@@ -1,0 +1,453 @@
+{
+  "Onboarding": {
+    "Buttons": {
+      "continue": "Continuar",
+      "back": "Atrás",
+      "complete": "Completar",
+      "loading": "Cargando..."
+    },
+    "Steps": {
+      "stepOne": "Bienvenido",
+      "stepTwo": "Detalles de la Empresa",
+      "stepThree": "Configuración Inicial del Usuario Administrador"
+    },
+    "Welcome": {
+      "title1": "Bienvenido al",
+      "title2": "Configuración de la Empresa",
+      "informationNeeded": "Lo que necesitas proporcionar",
+      "description": "Estamos encantados de tenerte a bordo. ¡Vamos a configurar tu perfil de empresa!",
+      "information": "Por favor, completa los siguientes campos para completar tu perfil de empresa.",
+      "information2": "Ten esta información disponible para un proceso sin problemas.",
+      "companyInformationDesc": {
+        "Logo": {
+          "title": "Logo de la Empresa",
+          "desc": "Logo en formato JPG, PNG o SVG"
+        },
+        "Email": {
+          "title": "Dirección de Email",
+          "desc": "Dirección de Email de la Empresa"
+        },
+        "Phone": {
+          "title": "Número de Teléfono",
+          "desc": "Número de Teléfono de la Empresa"
+        },
+        "IBAN": {
+          "title": "IBAN",
+          "desc": "IBAN de la Empresa"
+        },
+        "Company": {
+          "Number": {
+            "title": "Número de la Empresa",
+            "desc": "Número de la Empresa"
+          },
+          "Name": {
+            "title": "Nombre de la Empresa",
+            "desc": "Nombre de la Empresa"
+          }
+        }
+      }
+    },
+    "CompanyDetails": {
+      "headerPart1": "Detalles de la",
+      "headerPart2": "Empresa",
+      "enterCompanyDetails": "Introduce los detalles de tu empresa",
+      "fillAllRequiredFields": "Por favor, completa todos los campos obligatorios",
+      "Form": {
+        "Logo": {
+          "title": "Logo de la Empresa",
+          "lable": "Sube tu logo de empresa",
+          "acceptedTypes": "Tipos de archivo aceptados: jpg, jpeg, png"
+        },
+        "Location": {
+          "title": "Información de Ubicación",
+          "lable": "Seleccionar País",
+          "description": "Si tu país tiene estados, estos se mostrarán después de seleccionar el país",
+          "city": "Ciudad",
+          "postCode": "Código Postal",
+          "streetName": "Nombre de la Calle",
+          "streetNumber": "Número de la Calle"
+        },
+        "Company": {
+          "title": "Información de la Empresa",
+          "companyName": "Nombre de la Empresa",
+          "companyNumber": "Número de la Empresa",
+          "email": "Dirección de Email",
+          "phoneNumber": "Número de Teléfono",
+          "iban": "IBAN"
+        }
+      }
+    }
+  },
+  "Dashboard": {
+    "header": {
+      "monthlyStats": "Estadísticas Mensuales"
+    },
+    "InfoCards": {
+      "currency": "EUR",
+      "revenue": {
+        "title": "Ingresos",
+        "subtitle": "Ingresos Mensuales",
+        "timeframe": "desde el mes pasado"
+      },
+      "customer": {
+        "title": "Clientes",
+        "subtitle": "Número de Clientes",
+        "timeframe": "desde el mes pasado"
+      },
+      "monthlySales": {
+        "title": "Ventas Mensuales",
+        "subtitle": "Número de Ventas",
+        "timeframe": "desde el mes pasado"
+      },
+      "avarageOrderValue": {
+        "title": "Valor Promedio del Pedido",
+        "subtitle": "Valor Promedio del Pedido",
+        "timeframe": "desde el mes pasado"
+      }
+    },
+    "Ressource": {
+      "BreadCrumps": {
+        "title": "Tablero"
+      },
+      "Address": {
+        "BreadCrumps": {
+          "title": "Direcciones",
+          "add": "Nueva Dirección",
+          "edit": "Editar Dirección"
+        },
+        "Attributes": {
+          "state": "Estado",
+          "country": "País",
+          "city": "Ciudad",
+          "postCode": "Código Postal",
+          "streetName": "Nombre de la Calle",
+          "streetNumber": "Número de la Calle",
+          "status": "Estado",
+          "notFound": "No se encontraron direcciones"
+        },
+        "add": "Agregar Nueva Dirección",
+        "edit": "Editar Dirección",
+        "buttons": {
+          "delete": "Eliminar Dirección",
+          "deleteLoading": "Eliminando Dirección...",
+          "create": "Crear Dirección",
+          "createLoading": "Creando Dirección...",
+          "update": "Actualizar Dirección",
+          "updateLoading": "Actualizando Dirección...",
+          "add": "Agregar Dirección",
+          "addLoading": "Agregando Dirección..."
+        }
+      },
+      "Products": {
+        "BreadCrumps": {
+          "title": "Productos",
+          "add": "Nuevo Producto",
+          "edit": "Editar Producto"
+        },
+        "Attributes": {
+          "image": "Imagen",
+          "name": "Nombre",
+          "description": "Descripción",
+          "price": "Precio",
+          "status": "Estado",
+          "notFound": "No se encontraron productos"
+        },
+        "buttons": {
+          "delete": "Eliminar Producto",
+          "deleteLoading": "Eliminando Producto...",
+          "create": "Crear Producto",
+          "createLoading": "Creando Producto...",
+          "update": "Actualizar Producto",
+          "updateLoading": "Actualizando Producto...",
+          "add": "Agregar Producto",
+          "addLoading": "Agregando Producto..."
+        },
+        "add": "Agregar Nuevo Producto",
+        "edit": "Editar Producto",
+        "Status": {
+          "active": "Activo",
+          "inactive": "Inactivo"
+        }
+      },
+      "Categories": {
+        "BreadCrumps": {
+          "title": "Categorías",
+          "add": "Nueva Categoría",
+          "edit": "Editar Categoría"
+        },
+        "Attributes": {
+          "name": "Nombre",
+          "status": "Estado",
+          "notFound": "No se encontraron categorías"
+        },
+        "buttons": {
+          "delete": "Eliminar Categoría",
+          "deleteLoading": "Eliminando Categoría...",
+          "create": "Crear Categoría",
+          "createLoading": "Creando Categoría...",
+          "update": "Actualizar Categoría",
+          "updateLoading": "Actualizando Categoría...",
+          "add": "Agregar Categoría",
+          "addLoading": "Agregando Categoría..."
+        },
+        "add": "Agregar Nueva Categoría",
+        "edit": "Editar Categoría",
+        "Status": {
+          "active": "Activo",
+          "inactive": "Inactivo"
+        }
+      },
+      "Routes": {
+        "BreadCrumps": {
+          "title": "Rutas"
+        },
+        "add": "Agregar Nueva Ruta",
+        "edit": "Editar Ruta"
+      },
+      "Orders": {
+        "BreadCrumps": {
+          "title": "Pedidos",
+          "add": "Nuevo Pedido",
+          "edit": "Editar Pedido"
+        },
+        "Attributes": {
+          "customer": "Cliente",
+          "orderDate": "Fecha del Pedido",
+          "deliveryDate": "Fecha de Entrega",
+          "orderState": "Estado del Pedido",
+          "selfCollectYes": "Recogida Personal",
+          "selfCollectNo": "Entrega",
+          "deliveryMethode": "Método de Entrega",
+          "Products": {
+            "Product": {
+              "title": "Producto",
+              "image": "Imagen",
+              "quantity": "Cantidad",
+              "price": "Precio",
+              "total": "Total",
+              "noProductsInOrder": "No hay productos en el pedido"
+            },
+            "title": "Productos",
+            "name": "Nombre",
+            "quantity": "Cantidad",
+            "price": "Precio",
+            "total": "Total",
+            "orderTotal": "Total del Pedido:"
+          },
+          "notFound": "No se encontraron pedidos",
+          "notDeliveredYet": "Aún no entregado"
+        },
+        "buttons": {
+          "delete": "Eliminar Pedido",
+          "deleteLoading": "Eliminando Pedido...",
+          "create": "Crear Pedido",
+          "createLoading": "Creando Pedido...",
+          "update": "Actualizar Pedido",
+          "updateLoading": "Actualizando Pedido...",
+          "add": "Agregar Pedido",
+          "addLoading": "Agregando Pedido..."
+        },
+        "add": "Agregar Nuevo Pedido",
+        "edit": "Editar Pedido"
+      },
+      "Customers": {
+        "header": "Agregar Nuevo Cliente",
+        "headerUpdate": "Editar Cliente",
+        "Details": {
+          "customerDetails": "Detalles del Cliente",
+          "businessCustomerDetails": "Detalles del Cliente Empresarial"
+        },
+        "BreadCrumps": {
+          "title": "Clientes",
+          "add": "Nuevo Cliente",
+          "edit": "Editar Cliente"
+        },
+        "Attributes": {
+          "avatar": "Avatar",
+          "name": "Nombre",
+          "firstName": "Nombre",
+          "lastName": "Apellido",
+          "password": "Contraseña",
+          "email": "Email",
+          "phone": "Teléfono",
+          "customerReference": "Referencia del Cliente",
+          "businessSector": "Sector Empresarial",
+          "companyNumber": "Número de la Empresa",
+          "status": "Estado",
+          "notFound": "No se encontraron clientes"
+        },
+        "buttons": {
+          "delete": "Eliminar Cliente",
+          "deleteLoading": "Eliminando Cliente...",
+          "create": "Crear Cliente",
+          "createLoading": "Creando Cliente...",
+          "update": "Actualizar Cliente",
+          "updateLoading": "Actualizando Cliente...",
+          "add": "Agregar Cliente",
+          "addLoading": "Agregando Cliente..."
+        },
+        "add": "Agregar Nuevo Cliente",
+        "edit": "Editar Cliente",
+        "Placeholder": {
+          "selectBusinessSector": "Seleccionar Sector Empresarial",
+          "firstName": "Introduce el Nombre",
+          "lastName": "Introduce el Apellido",
+          "email": "Introduce el Email",
+          "companyNumber": "Introduce el Número de la Empresa",
+          "password": "Se generará automáticamente",
+          "passwordInfo": "La contraseña se generará automáticamente y se enviará al cliente"
+        },
+        "Status": {
+          "active": "Activo",
+          "inactive": "Inactivo"
+        }
+      },
+      "Settings": {
+        "BreadCrumps": {
+          "title": "Configuraciones"
+        },
+        "edit": "Editar Configuración"
+      },
+      "Employees": {
+        "header": "Agregar Nuevo Empleado",
+        "headerUpdate": "Editar Empleado",
+        "BreadCrumps": {
+          "title": "Empleados",
+          "add": "Nuevo Empleado",
+          "edit": "Editar Empleado"
+        },
+        "Attributes": {
+          "email": "Email",
+          "firstName": "Nombre",
+          "lastName": "Apellido",
+          "status": "Estado",
+          "role": "Rol",
+          "notFound": "No se encontraron empleados"
+        },
+        "buttons": {
+          "delete": "Eliminar Empleado",
+          "deleteLoading": "Eliminando Empleado...",
+          "create": "Crear Empleado",
+          "createLoading": "Creando Empleado...",
+          "update": "Actualizar Empleado",
+          "updateLoading": "Actualizando Empleado...",
+          "add": "Agregar Empleado",
+          "addLoading": "Agregando Empleado..."
+        },
+        "add": "Agregar Nuevo Empleado",
+        "edit": "Editar Empleado",
+        "Placeholder": {
+          "firstName": "Introduce el Nombre",
+          "lastName": "Introduce el Apellido",
+          "email": "Introduce el Email",
+          "password": "Introduce la Contraseña",
+          "selectRole": "Seleccionar Rol"
+        },
+        "Status": { "active": "Activo", "inactive": "Inactivo" }
+      },
+      "Subscription": {
+        "BreadCrumps": {
+          "title": "Suscripción"
+        },
+        "add": "Agregar Nueva Suscripción",
+        "edit": "Editar Suscripción"
+      }
+    }
+  },
+  "FilterAndSearch": {
+    "Filter": {
+      "title": "Filtrar",
+      "Status": {
+        "title": "Estado",
+        "options": {
+          "active": "Activo",
+          "inactive": "Inactivo"
+        }
+      },
+      "BusinessSectors": {
+        "title": "Sectores Empresariales",
+        "options": {
+          "agriculture": "Agricultura",
+          "construction": "Construcción",
+          "education": "Educación",
+          "finance": "Finanzas",
+          "health": "Salud",
+          "hospitality": "Hostelería",
+          "it": "TI",
+          "manufacturing": "Manufactura",
+          "other": "Otros",
+          "retail": "Venta al por menor",
+          "technology": "Tecnología",
+          "tourism": "Turismo",
+          "transportation": "Transporte",
+          "private": "Privado"
+        }
+      },
+      "Roles": {
+        "title": "Roles",
+        "options": {
+          "admin": "Administrador",
+          "employee": "Empleado",
+          "supplier": "Proveedor"
+        }
+      }
+    },
+    "Search": {
+      "title": "Buscar",
+      "searchForOption1": "Buscar por Nombre",
+      "searchForOption2": "Buscar por Nombre o Email",
+      "searchForOption3": "Buscar por Código Postal"
+    }
+  },
+  "Pagination": {
+    "rowsPerPage": "Filas por Página",
+    "goToPrev": "Ir a la página anterior",
+    "goToNext": "Ir a la siguiente página",
+    "goToFist": "Ir a la primera página",
+    "goToLast": "Ir a la última página",
+    "of": "de"
+  },
+  "SelectComponents": {
+    "Address": {
+      "selectAddress": "Seleccionar Dirección",
+      "noAddressFound": "No se encontró dirección",
+      "addNewAddress": "Agregar Nueva Dirección",
+      "findAddress": "Encontrar Dirección"
+    },
+    "Category": {
+      "selectCategory": "Seleccionar Categoría",
+      "noCategoryFound": "No se encontró categoría",
+      "addNewCategory": "Agregar Nueva Categoría",
+      "findAddress": "Encontrar Dirección"
+    },
+    "Customer": {
+      "selectCustomer": "Seleccionar Cliente",
+      "noCustomerFound": "No se encontró cliente",
+      "addNewCustomer": "Agregar Nuevo Cliente",
+      "findCustomer": "Encontrar Cliente"
+    },
+    "Product": {
+      "selectProduct": "Seleccionar Producto",
+      "noProductFound": "No se encontró producto",
+      "addNewProduct": "Agregar Nuevo Producto",
+      "findProduct": "Encontrar Producto"
+    },
+    "Route": {
+      "selectRoute": "Seleccionar Ruta",
+      "noRouteFound": "No se encontró ruta",
+      "addNewRoute": "Agregar Nueva Ruta",
+      "findRoute": "Encontrar Ruta"
+    },
+    "Order": {
+      "selectOrder": "Seleccionar Pedido",
+      "noOrderFound": "No se encontró pedido",
+      "addNewOrder": "Agregar Nuevo Pedido",
+      "findOrder": "Encontrar Pedido"
+    }
+  },
+  "PremiumWrapper": {
+    "header": "Actualizar a Premium",
+    "subtitle": "Actualiza a Premium para desbloquear esta función",
+    "button": "Actualizar Ahora"
+  }
+}

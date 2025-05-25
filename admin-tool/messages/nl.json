@@ -1,0 +1,453 @@
+{
+  "Onboarding": {
+    "Buttons": {
+      "continue": "Doorgaan",
+      "back": "Terug",
+      "complete": "Voltooien",
+      "loading": "Laden..."
+    },
+    "Steps": {
+      "stepOne": "Welkom",
+      "stepTwo": "Bedrijfsgegevens",
+      "stepThree": "Initiële Admin Gebruiker Setup"
+    },
+    "Welcome": {
+      "title1": "Welkom bij de",
+      "title2": "Bedrijfs Setup",
+      "informationNeeded": "Wat u moet verstrekken",
+      "description": "We zijn blij u aan boord te hebben. Laten we uw bedrijfsprofiel instellen!",
+      "information": "Vul de volgende velden in om uw bedrijfsprofiel te voltooien.",
+      "information2": "Houd deze informatie bij de hand voor een soepel proces.",
+      "companyInformationDesc": {
+        "Logo": {
+          "title": "Bedrijfslogo",
+          "desc": "Logo in JPG-, PNG- of SVG-formaat"
+        },
+        "Email": {
+          "title": "E-mailadres",
+          "desc": "Zakelijk e-mailadres"
+        },
+        "Phone": {
+          "title": "Telefoonnummer",
+          "desc": "Zakelijk telefoonnummer"
+        },
+        "IBAN": {
+          "title": "IBAN",
+          "desc": "Zakelijke IBAN"
+        },
+        "Company": {
+          "Number": {
+            "title": "Bedrijfsnummer",
+            "desc": "Bedrijfsnummer"
+          },
+          "Name": {
+            "title": "Bedrijfsnaam",
+            "desc": "Bedrijfsnaam"
+          }
+        }
+      }
+    },
+    "CompanyDetails": {
+      "headerPart1": "Bedrijfs",
+      "headerPart2": "Gegevens",
+      "enterCompanyDetails": "Voer uw bedrijfsgegevens in",
+      "fillAllRequiredFields": "Vul alle verplichte velden in",
+      "Form": {
+        "Logo": {
+          "title": "Bedrijfslogo",
+          "lable": "Upload uw bedrijfslogo",
+          "acceptedTypes": "Geaccepteerde bestandstypen: jpg, jpeg, png"
+        },
+        "Location": {
+          "title": "Locatie-informatie",
+          "lable": "Land selecteren",
+          "description": "Als uw land deelstaten heeft, worden deze weergegeven na het selecteren van het land",
+          "city": "Stad",
+          "postCode": "Postcode",
+          "streetName": "Straatnaam",
+          "streetNumber": "Straatnummer"
+        },
+        "Company": {
+          "title": "Bedrijfsinformatie",
+          "companyName": "Bedrijfsnaam",
+          "companyNumber": "Bedrijfsnummer",
+          "email": "E-mailadres",
+          "phoneNumber": "Telefoonnummer",
+          "iban": "IBAN"
+        }
+      }
+    }
+  },
+  "Dashboard": {
+    "header": {
+      "monthlyStats": "Maandelijkse Statistieken"
+    },
+    "InfoCards": {
+      "currency": "EUR",
+      "revenue": {
+        "title": "Omzet",
+        "subtitle": "Maandelijkse omzet",
+        "timeframe": "sinds vorige maand"
+      },
+      "customer": {
+        "title": "Klanten",
+        "subtitle": "Aantal klanten",
+        "timeframe": "sinds vorige maand"
+      },
+      "monthlySales": {
+        "title": "Maandelijkse Verkoop",
+        "subtitle": "Aantal verkopen",
+        "timeframe": "sinds vorige maand"
+      },
+      "avarageOrderValue": {
+        "title": "Gemiddelde Bestelwaarde",
+        "subtitle": "Gemiddelde bestelwaarde",
+        "timeframe": "sinds vorige maand"
+      }
+    },
+    "Ressource": {
+      "BreadCrumps": {
+        "title": "Dashboard"
+      },
+      "Address": {
+        "BreadCrumps": {
+          "title": "Adressen",
+          "add": "Nieuw Adres",
+          "edit": "Adres Bewerken"
+        },
+        "Attributes": {
+          "state": "Deelstaat",
+          "country": "Land",
+          "city": "Stad",
+          "postCode": "Postcode",
+          "streetName": "Straatnaam",
+          "streetNumber": "Straatnummer",
+          "status": "Status",
+          "notFound": "Geen adressen gevonden"
+        },
+        "add": "Nieuw Adres Toevoegen",
+        "edit": "Adres Bewerken",
+        "buttons": {
+          "delete": "Adres Verwijderen",
+          "deleteLoading": "Adres Verwijderen...",
+          "create": "Adres Aanmaken",
+          "createLoading": "Adres Aanmaken...",
+          "update": "Adres Bijwerken",
+          "updateLoading": "Adres Bijwerken...",
+          "add": "Adres Toevoegen",
+          "addLoading": "Adres Toevoegen..."
+        }
+      },
+      "Products": {
+        "BreadCrumps": {
+          "title": "Producten",
+          "add": "Nieuw Product",
+          "edit": "Product Bewerken"
+        },
+        "Attributes": {
+          "image": "Afbeelding",
+          "name": "Naam",
+          "description": "Beschrijving",
+          "price": "Prijs",
+          "status": "Status",
+          "notFound": "Geen producten gevonden"
+        },
+        "buttons": {
+          "delete": "Product Verwijderen",
+          "deleteLoading": "Product Verwijderen...",
+          "create": "Product Aanmaken",
+          "createLoading": "Product Aanmaken...",
+          "update": "Product Bijwerken",
+          "updateLoading": "Product Bijwerken...",
+          "add": "Product Toevoegen",
+          "addLoading": "Product Toevoegen..."
+        },
+        "add": "Nieuw Product Toevoegen",
+        "edit": "Product Bewerken",
+        "Status": {
+          "active": "Actief",
+          "inactive": "Inactief"
+        }
+      },
+      "Categories": {
+        "BreadCrumps": {
+          "title": "Categorieën",
+          "add": "Nieuwe Categorie",
+          "edit": "Categorie Bewerken"
+        },
+        "Attributes": {
+          "name": "Naam",
+          "status": "Status",
+          "notFound": "Geen categorieën gevonden"
+        },
+        "buttons": {
+          "delete": "Categorie Verwijderen",
+          "deleteLoading": "Categorie Verwijderen...",
+          "create": "Categorie Aanmaken",
+          "createLoading": "Categorie Aanmaken...",
+          "update": "Categorie Bijwerken",
+          "updateLoading": "Categorie Bijwerken...",
+          "add": "Categorie Toevoegen",
+          "addLoading": "Categorie Toevoegen..."
+        },
+        "add": "Nieuwe Categorie Toevoegen",
+        "edit": "Categorie Bewerken",
+        "Status": {
+          "active": "Actief",
+          "inactive": "Inactief"
+        }
+      },
+      "Routes": {
+        "BreadCrumps": {
+          "title": "Routes"
+        },
+        "add": "Nieuwe Route Toevoegen",
+        "edit": "Route Bewerken"
+      },
+      "Orders": {
+        "BreadCrumps": {
+          "title": "Bestellingen",
+          "add": "Nieuwe Bestelling",
+          "edit": "Bestelling Bewerken"
+        },
+        "Attributes": {
+          "customer": "Klant",
+          "orderDate": "Besteldatum",
+          "deliveryDate": "Leverdatum",
+          "orderState": "Bestelstatus",
+          "selfCollectYes": "Zelf afhalen",
+          "selfCollectNo": "Levering",
+          "deliveryMethode": "Leveringsmethode",
+          "Products": {
+            "Product": {
+              "title": "Product",
+              "image": "Afbeelding",
+              "quantity": "Hoeveelheid",
+              "price": "Prijs",
+              "total": "Totaal",
+              "noProductsInOrder": "Geen producten in de bestelling"
+            },
+            "title": "Producten",
+            "name": "Naam",
+            "quantity": "Hoeveelheid",
+            "price": "Prijs",
+            "total": "Totaal",
+            "orderTotal": "Bestelling Totaal:"
+          },
+          "notFound": "Geen bestellingen gevonden",
+          "notDeliveredYet": "Nog niet geleverd"
+        },
+        "buttons": {
+          "delete": "Bestelling Verwijderen",
+          "deleteLoading": "Bestelling Verwijderen...",
+          "create": "Bestelling Aanmaken",
+          "createLoading": "Bestelling Aanmaken...",
+          "update": "Bestelling Bijwerken",
+          "updateLoading": "Bestelling Bijwerken...",
+          "add": "Bestelling Toevoegen",
+          "addLoading": "Bestelling Toevoegen..."
+        },
+        "add": "Nieuwe Bestelling Toevoegen",
+        "edit": "Bestelling Bewerken"
+      },
+      "Customers": {
+        "header": "Nieuwe Klant Toevoegen",
+        "headerUpdate": "Klant Bewerken",
+        "Details": {
+          "customerDetails": "Klantgegevens",
+          "businessCustomerDetails": "Zakelijke Klantgegevens"
+        },
+        "BreadCrumps": {
+          "title": "Klanten",
+          "add": "Nieuwe Klant",
+          "edit": "Klant Bewerken"
+        },
+        "Attributes": {
+          "avatar": "Avatar",
+          "name": "Naam",
+          "firstName": "Voornaam",
+          "lastName": "Achternaam",
+          "password": "Wachtwoord",
+          "email": "E-mail",
+          "phone": "Telefoon",
+          "customerReference": "Klantreferentie",
+          "businessSector": "Zakelijke Sector",
+          "companyNumber": "Bedrijfsnummer",
+          "status": "Status",
+          "notFound": "Geen klanten gevonden"
+        },
+        "buttons": {
+          "delete": "Klant Verwijderen",
+          "deleteLoading": "Klant Verwijderen...",
+          "create": "Klant Aanmaken",
+          "createLoading": "Klant Aanmaken...",
+          "update": "Klant Bijwerken",
+          "updateLoading": "Klant Bijwerken...",
+          "add": "Klant Toevoegen",
+          "addLoading": "Klant Toevoegen..."
+        },
+        "add": "Nieuwe Klant Toevoegen",
+        "edit": "Klant Bewerken",
+        "Placeholder": {
+          "selectBusinessSector": "Zakelijke Sector Selecteren",
+          "firstName": "Voornaam invoeren",
+          "lastName": "Achternaam invoeren",
+          "email": "E-mail invoeren",
+          "companyNumber": "Bedrijfsnummer invoeren",
+          "password": "Wordt automatisch gegenereerd",
+          "passwordInfo": "Het wachtwoord wordt automatisch gegenereerd en naar de klant verzonden"
+        },
+        "Status": {
+          "active": "Actief",
+          "inactive": "Inactief"
+        }
+      },
+      "Settings": {
+        "BreadCrumps": {
+          "title": "Instellingen"
+        },
+        "edit": "Instelling Bewerken"
+      },
+      "Employees": {
+        "header": "Nieuwe Medewerker Toevoegen",
+        "headerUpdate": "Medewerker Bewerken",
+        "BreadCrumps": {
+          "title": "Medewerkers",
+          "add": "Nieuwe Medewerker",
+          "edit": "Medewerker Bewerken"
+        },
+        "Attributes": {
+          "email": "E-mail",
+          "firstName": "Voornaam",
+          "lastName": "Achternaam",
+          "status": "Status",
+          "role": "Rol",
+          "notFound": "Geen medewerkers gevonden"
+        },
+        "buttons": {
+          "delete": "Medewerker Verwijderen",
+          "deleteLoading": "Medewerker Verwijderen...",
+          "create": "Medewerker Aanmaken",
+          "createLoading": "Medewerker Aanmaken...",
+          "update": "Medewerker Bijwerken",
+          "updateLoading": "Medewerker Bijwerken...",
+          "add": "Medewerker Toevoegen",
+          "addLoading": "Medewerker Toevoegen..."
+        },
+        "add": "Nieuwe Medewerker Toevoegen",
+        "edit": "Medewerker Bewerken",
+        "Placeholder": {
+          "firstName": "Voornaam invoeren",
+          "lastName": "Achternaam invoeren",
+          "email": "E-mail invoeren",
+          "password": "Wachtwoord invoeren",
+          "selectRole": "Rol Selecteren"
+        },
+        "Status": { "active": "Actief", "inactive": "Inactief" }
+      },
+      "Subscription": {
+        "BreadCrumps": {
+          "title": "Abonnement"
+        },
+        "add": "Nieuw Abonnement Toevoegen",
+        "edit": "Abonnement Bewerken"
+      }
+    }
+  },
+  "FilterAndSearch": {
+    "Filter": {
+      "title": "Filter",
+      "Status": {
+        "title": "Status",
+        "options": {
+          "active": "Actief",
+          "inactive": "Inactief"
+        }
+      },
+      "BusinessSectors": {
+        "title": "Zakelijke Sectoren",
+        "options": {
+          "agriculture": "Landbouw",
+          "construction": "Bouw",
+          "education": "Onderwijs",
+          "finance": "Financiën",
+          "health": "Gezondheid",
+          "hospitality": "Gastvrijheid",
+          "it": "IT",
+          "manufacturing": "Productie",
+          "other": "Overig",
+          "retail": "Detailhandel",
+          "technology": "Technologie",
+          "tourism": "Toerisme",
+          "transportation": "Transport",
+          "private": "Privé"
+        }
+      },
+      "Roles": {
+        "title": "Rollen",
+        "options": {
+          "admin": "Admin",
+          "employee": "Medewerker",
+          "supplier": "Leverancier"
+        }
+      }
+    },
+    "Search": {
+      "title": "Zoeken",
+      "searchForOption1": "Zoeken op naam",
+      "searchForOption2": "Zoeken op naam of e-mail",
+      "searchForOption3": "Zoeken op postcode"
+    }
+  },
+  "Pagination": {
+    "rowsPerPage": "Rijen per pagina",
+    "goToPrev": "Naar vorige pagina",
+    "goToNext": "Naar volgende pagina",
+    "goToFist": "Naar eerste pagina",
+    "goToLast": "Naar laatste pagina",
+    "of": "van"
+  },
+  "SelectComponents": {
+    "Address": {
+      "selectAddress": "Adres selecteren",
+      "noAddressFound": "Geen adres gevonden",
+      "addNewAddress": "Nieuw adres toevoegen",
+      "findAddress": "Adres vinden"
+    },
+    "Category": {
+      "selectCategory": "Categorie selecteren",
+      "noCategoryFound": "Geen categorie gevonden",
+      "addNewCategory": "Nieuwe categorie toevoegen",
+      "findAddress": "Adres vinden"
+    },
+    "Customer": {
+      "selectCustomer": "Klant selecteren",
+      "noCustomerFound": "Geen klant gevonden",
+      "addNewCustomer": "Nieuwe klant toevoegen",
+      "findCustomer": "Klant vinden"
+    },
+    "Product": {
+      "selectProduct": "Product selecteren",
+      "noProductFound": "Geen product gevonden",
+      "addNewProduct": "Nieuw product toevoegen",
+      "findProduct": "Product vinden"
+    },
+    "Route": {
+      "selectRoute": "Route selecteren",
+      "noRouteFound": "Geen route gevonden",
+      "addNewRoute": "Nieuwe route toevoegen",
+      "findRoute": "Route vinden"
+    },
+    "Order": {
+      "selectOrder": "Bestelling selecteren",
+      "noOrderFound": "Geen bestelling gevonden",
+      "addNewOrder": "Nieuwe bestelling toevoegen",
+      "findOrder": "Bestelling vinden"
+    }
+  },
+  "PremiumWrapper": {
+    "header": "Upgrade naar Premium",
+    "subtitle": "Upgrade naar Premium om deze functie te ontgrendelen",
+    "button": "Nu Upgraden"
+  }
+}
