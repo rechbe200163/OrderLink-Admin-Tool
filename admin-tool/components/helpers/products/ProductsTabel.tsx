@@ -17,16 +17,16 @@ import Link from 'next/link';
 export function ProductTable({ products }: { products: Product[] }) {
   return (
     <div className='bg-background text-foreground p-4 rounded-lg shadow-sm'>
-      <div className='max-h-[50vh] overflow-auto min-w-full'>
-        <Table className='border-separate border-spacing-0 [&_td]:border-border [&_tfoot_td]:border-t [&_th]:border-b [&_th]:border-border [&_tr:not(:last-child)_td]:border-b'>
+      <div className='[&>div]:max-h-[50vh] min-w-full'>
+        <Table className='border-separate border-spacing-0 [&_td]:border-border [&_tfoot_td]:border-t [&_th]:border-b [&_th]:border-border [&_tr:not(:last-child)_td]:border-b [&_tr]:border-none'>
           <TableHeader className='sticky top-0 z-10 bg-background/90 backdrop-blur-sm'>
-            <TableRow className='hover:bg-muted/50'>
-              <TableHead className='w-20'>Image</TableHead>
+            <TableRow className='hover:bg-muted'>
+              <TableHead className='w-20'>Bild</TableHead>
               <TableHead className='w-40'>Name</TableHead>
-              <TableHead className='w-40'>Price</TableHead>
-              <TableHead className='w-60'>Description</TableHead>
-              <TableHead className='w-40 text-right'>Stock</TableHead>
-              <TableHead className='w-40 text-right'>Created At</TableHead>
+              <TableHead className='w-40'>Preis</TableHead>
+              <TableHead className='w-60'>Beschreibung</TableHead>
+              <TableHead className='w-40 text-right'>Lager</TableHead>
+              <TableHead className='w-40 text-right'>Erstellt am</TableHead>
               <TableHead className='w-40 text-right'>Status</TableHead>
             </TableRow>
           </TableHeader>
@@ -51,7 +51,7 @@ export function ProductTable({ products }: { products: Product[] }) {
                           ) : (
                             <div className='w-full h-full bg-muted flex items-center justify-center'>
                               <span className='text-muted-foreground text-sm'>
-                                No Image
+                                Kein Bild
                               </span>
                             </div>
                           )}
@@ -80,7 +80,7 @@ export function ProductTable({ products }: { products: Product[] }) {
                       href={`/products/${product.productId}/edit`}
                       className='hover:underline'
                     >
-                      {product.description || 'No description'}
+                      {product.description || 'Keine Beschreibung'}
                     </Link>
                   </TableCell>
                   <TableCell className='w-40 text-right'>
@@ -105,9 +105,9 @@ export function ProductTable({ products }: { products: Product[] }) {
                       className='hover:underline'
                     >
                       {product.deleted ? (
-                        <Badge variant='destructive'>Deleted</Badge>
+                        <Badge variant='destructive'>Gelöscht</Badge>
                       ) : (
-                        <Badge variant='success'>Active</Badge>
+                        <Badge variant='success'>Aktiv</Badge>
                       )}
                     </Link>
                   </TableCell>
@@ -116,7 +116,7 @@ export function ProductTable({ products }: { products: Product[] }) {
             ) : (
               <TableRow>
                 <TableCell colSpan={7} className='text-center py-4'>
-                  No products found
+                  Keine Produkte gefunden
                 </TableCell>
               </TableRow>
             )}

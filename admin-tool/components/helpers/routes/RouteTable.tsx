@@ -19,7 +19,7 @@ export function RoutesTable({ routes }: { routes: RoutesWithCount[] }) {
           <TableHeader className='sticky top-0 z-10 bg-background/90 backdrop-blur-sm'>
             <TableRow className='hover:bg-muted/50'>
               <TableHead className='w-40'>Name</TableHead>
-              <TableHead className='w-40 text-center'>Orders Count</TableHead>
+              <TableHead className='w-40 text-center'>Bestellungen</TableHead>
               <TableHead className='w-40 text-center'>Status</TableHead>
             </TableRow>
           </TableHeader>
@@ -30,7 +30,7 @@ export function RoutesTable({ routes }: { routes: RoutesWithCount[] }) {
                   key={route.routeId}
                   className='hover:bg-muted/50 transition-colors cursor-pointer'
                 >
-                  {/* Route Name */}
+                  {/* Routenname */}
                   <TableCell className='w-40 font-medium'>
                     <Link
                       href={`/routes/${route.routeId}/edit`}
@@ -40,9 +40,9 @@ export function RoutesTable({ routes }: { routes: RoutesWithCount[] }) {
                     </Link>
                   </TableCell>
 
-                  {/* Orders Count with Tooltip */}
+                  {/* Bestellungen mit Tooltip */}
                   <TableCell className='w-40 text-center'>
-                    <ToolTipWrapper label='Click for order details'>
+                    <ToolTipWrapper label='Klicken für Bestelldetails'>
                       <Link
                         href={`/orders/routes/${route.routeId}/${route.name}`}
                         className='block w-full h-full p-2 hover:underline'
@@ -52,16 +52,16 @@ export function RoutesTable({ routes }: { routes: RoutesWithCount[] }) {
                     </ToolTipWrapper>
                   </TableCell>
 
-                  {/* Route Status */}
+                  {/* Routenstatus */}
                   <TableCell className='w-40 text-center'>
                     <Link
                       href={`/routes/${route.routeId}/edit`}
                       className='hover:underline'
                     >
                       {route.deleted ? (
-                        <Badge variant='destructive'>Deleted</Badge>
+                        <Badge variant='destructive'>Gelöscht</Badge>
                       ) : (
-                        <Badge variant='success'>Active</Badge>
+                        <Badge variant='success'>Aktiv</Badge>
                       )}
                     </Link>
                   </TableCell>
@@ -70,7 +70,7 @@ export function RoutesTable({ routes }: { routes: RoutesWithCount[] }) {
             ) : (
               <TableRow>
                 <TableCell colSpan={3} className='text-center py-4'>
-                  No routes found
+                  Keine Routen gefunden
                 </TableCell>
               </TableRow>
             )}
