@@ -1,7 +1,10 @@
 import prisma from '@/prisma/client';
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 
-export async function GET(props: { params: Promise<{ routeId: string }> }) {
+export async function GET(
+  req: NextRequest,
+  props: { params: Promise<{ routeId: string }> }
+) {
   const params = await props.params;
 
   if (!params.routeId) {
