@@ -1,5 +1,9 @@
 'server only';
-import { GetAllOrdersPaging, OrdersWithCustomerAndProducts } from '@/lib/types';
+import {
+  GetAllOrdersPaging,
+  OrdersWithAddressOfCustomer,
+  OrdersWithCustomerAndProducts,
+} from '@/lib/types';
 import { BaseApiService } from '../base';
 import { Order } from '@prisma/client';
 
@@ -32,8 +36,8 @@ export class OrderApiService extends BaseApiService {
     );
   }
 
-  async getAll(): Promise<Order[]> {
-    return this.fetchFromApi<Order[]>('orders/all');
+  async getAll(): Promise<OrdersWithAddressOfCustomer[]> {
+    return this.fetchFromApi<OrdersWithAddressOfCustomer[]>('orders/all');
   }
 
   async getOrdersPaging(

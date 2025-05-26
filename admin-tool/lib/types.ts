@@ -208,3 +208,19 @@ const siteConfigWithAdress = Prisma.validator<Prisma.SiteConfigDefaultArgs>()({
 export type SiteConfigWithAddress = Prisma.SiteConfigGetPayload<
   typeof siteConfigWithAdress
 >;
+
+const ordersWithAddressOfCustomer = Prisma.validator<Prisma.OrderDefaultArgs>()(
+  {
+    include: {
+      customer: {
+        include: {
+          address: true,
+        },
+      },
+    },
+  }
+);
+
+export type OrdersWithAddressOfCustomer = Prisma.OrderGetPayload<
+  typeof ordersWithAddressOfCustomer
+>;

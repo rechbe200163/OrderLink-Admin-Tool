@@ -22,13 +22,14 @@ import { useId, useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Order } from '@prisma/client';
 import { useTranslations } from 'next-intl';
+import { OrdersWithAddressOfCustomer } from '@/lib/types';
 
 export default function OrderSelectComponent({
   orders,
   onOrderSelect,
   defaultValues = [],
 }: {
-  orders: Order[];
+  orders: OrdersWithAddressOfCustomer[];
   onOrderSelect: (orderIds: string[]) => void;
   defaultValues?: string[];
 }) {
@@ -96,13 +97,25 @@ export default function OrderSelectComponent({
                     key={order.orderId}
                     value={order.orderId}
                     onSelect={() => toggleSelect(order.orderId)}
+                    className='flex flex-col items-start'
                   >
-                    {`Order #${order.customerReference} - ${new Date(
-                      order.orderDate
-                    ).toLocaleDateString()}`}
-                    {selectedValues.includes(order.orderId) && (
-                      <Check size={16} strokeWidth={2} className='ml-auto' />
-                    )}
+                    <span>
+                      {`Order #${order.customerReference} - ${new Date(
+                        order.orderDate
+                      ).toLocaleDateString()}`}
+                      {selectedValues.includes(order.orderId) && (
+                        <Check
+                          size={16}
+                          strokeWidth={2}
+                          className='ml-2 inline'
+                        />
+                      )}
+                    </span>
+                    <span className='text-xs text-muted-foreground'>
+                      {order.customer.address
+                        ? `${order.customer.address.streetName}, ${order.customer.address.postCode} ${order.customer.address.city}`
+                        : ''}
+                    </span>
                   </CommandItem>
                 ))}
               </CommandGroup>

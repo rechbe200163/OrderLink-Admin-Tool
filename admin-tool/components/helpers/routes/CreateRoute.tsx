@@ -11,9 +11,10 @@ import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import OrderSelectComponent from '../OrderSelectComponent';
 import { createRoute } from '@/lib/actions/route.actions';
+import { OrdersWithAddressOfCustomer } from '@/lib/types';
 
 interface CreateOrderProps {
-  orders: Order[];
+  orders: OrdersWithAddressOfCustomer[];
 }
 
 const CreateRoutes = ({ orders }: CreateOrderProps) => {
@@ -47,10 +48,10 @@ const CreateRoutes = ({ orders }: CreateOrderProps) => {
     <Card className='shadow-md p-6 min-w-full'>
       <form action={action} className='space-y-6'>
         <h2 className='text-3xl font-bold tracking-tight mb-6'>
-          Add New Route
+          Neue Route hinzufügen
         </h2>
         <div className=''>
-          <Label htmlFor={id}>Route Name</Label>
+          <Label htmlFor={id}>Routenname</Label>
           <Input id={id} name='name' />
         </div>
         <div className='space-y-2'>
@@ -69,11 +70,12 @@ const CreateRoutes = ({ orders }: CreateOrderProps) => {
         <Button type='submit' disabled={isPending} className='mt-6'>
           {isPending ? (
             <>
-              <Loader2 className='animate-spin h-5 w-5' /> Adding Route
+              <Loader2 className='animate-spin h-5 w-5' /> Route wird
+              hinzugefügt
             </>
           ) : (
             <>
-              <PlusCircle /> Add Route
+              <PlusCircle /> Route hinzufügen
             </>
           )}
         </Button>
