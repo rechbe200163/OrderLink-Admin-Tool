@@ -6,6 +6,8 @@ import { headers } from 'next/headers';
 import { getMessages } from 'next-intl/server';
 import { defaultLocale } from '@/i18n/config';
 import { NextIntlClientProvider } from 'next-intl';
+import { Toaster as SonnerToast } from 'sonner';
+import { Toaster } from '@/components/ui/toaster';
 
 // const geistSans = Geist({
 //   variable: '--font-geist-sans',
@@ -47,6 +49,8 @@ export default async function RootLayout({
               {children}
             </NextIntlClientProvider>
           </ThemeProvider>
+          <Toaster />
+          <SonnerToast />
         </body>
       </html>
     </>

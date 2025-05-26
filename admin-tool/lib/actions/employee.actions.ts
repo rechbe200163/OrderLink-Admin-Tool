@@ -62,19 +62,19 @@ export async function updateEmployee(
   return await employeeService.updateEmployee(employeeId, formData);
 }
 
-export async function createInitialAdmin(
-  _prevState: FormState,
-  formData: FormData
-): Promise<FormState> {
-  const resp = await employeeService.createInitialAdmin(formData);
-  if (resp.success) {
-    const cookieStore = await cookies();
-    cookieStore.set('isInitialAdminConfigured', 'true', {
-      secure: true,
-      maxAge: 60 * 60 * 24 * 7, // 1 week
-    });
-    await siteConfigService.setSiteConfigured(true);
-    redirect('/');
-  }
-  return resp;
-}
+// export async function createInitialAdmin(
+//   _prevState: FormState,
+//   formData: FormData
+// ): Promise<FormState> {
+//   const resp = await employeeService.createInitialAdmin(formData);
+//   if (resp.success) {
+//     const cookieStore = await cookies();
+//     cookieStore.set('isInitialAdminConfigured', 'true', {
+//       secure: true,
+//       maxAge: 60 * 60 * 24 * 7, // 1 week
+//     });
+//     await siteConfigService.setSiteConfigured(true);
+//     redirect('/');
+//   }
+//   return resp;
+// }
