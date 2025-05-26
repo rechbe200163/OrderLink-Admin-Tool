@@ -1,8 +1,10 @@
 import {
   Address,
+  BusinessSector,
   Category,
   Customer,
   Employees,
+  OrderState,
   Prisma,
   Product,
   Route,
@@ -37,6 +39,16 @@ export type GetAllUserPaging = {
   totalCustomers: number;
   totalPages: number;
 };
+
+export type CustomerByBranch = {
+  totalCustomers: number;
+  sectors: Record<BusinessSector, number>;
+};
+
+export type OrderStateCount = {
+  _count: number;
+  orderState: OrderState;
+}[];
 
 export type GetAddressesPaging = {
   addresses: Address[];

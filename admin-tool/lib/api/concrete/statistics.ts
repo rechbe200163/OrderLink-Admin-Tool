@@ -1,5 +1,11 @@
 import { BaseApiService } from '../base';
-import { AIVStats, RevenueStats, SalesStates } from '@/lib/types';
+import {
+  AIVStats,
+  CustomerByBranch,
+  OrderStateCount,
+  RevenueStats,
+  SalesStates,
+} from '@/lib/types';
 
 class StatisticsAPiService extends BaseApiService {
   private static instance: StatisticsAPiService;
@@ -26,6 +32,20 @@ class StatisticsAPiService extends BaseApiService {
 
   async getRevenueStats(): Promise<RevenueStats> {
     return this.fetchFromApi<RevenueStats>('invoices?query=revenueStats');
+  }
+
+  async getCustomerCount(): Promise<CustomerByBranch> {
+    const response = await this.fetchFromApi<CustomerByBranch>(
+      'customers/groupedBS'
+    );
+    return response;
+  }
+
+  async getOrderStateCount(): Promise<OrderStateCount> {
+    const response = await this.fetchFromApi<OrderStateCount>(
+      'orders/groupedOS'
+    );
+    return response;
   }
 }
 

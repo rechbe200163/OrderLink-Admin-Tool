@@ -383,6 +383,17 @@
           "private": "Privat"
         }
       },
+      "OrderState": {
+        "title": "Bestellstatus",
+        "options": {
+          "in_progress": "In Bearbeitung",
+          "order_placed": "Bestellung aufgegeben",
+          "dispatched": "Versandt",
+          "delivered": "Geliefert",
+          "order_collected": "Abgeholt",
+          "cancelled": "Storniert"
+        }
+      },
       "Roles": {
         "title": "Rollen",
         "options": {

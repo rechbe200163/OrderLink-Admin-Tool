@@ -55,7 +55,7 @@ export default async function SalesInfoCard() {
   return (
     <Card className='@container/card'>
       <CardHeader className='relative'>
-        <CardDescription>Verkaufs-Info-Karte</CardDescription>
+        <CardDescription>Monatliche Verkäufe</CardDescription>
         <CardTitle className='@[250px]/card:text-3xl text-2xl font-semibold tabular-nums'>
           <AnimatedCounter value={currentMonthSales} />
         </CardTitle>

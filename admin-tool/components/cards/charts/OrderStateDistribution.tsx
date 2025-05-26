@@ -1,14 +1,14 @@
 'use client';
 
 import * as React from 'react';
-import { TrendingUp } from 'lucide-react';
-import { Label, Pie, PieChart } from 'recharts';
+import { Pie, PieChart, Label } from 'recharts';
+import { OrderState } from '@prisma/client';
+import { useTranslations } from 'next-intl';
 
 import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
@@ -18,8 +18,7 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from '@/components/ui/chart';
-import { BusinessSector } from '@prisma/client';
-import { useTranslations } from 'next-intl';
+import { OrderStateCount } from '@/lib/types';
 
 const chartColorVars = [
   'hsl(var(--chart-1))',
@@ -27,69 +26,60 @@ const chartColorVars = [
   'hsl(var(--chart-3))',
   'hsl(var(--chart-4))',
   'hsl(var(--chart-5))',
+  'hsl(var(--chart-6))',
 ];
 
-const businessSectors: BusinessSector[] = [
-  'IT',
-  'AGRICULTURE',
-  'FINANCE',
-  'RETAIL',
-  'MANUFACTURING',
-  'EDUCATION',
-  'HOSPITALITY',
-  'CONSTRUCTION',
-  'TRANSPORTATION',
-  'HEALTH',
-  'TOURISM',
-  'TECHNOLOGY',
-  'OTHER',
+const orderStates: OrderState[] = [
+  'ORDER_PLACED',
+  'IN_PROGRESS',
+  'DISPATCHED',
+  'DELIVERED',
+  'ORDER_COLLECTED',
 ];
 
-const sectorColors: Record<BusinessSector, string> = businessSectors.reduce(
-  (acc, sector, idx) => {
-    acc[sector] = chartColorVars[idx % chartColorVars.length];
+const stateColors: Record<OrderState, string> = orderStates.reduce(
+  (acc, state, idx) => {
+    acc[state] = chartColorVars[idx % chartColorVars.length];
     return acc;
   },
-  {} as Record<BusinessSector, string>
+  {} as Record<OrderState, string>
 );
 
-const chartData = Object.entries({
-  IT: 6,
-  AGRICULTURE: 2,
-  FINANCE: 1,
-}).map(([sector, count]) => ({
-  sector,
-  customers: count,
-  fill: sectorColors[sector as BusinessSector],
-}));
-
-export function CustomerBusinessTypeDistrubution() {
-  const tFilter = useTranslations('FilterAndSearch.Filter.BusinessSectors');
+export function OrderStateDistributionChart({
+  data,
+}: {
+  data: OrderStateCount;
+}) {
+  const tOrderState = useTranslations(
+    'FilterAndSearch.Filter.OrderState.options'
+  );
 
   const chartConfig = {
-    customers: {
-      label: 'Kunden',
-    },
-    ...businessSectors.reduce((acc, sector) => {
-      acc[sector] = {
-        label: tFilter(`options.${sector.toLocaleLowerCase()}`) || sector,
-        color: sectorColors[sector],
+    orders: { label: 'Bestellungen' },
+    ...orderStates.reduce((acc, state) => {
+      acc[state] = {
+        label: tOrderState(state.toLowerCase()) || state,
+        color: stateColors[state],
       };
       return acc;
-    }, {} as Record<BusinessSector, { label: string; color: string }>),
+    }, {} as Record<OrderState, { label: string; color: string }>),
   } satisfies ChartConfig;
 
-  const totalVisitors = React.useMemo(() => {
-    return chartData.reduce((acc, curr) => acc + curr.customers, 0);
-  }, []);
+  const chartData = React.useMemo(() => {
+    return data.map(({ orderState, _count }) => ({
+      orderState,
+      orders: _count,
+      fill: stateColors[orderState],
+    }));
+  }, [data]);
+
+  const totalOrders = data.reduce((sum, d) => sum + d._count, 0);
 
   return (
     <Card className='flex flex-col'>
       <CardHeader className='items-center pb-0'>
-        <CardTitle>Kundenverteilung nach Branche</CardTitle>
-        <CardDescription>
-          Diese Grafik zeigt die Verteilung der Kunden nach Branche.
-        </CardDescription>
+        <CardTitle>Bestellungen nach Status</CardTitle>
+        <CardDescription>Übersicht der Bestellungen je Status.</CardDescription>
       </CardHeader>
       <CardContent className='flex-1 pb-0'>
         <ChartContainer
@@ -103,8 +93,8 @@ export function CustomerBusinessTypeDistrubution() {
             />
             <Pie
               data={chartData}
-              dataKey='customers'
-              nameKey='sector'
+              dataKey='orders'
+              nameKey='orderState'
               innerRadius={60}
               strokeWidth={5}
             >
@@ -123,18 +113,19 @@ export function CustomerBusinessTypeDistrubution() {
                           y={viewBox.cy}
                           className='fill-foreground text-3xl font-bold'
                         >
-                          {totalVisitors.toLocaleString()}
+                          {totalOrders.toLocaleString()}
                         </tspan>
                         <tspan
                           x={viewBox.cx}
                           y={(viewBox.cy || 0) + 24}
                           className='fill-muted-foreground'
                         >
-                          Kunden
+                          Bestellungen
                         </tspan>
                       </text>
                     );
                   }
+                  return null;
                 }}
               />
             </Pie>
