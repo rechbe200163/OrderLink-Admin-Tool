@@ -10,7 +10,7 @@ import { Badge } from '@/components/ui/badge';
 import type { OrdersWithCustomerAndProducts } from '@/lib/types';
 import { formatDateTime, formatPrice } from '@/lib/utils';
 import ImageComponent from '@/components/images/ImageComponent';
-import { Suspense } from 'react';
+import { Suspense, use } from 'react';
 import ImageSkeleton from '@/components/images/ImageSkeleton';
 import Link from 'next/link';
 import { Package } from 'lucide-react';
@@ -29,6 +29,9 @@ export function OrderTable({
   orders: OrdersWithCustomerAndProducts[];
 }) {
   const t = useTranslations('Dashboard.Ressource.Orders');
+  const tOrderState = useTranslations(
+    'FilterAndSearch.Filter.OrderState.options'
+  );
   return (
     <div className='bg-background text-foreground p-4 rounded-lg shadow-sm'>
       <div className='max-h-[50vh] min-w-full'>
@@ -96,7 +99,7 @@ export function OrderTable({
                       className='hover:underline'
                     >
                       <Badge variant='success'>
-                        {order.orderState.toLowerCase()}
+                        {tOrderState(`${order.orderState.toLowerCase()}`)}
                       </Badge>
                     </Link>
                   </TableCell>

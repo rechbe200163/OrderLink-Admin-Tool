@@ -423,37 +423,37 @@
       "selectAddress": "Adresse auswählen",
       "noAddressFound": "Keine Adresse gefunden",
       "addNewAddress": "Neue Adresse hinzufügen",
-      "findAddress": "Adresse finden"
+      "findAddress": "Adresse suchen"
     },
     "Category": {
       "selectCategory": "Kategorie auswählen",
       "noCategoryFound": "Keine Kategorie gefunden",
       "addNewCategory": "Neue Kategorie hinzufügen",
-      "findAddress": "Adresse finden"
+      "findCategory": "Kategorie suchen"
     },
     "Customer": {
       "selectCustomer": "Kunde auswählen",
       "noCustomerFound": "Kein Kunde gefunden",
       "addNewCustomer": "Neuen Kunden hinzufügen",
-      "findCustomer": "Kunde finden"
+      "findCustomer": "Kunde suchen"
     },
     "Product": {
       "selectProduct": "Produkt auswählen",
       "noProductFound": "Kein Produkt gefunden",
       "addNewProduct": "Neues Produkt hinzufügen",
-      "findProduct": "Produkt finden"
+      "findProduct": "Produkt suchen"
     },
     "Route": {
       "selectRoute": "Route auswählen",
       "noRouteFound": "Keine Route gefunden",
       "addNewRoute": "Neue Route hinzufügen",
-      "findRoute": "Route finden"
+      "findRoute": "Route suchen"
     },
     "Order": {
       "selectOrder": "Bestellung auswählen",
       "noOrderFound": "Keine Bestellung gefunden",
       "addNewOrder": "Neue Bestellung hinzufügen",
-      "findOrder": "Bestellung finden"
+      "findOrder": "Bestellung suchen"
     }
   },
   "PremiumWrapper": {

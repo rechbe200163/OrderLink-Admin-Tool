@@ -137,11 +137,11 @@ const EditProductPage = ({
   }, []);
 
   return (
-    <div className='flex h-screen w-full bg-gray-50 bg-background'>
+    <div className='flex h-screen w-full  bg-background'>
       {/* Left side: Product Preview */}
       <div className='w-full p-8 flex items-center justify-center'>
-        <div className='w-full max-w-2xl bg-white rounded-lg shadow-lg overflow-hidden'>
-          <div className='relative aspect-square w-full bg-gray-100 overflow-hidden'>
+        <div className='w-full max-w-2xl  rounded-lg shadow-lg overflow-hidden'>
+          <div className='relative aspect-square w-full  overflow-hidden'>
             {productData.imagePath ? (
               <Image
                 src={productData.imagePath}
@@ -150,7 +150,7 @@ const EditProductPage = ({
                 className='object-cover'
               />
             ) : (
-              <div className='flex items-center justify-center w-full h-full text-gray-400'>
+              <div className='flex items-center justify-center w-full h-full text-foreground '>
                 <ImageOff className='h-20 w-20' />
               </div>
             )}

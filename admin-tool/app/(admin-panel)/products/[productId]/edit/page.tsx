@@ -19,7 +19,7 @@ async function EditProductPage(props: EditProductPageProps) {
   );
   const categories = await categoryApiService.getCategories();
   return (
-    <div className='sticky top-0 bg-white z-10 px-4 bg-background'>
+    <div className='sticky top-0 z-10 px-4 '>
       <BreadcrumbComponent
         items={[
           { label: 'Dashboard', href: '/' },

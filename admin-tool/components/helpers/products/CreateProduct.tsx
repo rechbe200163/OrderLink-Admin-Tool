@@ -135,11 +135,11 @@ const CreateProduct = ({ categories }: { categories: Category[] }) => {
   }, []);
 
   return (
-    <div className='flex h-screen w-fit bg-gray-50'>
+    <div className='flex h-screen w-fit '>
       {/* Left side: Real-time product preview */}
       <div className='w-full p-8 flex items-center justify-center'>
-        <div className='w-full max-w-2xl bg-white rounded-lg shadow-lg overflow-hidden'>
-          <div className='relative aspect-square w-full bg-gray-100 overflow-hidden'>
+        <div className='w-full max-w-2xl bg-background rounded-lg shadow-lg overflow-hidden'>
+          <div className='relative aspect-square w-full  overflow-hidden'>
             <div className='absolute inset-0'>
               {productData.imagePath ? (
                 <Image
@@ -149,13 +149,13 @@ const CreateProduct = ({ categories }: { categories: Category[] }) => {
                   objectFit='cover' // This will make sure the image covers the entire container
                 />
               ) : (
-                <div className='flex items-center justify-center w-full h-full text-gray-400'>
+                <div className='flex items-center justify-center w-full h-full text-foreground'>
                   <ImageOff className='h-20 w-20' />
                 </div>
               )}
             </div>
             <Badge className='absolute top-4 right-4 z-10' variant='secondary'>
-              New
+              Neu
             </Badge>
           </div>
           <div className='p-6 space-y-4'>
@@ -179,9 +179,9 @@ const CreateProduct = ({ categories }: { categories: Category[] }) => {
               {productData.stock > 0 && productData.stock <= 5 ? (
                 <Badge variant='destructive'>{productData.stock} left</Badge>
               ) : productData.stock === 0 ? (
-                <Badge variant='outline'>Out of Stock</Badge>
+                <Badge variant='outline'>Nicht auf Lager</Badge>
               ) : (
-                <Badge variant='secondary'>in stock</Badge>
+                <Badge variant='secondary'>Auf Lager</Badge>
               )}
             </div>
           </div>
@@ -193,11 +193,11 @@ const CreateProduct = ({ categories }: { categories: Category[] }) => {
         <div className='h-full overflow-y-auto'>
           <form action={action} className='space-y-6'>
             <h2 className='text-3xl font-bold mb-6 text-primary'>
-              Create a new product
+              Neues Produkt erstellen
             </h2>
             <div className='w-full h-full  flex items-center justify-center'>
               <FileInputComponent
-                label='Product Image'
+                label='Produktbild'
                 onImageUpload={handleImageUpload}
               />
             </div>
@@ -213,7 +213,7 @@ const CreateProduct = ({ categories }: { categories: Category[] }) => {
               />
             </div>
             <div className='space-y-2'>
-              <Label htmlFor='description'>Description</Label>
+              <Label htmlFor='description'>Beschreibung</Label>
               <Textarea
                 id='description'
                 name='description'
@@ -225,7 +225,7 @@ const CreateProduct = ({ categories }: { categories: Category[] }) => {
             </div>
             <div className='flex gap-4'>
               <div className='space-y-2'>
-                <Label htmlFor={'price'}>Price</Label>
+                <Label htmlFor={'price'}>Preis</Label>
                 <div className='relative flex rounded-lg shadow-sm shadow-black/5'>
                   <span className='pointer-events-none absolute inset-y-0 start-0 flex items-center justify-center ps-3 text-sm text-muted-foreground'>
                     €
@@ -245,7 +245,7 @@ const CreateProduct = ({ categories }: { categories: Category[] }) => {
                 </div>
               </div>
               <div className='space-y-2 w-1/2'>
-                <Label htmlFor='stock'>Stock</Label>
+                <Label htmlFor='stock'>Lagerbestand</Label>
                 <Input
                   id='stock'
                   name='stock'
@@ -278,12 +278,12 @@ const CreateProduct = ({ categories }: { categories: Category[] }) => {
               {isPending ? (
                 <>
                   <Loader2 className='mr-2 h-4 w-4 animate-spin' />
-                  Creating...
+                  Wird erstellt...
                 </>
               ) : (
                 <>
                   <Plus className='mr-2 h-4 w-4' />
-                  Create Product
+                  Produkt erstellen
                 </>
               )}
             </Button>

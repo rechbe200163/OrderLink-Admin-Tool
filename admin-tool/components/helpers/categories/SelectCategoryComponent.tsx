@@ -32,7 +32,7 @@ export default function SelectCategoryComponent({
   onCategorySelect: (categoryIds: string[]) => void; // Callback type definition
   defaultValues?: string[];
 }) {
-  const t = useTranslations('SelectComponents.category');
+  const t = useTranslations('SelectComponents.Category');
   const id = useId();
   const [open, setOpen] = useState<boolean>(false);
   const [values, setValues] = useState<string[]>(defaultValues);
@@ -55,7 +55,7 @@ export default function SelectCategoryComponent({
 
   return (
     <div className='space-y-2'>
-      <Label htmlFor={id}>{t('selectedCategories')}</Label>
+      <Label htmlFor={id}>{t('selectCategory')}</Label>
       <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
           <Button
