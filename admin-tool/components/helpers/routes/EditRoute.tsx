@@ -4,7 +4,7 @@ import { Order } from '@prisma/client';
 import { Card } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
-import { RoutesWithOrders } from '@/lib/types';
+import { OrdersWithAddressOfCustomer, RoutesWithOrders } from '@/lib/types';
 import { Button } from '@/components/ui/button';
 import { Loader2, PlusCircle } from 'lucide-react';
 import React, { useActionState, useId } from 'react';
@@ -15,7 +15,7 @@ import { useRouter } from 'next/navigation';
 
 interface CreateOrderProps {
   route: RoutesWithOrders;
-  orders: Order[];
+  orders: OrdersWithAddressOfCustomer[];
 }
 
 const EditRoute = ({ orders, route }: CreateOrderProps) => {
