@@ -13,7 +13,7 @@ async function CreateOrdersPage() {
         items={[
           { label: 'Dashboard', href: '/' },
           { label: 'Orders', href: '/orders' },
-          { label: 'Add', href: '/orders/add' },
+          { label: 'Hinzufügen', href: '/orders/add' },
         ]}
       />
       <CreateOrder customer={customers} products={products} />

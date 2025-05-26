@@ -19,8 +19,8 @@ async function EditRoutesPage(props: EditOrderPageProps) {
       <BreadcrumbComponent
         items={[
           { label: 'Dashboard', href: '/' },
-          { label: 'Routes', href: '/routes' },
-          { label: 'Edit', href: `/orders/${route.routeId}/edit` },
+          { label: 'Routen', href: '/routes' },
+          { label: 'Bearbeiten', href: `/orders/${route.routeId}/edit` },
         ]}
       />
       <EditRoute orders={orders} route={route} />

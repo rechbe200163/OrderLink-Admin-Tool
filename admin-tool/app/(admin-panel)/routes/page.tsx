@@ -32,7 +32,7 @@ async function RoutesPage(props: {
         <BreadcrumbComponent
           items={[
             { label: 'Dashboard', href: '/' },
-            { label: 'Routes', href: '/routes/' },
+            { label: 'Routen', href: '/routes/' },
           ]}
         />
       </div>

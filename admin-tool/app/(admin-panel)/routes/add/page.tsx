@@ -10,8 +10,8 @@ async function CreateRoutePage() {
       <BreadcrumbComponent
         items={[
           { label: 'Dashboard', href: '/' },
-          { label: 'Routes', href: '/routes' },
-          { label: 'Add', href: '/routes/add' },
+          { label: 'Routen', href: '/routes' },
+          { label: 'Hinzufügen', href: '/routes/add' },
         ]}
       />
       <CreateRoutes orders={orders} />

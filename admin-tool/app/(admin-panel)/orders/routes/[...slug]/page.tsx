@@ -21,7 +21,7 @@ async function EditProductPage(props: OrderPerRoutePageProps) {
         <BreadcrumbComponent
           items={[
             { label: 'Dashboard', href: '/' },
-            { label: 'Orders', href: '/orders/' },
+            { label: 'Bestellungen', href: '/orders/' },
             {
               label: `${decodeURIComponent(name!)}`,
               href: `/orders/routes/${routeId}/${name}`,

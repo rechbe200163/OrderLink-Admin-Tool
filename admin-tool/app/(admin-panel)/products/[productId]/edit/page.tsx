@@ -23,8 +23,8 @@ async function EditProductPage(props: EditProductPageProps) {
       <BreadcrumbComponent
         items={[
           { label: 'Dashboard', href: '/' },
-          { label: 'Products', href: '/products' },
-          { label: 'Edit', href: `/products/${product.productId}/edit` },
+          { label: 'Produkte', href: '/products' },
+          { label: 'Bearbeiten', href: `/products/${product.productId}/edit` },
         ]}
       />
       <EditProduct

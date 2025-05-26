@@ -13,7 +13,7 @@ const SiteConfigPage = async () => {
         <BreadcrumbComponent
           items={[
             { label: 'Dashboard', href: '/' },
-            { label: 'Routes', href: '/routes/' },
+            { label: 'Einstellungen', href: '/settings/' },
           ]}
         />
       </div>

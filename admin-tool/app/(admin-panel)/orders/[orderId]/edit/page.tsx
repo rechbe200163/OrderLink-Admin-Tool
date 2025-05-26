@@ -20,7 +20,7 @@ async function EditOrderPage(props: EditOrderPageProps) {
         items={[
           { label: 'Dashboard', href: '/' },
           { label: 'Orders', href: '/orders' },
-          { label: 'Edit', href: `/orders/${order.orderId}/edit` },
+          { label: 'Bearbeiten', href: `/orders/${order.orderId}/edit` },
         ]}
       />
       <EditOrder customer={customers} products={products} order={order} />

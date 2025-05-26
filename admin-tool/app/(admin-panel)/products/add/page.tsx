@@ -10,8 +10,8 @@ async function CreateProductPage() {
       <BreadcrumbComponent
         items={[
           { label: 'Dashboard', href: '/' },
-          { label: 'Products', href: '/products/' },
-          { label: 'Add', href: '/products/add' },
+          { label: 'Produkte', href: '/products/' },
+          { label: 'Hinzufügen', href: '/products/add' },
         ]}
       />
 
