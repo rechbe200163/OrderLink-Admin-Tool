@@ -8,10 +8,6 @@ import {
 } from '../utils';
 import { FormState } from '../form.types';
 import { Prisma, Role } from '@prisma/client';
-import { signIn } from '@/auth';
-import path from 'path';
-import fs from 'fs';
-import { hashSync } from 'bcryptjs';
 
 class EmployeeService {
   private static instance: EmployeeService;
@@ -37,8 +33,6 @@ class EmployeeService {
       role: formData.get('role'),
     });
 
-    console.log(validData.error?.flatten());
-
     if (!validData.success) {
       return {
         success: false,
@@ -47,10 +41,9 @@ class EmployeeService {
     }
 
     const { email, firstName, lastName, role } = validData.data;
-    console.log(validData.data);
 
     try {
-      const employee = await prisma.employees.create({
+      await prisma.employees.create({
         data: {
           email: email,
           firstName: firstName,
@@ -113,7 +106,7 @@ class EmployeeService {
       updateData.password = password;
     }
 
-    const oldRoute = await prisma.employees.update({
+    await prisma.employees.update({
       where: { employeeId: employeeId },
       data: updateData,
     });
@@ -130,8 +123,6 @@ class EmployeeService {
         lastName: formData.get('lastName'),
         password: formData.get('password'),
       });
-
-      console.log(validData.error?.flatten());
 
       if (!validData.success) {
         return {

@@ -1,7 +1,5 @@
 import { auth } from '@/auth';
-import { Button } from '@/components/ui/button';
 import { PlusCircle } from 'lucide-react';
-import Link from 'next/link';
 import React from 'react';
 import BreadcrumbComponent from '@/components/helpers/BreadCrumbComponent';
 import PaginationComponent from '@/components/pagination+filtering/PagingComponent';
@@ -9,7 +7,6 @@ import SearchComponent from '@/components/pagination+filtering/SearchComponent';
 import FilteringComponent from '@/components/pagination+filtering/FilteringComponent';
 import { employeesApiService } from '@/lib/api/concrete/employees';
 import { EmployeesTable } from '@/components/helpers/employees/EmployeesTable';
-import { capitalizeFirstLetter } from '@/lib/utils';
 import { Role } from '@prisma/client';
 import { ButtonLinkComponent } from '@/components/ButtonLinkComponent';
 import { getTranslations } from 'next-intl/server';

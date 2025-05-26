@@ -66,8 +66,6 @@ class AddressService {
       streetNumber: formData.get('streetNumber')?.toString() || null,
     });
 
-    console.log(validData.error?.flatten());
-
     if (!validData.success) {
       return {
         success: false,

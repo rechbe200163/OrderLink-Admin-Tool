@@ -1,17 +1,13 @@
 import { stripe } from '@/lib/stripeClient';
 import { NextResponse, NextRequest } from 'next/server';
-import { getSiteConfigForStripe } from '@/lib/depricated-data/data.siteconfig';
 import { siteConfigService } from '@/lib/services/SiteConfigService';
-import NextAuth from 'next-auth';
-import { authConfig } from '@/auth.config';
-const { auth } = NextAuth(authConfig);
+import { siteConfigApiService } from '@/lib/api/concrete/siteConfig';
 
 export async function POST(req: NextRequest) {
   if (req.method === 'POST') {
     let customer;
-    const siteConfig = await getSiteConfigForStripe();
+    const siteConfig = await siteConfigApiService.getSiteConfigWithAddress();
 
-    console.log('siteConfig:', siteConfig?.siteConfigId);
     // Return error if no siteConfig found
 
     if (!siteConfig) {
@@ -23,7 +19,6 @@ export async function POST(req: NextRequest) {
 
     // Check if stripeCustomerId exists, otherwise create a new customer
     if (!siteConfig.stripeCustomerId) {
-      console.log('Creating new customer');
       customer = await stripe.customers.create({
         email: siteConfig.email,
         address: {
@@ -43,7 +38,6 @@ export async function POST(req: NextRequest) {
       );
     } else {
       // Retrieve existing customer
-      console.log('Retrieving existing customer');
       customer = await stripe.customers.retrieve(siteConfig.stripeCustomerId);
     }
 

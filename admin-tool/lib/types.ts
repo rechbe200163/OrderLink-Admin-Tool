@@ -7,7 +7,6 @@ import {
   OrderState,
   Prisma,
   Product,
-  Route,
 } from '@prisma/client';
 import Stripe from 'stripe';
 //! DASHBOARD
@@ -115,48 +114,48 @@ const routeWithCount = Prisma.validator<Prisma.RouteDefaultArgs>()({
   },
 });
 
-export type RoutesWithCount = Prisma.RouteGetPayload<typeof routeWithCount>;
+type RoutesWithCount = Prisma.RouteGetPayload<typeof routeWithCount>;
 
-const routesWithOrders = Prisma.validator<Prisma.RouteDefaultArgs>()({
-  include: {
-    order: true,
-  },
-});
+// const routesWithOrders = Prisma.validator<Prisma.RouteDefaultArgs>()({
+//   include: {
+//     order: true,
+//   },
+// });
 
-export type RoutesWithOrders = Prisma.RouteGetPayload<typeof routesWithOrders>;
+// export type RoutesWithOrders = Prisma.RouteGetPayload<typeof routesWithOrders>;
 
-const productWithCategoryNames = Prisma.validator<Prisma.ProductDefaultArgs>()({
-  include: {
-    categories: {
-      select: {
-        category: {
-          select: {
-            categoryId: true,
-            name: true,
-          },
-        },
-      },
-    },
-  },
-});
+// const productWithCategoryNames = Prisma.validator<Prisma.ProductDefaultArgs>()({
+//   include: {
+//     categories: {
+//       select: {
+//         category: {
+//           select: {
+//             categoryId: true,
+//             name: true,
+//           },
+//         },
+//       },
+//     },
+//   },
+// });
 
-export type ProductWithCategoryNames = Prisma.ProductGetPayload<
-  typeof productWithCategoryNames
->;
+// export type ProductWithCategoryNames = Prisma.ProductGetPayload<
+//   typeof productWithCategoryNames
+// >;
 
-const customerWithAddressId = Prisma.validator<Prisma.CustomerDefaultArgs>()({
-  include: {
-    address: {
-      select: {
-        addressId: true,
-      },
-    },
-  },
-});
+// const customerWithAddressId = Prisma.validator<Prisma.CustomerDefaultArgs>()({
+//   include: {
+//     address: {
+//       select: {
+//         addressId: true,
+//       },
+//     },
+//   },
+// });
 
-export type CustomerWithAddressId = Prisma.CustomerGetPayload<
-  typeof customerWithAddressId
->;
+// export type CustomerWithAddressId = Prisma.CustomerGetPayload<
+//   typeof customerWithAddressId
+// >;
 
 const ordersWithCustomer = Prisma.validator<Prisma.OrderDefaultArgs>()({
   include: {
@@ -175,28 +174,36 @@ const ordersWithCustomer = Prisma.validator<Prisma.OrderDefaultArgs>()({
   },
 });
 
-export type OrdersWithCustomer = Prisma.OrderGetPayload<
-  typeof ordersWithCustomer
->;
+type OrdersWithCustomer = Prisma.OrderGetPayload<typeof ordersWithCustomer>;
 
-const ordersWithCustomerAndProducts =
-  Prisma.validator<Prisma.OrderDefaultArgs>()({
-    include: {
-      products: {
-        include: {
-          product: true,
-        },
-      },
-      customer: {
-        select: {
-          customerReference: true,
-          firstName: true,
-          lastName: true,
-        },
-      },
-    },
-  });
+// const ordersWithCustomerAndProducts =
+//   Prisma.validator<Prisma.OrderDefaultArgs>()({
+//     include: {
+//       products: {
+//         include: {
+//           product: true,
+//         },
+//       },
+//       customer: {
+//         select: {
+//           customerReference: true,
+//           firstName: true,
+//           lastName: true,
+//         },
+//       },
+//     },
+//   });
 
-export type OrdersWithCustomerAndProducts = Prisma.OrderGetPayload<
-  typeof ordersWithCustomerAndProducts
+// export type OrdersWithCustomerAndProducts = Prisma.OrderGetPayload<
+//   typeof ordersWithCustomerAndProducts
+// >;
+
+const siteConfigWithAdress = Prisma.validator<Prisma.SiteConfigDefaultArgs>()({
+  include: {
+    address: true,
+  },
+});
+
+export type SiteConfigWithAddress = Prisma.SiteConfigGetPayload<
+  typeof siteConfigWithAdress
 >;

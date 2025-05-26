@@ -27,7 +27,6 @@ class CategoryApiService extends BaseApiService {
   }
 
   async getCategroyById(categoryId: string): Promise<Category> {
-    console.log('categoryId', categoryId);
     return this.fetchFromApi<Category>(`categories/${categoryId}`);
   }
 

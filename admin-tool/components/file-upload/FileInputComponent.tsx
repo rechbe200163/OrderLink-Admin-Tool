@@ -20,7 +20,6 @@ export default function FileInputComponent({
     if (initialImage) {
       supabaseService.getSingedUrlSupabase(initialImage).then((url) => {
         setImagePreview(url);
-        console.log('url', url);
       });
     }
   }, [initialImage]);

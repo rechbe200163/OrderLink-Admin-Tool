@@ -1,6 +1,3 @@
-import NextAuth from 'next-auth';
-import { authConfig } from '@/auth.config';
-const { auth } = NextAuth(authConfig);
 import prisma from '@/prisma/client';
 import { Invoice } from '@prisma/client';
 import { NextRequest, NextResponse } from 'next/server';

@@ -1,4 +1,3 @@
-import { Button } from '@/components/ui/button';
 import {
   Tooltip,
   TooltipContent,
@@ -14,7 +13,6 @@ interface ToolTipWrapperProps {
 
 export default function ToolTipWrapper({
   children,
-  fallback,
   label,
 }: ToolTipWrapperProps) {
   return (

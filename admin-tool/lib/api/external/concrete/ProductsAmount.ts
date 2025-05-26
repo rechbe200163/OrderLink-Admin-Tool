@@ -32,8 +32,6 @@ class ProductsAmountServie extends ExternalApiService {
       if (well_stocked) params.well_stocked = 'true';
       if (out_of_stock) params.out_of_stock = 'true';
 
-      console.log('params', params);
-
       const data = await this.fetchFromExternalApi<any>(
         token,
         'descriptive/products-amount/',

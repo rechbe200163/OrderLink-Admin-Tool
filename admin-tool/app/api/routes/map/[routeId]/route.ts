@@ -1,5 +1,4 @@
 import prisma from '@/prisma/client';
-import { Select } from '@radix-ui/react-select';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(

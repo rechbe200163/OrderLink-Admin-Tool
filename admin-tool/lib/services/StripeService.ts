@@ -1,7 +1,5 @@
 'server only';
-import prisma from '@/prisma/client';
 import { stripe } from '../stripeClient';
-import { siteConfigService } from './SiteConfigService';
 
 class StripeService {
   private static instance: StripeService;

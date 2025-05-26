@@ -25,10 +25,7 @@ export class ExternalApiService {
 
     url.searchParams.append('token', token);
 
-    console.log('url', url.toString());
-
     if (params) {
-      console.log('inside if params', params);
       Object.entries(params).forEach(([key, value]) => {
         if (value !== undefined) {
           url.searchParams.append(key, String(value));

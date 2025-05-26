@@ -117,7 +117,7 @@ const EditOrder = ({ customer, products, order }: EditOrderProps) => {
           />
         </div>
         <div className='space-y-2 min-w-full'>
-          {stockOfSelectedProducts.map((product, index) =>
+          {stockOfSelectedProducts.map((product, _index) =>
             product ? (
               <div key={product.productId} className='space-y-2'>
                 <Label htmlFor={`quantity-${product.productId}`}>

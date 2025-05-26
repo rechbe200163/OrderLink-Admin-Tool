@@ -1,7 +1,6 @@
 'use client';
 
 import { AlertCircleIcon, ImageUpIcon, XIcon } from 'lucide-react';
-import Image from 'next/image';
 
 import { useFileUpload } from '@/hooks/use-file-upload';
 

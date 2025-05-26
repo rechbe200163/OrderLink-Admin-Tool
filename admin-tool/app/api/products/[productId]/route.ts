@@ -1,13 +1,7 @@
-import NextAuth from 'next-auth';
-import { authConfig } from '@/auth.config';
-const { auth } = NextAuth(authConfig);
 import prisma from '@/prisma/client';
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
 
-export async function GET(
-  req: NextRequest,
-  props: { params: Promise<{ productId: string }> }
-) {
+export async function GET(props: { params: Promise<{ productId: string }> }) {
   const params = await props.params;
 
   const product = await prisma.product.findUnique({

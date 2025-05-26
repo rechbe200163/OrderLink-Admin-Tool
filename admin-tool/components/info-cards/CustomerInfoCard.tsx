@@ -1,5 +1,4 @@
 import React from 'react';
-import { DashboardCard } from '../cards/DashboardCard';
 import {
   Card,
   CardDescription,
@@ -11,11 +10,9 @@ import { ArrowRightIcon, TrendingDownIcon, TrendingUpIcon } from 'lucide-react';
 import { customerApiService } from '@/lib/api/concrete/customers';
 import { getTranslations } from 'next-intl/server';
 import { Badge } from '../ui/badge';
-import { get } from 'http';
 import AnimatedCounter from '../helpers/AnimatedCounter';
 export default async function CustomerInfoCard() {
   const t = await getTranslations('Dashboard.InfoCards.customer');
-  const tCurrency = await getTranslations('Dashboard.InfoCards');
 
   const { currentMonthSignUps, percentageChange } =
     await customerApiService.getCustomerStats();

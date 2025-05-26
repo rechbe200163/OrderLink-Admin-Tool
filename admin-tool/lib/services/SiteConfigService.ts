@@ -3,8 +3,6 @@ import prisma from '@/prisma/client';
 import { siteConfigFormSchema } from '../utils';
 import { FormState } from '../form.types';
 import { supabaseService } from '../utlis/SupabaseStorageService';
-import path from 'path';
-import fs from 'fs';
 
 class SiteConfigService {
   private static instance: SiteConfigService;
@@ -18,8 +16,6 @@ class SiteConfigService {
 
   async createSiteConfig(formData: FormData): Promise<FormState> {
     try {
-      console.log('Form data:', formData);
-
       const validData = siteConfigFormSchema.safeParse({
         companyName: formData.get('companyName')?.toString() ?? '',
         email: formData.get('email')?.toString() ?? '',
@@ -35,7 +31,6 @@ class SiteConfigService {
       });
 
       if (!validData.success) {
-        console.log('Invalid form data:', validData.error.flatten());
         return { success: false, errors: { title: ['Invalid form data'] } };
       }
 
@@ -88,7 +83,6 @@ class SiteConfigService {
     formData: FormData
   ): Promise<FormState> {
     try {
-      console.log('Form data:', formData);
       const validData = siteConfigFormSchema.safeParse({
         companyName: formData.get('companyName')?.toString() ?? '',
         logoPath: formData.get('logo')?.toString() ?? '',
@@ -100,7 +94,6 @@ class SiteConfigService {
       });
 
       if (!validData.success) {
-        console.log('Invalid form data:', validData.error);
         return { success: false, errors: { title: ['Invalid form data'] } };
       }
 
@@ -114,9 +107,6 @@ class SiteConfigService {
       if (!oldSiteConfig) {
         return { success: false, errors: { title: ['Site config not found'] } };
       }
-
-      console.log('Parsed form data:', validData);
-      console.log('Old SiteConfig:', oldSiteConfig);
 
       const newSiteconfig = await prisma.siteConfig.create({
         data: {
@@ -157,21 +147,21 @@ class SiteConfigService {
   //   }
   // }
 
-  // async setStripeCustomerForSiteConfig(
-  //   stripeCustomerId: string,
-  //   siteConfigId: string
-  // ) {
-  //   try {
-  //     await prisma.siteConfig.update({
-  //       where: { siteConfigId: siteConfigId },
-  //       data: {
-  //         stripeCustomerId: stripeCustomerId,
-  //       },
-  //     });
-  //   } catch (error) {
-  //     console.error('Error updating siteConfig:', error);
-  //   }
-  // }
+  async setStripeCustomerForSiteConfig(
+    stripeCustomerId: string,
+    siteConfigId: string
+  ) {
+    try {
+      await prisma.siteConfig.update({
+        where: { siteConfigId: siteConfigId },
+        data: {
+          stripeCustomerId: stripeCustomerId,
+        },
+      });
+    } catch (error) {
+      console.error('Error updating siteConfig:', error);
+    }
+  }
 
   async updateUserPremiumState(isPremium: boolean, siteConfigId: string) {
     try {
@@ -184,8 +174,6 @@ class SiteConfigService {
       if (!siteConfig || !siteConfig.email) {
         throw new Error('No email found');
       }
-
-      const { email } = siteConfig;
 
       await prisma.siteConfig.update({
         where: {

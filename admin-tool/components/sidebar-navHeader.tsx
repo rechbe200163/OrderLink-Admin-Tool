@@ -24,8 +24,6 @@ const SideBarHeader = async () => {
     return <ErrorComponent />;
   }
 
-  console.log('siteConfig', companyName);
-
   return (
     <SidebarMenuButton
       asChild

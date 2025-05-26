@@ -1,8 +1,7 @@
 'server only';
 import prisma from '@/prisma/client';
-import { orderFormSchema, productFormSchema, routeFormSchema } from '../utils';
+import { routeFormSchema } from '../utils';
 import { FormState } from '../form.types';
-import { supabaseService } from '../utlis/SupabaseStorageService';
 
 class RouteService {
   private static instance: RouteService;
@@ -26,8 +25,6 @@ class RouteService {
       orderIds: formData.get('orderIds')?.toString(),
     });
 
-    console.log(validData.error?.flatten());
-
     if (!validData.success) {
       return {
         success: false,
@@ -36,11 +33,10 @@ class RouteService {
     }
 
     const { name, orderIds } = validData.data;
-    console.log(validData.data);
     const orderIdArray = orderIds.split(',');
 
     try {
-      const route = await prisma.route.create({
+      await prisma.route.create({
         data: {
           name: name,
           order: {

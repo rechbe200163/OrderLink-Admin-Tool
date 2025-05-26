@@ -1,8 +1,4 @@
-import NextAuth from 'next-auth';
-import { authConfig } from '@/auth.config';
-const { auth } = NextAuth(authConfig);
 import prisma from '@/prisma/client';
-import { Select } from '@radix-ui/react-select';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(

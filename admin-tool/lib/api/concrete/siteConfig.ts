@@ -2,6 +2,7 @@
 import { SiteConfig } from '@prisma/client';
 import { BaseApiService } from '../base';
 import prisma from '@/prisma/client';
+import { SiteConfigWithAddress } from '@/lib/types';
 
 class SiteConfigApiService extends BaseApiService {
   private static instance: SiteConfigApiService;
@@ -23,6 +24,13 @@ class SiteConfigApiService extends BaseApiService {
       'siteConfig'
     );
     return response.siteConfig;
+  }
+
+  async getSiteConfigWithAddress(): Promise<SiteConfigWithAddress> {
+    const response = await this.fetchFromApi<SiteConfigWithAddress>(
+      'siteConfig?includeAddress=true'
+    );
+    return response;
   }
 
   async getPremiumStatus(): Promise<{ isPremium: boolean }> {

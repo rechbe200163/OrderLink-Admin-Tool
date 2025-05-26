@@ -29,13 +29,6 @@ const StatsCard: React.FC<StatsCardProps> = ({
     return <ArrowRightIcon className='size-3' />;
   };
 
-  const getFormattedValue = (value: number) => {
-    return `$${value.toLocaleString(undefined, {
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2,
-    })}`;
-  };
-
   return (
     <Card className='@container/card'>
       <CardHeader className='relative'>

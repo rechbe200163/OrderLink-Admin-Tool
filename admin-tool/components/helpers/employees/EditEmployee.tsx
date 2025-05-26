@@ -1,6 +1,6 @@
 'use client';
 import { Employees, Role } from '@prisma/client';
-import React, { useActionState, useId } from 'react';
+import React, { useActionState } from 'react';
 import { toast } from 'sonner';
 import CustomeToast from '../toasts/CustomeErrorToast';
 
@@ -15,7 +15,6 @@ import {
   SelectContent,
   SelectGroup,
   SelectItem,
-  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
@@ -60,7 +59,6 @@ const EditEmployee = ({ employee }: EditEmployeesProps) => {
     }
   }, [formState, t]);
 
-  const id = useId();
   return (
     <Card className='shadow-md p-6 min-w-full bg-background'>
       <form action={action} className='space-y-6'>

@@ -116,8 +116,6 @@ class CustomerService {
         address: formData.get('addressId')?.toString() || null,
       });
 
-      console.log(validData.error?.flatten());
-
       if (!validData.success) {
         return {
           success: false,
@@ -128,7 +126,6 @@ class CustomerService {
       }
 
       const customerReference = generateCustomerRefercenceNumber();
-      console.log(customerReference);
       // check for customer with same customer
 
       const checkForExistingEmail = await prisma.customer.findUnique({
@@ -136,8 +133,6 @@ class CustomerService {
           email: validData.data.email,
         },
       });
-
-      console.log(checkForExistingEmail);
 
       if (checkForExistingEmail) {
         return {
@@ -149,7 +144,6 @@ class CustomerService {
       }
 
       const hashPwd = await hashUserPassword('password');
-      console.log(hashPwd);
 
       const customer = await prisma.customer.create({
         data: {
@@ -174,7 +168,6 @@ class CustomerService {
           },
         },
       });
-      console.log(customer);
 
       if (!customer) {
         return {
@@ -220,10 +213,6 @@ class CustomerService {
         password: formData.get('password')?.toString() || null,
       });
 
-      console.log(formData);
-      console.log(validData.error?.flatten());
-      console.log(validData.data);
-
       if (!validData.success) {
         return {
           success: false,
@@ -265,8 +254,6 @@ class CustomerService {
           businessSector: oldCustomer.businessSector,
         },
       });
-
-      console.log(validData.data);
 
       const updatedCustomer = await prisma.customer.update({
         where: { customerReference },

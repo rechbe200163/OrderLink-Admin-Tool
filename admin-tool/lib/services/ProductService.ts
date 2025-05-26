@@ -3,7 +3,6 @@ import prisma from '@/prisma/client';
 import { productFormSchema } from '../utils';
 import { FormState } from '../form.types';
 import { supabaseService } from '../utlis/SupabaseStorageService';
-import { createPrerenderSearchParamsForClientPage } from 'next/dist/server/request/search-params';
 
 class ProductService {
   private static instance: ProductService;
@@ -31,8 +30,6 @@ class ProductService {
         imagePath: formData.get('image')?.toString() || null,
         categoryIds: formData.getAll('categoryIds') || [],
       });
-
-      console.log(formData.get('image'));
 
       if (!validData.success) {
         return {
@@ -98,9 +95,6 @@ class ProductService {
         categoryIds: formData.getAll('categoryIds') || [],
       });
 
-      console.log(formData);
-      console.log(validData.error?.flatten());
-
       if (!validData.success) {
         return {
           success: false,
@@ -119,7 +113,6 @@ class ProductService {
 
       // Create new product with the same details (except ID & timestamps)
       let filePath: string = oldProduct.imagePath!;
-      console.log('image!', validData.data.imagePath);
       if (validData.data.imagePath) {
         const uploadedFilePath = await supabaseService.uploadFile(
           formData.get('image') as File

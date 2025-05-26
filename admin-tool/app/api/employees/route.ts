@@ -1,6 +1,3 @@
-import NextAuth from 'next-auth';
-import { authConfig } from '@/auth.config';
-const { auth } = NextAuth(authConfig);
 import prisma from '@/prisma/client';
 import { Prisma, Role } from '@prisma/client';
 import { NextRequest, NextResponse } from 'next/server';
@@ -67,7 +64,6 @@ export async function GET(req: NextRequest) {
     }
 
     // Handle the 'query' parameter for customer search
-    console.log('query:', query);
     if (query) {
       baseWhereClause.OR = [
         { firstName: { contains: query, mode: 'insensitive' } },

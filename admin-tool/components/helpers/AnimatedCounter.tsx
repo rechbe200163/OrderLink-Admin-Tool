@@ -1,7 +1,5 @@
 'use client';
 
-import { formatPrice } from '@/lib/utils';
-import { useTranslations } from 'next-intl';
 import CountUp from 'react-countup';
 
 type AnimatedCounterProps = {
@@ -15,7 +13,6 @@ const AnimatedCounter = ({
   decimals = 0,
   prefix = '',
 }: AnimatedCounterProps) => {
-  const t = useTranslations('Dashboard.InfoCards');
   return (
     <CountUp
       start={0}

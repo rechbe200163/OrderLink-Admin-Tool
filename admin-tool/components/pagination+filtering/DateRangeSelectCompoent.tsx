@@ -3,7 +3,6 @@
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { Calendar } from '@/components/ui/calendar';
-import { Label } from '@/components/ui/label';
 import {
   Popover,
   PopoverContent,
@@ -11,7 +10,7 @@ import {
 } from '@/components/ui/popover';
 import { format } from 'date-fns';
 import { CalendarIcon, XIcon } from 'lucide-react';
-import { useId, useState, useEffect, useCallback } from 'react';
+import { useId, useState, useEffect, useCallback, useMemo } from 'react';
 import { DateRange } from 'react-day-picker';
 import { useRouter, usePathname, useSearchParams } from 'next/navigation';
 
@@ -21,13 +20,14 @@ export default function DateRangeSelectComponent() {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const params = new URLSearchParams(searchParams);
-
-  // Format date for URL query
-  const formatDate = (date: Date) => format(date, 'yyyy-MM-dd');
+  const params = useMemo(
+    () => new URLSearchParams(searchParams),
+    [searchParams]
+  );
 
   // Update the URL with the selected date range
   const updateUrlWithDates = useCallback(() => {
+    const formatDate = (date: Date) => format(date, 'yyyy-MM-dd');
     if (date?.from) {
       params.set('startDate', formatDate(date.from));
     } else {
@@ -41,7 +41,7 @@ export default function DateRangeSelectComponent() {
     }
 
     router.push(`${pathname}?${params.toString()}`);
-  }, [date, formatDate, params, pathname, router]);
+  }, [date, params, pathname, router]);
 
   useEffect(() => {
     updateUrlWithDates();

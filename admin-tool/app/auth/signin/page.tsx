@@ -1,5 +1,4 @@
 import { LoginForm } from '@/components/session/LoginForm';
-import { siteConfigApiService } from '@/lib/api/concrete/siteConfig';
 
 export default async function LoginPage() {
   return (

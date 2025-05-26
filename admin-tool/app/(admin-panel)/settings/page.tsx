@@ -6,7 +6,6 @@ import React from 'react';
 
 const SiteConfigPage = async () => {
   const siteConfig = await siteConfigApiService.getSiteConfig();
-  console.log('siteConfig', siteConfig);
   const addresses = await addressApiService.getAddresses();
   return (
     <div className='px-5'>

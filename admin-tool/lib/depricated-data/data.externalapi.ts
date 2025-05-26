@@ -1,7 +1,4 @@
-import { auth } from '@/auth';
-import { employeesApiService } from '@/lib/api/concrete/employees';
 import { getCookie } from '@/lib/cookies/cookie-managment';
-import { employeeService } from '@/lib/services/EmployeeService';
 import { getSession, hasPermission } from '@/lib/utlis/getSession';
 import { cookies } from 'next/headers';
 
@@ -69,7 +66,6 @@ export async function fetchWithQueryParams<T>(
 //   month: boolean = true,
 //   year: boolean = false
 // ): Promise<CustomerGrowthItem[]> {
-//   console.log(`${NEXT_PUBLIC_EXTERNAL_API}descriptive/customers-signup/`);
 //   const rawData = await fetchWithQueryParams<any>(
 //     `${NEXT_PUBLIC_EXTERNAL_API}descriptive/customers-signup/`,
 //     {
@@ -96,9 +92,6 @@ export async function authenticateExternalAPI(
   email: string = 'test',
   password: string = 'test'
 ): Promise<string> {
-  console.log(
-    `${NEXT_PUBLIC_EXTERNAL_API}/authenticate/?email=${email}&password=${password}`
-  );
   const response = await fetch(
     `${NEXT_PUBLIC_EXTERNAL_API}/authenticate/?email=${email}&password=${password}`,
     {
@@ -116,7 +109,6 @@ export async function authenticateExternalAPI(
   setCookie('token', response.headers.get('token') || '');
 
   const data = await response.json();
-  console.log('data', data);
   return data;
 }
 

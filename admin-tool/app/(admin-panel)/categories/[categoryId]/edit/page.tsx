@@ -1,7 +1,6 @@
 import BreadcrumbComponent from '@/components/helpers/BreadCrumbComponent';
 import EditCategory from '@/components/helpers/categories/EditCategory';
 import { categoryApiService } from '@/lib/api/concrete/categories';
-import { useTranslations } from 'next-intl';
 import { getTranslations } from 'next-intl/server';
 import React from 'react';
 

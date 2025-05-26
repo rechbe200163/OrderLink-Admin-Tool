@@ -8,10 +8,8 @@ import React from 'react';
 export const CustomerChartsComponent = async () => {
   let token = null;
   token = await getCookie('token');
-  console.log('token', token);
   if (!token) {
     token = await authenticateExternalAPI();
-    console.log('token', token);
     if (!token) {
       throw new Error('Failed to authenticate');
     }

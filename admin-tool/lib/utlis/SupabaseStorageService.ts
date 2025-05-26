@@ -31,7 +31,6 @@ class SupabaseService {
       const fileName = file.name.split('.').shift();
 
       const filePath = `${this.productImageBucket}/${fileName}.${fileExt}`; // Unique filename
-      console.log('filePath', filePath);
 
       // Upload the file
       const { data, error } = await this.supabase.storage
@@ -62,7 +61,6 @@ class SupabaseService {
       const fileName = file.name.split('.').shift();
 
       const filePath = `${this.companyImageBucket}/${fileName}.${fileExt}`; // Unique filename
-      console.log('filePath', filePath);
 
       // Upload the file
       const { data, error } = await this.supabase.storage

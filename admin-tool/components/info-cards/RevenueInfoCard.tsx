@@ -1,7 +1,5 @@
 import React from 'react';
 
-import { DashboardCard } from '../cards/DashboardCard';
-import { Coins } from 'lucide-react';
 import { statisticsApiService } from '@/lib/api/concrete/statistics';
 import {
   Card,

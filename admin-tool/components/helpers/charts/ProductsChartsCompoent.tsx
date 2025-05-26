@@ -1,7 +1,5 @@
 import { ProductsBarChart } from '@/components/cards/charts/ProductAmountChartComponent';
-import { CustomerGrowthCharts } from '@/components/cards/charts/UserChartComponent';
 import { authenticateExternalAPI } from '@/lib/depricated-data/data.externalapi';
-import { customerGrowthService } from '@/lib/api/external/concrete/CustomerGrowth';
 import { productsAmountService } from '@/lib/api/external/concrete/ProductsAmount';
 import { getCookie } from '@/lib/cookies/cookie-managment';
 
@@ -21,10 +19,8 @@ export const ProductChartsComponent = async (props: {
 
   let token = null;
   token = await getCookie('token');
-  console.log('token', token);
   if (!token) {
     token = await authenticateExternalAPI();
-    console.log('token', token);
     if (!token) {
       throw new Error('Failed to authenticate');
     }
@@ -35,8 +31,6 @@ export const ProductChartsComponent = async (props: {
     well_stocked,
     out_of_stock
   );
-
-  console.log('products', products);
 
   return <ProductsBarChart products={products} />;
 };

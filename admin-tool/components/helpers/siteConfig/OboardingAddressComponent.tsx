@@ -1,17 +1,7 @@
 'use client';
 import React, { useState } from 'react';
-import { useRouter } from 'next/navigation';
-import { useActionState } from 'react';
-import { createSiteConfig } from '@/lib/actions/siteConfig.actions';
-import CustomeToast from '@/components/helpers/toasts/CustomeErrorToast';
-import { toast } from 'sonner';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Separator } from '@/components/ui/separator';
-import AddressSelectComponent from '@/components/helpers/AddressSelectComponent';
-import GenericInputMaskComponent from '@/components/InputWithMask';
 import {
   Form,
   FormControl,
@@ -27,11 +17,6 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { withMask } from 'use-mask-input';
 
-const steps = [
-  { id: 1, title: 'Basic Info', key: '2.1' },
-  { id: 2, title: 'Financial Details', key: '2.2' },
-  { id: 3, title: 'Address Selection', key: '2.3' },
-];
 const formSchema = z.object({
   name_5020537749: z.tuple([z.string(), z.string().optional()]),
 });

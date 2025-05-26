@@ -2,7 +2,6 @@
 
 import { Alert, AlertDescription } from '../ui/alert';
 import { AlertCircle, Loader2, LogOutIcon } from 'lucide-react';
-import { Button } from '@/components/ui/button';
 import { useActionState } from 'react';
 import { DropdownMenuItem } from '@radix-ui/react-dropdown-menu';
 import { logout } from '@/lib/actions/auth.actions';
@@ -18,8 +17,6 @@ export function LogoutForm() {
   if (!action) {
     return null; // or handle the case when action is not defined
   }
-
-  console.log('LogoutForm action:', action);
 
   return (
     <form action={action}>

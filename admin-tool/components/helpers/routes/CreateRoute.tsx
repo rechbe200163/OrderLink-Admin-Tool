@@ -1,5 +1,5 @@
 'use client';
-import { Customer, Order, Product } from '@prisma/client';
+import { Order } from '@prisma/client';
 import React, { useActionState, useId } from 'react';
 import { toast } from 'sonner';
 import CustomeToast from '../toasts/CustomeErrorToast';

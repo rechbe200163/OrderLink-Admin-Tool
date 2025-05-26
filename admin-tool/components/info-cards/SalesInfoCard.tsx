@@ -1,12 +1,6 @@
 import React from 'react';
 
-import { DashboardCard } from '../cards/DashboardCard';
-import {
-  ArrowRightIcon,
-  Sigma,
-  TrendingDownIcon,
-  TrendingUpIcon,
-} from 'lucide-react';
+import { ArrowRightIcon, TrendingDownIcon, TrendingUpIcon } from 'lucide-react';
 import { getTranslations } from 'next-intl/server';
 import { statisticsApiService } from '@/lib/api/concrete/statistics';
 import {

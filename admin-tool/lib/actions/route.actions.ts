@@ -3,7 +3,6 @@ import { auth } from '@/auth';
 import { FormState } from '../form.types';
 import { routeService } from '../services/RouteService';
 import { hasPermission } from '../utlis/getSession';
-import { redirect } from 'next/navigation';
 
 export async function createRoute(
   _prevState: FormState,

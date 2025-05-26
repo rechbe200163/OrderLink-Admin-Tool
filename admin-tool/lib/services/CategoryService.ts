@@ -51,8 +51,6 @@ class CategoryService {
       name: formData.get('name')?.toString(),
     });
 
-    console.log(validData.error?.flatten());
-
     if (!validData.success) {
       return {
         success: false,

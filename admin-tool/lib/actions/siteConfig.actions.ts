@@ -7,7 +7,6 @@ import { hasPermission } from '../utlis/getSession';
 import { siteConfigService } from '../services/SiteConfigService';
 import { stripeService } from '../services/StripeService';
 import prisma from '@/prisma/client';
-import constants from 'node:constants';
 
 export async function updateSiteConfig(
   siteConfigId: string,

@@ -1,8 +1,7 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { BusinessSector, Prisma } from '@prisma/client';
+import { NextResponse } from 'next/server';
 import prisma from '@/prisma/client';
 
-export async function GET(req: NextRequest) {
+export async function GET() {
   try {
     // Fetch customers with their business sector
     const customers = await prisma.customer.findMany({
@@ -25,6 +24,7 @@ export async function GET(req: NextRequest) {
       sectors: sectorCounts,
     });
   } catch (error) {
+    console.error('Error grouping customers by business sector:', error);
     return NextResponse.json(
       { error: 'Failed to group customers' },
       { status: 500 }

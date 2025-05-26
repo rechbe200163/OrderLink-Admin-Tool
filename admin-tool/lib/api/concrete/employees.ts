@@ -1,11 +1,7 @@
 'server only';
-import {
-  GetAllEmployeesPaging,
-  GetAllOrdersPaging,
-  OrdersWithCustomerAndProducts,
-} from '@/lib/types';
+import { GetAllEmployeesPaging } from '@/lib/types';
 import { BaseApiService } from '../base';
-import { Employees, Order } from '@prisma/client';
+import { Employees } from '@prisma/client';
 import prisma from '@/prisma/client';
 
 export class EmployeesApiService extends BaseApiService {

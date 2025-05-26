@@ -1,12 +1,6 @@
 import React from 'react';
 import { formatPrice } from '@/lib/utils';
-import { DashboardCard } from '../cards/DashboardCard';
-import {
-  ArrowRightIcon,
-  Diameter,
-  TrendingDownIcon,
-  TrendingUpIcon,
-} from 'lucide-react';
+import { ArrowRightIcon, TrendingDownIcon, TrendingUpIcon } from 'lucide-react';
 import { statisticsApiService } from '@/lib/api/concrete/statistics';
 import { getTranslations } from 'next-intl/server';
 import {

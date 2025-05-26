@@ -1,13 +1,10 @@
 'use client';
 
 import {
-  BarChartIcon,
-  CalendarIcon,
   HomeIcon,
   ShoppingCartIcon,
   UsersIcon,
   ChevronRight,
-  type LucideIcon,
   ChartLine,
   Bolt,
   UserPen,
@@ -24,7 +21,6 @@ import {
 } from '@/components/ui/collapsible';
 import {
   SidebarGroup,
-  SidebarGroupLabel,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,

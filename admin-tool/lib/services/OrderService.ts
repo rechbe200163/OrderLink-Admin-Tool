@@ -1,8 +1,7 @@
 'server only';
 import prisma from '@/prisma/client';
-import { orderFormSchema, productFormSchema } from '../utils';
+import { orderFormSchema } from '../utils';
 import { FormState } from '../form.types';
-import { supabaseService } from '../utlis/SupabaseStorageService';
 
 class OrderService {
   private static instance: OrderService;
@@ -50,7 +49,6 @@ class OrderService {
       quantity: validQuantity,
       selfCollect,
     } = validData.data;
-    console.log(validData.data);
     const productIdsArray = productIds.split(',');
 
     try {

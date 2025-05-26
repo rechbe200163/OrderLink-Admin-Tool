@@ -1,16 +1,5 @@
 'use client';
-import { TrendingUp } from 'lucide-react';
-import {
-  AreaChart,
-  CartesianGrid,
-  Line,
-  LineChart,
-  XAxis,
-  YAxis,
-  ResponsiveContainer,
-  Tooltip,
-  Area,
-} from 'recharts';
+import { AreaChart, CartesianGrid, XAxis, Area } from 'recharts';
 import {
   Card,
   CardContent,
@@ -43,7 +32,6 @@ export function CustomerGrowthCharts({
   chartData: CustomerGrowth;
 }) {
   // get date range from chartData
-  console.log('chartData', chartData);
   const dateRange = chartData.map((item) => item.date);
   const startDate = new Date(dateRange[0]);
   const endDate = new Date(dateRange[dateRange.length - 1]);
