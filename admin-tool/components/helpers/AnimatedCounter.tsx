@@ -4,17 +4,28 @@ import { formatPrice } from '@/lib/utils';
 import { useTranslations } from 'next-intl';
 import CountUp from 'react-countup';
 
-const AnimatedCounter = ({ value }: { value: number }) => {
+type AnimatedCounterProps = {
+  value: number;
+  decimals?: number;
+  prefix?: string;
+};
+
+const AnimatedCounter = ({
+  value,
+  decimals = 0,
+  prefix = '',
+}: AnimatedCounterProps) => {
   const t = useTranslations('Dashboard.InfoCards');
-  console.log(t('currency'));
   return (
-    <div className='w-full'>
-      <CountUp
-        decimals={2}
-        end={value}
-        formattingFn={(val) => formatPrice(val, t('currency'))}
-      />
-    </div>
+    <CountUp
+      start={0}
+      end={value}
+      duration={2.5}
+      separator=' '
+      decimal='.'
+      decimals={decimals}
+      prefix={String(prefix)}
+    />
   );
 };
 

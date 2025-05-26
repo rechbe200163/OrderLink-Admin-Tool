@@ -83,7 +83,7 @@
       "monthlyStats": "Estadísticas Mensuales"
     },
     "InfoCards": {
-      "currency": "EUR",
+      "currency": "€",
       "revenue": {
         "title": "Ingresos",
         "subtitle": "Ingresos Mensuales",

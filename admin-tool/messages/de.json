@@ -83,7 +83,7 @@
       "monthlyStats": "Monatliche Statistiken"
     },
     "InfoCards": {
-      "currency": "EUR",
+      "currency": "€",
       "revenue": {
         "title": "Umsatz",
         "subtitle": "Monatlicher Umsatz",
@@ -91,7 +91,7 @@
       },
       "customer": {
         "title": "Kunden",
-        "subtitle": "Anzahl der Kunden",
+        "subtitle": "Anzahl der registrierten Kunden",
         "timeframe": "seit letztem Monat"
       },
       "monthlySales": {

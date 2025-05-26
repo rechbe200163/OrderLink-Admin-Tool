@@ -83,7 +83,7 @@
       "monthlyStats": "Maandelijkse Statistieken"
     },
     "InfoCards": {
-      "currency": "EUR",
+      "currency": "€",
       "revenue": {
         "title": "Omzet",
         "subtitle": "Maandelijkse omzet",
