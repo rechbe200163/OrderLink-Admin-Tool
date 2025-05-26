@@ -41,7 +41,7 @@ async function ImageComponent({
         alt={alt}
         fill={true}
         sizes={sizes || '(max-width: 768px) 100vw, 33vw'}
-        className='object-cover w-full h-full hover:scale-105 transition-transform duration-300'
+        className='object-contain w-full h-full transition-transform duration-300 hover:scale-105 p-2'
         priority
       />
     </div>

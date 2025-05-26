@@ -1,21 +1,11 @@
-import SignInForm from '@/components/forms/auth/SigInForm';
-import Link from 'next/link';
-import { Suspense } from 'react';
+import { LoginForm } from '@/components/session/LoginForm';
+import { siteConfigApiService } from '@/lib/api/concrete/siteConfig';
 
-export default function SignIn() {
+export default async function LoginPage() {
   return (
-    <div className='h-screen w-screen flex justify-center items-center bg-slate-100'>
-      <div className='sm:shadow-xl px-8 pb-8 pt-12 sm:bg-white rounded-xl space-y-12'>
-        <h1 className='font-semibold text-2xl'>Login</h1>
-        <Suspense fallback={<div>Loading...</div>}>
-          <SignInForm />
-        </Suspense>
-        <p className='text-center'>
-          Need to create an account?
-          <Link className='text-indigo-500 hover:underline' href='/auth/signup'>
-            Create Account
-          </Link>
-        </p>
+    <div className='flex min-h-svh flex-col items-center justify-center bg-muted p-6 md:p-10'>
+      <div className='w-full max-w-sm md:max-w-3xl'>
+        <LoginForm />
       </div>
     </div>
   );

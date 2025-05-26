@@ -29,7 +29,7 @@ import {
 import Link from 'next/link';
 import NavUser from './nav-user';
 import { auth } from '@/auth';
-import SideBarHeader from './sidebar-naheader';
+import SideBarHeader from './sidebar-navHeader';
 
 const data = {
   user: {

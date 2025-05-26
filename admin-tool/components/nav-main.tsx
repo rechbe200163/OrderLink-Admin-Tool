@@ -6,128 +6,195 @@ import {
   HomeIcon,
   ShoppingCartIcon,
   UsersIcon,
+  ChevronRight,
   type LucideIcon,
+  ChartLine,
+  Bolt,
+  UserPen,
+  Route,
+  MapPin,
+  Box,
+  Shapes,
 } from 'lucide-react';
 
 import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from '@/components/ui/collapsible';
+import {
   SidebarGroup,
-  SidebarGroupContent,
+  SidebarGroupLabel,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  SidebarMenuSub,
+  SidebarMenuSubButton,
+  SidebarMenuSubItem,
 } from '@/components/ui/sidebar';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { cn } from '@/lib/utils';
 
-const data = {
-  navMain: [
-    {
-      title: 'Dashboard',
-      url: '/',
-      icon: HomeIcon,
-    },
-    {
-      title: 'Customers',
-      url: '/customers',
-      icon: UsersIcon,
-    },
-    {
-      title: 'Products',
-      url: '/products',
-      icon: ShoppingCartIcon,
-    },
-    {
-      title: 'Categories',
-      url: '/categories',
-      icon: BarChartIcon,
-    },
-    {
-      title: 'Addresses',
-      url: '/addresses',
-      icon: CalendarIcon,
-    },
-    {
-      title: 'Routes',
-      url: '/routes',
-      icon: CalendarIcon,
-    },
-    {
-      title: 'Employees',
-      url: '/employees',
-      icon: UsersIcon,
-    },
-    {
-      title: 'Orders',
-      url: '/orders',
-      icon: ShoppingCartIcon,
-    },
-    {
-      title: 'Settings',
-      url: '/settings',
-      icon: BarChartIcon,
-    },
-    {
-      title: 'Statistics',
-      url: '/statistics',
-      icon: BarChartIcon,
-    },
-    // {
-    //   title: 'Subscriptions',
-    //   url: '/subscriptions',
-    //   icon: CalendarIcon,
-    // },
-  ],
-};
+const navGroups = [
+  {
+    label: 'Übersicht',
+    items: [
+      {
+        title: 'Übersicht',
+        url: '/',
+        icon: HomeIcon,
+      },
+      {
+        title: 'Statistiken',
+        url: '/statistics',
+        icon: ChartLine,
+      },
+    ],
+  },
+  {
+    label: 'Verkauf',
+    items: [
+      {
+        title: 'Bestellungen',
+        url: '/orders',
+        icon: ShoppingCartIcon,
+      },
+      {
+        title: 'Routen',
+        url: '/routes',
+        icon: Route,
+      },
+      {
+        title: 'Adressen',
+        url: '/addresses',
+        icon: MapPin,
+      },
+    ],
+  },
+  {
+    label: 'Produkte',
+    items: [
+      {
+        title: 'Produkte',
+        url: '/products',
+        icon: Box,
+      },
+      {
+        title: 'Kategorien',
+        url: '/categories',
+        icon: Shapes,
+      },
+    ],
+  },
+  {
+    label: 'Kunden',
+    items: [
+      {
+        title: 'Kunden',
+        url: '/customers',
+        icon: UsersIcon,
+      },
+    ],
+  },
+  {
+    label: 'Mitarbeiter',
+    items: [
+      {
+        title: 'Mitarbeiter',
+        url: '/employees',
+        icon: UserPen,
+      },
+    ],
+  },
+  {
+    label: 'Einstellungen',
+    items: [
+      {
+        title: 'Einstellungen',
+        url: '/settings',
+        icon: Bolt,
+      },
+    ],
+  },
+];
 
 export function NavMain() {
-  const items = data.navMain;
-
   const pathname = usePathname();
-  const isActive = (url: string) => {
-    return pathname === url; // Correct comparison
-  };
+
+  // Helper to check if any item in group is active
+  const isGroupActive = (items: { url: string }[]) =>
+    items.some(
+      (item) => pathname === item.url || pathname.startsWith(item.url + '/')
+    );
+
   return (
     <SidebarGroup>
-      <SidebarGroupContent className='flex flex-col gap-2'>
-        <SidebarMenu>
-          {/* <SidebarMenuItem className='flex items-center gap-2'>
-            <SidebarMenuButton
-              tooltip='Quick Create'
-              className='min-w-8 bg-primary text-primary-foreground duration-200 ease-linear hover:bg-primary/90 hover:text-primary-foreground active:bg-primary/90 active:text-primary-foreground'
-            >
-              <PlusCircleIcon />
-              <span>Quick Create</span>
-            </SidebarMenuButton>
-            <Button
-              size='icon'
-              className='h-9 w-9 shrink-0 group-data-[collapsible=icon]:opacity-0'
-              variant='outline'
-            >
-              <MailIcon />
-              <span className='sr-only'>Inbox</span>
-            </Button>
-          </SidebarMenuItem> */}
-        </SidebarMenu>
-        <SidebarMenu>
-          {items.map((item) => (
-            <SidebarMenuItem key={item.title}>
-              <Link href={item.url}>
-                <SidebarMenuButton
-                  tooltip={item.title}
-                  className={cn(
-                    'hover:cursor-pointer',
-                    isActive(item.url) && 'bg-accent text-accent-foreground'
-                  )}
-                >
-                  {item.icon && <item.icon />}
-                  <span>{item.title}</span>
-                </SidebarMenuButton>
-              </Link>
-            </SidebarMenuItem>
-          ))}
-        </SidebarMenu>
-      </SidebarGroupContent>
+      {navGroups.map((group) => (
+        <div key={group.label} className='mb-4 last:mb-0'>
+          <SidebarMenu>
+            {group.items.length > 1 ? (
+              <Collapsible
+                asChild
+                defaultOpen={isGroupActive(group.items)}
+                className='group/collapsible'
+              >
+                <SidebarMenuItem>
+                  <CollapsibleTrigger asChild>
+                    <SidebarMenuButton>
+                      <span>{group.label}</span>
+                      <ChevronRight className='ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90' />
+                    </SidebarMenuButton>
+                  </CollapsibleTrigger>
+                  <CollapsibleContent>
+                    <SidebarMenuSub>
+                      {group.items.map((item) => (
+                        <SidebarMenuSubItem key={item.title}>
+                          <SidebarMenuSubButton
+                            asChild
+                            className={
+                              pathname === item.url ||
+                              pathname.startsWith(item.url + '/')
+                                ? 'bg-accent text-accent-foreground'
+                                : ''
+                            }
+                          >
+                            <Link href={item.url}>
+                              <span className='flex items-center gap-2'>
+                                {item.icon && <item.icon size={16} />}
+                                {item.title}
+                              </span>
+                            </Link>
+                          </SidebarMenuSubButton>
+                        </SidebarMenuSubItem>
+                      ))}
+                    </SidebarMenuSub>
+                  </CollapsibleContent>
+                </SidebarMenuItem>
+              </Collapsible>
+            ) : (
+              group.items.map((item) => (
+                <SidebarMenuItem key={item.title}>
+                  <SidebarMenuButton
+                    asChild
+                    tooltip={item.title}
+                    className={
+                      pathname === item.url ||
+                      pathname.startsWith(item.url + '/')
+                        ? 'bg-accent text-accent-foreground'
+                        : ''
+                    }
+                  >
+                    <Link href={item.url}>
+                      {item.icon && <item.icon size={16} />}
+                      <span>{item.title}</span>
+                    </Link>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              ))
+            )}
+          </SidebarMenu>
+        </div>
+      ))}
     </SidebarGroup>
   );
 }
