@@ -1,4 +1,5 @@
 import { CustomerChartsComponent } from '@/components/helpers/charts/CustomerChartsComponent';
+import { OrdersChartsComponent } from '@/components/helpers/charts/OrdersChartsComponent';
 import { ProductChartsComponent } from '@/components/helpers/charts/ProductsChartsCompoent';
 import TabView from '@/components/TabView';
 import { Box, Package, Route, UsersRound, ChartLine } from 'lucide-react';
@@ -8,33 +9,33 @@ export default async function StatisticsPage() {
   const tabs = [
     {
       value: 'tab-1',
-      label: 'Customers',
+      label: 'Kunden',
       icon: UsersRound,
       content: CustomerChartsComponent,
     },
     {
       value: 'tab-2',
-      label: 'Products',
+      label: 'Produkte',
       icon: Package,
       content: ProductChartsComponent,
     },
     {
       value: 'tab-3',
-      label: 'Categories',
+      label: 'Kategorien',
       icon: Box,
       content: () => <div>Categories Data</div>,
     },
     {
       value: 'tab-4',
-      label: 'Routes',
+      label: 'Routen',
       icon: Route,
       content: () => <div>Routes Data</div>,
     },
     {
       value: 'tab-5',
-      label: 'Sales',
+      label: 'Bestellungen',
       icon: ChartLine,
-      content: () => <div>Sales Data</div>,
+      content: OrdersChartsComponent,
     },
   ];
 

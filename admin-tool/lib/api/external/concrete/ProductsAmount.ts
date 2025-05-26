@@ -4,6 +4,10 @@ export type ProductsAmount = {
   products: Record<string, number>;
 };
 
+export type ProductsMosthlyBought = {
+  products: Record<string, number>;
+};
+
 class ProductsAmountServie extends ExternalApiService {
   private static instance: ProductsAmountServie;
 
@@ -45,6 +49,37 @@ class ProductsAmountServie extends ExternalApiService {
       return data.products;
     } catch (error) {
       console.error('Error fetching products growth:', error);
+      return { products: {} };
+    }
+  }
+
+  async getProductsMostlyBought(
+    token: string,
+    limit: number = 10,
+    month: boolean = false,
+    year: boolean = false
+  ): Promise<ProductsMosthlyBought> {
+    try {
+      const params: Record<string, string> = {
+        limit: String(limit),
+      };
+
+      if (month) params.month = 'true';
+      if (year) params.year = 'true';
+
+      const data = await this.fetchFromExternalApi<any>(
+        token,
+        'descriptive/products-mostly-bought/',
+        params,
+        {
+          method: 'GET',
+          headers: { Accept: 'application/json' },
+        }
+      );
+
+      return data.products;
+    } catch (error) {
+      console.error('Error fetching mostly bought products:', error);
       return { products: {} };
     }
   }

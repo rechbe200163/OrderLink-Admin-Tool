@@ -5,8 +5,10 @@ import { getCookie } from '@/lib/cookies/cookie-managment';
 
 import React from 'react';
 import { ProductsMostlyBought } from '@/components/cards/charts/ProductsMostlyBought';
+import { ordersStatsService } from '@/lib/api/external/concrete/OrderStatsService';
+import { OrderAmountChart } from '@/components/cards/charts/OrderAmountcChart';
 
-export const ProductChartsComponent = async (props: {
+export const OrdersChartsComponent = async (props: {
   searchParams?: Promise<{
     limit?: string;
     well_stocked?: boolean;
@@ -14,7 +16,7 @@ export const ProductChartsComponent = async (props: {
   }>;
 }) => {
   const searchParams = await props.searchParams;
-  const limit = searchParams?.limit ? parseInt(searchParams.limit) : 20;
+  const limit = searchParams?.limit ? parseInt(searchParams.limit) : 10;
   const well_stocked = searchParams?.well_stocked ?? false;
   const out_of_stock = searchParams?.out_of_stock ?? false;
 
@@ -26,25 +28,16 @@ export const ProductChartsComponent = async (props: {
       throw new Error('Failed to authenticate');
     }
   }
-  const products = await productsAmountService.getProductsGrowth(
+  const orders = await ordersStatsService.getProductsGrowth(
     token,
     limit,
     well_stocked,
     out_of_stock
   );
 
-  const productsMostlyBought =
-    await productsAmountService.getProductsMostlyBought(
-      token,
-      limit,
-      false,
-      false
-    );
-
   return (
     <>
-      <ProductsBarChart products={products} />
-      <ProductsMostlyBought products={productsMostlyBought} />
+      <OrderAmountChart chartData={orders} />
     </>
   );
 };

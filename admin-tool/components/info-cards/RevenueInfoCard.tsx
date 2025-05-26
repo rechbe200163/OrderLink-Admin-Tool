@@ -18,6 +18,8 @@ export default async function RevenueInfoCard() {
   const { currentMonthRevenue, percentageChange } =
     await statisticsApiService.getRevenueStats();
 
+  console.log('RevenueInfoCard', currentMonthRevenue, percentageChange);
+
   const getTrendIcon = () => {
     if (percentageChange > 0) return <TrendingUpIcon className='size-3' />;
     if (percentageChange < 0) return <TrendingDownIcon className='size-3' />;
@@ -45,13 +47,19 @@ export default async function RevenueInfoCard() {
 
     return 'Gleich wie letzten Monat';
   }
+
+  function convertCentsToEuros(currentMonthRevenue: number): number {
+    return Number((currentMonthRevenue / 100).toFixed(2));
+  }
+
   return (
     <Card className='@container/card'>
       <CardHeader className='relative'>
         <CardDescription>Monatlicher Umsatz</CardDescription>
         <CardTitle className='@[250px]/card:text-3xl text-2xl font-semibold tabular-nums'>
           <AnimatedCounter
-            value={currentMonthRevenue}
+            value={convertCentsToEuros(currentMonthRevenue)}
+            decimals={2}
             prefix={tCurrency('currency')}
           />
         </CardTitle>

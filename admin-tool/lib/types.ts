@@ -10,8 +10,8 @@ import {
 } from '@prisma/client';
 import Stripe from 'stripe';
 export type AIVStats = {
-  currentMonthRevenue: number;
-  lastMonthRevenue: number;
+  currentMonthAIV: number;
+  lastMonthAIV: number;
   percentageChange: number;
 };
 

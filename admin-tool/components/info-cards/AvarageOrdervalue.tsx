@@ -14,8 +14,9 @@ import AnimatedCounter from '../helpers/AnimatedCounter';
 import { Badge } from '../ui/badge';
 export default async function AvarageOderValueCard() {
   const t = await getTranslations('Dashboard.InfoCards.avarageOrderValue');
+  const tCurrency = await getTranslations('Dashboard.InfoCards');
 
-  const { currentMonthRevenue, lastMonthRevenue, percentageChange } =
+  const { currentMonthAIV, lastMonthAIV, percentageChange } =
     await statisticsApiService.getAvarageOrderValueStats();
 
   const getTrendIcon = () => {
@@ -24,12 +25,12 @@ export default async function AvarageOderValueCard() {
     return <ArrowRightIcon className='size-3' />;
   };
 
-  function renderComparison(current: number, lastMonthRevenue: number | null) {
-    if (lastMonthRevenue == null) return 'Keine Daten für letzten Monat';
+  function renderComparison(current: number, lastMonthAIV: number | null) {
+    if (lastMonthAIV == null) return 'Keine Daten für letzten Monat';
 
-    const change = current - lastMonthRevenue;
+    const change = current - lastMonthAIV;
     const changePercentage =
-      lastMonthRevenue !== 0 ? (change / lastMonthRevenue) * 100 : 0;
+      lastMonthAIV !== 0 ? (change / lastMonthAIV) * 100 : 0;
 
     if (changePercentage > 0) {
       return (
@@ -51,12 +52,26 @@ export default async function AvarageOderValueCard() {
 
     return 'Gleich wie letzten Monat';
   }
+
+  console.log(
+    'AvarageOderValueCard',
+    currentMonthAIV,
+    lastMonthAIV,
+    percentageChange
+  );
+  function convertCentsToEuros(currentMonthAIV: number): number {
+    return Number((currentMonthAIV / 100).toFixed(2));
+  }
   return (
     <Card className='@container/card'>
       <CardHeader className='relative'>
-        <CardDescription>Monatlicher Umsatz</CardDescription>
+        <CardDescription>Durchschnittlicher Bestellwert</CardDescription>
         <CardTitle className='@[250px]/card:text-3xl text-2xl font-semibold tabular-nums'>
-          <AnimatedCounter value={currentMonthRevenue} />
+          <AnimatedCounter
+            value={convertCentsToEuros(currentMonthAIV)}
+            decimals={2}
+            prefix={tCurrency('currency')}
+          />{' '}
         </CardTitle>
         <div className='absolute right-4 top-4'>
           <Badge variant='outline' className='flex gap-1 rounded-lg text-xs'>
@@ -68,7 +83,7 @@ export default async function AvarageOderValueCard() {
       </CardHeader>
       <CardFooter className='flex-col items-start gap-1 text-sm'>
         <div className='line-clamp-1 flex gap-2 font-medium'>
-          {renderComparison(currentMonthRevenue, lastMonthRevenue)}
+          {renderComparison(currentMonthAIV, lastMonthAIV)}
         </div>
         <div className='text-muted-foreground'>
           {t('subtitle')} {''}
