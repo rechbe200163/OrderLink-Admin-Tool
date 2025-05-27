@@ -71,7 +71,7 @@ export function ProductsMostlyBought({
               tickLine={false}
               tickMargin={1}
               axisLine
-              angle={-45}
+              angle={-90}
               textAnchor='end'
               height={70}
             />
