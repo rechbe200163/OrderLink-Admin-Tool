@@ -1,6 +1,6 @@
 'use client';
 
-import { CreditCardIcon, MoreVerticalIcon } from 'lucide-react';
+import { CreditCardIcon, LogOut, MoreVerticalIcon } from 'lucide-react';
 
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import {
@@ -19,7 +19,8 @@ import {
   useSidebar,
 } from '@/components/ui/sidebar';
 import { Session } from 'next-auth';
-import { LogoutForm } from './session/LogoutForm';
+import { logOut } from '@/lib/actions/auth.actions';
+import { useActionState } from 'react';
 
 export default function NavUser({ user }: { user: Session['user'] }) {
   // if user is null return generic user object
@@ -95,8 +96,9 @@ export default function NavUser({ user }: { user: Session['user'] }) {
               </DropdownMenuItem> */}
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
-            <DropdownMenuItem asChild>
-              <LogoutForm />
+            <DropdownMenuItem onClick={logOut}>
+              <LogOut className='mr-2 h-4 w-4' />
+              Log out
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

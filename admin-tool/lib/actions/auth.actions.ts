@@ -1,7 +1,9 @@
+'use server';
 import { signOut } from '@/auth';
 import { FormState } from '../form.types';
+import { redirect } from 'next/navigation';
 
-export async function logout(): Promise<FormState> {
+export async function logOut(): Promise<FormState> {
   try {
     await signOut();
     return Promise.resolve({
@@ -13,5 +15,7 @@ export async function logout(): Promise<FormState> {
       success: false,
       message: error.message || 'Logout failed',
     };
+  } finally {
+    redirect('/auth/signin');
   }
 }
