@@ -15,9 +15,9 @@ datasource db {
 }
 
 enum Role {
+  CUSTOMER
   ADMIN
   SUPPLIER
-  CUSTOMER
   EMPLOYEE
 }
 
@@ -47,7 +47,7 @@ enum BusinessSector {
 
 model Customer {
   customerId        String    @id @default(uuid()) @db.Uuid
-  customerReference Int       @unique()
+  customerReference Int       @unique() 
   email             String    @unique
   phoneNumber       String    @db.VarChar(15)
   password          String    @db.VarChar(255)
@@ -61,7 +61,6 @@ model Customer {
   addressId         String    @db.Uuid
 
   businessSector BusinessSector?
-  role           Role              @default(CUSTOMER)
   address        Address           @relation(fields: [addressId], references: [addressId])
   cart           Cart?
   orders         Order[]
@@ -72,7 +71,7 @@ model Customer {
 
 model CustomerHistory {
   historyId         String    @id @default(uuid()) @db.Uuid
-  customerReference Int
+  customerReference Int        
   email             String
   phoneNumber       String    @db.VarChar(15)
   password          String    @db.VarChar(255)
@@ -102,8 +101,8 @@ model Address {
   modifiedAt   DateTime? @default(dbgenerated("null")) @updatedAt
   deleted      Boolean   @default(false)
 
-  customers  Customer[]
-  siteConfig SiteConfig[]
+  customers       Customer[]
+  siteConfig      SiteConfig[]
 
   @@map("addresses") // Removed unique constraint
 }
@@ -149,7 +148,7 @@ model Category {
 //TODO
 model Order {
   orderId           String     @id @default(uuid()) @db.Uuid
-  customerReference Int
+  customerReference Int        
   orderDate         DateTime   @default(now())
   deliveryDate      DateTime?
   deleted           Boolean    @default(false)
@@ -160,6 +159,7 @@ model Order {
   products OrderOnProducts[]
   invoice  Invoice?
   route    RoutesOnOrders[]
+  // history  RouteOrderHistory[]
 
   @@map("orders")
 }
@@ -184,6 +184,7 @@ model Route {
   name    String           @db.VarChar(255)
   deleted Boolean          @default(false)
   order   RoutesOnOrders[]
+  // history RouteOrderHistory[]
 
   @@map("routes")
 }
@@ -248,12 +249,12 @@ model CartOnProducts {
 }
 
 model OrderOnProducts {
-  orderId       String    @db.Uuid
-  order         Order     @relation(fields: [orderId], references: [orderId])
-  productId     String    @db.Uuid
-  product       Product   @relation(fields: [productId], references: [productId])
-  orderDate     DateTime? @default(now())
-  productAmount Int       @default(1)
+  orderId       String  @db.Uuid
+  order         Order   @relation(fields: [orderId], references: [orderId])
+  productId     String  @db.Uuid
+  product       Product @relation(fields: [productId], references: [productId])
+  orderDate     DateTime @default(now())
+  productAmount Int     @default(1)
 
   @@id([orderId, productId])
   @@map("ordersProducts")
@@ -269,8 +270,14 @@ model RoutesOnOrders {
   @@map("routesOrders")
 }
 
-// model Config {
-//   configId String @id @default(uuid()) @db.Uuid
-//   configured Boolean @default(false)
-//   @@map("config")
+// model RouteOrderHistory {
+//   historyId String @id @default(uuid()) @db.Uuid
+//   routeId             String @db.Uuid
+//   orderId             String @db.Uuid
+//   deleted             Boolean @default(false)
+
+//   route Route @relation(fields: [routeId], references: [routeId])
+//   order Order @relation(fields: [orderId], references: [orderId])
+
+//   @@map("routeOrderHistory")
 // }
