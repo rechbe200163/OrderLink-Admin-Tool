@@ -23,11 +23,11 @@ class CustomerApiService extends BaseApiService {
   }
 
   async getAll(): Promise<Customer[]> {
-    return this.fetchFromApi<Customer[]>('customers/all');
+    return this.get<Customer[]>('customers/all');
   }
 
   async getCustomerStats(): Promise<CustomerStats> {
-    return this.fetchFromApi<CustomerStats>('customers', {
+    return this.get<CustomerStats>('customers', {
       stats: 'customerStats',
     });
   }
@@ -39,7 +39,7 @@ class CustomerApiService extends BaseApiService {
     filter?: string,
     businessSector?: BusinessSector | 'n/a'
   ): Promise<GetAllUserPaging> {
-    return this.fetchFromApi<GetAllUserPaging>('customers', {
+    return this.get<GetAllUserPaging>('customers', {
       page,
       limit,
       query,
@@ -51,7 +51,7 @@ class CustomerApiService extends BaseApiService {
   async getCustomerByReference(
     customerReference: string
   ): Promise<CustomerWithAddressId> {
-    return this.fetchFromApi(`customers/${customerReference}`);
+    return this.get(`customers/${customerReference}`);
   }
 }
 

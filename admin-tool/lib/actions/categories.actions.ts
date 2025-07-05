@@ -1,7 +1,8 @@
 'use server';
 import { auth } from '@/auth';
 import { FormState } from '../form.types';
-import { categoryService } from '../services/CategoryService';
+import { apiPost, apiPut } from './api.actions';
+import { ENDPOINTS } from '../api/endpoints';
 
 export async function createCategory(
   _prevState: FormState,
@@ -18,7 +19,12 @@ export async function createCategory(
     };
   }
 
-  return await categoryService.createCategory(formData);
+  try {
+    await apiPost(ENDPOINTS.CATEGORIES, Object.fromEntries(formData));
+    return { success: true };
+  } catch (error: any) {
+    return { success: false, errors: { title: [error.message] } };
+  }
 }
 
 export async function updateCategory(
@@ -37,5 +43,10 @@ export async function updateCategory(
     };
   }
 
-  return await categoryService.updateCategory(categoryId, formData);
+  try {
+    await apiPut(ENDPOINTS.CATEGORY(categoryId), Object.fromEntries(formData));
+    return { success: true };
+  } catch (error: any) {
+    return { success: false, errors: { title: [error.message] } };
+  }
 }

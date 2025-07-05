@@ -19,11 +19,11 @@ export class ProductApiService extends BaseApiService {
   }
 
   async getAll(): Promise<Product[]> {
-    return this.fetchFromApi<Product[]>('products/all');
+    return this.get<Product[]>('products/all');
   }
 
   async getProductbyId(productId: string): Promise<ProductWithCategoryNames> {
-    return await this.fetchFromApi<ProductWithCategoryNames>(
+    return await this.get<ProductWithCategoryNames>(
       `products/${productId}`
     );
   }
@@ -35,7 +35,7 @@ export class ProductApiService extends BaseApiService {
     filter?: string,
     category?: string
   ): Promise<GetAllProductsPaging> {
-    return this.fetchFromApi<GetAllProductsPaging>('products', {
+    return this.get<GetAllProductsPaging>('products', {
       page,
       limit,
       query,

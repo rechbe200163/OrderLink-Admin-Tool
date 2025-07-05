@@ -1,0 +1,25 @@
+export const ENDPOINTS = {
+  ADDRESSES: 'addresses',
+  ADDRESS: (id: string | number) => `addresses/${id}`,
+  CATEGORIES: 'categories',
+  CATEGORY: (id: string | number) => `categories/${id}`,
+  CUSTOMERS: 'customers',
+  CUSTOMER: (ref: string | number) => `customers/${ref}`,
+  CUSTOMER_DELETE: (ref: string | number) => `customers/${ref}/delete`,
+  CUSTOMER_RESTORE: (ref: string | number) => `customers/${ref}/restore`,
+  EMPLOYEES: 'employees',
+  EMPLOYEE: (id: string | number) => `employees/${id}`,
+  ORDERS: 'orders',
+  ORDER: (id: string | number) => `orders/${id}`,
+  PRODUCTS: 'products',
+  PRODUCT: (id: string | number) => `products/${id}`,
+  ROUTES: 'routes',
+  ROUTE: (id: string | number) => `routes/${id}`,
+  SITE_CONFIG: 'siteConfig',
+  SITE_CONFIG_ID: (id: string | number) => `siteConfig/${id}`,
+  SUBSCRIPTIONS: 'subscriptions',
+  SUBSCRIPTION_PAUSE: (id: string | number) => `subscriptions/${id}/pause`,
+  SUBSCRIPTION_CANCEL: (id: string | number) => `subscriptions/${id}/cancel`,
+} as const;
+
+export type EndpointKey = keyof typeof ENDPOINTS;

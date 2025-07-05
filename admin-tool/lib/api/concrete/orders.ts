@@ -23,7 +23,7 @@ export class OrderApiService extends BaseApiService {
   }
 
   async getOrderById(orderId: string): Promise<OrdersWithCustomerAndProducts> {
-    return this.fetchFromApi<OrdersWithCustomerAndProducts>(
+    return this.get<OrdersWithCustomerAndProducts>(
       `orders/${orderId}`
     );
   }
@@ -31,13 +31,13 @@ export class OrderApiService extends BaseApiService {
   async getOrdersByRouteId(
     routeId: string
   ): Promise<OrdersWithCustomerAndProducts[]> {
-    return this.fetchFromApi<OrdersWithCustomerAndProducts[]>(
+    return this.get<OrdersWithCustomerAndProducts[]>(
       `orders/routes/${routeId}`
     );
   }
 
   async getAll(): Promise<OrdersWithAddressOfCustomer[]> {
-    return this.fetchFromApi<OrdersWithAddressOfCustomer[]>('orders/all');
+    return this.get<OrdersWithAddressOfCustomer[]>('orders/all');
   }
 
   async getOrdersPaging(
@@ -47,7 +47,7 @@ export class OrderApiService extends BaseApiService {
     startDate?: string,
     endDate?: string
   ): Promise<GetAllOrdersPaging> {
-    return this.fetchFromApi<GetAllOrdersPaging>('orders', {
+    return this.get<GetAllOrdersPaging>('orders', {
       page,
       limit,
       query,

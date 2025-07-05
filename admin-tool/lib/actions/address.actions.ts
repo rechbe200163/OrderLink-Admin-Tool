@@ -1,7 +1,8 @@
 'use server';
 import { auth } from '@/auth';
 import { FormState } from '../form.types';
-import { addressService } from '../services/AddressService';
+import { apiPost, apiPut } from './api.actions';
+import { ENDPOINTS } from '../api/endpoints';
 
 export async function createAddress(
   _prevState: FormState,
@@ -18,7 +19,12 @@ export async function createAddress(
     };
   }
 
-  return await addressService.createAddress(formData);
+  try {
+    await apiPost(ENDPOINTS.ADDRESSES, Object.fromEntries(formData));
+    return { success: true };
+  } catch (error: any) {
+    return { success: false, errors: { title: [error.message] } };
+  }
 }
 
 export async function updateAddress(
@@ -37,5 +43,10 @@ export async function updateAddress(
     };
   }
 
-  return await addressService.updateAddress(addressId, formData);
+  try {
+    await apiPut(ENDPOINTS.ADDRESS(addressId), Object.fromEntries(formData));
+    return { success: true };
+  } catch (error: any) {
+    return { success: false, errors: { title: [error.message] } };
+  }
 }

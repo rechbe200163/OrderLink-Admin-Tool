@@ -19,11 +19,11 @@ class AddressApiService extends BaseApiService {
   }
 
   async getCustomerAddress(customerReference: number): Promise<Address> {
-    return this.fetchFromApi<Address>(`addresses/${customerReference}`);
+    return this.get<Address>(`addresses/${customerReference}`);
   }
 
   async getAddresses(): Promise<Address[]> {
-    return this.fetchFromApi<Address[]>('addresses/all');
+    return this.get<Address[]>('addresses/all');
   }
 
   // TODO on backend
@@ -34,7 +34,7 @@ class AddressApiService extends BaseApiService {
     filter?: string,
     tag?: string
   ): Promise<GetAddressesPaging> {
-    return this.fetchFromApi<GetAddressesPaging>('addresses', {
+    return this.get<GetAddressesPaging>('addresses', {
       page,
       limit,
       query,
@@ -44,7 +44,7 @@ class AddressApiService extends BaseApiService {
   }
 
   async getAddressById(addressId: string): Promise<Address> {
-    return this.fetchFromApi<Address>(`addresses/${addressId}`);
+    return this.get<Address>(`addresses/${addressId}`);
   }
 }
 
