@@ -40,7 +40,7 @@ export function CustomerTable({ customers }: { customers: Customer[] }) {
           <TableBody>
             {customers.length > 0 ? (
               customers.map((customer) => (
-                <TableRow key={customer.customerId} className='hover:bg-muted'>
+                <TableRow key={customer.customerReference} className='hover:bg-muted'>
                   <TableCell className='w-20 font-medium'>
                     <UserAvatarComponent avatarPath={customer.avatarPath!} />
                   </TableCell>

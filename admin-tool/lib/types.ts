@@ -9,6 +9,7 @@ import {
   Product,
 } from '@prisma/client';
 import Stripe from 'stripe';
+import type { PagingDto } from './dtos';
 export type AIVStats = {
   currentMonthAIV: number;
   lastMonthAIV: number;
@@ -32,11 +33,6 @@ export type RevenueStats = {
   lastMonthRevenue: number;
   percentageChange: number;
 };
-export type GetAllUserPaging = {
-  customers: Customer[];
-  totalCustomers: number;
-  totalPages: number;
-};
 
 export type CustomerByBranch = {
   totalCustomers: number;
@@ -48,11 +44,6 @@ export type OrderStateCount = {
   orderState: OrderState;
 }[];
 
-export type GetAddressesPaging = {
-  addresses: Address[];
-  totalAddresses: number;
-  totalPages: number;
-};
 
 export type Subscription = {
   id: string;
@@ -67,35 +58,20 @@ export type Subscription = {
   };
 };
 
-export type GetAllProductsPaging = {
-  products: Product[];
-  totalProducts: number;
-  totalPages: number;
-};
+// Generic DTO aliases for paginated responses
 
-export type GetAllOrdersPaging = {
-  orders: OrdersWithCustomer[];
-  totalOrders: number;
-  totalPages: number;
-};
+export type CustomersPagingDto = PagingDto<Customer>;
+export type AddressesPagingDto = PagingDto<Address>;
+export type ProductsPagingDto = PagingDto<Product>;
+export type OrdersPagingDto = PagingDto<OrdersWithCustomer>;
+export type EmployeesPagingDto = PagingDto<Employees>;
+export type RoutesPagingDto = PagingDto<RoutesWithCount>;
+export type CategoriesPagingDto = PagingDto<Category>;
 
-export type GetAllEmployeesPaging = {
-  employees: Employees[];
-  totalEmployees: number;
-  totalPages: number;
-};
 
-export type GetAllRoutePaging = {
-  routes: RoutesWithCount[];
-  totalRoutes: number;
-  totalPages: number;
-};
 
-export type GetAllCategoriesPaging = {
-  categories: Category[];
-  totalCategories: number;
-  totalPages: number;
-};
+
+
 
 export type CustomerGrowth = {
   date: string;

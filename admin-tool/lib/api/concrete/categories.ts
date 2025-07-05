@@ -1,7 +1,7 @@
 'server only';
-import { GetAllCategoriesPaging } from '@/lib/types';
 import { BaseApiService } from '../base';
 import { Category } from '@prisma/client';
+import { PagingDto } from '@/lib/dtos';
 
 class CategoryApiService extends BaseApiService {
   private static instance: CategoryApiService;
@@ -35,8 +35,8 @@ class CategoryApiService extends BaseApiService {
     limit: number,
     query?: string,
     filter?: string
-  ): Promise<GetAllCategoriesPaging> {
-    return this.get<GetAllCategoriesPaging>(
+  ): Promise<PagingDto<Category>> {
+    return this.get<PagingDto<Category>>(
       'categories',
       { page, limit, query, filter },
       'read'

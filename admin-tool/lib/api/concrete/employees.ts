@@ -1,6 +1,6 @@
 'server only';
-import { GetAllEmployeesPaging } from '@/lib/types';
 import { BaseApiService } from '../base';
+import { PagingDto } from '@/lib/dtos';
 import { Employees } from '@prisma/client';
 import prisma from '@/prisma/client';
 
@@ -33,8 +33,8 @@ export class EmployeesApiService extends BaseApiService {
     query?: string,
     role?: string,
     excludeEmployeeId?: string
-  ): Promise<GetAllEmployeesPaging> {
-    return this.get<GetAllEmployeesPaging>('employees', {
+  ): Promise<PagingDto<Employees>> {
+    return this.get<PagingDto<Employees>>('employees', {
       page,
       limit,
       query,

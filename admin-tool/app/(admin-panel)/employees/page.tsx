@@ -30,14 +30,15 @@ export default async function EmployeesPage(props: {
 
   const excludeEmployeeId = session.user.id;
 
-  const { employees, totalEmployees, totalPages } =
-    await employeesApiService.getEmployeesPaging(
-      page,
-      limit,
-      query,
-      role,
-      excludeEmployeeId
-    );
+  const employeesData = await employeesApiService.getEmployeesPaging(
+    page,
+    limit,
+    query,
+    role,
+    excludeEmployeeId
+  );
+  const employees = employeesData.data;
+  const { meta } = employeesData;
 
   const t = await getTranslations('Dashboard');
 
@@ -93,9 +94,9 @@ export default async function EmployeesPage(props: {
         </div>
         <div className='mt-4 mb-5'>
           <PaginationComponent
-            currentPage={page}
-            totalPages={totalPages}
-            totalValues={totalEmployees}
+            currentPage={meta.currentPage}
+            totalPages={meta.pageCount}
+            totalValues={meta.totalCount}
           />
         </div>
       </div>
