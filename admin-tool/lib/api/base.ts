@@ -1,5 +1,6 @@
 'server only';
 import { hasPermission } from '../utlis/getSession';
+import { getCookie } from '../cookies/cookie-managment';
 
 export class BaseApiService {
   protected baseUrl: string;
@@ -38,9 +39,15 @@ export class BaseApiService {
       });
     }
 
+    const token = await getCookie('token');
     const options: RequestInit = {
       method,
-      headers: { 'Content-Type': 'application/json', ...(headers || {}) },
+      headers: {
+        'Content-Type': 'application/json',
+        ...(token ? { Authorization: `Bearer ${token}` } : {}),
+        ...(headers || {}),
+      },
+
     };
 
     if (body !== undefined) {

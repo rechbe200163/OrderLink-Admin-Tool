@@ -32,3 +32,8 @@ export async function getCookie(name: string): Promise<string | null> {
   }
   return null;
 }
+
+export async function deleteCookie(name: string): Promise<void> {
+  const cookieStore = await cookies();
+  cookieStore.set(name, '', { expires: new Date(0) });
+}

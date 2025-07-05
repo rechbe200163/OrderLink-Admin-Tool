@@ -4,34 +4,22 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Loader2 } from 'lucide-react';
-import { signIn } from 'next-auth/react';
 import { useSearchParams } from 'next/navigation';
-import { useState } from 'react';
+import { useActionState, useState } from 'react';
+import { logIn } from '@/lib/actions/auth.actions';
 
 const SignInForm = () => {
   const searchParams = useSearchParams();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const error = searchParams.get('error');
-  const [isLoading, setLoading] = useState(false);
+  const [formState, action, isLoading] = useActionState(logIn, {
+    success: false,
+    errors: { title: [] as string[] },
+  });
 
   const [fieldType, setFieldType] = useState('password');
 
-  const onSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
-    try {
-      await signIn('credentials', {
-        redirect: true,
-        email,
-        password,
-      });
-    } catch (err) {
-      console.error(err);
-    } finally {
-      setLoading(false);
-    }
-  };
 
   return (
     <>
@@ -55,7 +43,7 @@ const SignInForm = () => {
           </span>
         </div>
       )}
-      <form onSubmit={onSubmit} className='space-y-12 w-full sm:w-[400px]'>
+      <form action={action} className='space-y-12 w-full sm:w-[400px]'>
         <div className='grid w-full items-center gap-1.5'>
           <Label htmlFor='email'>Email</Label>
           <Input
@@ -64,6 +52,7 @@ const SignInForm = () => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             id='email'
+            name='email'
             type='email'
           />
         </div>
@@ -76,6 +65,7 @@ const SignInForm = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               id='password'
+              name='password'
               type={fieldType}
             />
             <button
@@ -134,7 +124,7 @@ const SignInForm = () => {
           </div>
         </div>
         <div className='w-full'>
-          <Button className='w-full ' disabled={isLoading}>
+          <Button type='submit' className='w-full ' disabled={isLoading}>
             {isLoading ? (
               <>
                 <Loader2 size={20} className='animate-spin' /> &nbsp; Loging you

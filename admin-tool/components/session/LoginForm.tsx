@@ -10,9 +10,9 @@ import {
 } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { useState } from 'react';
+import { useActionState, useState } from 'react';
 import { EyeIcon, EyeOff, Loader2Icon, LockKeyhole } from 'lucide-react';
-import { signIn } from 'next-auth/react';
+import { logIn } from '@/lib/actions/auth.actions';
 
 export function LoginForm({
   className,
@@ -22,27 +22,11 @@ export function LoginForm({
   const [email, setEmail] = useState('');
 
   const [password, setPassword] = useState('');
-  const [isLoading, setLoading] = useState(false);
+  const [formState, action, isLoading] = useActionState(logIn, {
+    success: false,
+    errors: { title: [] as string[] },
+  });
 
-  const onSubmit = async (e: React.FormEvent) => {
-    if (!email || !password) {
-      console.error('Email and password are required');
-      return;
-    }
-    e.preventDefault();
-    setLoading(true);
-    try {
-      await signIn('credentials', {
-        redirect: true,
-        email,
-        password,
-      });
-    } catch (err) {
-      console.error(err);
-    } finally {
-      setLoading(false);
-    }
-  };
 
   return (
     <div className={cn('flex flex-col gap-6', className)} {...props}>
@@ -54,13 +38,14 @@ export function LoginForm({
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <form>
+          <form action={action}>
             <div className='grid gap-6'>
               <div className='grid gap-6'>
                 <div className='grid gap-2'>
                   <Label htmlFor='email'>E-Mail</Label>
                   <Input
                     id='email'
+                    name='email'
                     type='email'
                     placeholder='m@example.com'
                     required
@@ -81,6 +66,7 @@ export function LoginForm({
                   <div className='relative'>
                     <Input
                       id='password'
+                      name='password'
                       type={inputHidden}
                       required
                       className='pr-10'
@@ -112,12 +98,7 @@ export function LoginForm({
                     </button>
                   </div>
                 </div>
-                <Button
-                  type='submit'
-                  className='w-full'
-                  disabled={isLoading}
-                  onClick={onSubmit}
-                >
+                <Button type='submit' className='w-full' disabled={isLoading}>
                   {isLoading ? (
                     <>
                       <Loader2Icon className='mr-2 h-4 w-4 animate-spin' />
