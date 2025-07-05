@@ -1,7 +1,8 @@
 'use server';
 import { FormState } from '../form.types';
 import { auth } from '@/auth';
-import { customerService } from '../services/CustomerService';
+import { apiPost, apiPut } from './api.actions';
+import { ENDPOINTS } from '../api/endpoints';
 
 export async function addCustomer(
   prevState: FormState,
@@ -18,7 +19,12 @@ export async function addCustomer(
     };
   }
 
-  return await customerService.addCustomer(prevState, formData);
+  try {
+    await apiPost(ENDPOINTS.CUSTOMERS, Object.fromEntries(formData));
+    return { success: true };
+  } catch (error: any) {
+    return { success: false, errors: { title: [error.message] } };
+  }
 }
 
 export async function deleteUser(
@@ -35,7 +41,12 @@ export async function deleteUser(
     };
   }
 
-  return await customerService.deleteUser(customerReference);
+  try {
+    await apiPost(ENDPOINTS.CUSTOMER_DELETE(customerReference));
+    return { success: true };
+  } catch (error: any) {
+    return { success: false, errors: { title: [error.message] } };
+  }
 }
 
 export async function restoreUser(
@@ -52,7 +63,12 @@ export async function restoreUser(
     };
   }
 
-  return await customerService.restoreUser(customerReference);
+  try {
+    await apiPost(ENDPOINTS.CUSTOMER_RESTORE(customerReference));
+    return { success: true };
+  } catch (error: any) {
+    return { success: false, errors: { title: [error.message] } };
+  }
 }
 
 export async function updateCustomer(
@@ -71,5 +87,13 @@ export async function updateCustomer(
     };
   }
 
-  return await customerService.updateCustomer(customerReference, formData);
+  try {
+    await apiPut(
+      ENDPOINTS.CUSTOMER(customerReference),
+      Object.fromEntries(formData)
+    );
+    return { success: true };
+  } catch (error: any) {
+    return { success: false, errors: { title: [error.message] } };
+  }
 }

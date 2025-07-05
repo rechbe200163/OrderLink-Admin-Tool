@@ -2,10 +2,11 @@
 import { auth } from '@/auth';
 import { FormState } from '../form.types';
 import { hasPermission } from '../utlis/getSession';
-import { employeeService } from '../services/EmployeeService';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 import { siteConfigService } from '../services/SiteConfigService';
+import { apiPost, apiPut } from './api.actions';
+import { ENDPOINTS } from '../api/endpoints';
 
 export async function createEmployee(
   _prevState: FormState,
@@ -31,7 +32,12 @@ export async function createEmployee(
     };
   }
 
-  return await employeeService.createEmployee(formData);
+  try {
+    await apiPost(ENDPOINTS.EMPLOYEES, Object.fromEntries(formData));
+    return { success: true };
+  } catch (error: any) {
+    return { success: false, errors: { title: [error.message] } };
+  }
 }
 
 export async function updateEmployee(
@@ -59,7 +65,12 @@ export async function updateEmployee(
     };
   }
 
-  return await employeeService.updateEmployee(employeeId, formData);
+  try {
+    await apiPut(ENDPOINTS.EMPLOYEE(employeeId), Object.fromEntries(formData));
+    return { success: true };
+  } catch (error: any) {
+    return { success: false, errors: { title: [error.message] } };
+  }
 }
 
 // export async function createInitialAdmin(

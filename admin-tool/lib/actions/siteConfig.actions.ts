@@ -6,6 +6,8 @@ import { redirect } from 'next/navigation';
 import { hasPermission } from '../utlis/getSession';
 import { siteConfigService } from '../services/SiteConfigService';
 import { stripeService } from '../services/StripeService';
+import { apiPut } from './api.actions';
+import { ENDPOINTS } from '../api/endpoints';
 import prisma from '@/prisma/client';
 
 export async function updateSiteConfig(
@@ -33,7 +35,15 @@ export async function updateSiteConfig(
     };
   }
 
-  return await siteConfigService.updateSiteConfig(siteConfigId, formData);
+  try {
+    await apiPut(
+      ENDPOINTS.SITE_CONFIG_ID(siteConfigId),
+      Object.fromEntries(formData)
+    );
+    return { success: true };
+  } catch (error: any) {
+    return { success: false, errors: { title: [error.message] } };
+  }
 }
 
 export async function createSiteConfig(

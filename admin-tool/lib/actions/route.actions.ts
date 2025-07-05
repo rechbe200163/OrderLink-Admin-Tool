@@ -1,8 +1,9 @@
 'use server';
 import { auth } from '@/auth';
 import { FormState } from '../form.types';
-import { routeService } from '../services/RouteService';
 import { hasPermission } from '../utlis/getSession';
+import { apiPost, apiPut } from './api.actions';
+import { ENDPOINTS } from '../api/endpoints';
 
 export async function createRoute(
   _prevState: FormState,
@@ -28,7 +29,12 @@ export async function createRoute(
     };
   }
 
-  return await routeService.createRoute(formData);
+  try {
+    await apiPost(ENDPOINTS.ROUTES, Object.fromEntries(formData));
+    return { success: true };
+  } catch (error: any) {
+    return { success: false, errors: { title: [error.message] } };
+  }
 }
 
 export async function updateRoute(
@@ -56,5 +62,10 @@ export async function updateRoute(
     };
   }
 
-  return await routeService.updateRoute(routeId, formData);
+  try {
+    await apiPut(ENDPOINTS.ROUTE(routeId), Object.fromEntries(formData));
+    return { success: true };
+  } catch (error: any) {
+    return { success: false, errors: { title: [error.message] } };
+  }
 }
