@@ -56,3 +56,12 @@ export const rolePermissions: Record<Role, Record<string, Permission>> = {
   },
   [Role.CUSTOMER]: {},
 };
+
+export function hasPermissionFromRole(
+  role: Role,
+  resource: string,
+  action: 'read' | 'write'
+): boolean {
+  const permission = rolePermissions[role]?.[resource];
+  return permission ? permission[action] : false;
+}

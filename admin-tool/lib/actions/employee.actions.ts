@@ -1,76 +1,38 @@
 'use server';
-import { auth } from '@/auth';
 import { FormState } from '../form.types';
-import { hasPermission } from '../utlis/getSession';
-import { cookies } from 'next/headers';
-import { redirect } from 'next/navigation';
-import { siteConfigService } from '../services/SiteConfigService';
 import { apiPost, apiPut } from './api.actions';
 import { ENDPOINTS } from '../api/endpoints';
+import { guardAction } from '../server-guard';
 
 export async function createEmployee(
   _prevState: FormState,
   formData: FormData
-): Promise<FormState> {
-  const session = await auth();
-
-  if (!session) {
-    return {
-      success: false,
-      errors: {
-        title: ['Not authenticated'],
-      },
-    };
-  }
-
-  if (!(await hasPermission('employees', 'write'))) {
-    return {
-      success: false,
-      errors: {
-        title: ['Not authorized'],
-      },
-    };
-  }
-
-  try {
-    await apiPost(ENDPOINTS.EMPLOYEES, Object.fromEntries(formData));
-    return { success: true };
-  } catch (error: any) {
-    return { success: false, errors: { title: [error.message] } };
-  }
+): Promise<FormState | void> {
+  return (await guardAction(
+    'employees',
+    'write',
+    async () => {
+      await apiPost(ENDPOINTS.EMPLOYEES, Object.fromEntries(formData));
+      return { success: true } as FormState;
+    },
+    'Failed to create employee'
+  )) as FormState;
 }
 
 export async function updateEmployee(
   employeeId: string,
   _prevState: FormState,
   formData: FormData
-): Promise<FormState> {
-  const session = await auth();
-
-  if (!session) {
-    return {
-      success: false,
-      errors: {
-        title: ['Not authenticated'],
-      },
-    };
-  }
-
-  if (!(await hasPermission('employees', 'write'))) {
-    return {
-      success: false,
-      errors: {
-        title: ['Not authorized'],
-      },
-    };
-  }
-
-  try {
-    await apiPut(ENDPOINTS.EMPLOYEE(employeeId), Object.fromEntries(formData));
-    return { success: true };
-  } catch (error: any) {
-    return { success: false, errors: { title: [error.message] } };
-  }
+): Promise<FormState | void> {
+  return (await guardAction(
+    'employees',
+    'write',
+    async () => {
+      await apiPut(ENDPOINTS.EMPLOYEE(employeeId), Object.fromEntries(formData));
+      return { success: true } as FormState;
+    },
+    'Failed to update employee'
+  )) as FormState;
 }
 
 // export async function createInitialAdmin(
