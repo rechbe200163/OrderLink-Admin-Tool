@@ -18,7 +18,7 @@ class CategoryApiService extends BaseApiService {
   }
 
   async getCategories(): Promise<Category[]> {
-    const response = await this.fetchFromApi<{ categories: Category[] }>(
+    const response = await this.get<{ categories: Category[] }>(
       'categories',
       {},
       'read'
@@ -27,7 +27,7 @@ class CategoryApiService extends BaseApiService {
   }
 
   async getCategroyById(categoryId: string): Promise<Category> {
-    return this.fetchFromApi<Category>(`categories/${categoryId}`);
+    return this.get<Category>(`categories/${categoryId}`);
   }
 
   async getCategoriesPaging(
@@ -36,7 +36,7 @@ class CategoryApiService extends BaseApiService {
     query?: string,
     filter?: string
   ): Promise<GetAllCategoriesPaging> {
-    return this.fetchFromApi<GetAllCategoriesPaging>(
+    return this.get<GetAllCategoriesPaging>(
       'categories',
       { page, limit, query, filter },
       'read'

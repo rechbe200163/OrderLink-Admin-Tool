@@ -23,27 +23,26 @@ class StatisticsAPiService extends BaseApiService {
   }
 
   async getAvarageOrderValueStats(): Promise<AIVStats> {
-    return this.fetchFromApi<AIVStats>('invoices?query=AIVStats');
+    return this.get<AIVStats>('invoices?query=AIVStats');
   }
 
   async getSalesStats(): Promise<SalesStates> {
-    return this.fetchFromApi<SalesStates>('invoices?query=salesStats');
+    return this.get<SalesStates>('invoices?query=salesStats');
   }
 
   async getRevenueStats(): Promise<RevenueStats> {
-    return this.fetchFromApi<RevenueStats>('invoices?query=revenueStats');
+    return this.get<RevenueStats>('invoices?query=revenueStats');
   }
 
   async getCustomerCount(): Promise<CustomerByBranch> {
-    const response = await this.fetchFromApi<CustomerByBranch>(
+    const response = await this.get<CustomerByBranch>(
       'customers/groupedBS'
     );
     return response;
   }
 
   async getOrderStateCount(): Promise<OrderStateCount> {
-    const response =
-      await this.fetchFromApi<OrderStateCount>('orders/groupedOS');
+    const response = await this.get<OrderStateCount>('orders/groupedOS');
     return response;
   }
 }

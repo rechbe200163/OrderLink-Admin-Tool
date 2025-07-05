@@ -1,8 +1,9 @@
 'use server';
 import { auth } from '@/auth';
 import { FormState } from '../form.types';
-import { productService } from '../services/ProductService';
 import { hasPermission } from '../utlis/getSession';
+import { apiPost, apiPut } from './api.actions';
+import { ENDPOINTS } from '../api/endpoints';
 
 export async function createProduct(
   _prevState: FormState,
@@ -19,7 +20,12 @@ export async function createProduct(
     };
   }
 
-  return await productService.createProduct(formData);
+  try {
+    await apiPost(ENDPOINTS.PRODUCTS, Object.fromEntries(formData));
+    return { success: true };
+  } catch (error: any) {
+    return { success: false, errors: { title: [error.message] } };
+  }
 }
 
 export async function updateProduct(
@@ -46,5 +52,10 @@ export async function updateProduct(
       },
     };
   }
-  return await productService.updateProduct(productId, formData);
+  try {
+    await apiPut(ENDPOINTS.PRODUCT(productId), Object.fromEntries(formData));
+    return { success: true };
+  } catch (error: any) {
+    return { success: false, errors: { title: [error.message] } };
+  }
 }

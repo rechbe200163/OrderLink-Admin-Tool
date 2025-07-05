@@ -1,13 +1,18 @@
-import { auth } from '@/auth';
-import { Session } from 'next-auth';
+import { Role } from '@prisma/client';
+import { getCookie } from '../cookies/cookie-managment';
 import { rolePermissions } from '../access-managment/permissions';
 
+export interface Session {
+  user: { role: Role } & Record<string, any>;
+}
+
 export async function getSession(): Promise<Session> {
-  const session = await auth();
-  if (!session) {
+  const raw = await getCookie('user');
+  if (!raw) {
     throw new Error('No session found');
   }
-  return session;
+  const user = JSON.parse(raw);
+  return { user };
 }
 
 export async function hasPermission(
@@ -15,7 +20,7 @@ export async function hasPermission(
   action: 'read' | 'write'
 ): Promise<boolean> {
   const session = await getSession();
-  const role = session.user.role;
+  const role = session.user.role as Role | undefined;
   if (!role) return false;
 
   const permissions = rolePermissions[role];

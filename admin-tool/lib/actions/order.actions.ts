@@ -1,7 +1,8 @@
 'use server';
 import { auth } from '@/auth';
 import { FormState } from '../form.types';
-import { orderService } from '../services/OrderService';
+import { apiPost, apiPut } from './api.actions';
+import { ENDPOINTS } from '../api/endpoints';
 
 export async function createOrder(
   _prevState: FormState,
@@ -17,7 +18,12 @@ export async function createOrder(
       },
     };
   }
-  return orderService.createOrder(formData);
+  try {
+    await apiPost(ENDPOINTS.ORDERS, Object.fromEntries(formData));
+    return { success: true };
+  } catch (error: any) {
+    return { success: false, errors: { title: [error.message] } };
+  }
 }
 
 export async function updateOrder(
@@ -35,5 +41,10 @@ export async function updateOrder(
       },
     };
   }
-  return orderService.updateOrder(orderId, formData);
+  try {
+    await apiPut(ENDPOINTS.ORDER(orderId), Object.fromEntries(formData));
+    return { success: true };
+  } catch (error: any) {
+    return { success: false, errors: { title: [error.message] } };
+  }
 }

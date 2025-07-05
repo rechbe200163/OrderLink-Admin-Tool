@@ -20,11 +20,11 @@ export class EmployeesApiService extends BaseApiService {
   }
 
   async getEmployeeById(employeeId: string): Promise<Employees> {
-    return this.fetchFromApi<Employees>(`employees/${employeeId}`);
+    return this.get<Employees>(`employees/${employeeId}`);
   }
 
   async getAll(): Promise<Employees[]> {
-    return this.fetchFromApi<Employees[]>('employees/all');
+    return this.get<Employees[]>('employees/all');
   }
 
   async getEmployeesPaging(
@@ -34,7 +34,7 @@ export class EmployeesApiService extends BaseApiService {
     role?: string,
     excludeEmployeeId?: string
   ): Promise<GetAllEmployeesPaging> {
-    return this.fetchFromApi<GetAllEmployeesPaging>('employees', {
+    return this.get<GetAllEmployeesPaging>('employees', {
       page,
       limit,
       query,

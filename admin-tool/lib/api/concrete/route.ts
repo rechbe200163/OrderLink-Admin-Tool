@@ -19,11 +19,11 @@ export class RouteApiService extends BaseApiService {
   }
 
   async getRouteById(routeId: string): Promise<RoutesWithOrders> {
-    return this.fetchFromApi<RoutesWithOrders>(`routes/${routeId}`);
+    return this.get<RoutesWithOrders>(`routes/${routeId}`);
   }
 
   async getAll(): Promise<Order[]> {
-    return this.fetchFromApi<Order[]>('routes/all');
+    return this.get<Order[]>('routes/all');
   }
 
   async getRoutesPaging(
@@ -31,7 +31,7 @@ export class RouteApiService extends BaseApiService {
     limit: number,
     query?: string
   ): Promise<GetAllRoutePaging> {
-    return this.fetchFromApi<GetAllRoutePaging>('routes', {
+    return this.get<GetAllRoutePaging>('routes', {
       page,
       limit,
       query,

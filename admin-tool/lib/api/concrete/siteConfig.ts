@@ -20,14 +20,14 @@ class SiteConfigApiService extends BaseApiService {
   }
 
   async getSiteConfig(): Promise<SiteConfig> {
-    const response = await this.fetchFromApi<{ siteConfig: SiteConfig }>(
+    const response = await this.get<{ siteConfig: SiteConfig }>(
       'siteConfig'
     );
     return response.siteConfig;
   }
 
   async getSiteConfigWithAddress(): Promise<SiteConfigWithAddress> {
-    const response = await this.fetchFromApi<SiteConfigWithAddress>(
+    const response = await this.get<SiteConfigWithAddress>(
       'siteConfig?includeAddress=true'
     );
     return response;
@@ -41,7 +41,7 @@ class SiteConfigApiService extends BaseApiService {
   }
 
   async getSiteConfigForStripe(): Promise<SiteConfig> {
-    return this.fetchFromApi<SiteConfig>('siteConfigForStripe');
+    return this.get<SiteConfig>('siteConfigForStripe');
   }
 }
 
