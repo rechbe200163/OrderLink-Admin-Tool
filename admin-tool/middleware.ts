@@ -1,9 +1,6 @@
-import NextAuth from 'next-auth';
-import { authConfig } from '@/auth.config';
 import { NextRequest, NextResponse } from 'next/server';
 import { getUserLocale, setUserLocale } from './services/locale';
 import { Locale } from './i18n/config';
-import { cookies } from 'next/headers';
 
 export const ROOT = '/';
 export const PUBLIC_ROUTES = [
@@ -15,19 +12,29 @@ export const DEFAULT_REDIRECT = '/auth/signin';
 export const defaultLocale = 'de';
 export const locales = ['en', 'de', 'fr', 'it', 'es'];
 
-const { auth } = NextAuth(authConfig);
-
 export const config = {
   matcher: ['/((?!_next/static|_next/image|favicon.ico|api/|onboarding).*)'],
 };
 
 export default async function middleware(request: NextRequest) {
-  const session = await auth();
+  const userCookie = request.cookies.get('user');
+  let session: any = null;
+  if (userCookie) {
+    try {
+      const parsed = JSON.parse(userCookie.value);
+      const createdAt = new Date(parsed.createdAt);
+      const ageMinutes = (Date.now() - createdAt.getTime()) / 1000 / 60;
+      if (ageMinutes < 30) {
+        session = { user: JSON.parse(parsed.data) };
+      }
+    } catch (err) {
+      session = null;
+    }
+  }
   const isAuthenticated = !!session?.user;
   console.warn('Middleware session:', session);
   console.warn('Middleware isAuthenticated:', isAuthenticated);
   const { origin, pathname } = request.nextUrl;
-  const cookieStore = cookies();
 
   // Locale detection
   const acceptLanguage = request.headers.get('accept-language');
