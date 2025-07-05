@@ -18,6 +18,7 @@ export const config = {
 
 export default async function middleware(request: NextRequest) {
   const userCookie = request.cookies.get('user');
+  const tokenCookie = request.cookies.get('token');
   let session: any = null;
   if (userCookie) {
     try {
@@ -28,10 +29,11 @@ export default async function middleware(request: NextRequest) {
         session = { user: JSON.parse(parsed.data) };
       }
     } catch (err) {
+      console.error('Error parsing user cookie:', err);
       session = null;
     }
   }
-  const isAuthenticated = !!session?.user;
+  const isAuthenticated = !!(session?.user && tokenCookie?.value);
   console.warn('Middleware session:', session);
   console.warn('Middleware isAuthenticated:', isAuthenticated);
   const { origin, pathname } = request.nextUrl;
