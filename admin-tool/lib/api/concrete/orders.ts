@@ -1,9 +1,9 @@
 'server only';
 import {
-  GetAllOrdersPaging,
   OrdersWithAddressOfCustomer,
   OrdersWithCustomerAndProducts,
 } from '@/lib/types';
+import { PagingDto } from '@/lib/dtos';
 import { BaseApiService } from '../base';
 import { Order } from '@prisma/client';
 
@@ -46,8 +46,8 @@ export class OrderApiService extends BaseApiService {
     query?: string,
     startDate?: string,
     endDate?: string
-  ): Promise<GetAllOrdersPaging> {
-    return this.get<GetAllOrdersPaging>('orders', {
+  ): Promise<PagingDto<OrdersWithCustomer>> {
+    return this.get<PagingDto<OrdersWithCustomer>>('orders', {
       page,
       limit,
       query,

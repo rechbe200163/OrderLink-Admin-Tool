@@ -1,7 +1,8 @@
 'server only';
-import { GetAllRoutePaging, RoutesWithOrders } from '@/lib/types';
+import { RoutesWithOrders, RoutesWithCount } from '@/lib/types';
 import { BaseApiService } from '../base';
 import { Order } from '@prisma/client';
+import { PagingDto } from '@/lib/dtos';
 
 export class RouteApiService extends BaseApiService {
   private static instance: RouteApiService;
@@ -30,8 +31,8 @@ export class RouteApiService extends BaseApiService {
     page: number,
     limit: number,
     query?: string
-  ): Promise<GetAllRoutePaging> {
-    return this.get<GetAllRoutePaging>('routes', {
+  ): Promise<PagingDto<RoutesWithCount>> {
+    return this.get<PagingDto<RoutesWithCount>>('routes', {
       page,
       limit,
       query,

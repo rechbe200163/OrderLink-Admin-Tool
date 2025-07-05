@@ -1,7 +1,7 @@
 'server only';
 import { Address } from '@prisma/client';
 import { BaseApiService } from '../base';
-import { GetAddressesPaging } from '@/lib/types';
+import { PagingDto } from '@/lib/dtos';
 
 class AddressApiService extends BaseApiService {
   private static instance: AddressApiService;
@@ -33,8 +33,8 @@ class AddressApiService extends BaseApiService {
     query?: string,
     filter?: string,
     tag?: string
-  ): Promise<GetAddressesPaging> {
-    return this.get<GetAddressesPaging>('addresses', {
+  ): Promise<PagingDto<Address>> {
+    return this.get<PagingDto<Address>>('addresses', {
       page,
       limit,
       query,

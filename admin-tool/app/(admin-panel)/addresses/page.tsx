@@ -29,8 +29,15 @@ export default async function AddressesPage(props: {
   const filter = searchParams?.filter ? searchParams.filter : '';
   const tag = searchParams?.tag ? searchParams.tag : '';
 
-  const { addresses, totalAddresses, totalPages } =
-    await addressApiService.getAddressesPaging(page, limit, query, filter, tag);
+  const addressData = await addressApiService.getAddressesPaging(
+    page,
+    limit,
+    query,
+    filter,
+    tag
+  );
+  const addresses = addressData.data;
+  const { meta } = addressData;
   const t = await getTranslations('Dashboard');
   const tFilter = await getTranslations('FilterAndSearch');
   return (
@@ -80,9 +87,9 @@ export default async function AddressesPage(props: {
         </div>
         <div className='mt-4 mb-5'>
           <PaginationComponent
-            currentPage={page}
-            totalPages={totalPages}
-            totalValues={totalAddresses}
+            currentPage={meta.currentPage}
+            totalPages={meta.pageCount}
+            totalValues={meta.totalCount}
           />
         </div>
       </div>

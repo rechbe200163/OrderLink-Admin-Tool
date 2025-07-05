@@ -30,14 +30,15 @@ export default async function AdminPanelUsersPage(props: {
   const filter = searchParams?.filter ? searchParams.filter : '';
   const businessSector = searchParams?.businessSector;
 
-  const { customers, totalCustomers, totalPages } =
-    await customerApiService.getCustomersPaging(
+  const customerData = await customerApiService.getCustomersPaging(
       page,
       limit,
       query,
       filter,
       businessSector
     );
+  const customers = customerData.data;
+  const { meta } = customerData;
   const t = await getTranslations('Dashboard');
   const tFilter = await getTranslations('FilterAndSearch');
   return (
@@ -102,9 +103,9 @@ export default async function AdminPanelUsersPage(props: {
         </div>
         <div className='mt-4 mb-5'>
           <PaginationComponent
-            currentPage={page}
-            totalPages={totalPages}
-            totalValues={totalCustomers}
+            currentPage={meta.currentPage}
+            totalPages={meta.pageCount}
+            totalValues={meta.totalCount}
           />
         </div>
       </div>

@@ -29,14 +29,15 @@ export default async function OrdersPage(props: {
   const endDate = searchParams?.endDate ? searchParams.endDate : '';
   const query = searchParams?.query ? searchParams.query : '';
 
-  const { orders, totalOrders, totalPages } =
-    await orderApiService.getOrdersPaging(
-      page,
-      limit,
-      query,
-      startDate,
-      endDate
-    );
+  const orderData = await orderApiService.getOrdersPaging(
+    page,
+    limit,
+    query,
+    startDate,
+    endDate
+  );
+  const orders = orderData.data;
+  const { meta } = orderData;
   const t = await getTranslations('Dashboard');
   const tFilter = await getTranslations('FilterAndSearch');
 
@@ -71,9 +72,9 @@ export default async function OrdersPage(props: {
         </div>
         <div className='mt-4 mb-5'>
           <PaginationComponent
-            currentPage={page}
-            totalPages={totalPages}
-            totalValues={totalOrders}
+            currentPage={meta.currentPage}
+            totalPages={meta.pageCount}
+            totalValues={meta.totalCount}
           />
         </div>
       </div>
