@@ -27,7 +27,7 @@ const SideBarHeader = async () => {
   return (
     <SidebarMenuButton
       asChild
-      className='data-[slot=sidebar-menu-button]:!p-1.5'
+      className='data-[slot=sidebar-menu-button]:p-1.5!'
     >
       <Link href='/'>
         <ArrowUpCircleIcon className='h-5 w-5' />

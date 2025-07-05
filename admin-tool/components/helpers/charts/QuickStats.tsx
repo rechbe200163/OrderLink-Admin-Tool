@@ -7,7 +7,7 @@ const QuickStats = async () => {
   const data = await statisticsApiService.getOrderStateCount();
 
   return (
-    <div className='grid grid-cols-1 gap-4 px-4 *:data-[slot=card]:shadow-xs *:data-[slot=card]:bg-gradient-to-t *:data-[slot=card]:from-primary/5 *:data-[slot=card]:to-card dark:*:data-[slot=card]:bg-card sm:grid-cols-2 lg:px-6'>
+    <div className='grid grid-cols-1 gap-4 px-4 data-[slot=card]:*:shadow-2xs data-[slot=card]:*:bg-linear-to-t data-[slot=card]:*:from-primary/5 data-[slot=card]:*:to-card dark:data-[slot=card]:*:bg-card sm:grid-cols-2 lg:px-6'>
       <CustomerBusinessTypeDistrubution data={customerCountData} />
       <OrderStateDistributionChart data={data} />
     </div>

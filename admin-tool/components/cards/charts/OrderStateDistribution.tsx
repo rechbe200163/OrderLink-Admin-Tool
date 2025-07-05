@@ -21,12 +21,12 @@ import {
 import { OrderStateCount } from '@/lib/types';
 
 const chartColorVars = [
-  'hsl(var(--chart-1))',
-  'hsl(var(--chart-2))',
-  'hsl(var(--chart-3))',
-  'hsl(var(--chart-4))',
-  'hsl(var(--chart-5))',
-  'hsl(var(--chart-6))',
+  'var(--color-chart-1)',
+  'var(--color-chart-2)',
+  'var(--color-chart-3)',
+  'var(--color-chart-4)',
+  'var(--color-chart-5)',
+  'var(--color-chart-6)',
 ];
 
 const orderStates: OrderState[] = [
@@ -56,13 +56,16 @@ export function OrderStateDistributionChart({
 
   const chartConfig = {
     orders: { label: 'Bestellungen' },
-    ...orderStates.reduce((acc, state) => {
-      acc[state] = {
-        label: tOrderState(state.toLowerCase()) || state,
-        color: stateColors[state],
-      };
-      return acc;
-    }, {} as Record<OrderState, { label: string; color: string }>),
+    ...orderStates.reduce(
+      (acc, state) => {
+        acc[state] = {
+          label: tOrderState(state.toLowerCase()) || state,
+          color: stateColors[state],
+        };
+        return acc;
+      },
+      {} as Record<OrderState, { label: string; color: string }>
+    ),
   } satisfies ChartConfig;
 
   const chartData = React.useMemo(() => {

@@ -21,11 +21,11 @@ import { useTranslations } from 'next-intl';
 import { CustomerByBranch } from '@/lib/types';
 
 const chartColorVars = [
-  'hsl(var(--chart-1))',
-  'hsl(var(--chart-2))',
-  'hsl(var(--chart-3))',
-  'hsl(var(--chart-4))',
-  'hsl(var(--chart-5))',
+  'var(--chart-1)',
+  'var(--chart-2)',
+  'var(--chart-3)',
+  'var(--chart-4)',
+  'var(--chart-5)',
 ];
 
 const businessSectors: BusinessSector[] = [
@@ -63,13 +63,16 @@ export function CustomerBusinessTypeDistrubution({
     customers: {
       label: 'Kunden',
     },
-    ...businessSectors.reduce((acc, sector) => {
-      acc[sector] = {
-        label: tFilter(`options.${sector.toLocaleLowerCase()}`) || sector,
-        color: sectorColors[sector],
-      };
-      return acc;
-    }, {} as Record<BusinessSector, { label: string; color: string }>),
+    ...businessSectors.reduce(
+      (acc, sector) => {
+        acc[sector] = {
+          label: tFilter(`options.${sector.toLocaleLowerCase()}`) || sector,
+          color: sectorColors[sector],
+        };
+        return acc;
+      },
+      {} as Record<BusinessSector, { label: string; color: string }>
+    ),
   } satisfies ChartConfig;
 
   const chartData = React.useMemo(() => {

@@ -58,15 +58,15 @@ export default function DateRangeSelectComponent() {
 
   return (
     <div>
-      <div className='*:not-first:mt-2'>
+      <div className='not-first:*:mt-2'>
         {/* <Label htmlFor={id}>Date range picker</Label> */}
         <Popover>
           <PopoverTrigger asChild>
             <Button
               id={id}
-              variant={'outline'}
+              variant={'outline-solid'}
               className={cn(
-                'group bg-background hover:bg-background border-input w-full justify-between px-3 font-normal outline-offset-0 outline-none focus-visible:outline-[3px]',
+                'group bg-background hover:bg-background border-input w-full justify-between px-3 font-normal outline-offset-0 outline-hidden focus-visible:outline-[3px]',
                 !date && 'text-muted-foreground'
               )}
             >

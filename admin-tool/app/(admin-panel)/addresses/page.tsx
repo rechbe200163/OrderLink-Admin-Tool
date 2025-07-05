@@ -31,6 +31,17 @@ export default async function AddressesPage(props: {
 
   const { addresses, totalAddresses, totalPages } =
     await addressApiService.getAddressesPaging(page, limit, query, filter, tag);
+
+  console.log('AddressesPage', {
+    page,
+    limit,
+    query,
+    filter,
+    tag,
+    addresses,
+    totalAddresses,
+    totalPages,
+  });
   const t = await getTranslations('Dashboard');
   const tFilter = await getTranslations('FilterAndSearch');
   return (

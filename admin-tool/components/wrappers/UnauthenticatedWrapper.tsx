@@ -22,7 +22,7 @@ export function UnauthenticatedWrapper({
   return (
     <div className='relative'>
       {/* Blurred content in background */}
-      <div className='pointer-events-none filter blur-sm opacity-50'>
+      <div className='pointer-events-none filter blur-xs opacity-50'>
         {fallback || children}
       </div>
 

@@ -84,7 +84,7 @@ export default function OrderSelectComponent({
           </Button>
         </PopoverTrigger>
         <PopoverContent
-          className='w-full min-w-[var(--radix-popper-anchor-width)] border-input p-0'
+          className='w-full min-w-(--radix-popper-anchor-width) border-input p-0'
           align='start'
         >
           <Command>

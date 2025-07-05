@@ -33,10 +33,10 @@ export function OrderTable({
     'FilterAndSearch.Filter.OrderState.options'
   );
   return (
-    <div className='bg-background text-foreground p-4 rounded-lg shadow-sm'>
+    <div className='bg-background text-foreground p-4 rounded-lg shadow-xs'>
       <div className='max-h-[50vh] min-w-full'>
         <Table className='border-separate border-spacing-0 [&_td]:border-border [&_tfoot_td]:border-t [&_th]:border-b [&_th]:border-border [&_tr:not(:last-child)_td]:border-b'>
-          <TableHeader className='sticky top-0 z-10 bg-background/90 backdrop-blur-sm'>
+          <TableHeader className='sticky top-0 z-10 bg-background/90 backdrop-blur-xs'>
             <TableRow className='hover:bg-muted/50'>
               <TableHead className='w-40'>{t('Attributes.customer')}</TableHead>
               <TableHead className='w-40'>

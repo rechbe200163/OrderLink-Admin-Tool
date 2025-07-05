@@ -66,7 +66,7 @@ const EditEmployee = ({ employee }: EditEmployeesProps) => {
           {t('headerUpdate')} {employee.firstName} {employee.lastName}
         </h2>
 
-        <div className='*:not-first:mt-2'>
+        <div className='not-first:*:mt-2'>
           <Label htmlFor='email'>{t('Attributes.email')}</Label>
           <div className='relative'>
             <Input

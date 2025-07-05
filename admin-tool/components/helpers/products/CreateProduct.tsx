@@ -226,7 +226,7 @@ const CreateProduct = ({ categories }: { categories: Category[] }) => {
             <div className='flex gap-4'>
               <div className='space-y-2'>
                 <Label htmlFor={'price'}>Preis</Label>
-                <div className='relative flex rounded-lg shadow-sm shadow-black/5'>
+                <div className='relative flex rounded-lg shadow-xs shadow-black/5'>
                   <span className='pointer-events-none absolute inset-y-0 start-0 flex items-center justify-center ps-3 text-sm text-muted-foreground'>
                     €
                   </span>

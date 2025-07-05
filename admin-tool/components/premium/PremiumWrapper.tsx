@@ -22,7 +22,7 @@ export async function PremiumWrapper({
   return (
     <div className='relative'>
       {/* Overlay with proper dark mode support */}
-      <div className='absolute inset-0 bg-white/50 dark:bg-background/70 backdrop-blur-sm z-10'>
+      <div className='absolute inset-0 bg-white/50 dark:bg-background/70 backdrop-blur-xs z-10'>
         <div className='flex items-center justify-center h-full'>
           <div className='text-center bg-white dark:bg-background p-6 rounded-lg shadow-lg dark:shadow-gray-800'>
             <h2 className='text-2xl font-bold text-gray-900 dark:text-gray-100'>

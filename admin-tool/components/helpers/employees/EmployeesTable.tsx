@@ -30,10 +30,10 @@ export function EmployeesTable({ employees }: { employees: Employees[] }) {
   }
 
   return (
-    <div className='bg-background text-foreground p-4 rounded-lg shadow-sm'>
+    <div className='bg-background text-foreground p-4 rounded-lg shadow-xs'>
       <div className='[&>div]:max-h-[50vh] min-w-full'>
         <Table className='border-separate border-spacing-0 [&_td]:border-border [&_tfoot_td]:border-t [&_th]:border-b [&_th]:border-border [&_tr:not(:last-child)_td]:border-b [&_tr]:border-none'>
-          <TableHeader className='sticky top-0 z-10 bg-background/90 backdrop-blur-sm'>
+          <TableHeader className='sticky top-0 z-10 bg-background/90 backdrop-blur-xs'>
             <TableRow className='hover:bg-muted'>
               <TableHead className='w-40'>{t('Attributes.email')}</TableHead>
               <TableHead className='w-40'>
