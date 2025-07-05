@@ -28,8 +28,14 @@ export default async function CategoriesPage(props: {
   const query = searchParams?.query ? searchParams.query : '';
   const filter = searchParams?.filter ? searchParams.filter : '';
 
-  const { categories, totalCategories, totalPages } =
-    await categoryApiService.getCategoriesPaging(page, limit, query, filter);
+  const categoryData = await categoryApiService.getCategoriesPaging(
+    page,
+    limit,
+    query,
+    filter
+  );
+  const categories = categoryData.data;
+  const { meta } = categoryData;
   const t = await getTranslations('Dashboard');
   const tFilter = await getTranslations('FilterAndSearch');
 
@@ -79,9 +85,9 @@ export default async function CategoriesPage(props: {
         </div>
         <div className='mt-4 mb-5'>
           <PaginationComponent
-            currentPage={page}
-            totalPages={totalPages}
-            totalValues={totalCategories}
+            currentPage={meta.currentPage}
+            totalPages={meta.pageCount}
+            totalValues={meta.totalCount}
           />
         </div>
       </div>

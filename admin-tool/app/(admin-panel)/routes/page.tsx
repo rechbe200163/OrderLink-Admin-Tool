@@ -23,8 +23,9 @@ async function RoutesPage(props: {
   const limit = searchParams?.limit ? parseInt(searchParams.limit) : 10;
   const query = searchParams?.query ? searchParams.query : '';
 
-  const { routes, totalRoutes, totalPages } =
-    await routeApiService.getRoutesPaging(page, limit, query);
+  const routeData = await routeApiService.getRoutesPaging(page, limit, query);
+  const routes = routeData.data;
+  const { meta } = routeData;
 
   return (
     <div className='px-5'>
@@ -53,9 +54,9 @@ async function RoutesPage(props: {
         </div>
         <div className='mt-4 mb-5'>
           <PaginationComponent
-            currentPage={page}
-            totalPages={totalPages}
-            totalValues={totalRoutes}
+            currentPage={meta.currentPage}
+            totalPages={meta.pageCount}
+            totalValues={meta.totalCount}
           />
         </div>
       </div>

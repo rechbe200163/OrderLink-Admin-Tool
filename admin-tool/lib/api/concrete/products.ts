@@ -1,7 +1,8 @@
 'server only';
-import { GetAllProductsPaging, ProductWithCategoryNames } from '@/lib/types';
+import { ProductWithCategoryNames } from '@/lib/types';
 import { BaseApiService } from '../base';
 import { Product } from '@prisma/client';
+import { PagingDto } from '@/lib/dtos';
 
 export class ProductApiService extends BaseApiService {
   private static instance: ProductApiService;
@@ -34,8 +35,8 @@ export class ProductApiService extends BaseApiService {
     query?: string,
     filter?: string,
     category?: string
-  ): Promise<GetAllProductsPaging> {
-    return this.get<GetAllProductsPaging>('products', {
+  ): Promise<PagingDto<Product>> {
+    return this.get<PagingDto<Product>>('products', {
       page,
       limit,
       query,

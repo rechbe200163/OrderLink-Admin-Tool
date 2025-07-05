@@ -2,8 +2,8 @@
 import {
   CustomerStats,
   CustomerWithAddressId,
-  GetAllUserPaging,
 } from '@/lib/types';
+import { PagingDto } from '@/lib/dtos';
 import { BusinessSector, Customer } from '@prisma/client';
 import { BaseApiService } from '../base';
 
@@ -38,8 +38,8 @@ class CustomerApiService extends BaseApiService {
     query?: string,
     filter?: string,
     businessSector?: BusinessSector | 'n/a'
-  ): Promise<GetAllUserPaging> {
-    return this.get<GetAllUserPaging>('customers', {
+  ): Promise<PagingDto<Customer>> {
+    return this.get<PagingDto<Customer>>('customers', {
       page,
       limit,
       query,

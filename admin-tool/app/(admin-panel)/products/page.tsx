@@ -30,14 +30,15 @@ export default async function ProductsPage(props: {
   const filter = searchParams?.filter ? searchParams.filter : '';
   const category = searchParams?.category;
 
-  const { products, totalProducts, totalPages } =
-    await productApiService.getProductsPaging(
-      page,
-      limit,
-      query,
-      filter,
-      category
-    );
+  const productData = await productApiService.getProductsPaging(
+    page,
+    limit,
+    query,
+    filter,
+    category
+  );
+  const products = productData.data;
+  const { meta } = productData;
   const categories = await categoryApiService.getCategories();
   return (
     <div className='px-5'>
@@ -82,9 +83,9 @@ export default async function ProductsPage(props: {
         </div>
         <div className='mt-4 mb-5'>
           <PaginationComponent
-            currentPage={page}
-            totalPages={totalPages}
-            totalValues={totalProducts}
+            currentPage={meta.currentPage}
+            totalPages={meta.pageCount}
+            totalValues={meta.totalCount}
           />
         </div>
       </div>
