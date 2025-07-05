@@ -7,7 +7,7 @@ import { guardAction } from '../server-guard';
 export async function createEmployee(
   _prevState: FormState,
   formData: FormData
-): Promise<FormState | void> {
+): Promise<FormState> {
   return (await guardAction(
     'employees',
     'write',
@@ -23,12 +23,15 @@ export async function updateEmployee(
   employeeId: string,
   _prevState: FormState,
   formData: FormData
-): Promise<FormState | void> {
+): Promise<FormState> {
   return (await guardAction(
     'employees',
     'write',
     async () => {
-      await apiPut(ENDPOINTS.EMPLOYEE(employeeId), Object.fromEntries(formData));
+      await apiPut(
+        ENDPOINTS.EMPLOYEE(employeeId),
+        Object.fromEntries(formData)
+      );
       return { success: true } as FormState;
     },
     'Failed to update employee'

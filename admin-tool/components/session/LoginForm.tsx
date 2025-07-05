@@ -27,7 +27,6 @@ export function LoginForm({
     errors: { title: [] as string[] },
   });
 
-
   return (
     <div className={cn('flex flex-col gap-6', className)} {...props}>
       <Card>

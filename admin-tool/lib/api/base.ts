@@ -1,9 +1,10 @@
 'server only';
 import { hasPermission } from '../utlis/getSession';
 import { getCookie } from '../cookies/cookie-managment';
+import { ENDPOINTS } from './endpoints';
 
 export class BaseApiService {
-  protected baseUrl: string;
+  public baseUrl: string;
 
   constructor(baseUrl: string = process.env.NEXT_PUBLIC_API_URL || '') {
     this.baseUrl = baseUrl;
@@ -25,11 +26,14 @@ export class BaseApiService {
     } = {}
   ): Promise<T> {
     const ressource = endpoint.split('?')[0].split('/')[0];
-    if (!(await hasPermission(ressource, action))) {
+    const isAuthEndpoint = ressource === ENDPOINTS.AUTH_LOGIN.split('/')[0];
+    if (!isAuthEndpoint && !(await hasPermission(ressource, action))) {
       throw new Error(`Unauthorized: No ${action} access to ${endpoint}`);
     }
 
     const url = new URL(`${this.baseUrl}/${endpoint}`);
+
+    console.log('method:', method, 'url:', url.toString());
 
     if (params) {
       Object.entries(params).forEach(([key, value]) => {
@@ -47,7 +51,6 @@ export class BaseApiService {
         ...(token ? { Authorization: `Bearer ${token}` } : {}),
         ...(headers || {}),
       },
-
     };
 
     if (body !== undefined) {
@@ -66,7 +69,7 @@ export class BaseApiService {
     return response.json();
   }
 
-  protected get<T>(
+  public get<T>(
     endpoint: string,
     params?: Record<string, string | number | undefined>,
     action: 'read' | 'write' = 'read'
@@ -74,7 +77,7 @@ export class BaseApiService {
     return this.request('GET', endpoint, { params, action });
   }
 
-  protected post<T>(
+  public post<T>(
     endpoint: string,
     body?: unknown,
     params?: Record<string, string | number | undefined>,
@@ -83,7 +86,7 @@ export class BaseApiService {
     return this.request('POST', endpoint, { body, params, action });
   }
 
-  protected put<T>(
+  public put<T>(
     endpoint: string,
     body?: unknown,
     params?: Record<string, string | number | undefined>,
@@ -92,7 +95,7 @@ export class BaseApiService {
     return this.request('PUT', endpoint, { body, params, action });
   }
 
-  protected patch<T>(
+  public patch<T>(
     endpoint: string,
     body?: unknown,
     params?: Record<string, string | number | undefined>,
@@ -101,7 +104,7 @@ export class BaseApiService {
     return this.request('PATCH', endpoint, { body, params, action });
   }
 
-  protected delete<T>(
+  public delete<T>(
     endpoint: string,
     params?: Record<string, string | number | undefined>,
     action: 'read' | 'write' = 'write'

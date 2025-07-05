@@ -7,7 +7,7 @@ import { guardAction } from '../server-guard';
 export async function createAddress(
   _prevState: FormState,
   formData: FormData
-): Promise<FormState | void> {
+): Promise<FormState> {
   return (await guardAction(
     'addresses',
     'write',
@@ -23,7 +23,7 @@ export async function updateAddress(
   addressId: string,
   _prevState: FormState,
   formData: FormData
-): Promise<FormState | void> {
+): Promise<FormState> {
   return (await guardAction(
     'addresses',
     'write',

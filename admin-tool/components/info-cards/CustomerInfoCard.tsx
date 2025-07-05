@@ -7,15 +7,15 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import { ArrowRightIcon, TrendingDownIcon, TrendingUpIcon } from 'lucide-react';
-import { customerApiService } from '@/lib/api/concrete/customers';
 import { getTranslations } from 'next-intl/server';
 import { Badge } from '../ui/badge';
 import AnimatedCounter from '../helpers/AnimatedCounter';
+import { statisticsApiService } from '@/lib/api/concrete/statistics';
 export default async function CustomerInfoCard() {
   const t = await getTranslations('Dashboard.InfoCards.customer');
 
   const { currentMonthSignUps, percentageChange } =
-    await customerApiService.getCustomerStats();
+    await statisticsApiService.getCustomerSignUps();
 
   const getTrendIcon = () => {
     if (percentageChange > 0) return <TrendingUpIcon className='size-3' />;

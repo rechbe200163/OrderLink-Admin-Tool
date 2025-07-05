@@ -4,10 +4,10 @@ import { Alert, AlertDescription } from '../ui/alert';
 import { AlertCircle, Loader2, LogOutIcon } from 'lucide-react';
 import { useActionState } from 'react';
 import { DropdownMenuItem } from '@radix-ui/react-dropdown-menu';
-import { logout } from '@/lib/actions/auth.actions';
+import { logOut } from '@/lib/actions/auth.actions';
 
 export function LogoutForm() {
-  const [formState, action, isPending] = useActionState(logout, {
+  const [formState, action, isPending] = useActionState(logOut, {
     success: false,
     errors: {
       title: [''],

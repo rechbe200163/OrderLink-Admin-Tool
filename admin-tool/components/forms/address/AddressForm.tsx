@@ -31,15 +31,12 @@ const formSchema = z.object({
 export default function AddressForm() {
   const t = useTranslations('Dashboard.Ressource.Address');
 
-  const [formState, action, isPending] = useActionState(
-    createAddress.bind(null),
-    {
-      success: false,
-      errors: {
-        title: [],
-      },
-    }
-  );
+  const [formState, action, isPending] = useActionState(createAddress, {
+    success: false,
+    errors: {
+      title: [],
+    },
+  });
 
   const [_countryName, setCountryName] = useState<string>('');
   const [stateName, setStateName] = useState<string>('');

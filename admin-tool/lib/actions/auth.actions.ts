@@ -35,15 +35,18 @@ export async function logIn(
   }
 
   try {
-    const resp = await apiPost<{ token: string; user: any }>(ENDPOINTS.AUTH_LOGIN, {
-      email,
-      password,
-    });
+    const resp = await apiPost<{ token: string; user: any }>(
+      ENDPOINTS.AUTH_LOGIN,
+      {
+        email,
+        password,
+      }
+    );
     await setCookie('token', resp.token);
     await setCookie('user', JSON.stringify(resp.user));
-    redirect('/');
-    return { success: true };
   } catch (error: any) {
+    console.error('Login error:', error);
     return { success: false, errors: { title: [error.message] } };
   }
+  redirect('/');
 }
