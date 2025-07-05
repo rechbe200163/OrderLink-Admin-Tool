@@ -1,4 +1,3 @@
-import { auth } from '@/auth';
 import { PlusCircle } from 'lucide-react';
 import React from 'react';
 import BreadcrumbComponent from '@/components/helpers/BreadCrumbComponent';
@@ -20,7 +19,7 @@ export default async function ProductsPage(props: {
     category?: BusinessSector;
   }>;
 }) {
-  const session = await auth();
+  const session = await getSession();
   if (!session) return null;
 
   const searchParams = await props.searchParams;

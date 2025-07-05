@@ -9,13 +9,13 @@ import {
   SidebarMenuItem,
 } from '@/components/ui/sidebar';
 import NavUser from './nav-user';
-import { auth } from '@/auth';
 import SideBarHeader from './sidebar-navHeader';
+import { getSession } from '@/lib/utlis/getSession';
 
 export async function AppSidebar({
   ...props
 }: React.ComponentProps<typeof Sidebar>) {
-  const session = await auth();
+  const session = await getSession();
 
   if (!session) {
     return null; // or handle unauthenticated state

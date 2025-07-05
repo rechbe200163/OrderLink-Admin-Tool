@@ -1,4 +1,3 @@
-import { auth } from '@/auth';
 import { PlusCircle } from 'lucide-react';
 import React from 'react';
 import BreadcrumbComponent from '@/components/helpers/BreadCrumbComponent';
@@ -10,6 +9,7 @@ import { CustomerTable } from '@/components/helpers/customers/CustomerTable';
 import { customerApiService } from '@/lib/api/concrete/customers';
 import { ButtonLinkComponent } from '@/components/ButtonLinkComponent';
 import { getTranslations } from 'next-intl/server';
+import { getSession } from '@/lib/utlis/getSession';
 
 export default async function AdminPanelUsersPage(props: {
   searchParams?: Promise<{
@@ -20,7 +20,7 @@ export default async function AdminPanelUsersPage(props: {
     businessSector?: BusinessSector;
   }>;
 }) {
-  const session = await auth();
+  const session = await getSession();
   if (!session) return null;
 
   const searchParams = await props.searchParams;
@@ -31,14 +31,17 @@ export default async function AdminPanelUsersPage(props: {
   const businessSector = searchParams?.businessSector;
 
   const customerData = await customerApiService.getCustomersPaging(
-      page,
-      limit,
-      query,
-      filter,
-      businessSector
-    );
+    page,
+    limit,
+    query,
+    filter,
+    businessSector
+  );
   const customers = customerData.data;
   const { meta } = customerData;
+
+  console.log('Customer Data:', customerData);
+
   const t = await getTranslations('Dashboard');
   const tFilter = await getTranslations('FilterAndSearch');
   return (

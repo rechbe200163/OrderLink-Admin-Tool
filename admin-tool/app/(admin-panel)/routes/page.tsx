@@ -1,4 +1,3 @@
-import { auth } from '@/auth';
 import { ButtonLinkComponent } from '@/components/ButtonLinkComponent';
 import BreadcrumbComponent from '@/components/helpers/BreadCrumbComponent';
 import { RoutesTable } from '@/components/helpers/routes/RouteTable';
@@ -15,7 +14,7 @@ async function RoutesPage(props: {
     query?: string;
   }>;
 }) {
-  const session = await auth();
+  const session = await getSession();
   if (!session) return null;
 
   const searchParams = await props.searchParams;

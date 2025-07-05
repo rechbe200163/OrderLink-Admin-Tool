@@ -1,4 +1,3 @@
-import { auth } from '@/auth';
 import { ButtonLinkComponent } from '@/components/ButtonLinkComponent';
 import { AddressTable } from '@/components/helpers/addresses/AddressTable';
 import BreadcrumbComponent from '@/components/helpers/BreadCrumbComponent';
@@ -7,6 +6,7 @@ import PaginationComponent from '@/components/pagination+filtering/PagingCompone
 import SearchComponent from '@/components/pagination+filtering/SearchComponent';
 import TagsInput from '@/components/TagInput';
 import { addressApiService } from '@/lib/api/concrete/address';
+import { getSession } from '@/lib/utlis/getSession';
 import { PlusCircle } from 'lucide-react';
 import { getTranslations } from 'next-intl/server';
 
@@ -19,7 +19,7 @@ export default async function AddressesPage(props: {
     tag?: string;
   }>;
 }) {
-  const session = await auth();
+  const session = await getSession();
   if (!session) return null;
 
   const searchParams = await props.searchParams;

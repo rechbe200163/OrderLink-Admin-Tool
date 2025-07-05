@@ -1,4 +1,3 @@
-import { auth } from '@/auth';
 import {
   SidebarMenu,
   SidebarMenuItem,

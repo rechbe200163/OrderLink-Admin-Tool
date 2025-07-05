@@ -1,7 +1,6 @@
 'server only';
 import { SiteConfig } from '@prisma/client';
 import { BaseApiService } from '../base';
-import prisma from '@/prisma/client';
 import { SiteConfigWithAddress } from '@/lib/types';
 
 class SiteConfigApiService extends BaseApiService {
@@ -20,9 +19,7 @@ class SiteConfigApiService extends BaseApiService {
   }
 
   async getSiteConfig(): Promise<SiteConfig> {
-    const response = await this.get<{ siteConfig: SiteConfig }>(
-      'siteConfig'
-    );
+    const response = await this.get<{ siteConfig: SiteConfig }>('siteConfig');
     return response.siteConfig;
   }
 
@@ -31,13 +28,6 @@ class SiteConfigApiService extends BaseApiService {
       'siteConfig?includeAddress=true'
     );
     return response;
-  }
-
-  async getPremiumStatus(): Promise<{ isPremium: boolean }> {
-    const siteConfig = await prisma.siteConfig.findFirst();
-    const isPremium = siteConfig?.isPremium ?? false;
-
-    return { isPremium };
   }
 
   async getSiteConfigForStripe(): Promise<SiteConfig> {

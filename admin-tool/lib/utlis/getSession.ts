@@ -3,7 +3,14 @@ import { getCookie } from '../cookies/cookie-managment';
 import { rolePermissions } from '../access-managment/permissions';
 
 export interface Session {
-  user: { role: Role } & Record<string, any>;
+  token: string;
+  user: {
+    employeeId: string;
+    email: string;
+    firstName?: string;
+    lastName?: string;
+    role?: Role;
+  };
 }
 
 export async function getSession(): Promise<Session> {
@@ -12,7 +19,7 @@ export async function getSession(): Promise<Session> {
     throw new Error('No session found');
   }
   const user = JSON.parse(raw);
-  return { user };
+  return { token: user.token, user };
 }
 
 export async function hasPermission(

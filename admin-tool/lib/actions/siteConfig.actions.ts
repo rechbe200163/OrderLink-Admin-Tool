@@ -1,5 +1,5 @@
 'use server';
-import { auth } from '@/auth';
+
 import { cookies } from 'next/headers';
 import { FormState } from '../form.types';
 import { redirect } from 'next/navigation';

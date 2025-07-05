@@ -1,6 +1,5 @@
 'use server';
 
-import { auth } from '@/auth';
 import { FormState } from '../form.types';
 
 import { subscriptionService } from '../services/SubscriptionService';
@@ -21,10 +20,7 @@ export async function pauseSubscription(
       };
     }
 
-    await apiPost(
-      ENDPOINTS.SUBSCRIPTION_PAUSE(subId),
-      { siteConfigId }
-    );
+    await apiPost(ENDPOINTS.SUBSCRIPTION_PAUSE(subId), { siteConfigId });
     return { success: true };
   } catch (error) {
     console.error('Error pausing Subscription' + error);
@@ -45,10 +41,7 @@ export async function cancleSubscription(
       };
     }
 
-    await apiPost(
-      ENDPOINTS.SUBSCRIPTION_CANCEL(subId),
-      { siteConfigId }
-    );
+    await apiPost(ENDPOINTS.SUBSCRIPTION_CANCEL(subId), { siteConfigId });
     return { success: true };
   } catch (error) {
     console.error('Error pausing Subscription' + error);
