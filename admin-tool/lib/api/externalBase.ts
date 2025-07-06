@@ -1,4 +1,6 @@
 import { hasPermission } from '../utlis/getSession';
+import { ApiError } from './ApiError';
+import { redirect } from 'next/navigation';
 
 export class ExternalApiService {
   protected baseUrl: string;
@@ -37,9 +39,19 @@ export class ExternalApiService {
       const response = await fetch(url.toString(), options);
 
       if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(
-          errorData.error || `Request failed with status ${response.status}`
+        const errorData = await response.json().catch(() => ({}));
+
+        if (response.status === 401 || response.status === 403) {
+          redirect(
+            `/unauthorized?message=${encodeURIComponent(
+              errorData.message || errorData.error || 'Access denied'
+            )}`
+          );
+        }
+
+        throw new ApiError(
+          errorData.message || errorData.error || `Request failed with status ${response.status}`,
+          response.status
         );
       }
 
