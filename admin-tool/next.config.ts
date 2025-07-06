@@ -9,6 +9,8 @@ const nextConfig: NextConfig = {
     serverActions: {
       bodySizeLimit: '200mb',
     },
+    authInterrupts: true,
+
     //  dynamicIO: true,
   },
   images: {

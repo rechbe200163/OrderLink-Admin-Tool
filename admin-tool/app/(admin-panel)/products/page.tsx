@@ -9,6 +9,7 @@ import { ProductTable } from '@/components/helpers/products/ProductsTabel';
 import { productApiService } from '@/lib/api/concrete/products';
 import { categoryApiService } from '@/lib/api/concrete/categories';
 import { ButtonLinkComponent } from '@/components/ButtonLinkComponent';
+import { getSession } from '@/lib/utlis/getSession';
 
 export default async function ProductsPage(props: {
   searchParams?: Promise<{

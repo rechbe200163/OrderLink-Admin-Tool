@@ -8,6 +8,7 @@ import { CategoryTable } from '@/components/helpers/categories/CategoryTable';
 import { categoryApiService } from '@/lib/api/concrete/categories';
 import { ButtonLinkComponent } from '@/components/ButtonLinkComponent';
 import { getTranslations } from 'next-intl/server';
+import { getSession } from '@/lib/utlis/getSession';
 
 export default async function CategoriesPage(props: {
   searchParams?: Promise<{

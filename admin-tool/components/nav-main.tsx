@@ -150,7 +150,7 @@ export function NavMain() {
                             className={
                               pathname === item.url ||
                               pathname.startsWith(item.url + '/')
-                                ? 'bg-accent text-accent-foreground'
+                                ? 'bg-primary text-primary-foreground'
                                 : ''
                             }
                           >
@@ -176,7 +176,7 @@ export function NavMain() {
                     className={
                       pathname === item.url ||
                       pathname.startsWith(item.url + '/')
-                        ? 'bg-accent text-accent-foreground'
+                        ? 'bg-primary text-primary-foreground'
                         : ''
                     }
                   >
