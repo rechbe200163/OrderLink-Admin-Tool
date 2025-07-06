@@ -44,7 +44,6 @@ export type OrderStateCount = {
   orderState: OrderState;
 }[];
 
-
 export type Subscription = {
   id: string;
   status: Stripe.Subscription.Status;
@@ -67,11 +66,21 @@ export type OrdersPagingDto = PagingDto<OrdersWithCustomer>;
 export type EmployeesPagingDto = PagingDto<Employees>;
 export type RoutesPagingDto = PagingDto<RoutesWithCount>;
 export type CategoriesPagingDto = PagingDto<Category>;
-
-
-
-
-
+export type SiteConfigDto = {
+  siteConfigId: string;
+  companyName: string;
+  logoPath: string;
+  email: string;
+  phoneNumber: string;
+  iban: string;
+  companyNumber: string;
+  isPremium: boolean;
+  deleted: boolean;
+  stripeCustomerId: string | null;
+  stripeAccountId: string | null;
+  stripeConfigured: boolean;
+  address: Address;
+};
 
 export type CustomerGrowth = {
   date: string;

@@ -9,6 +9,7 @@ import { EmployeesTable } from '@/components/helpers/employees/EmployeesTable';
 import { Role } from '@prisma/client';
 import { ButtonLinkComponent } from '@/components/ButtonLinkComponent';
 import { getTranslations } from 'next-intl/server';
+import { getSession } from '@/lib/utlis/getSession';
 
 export default async function EmployeesPage(props: {
   searchParams?: Promise<{
@@ -27,7 +28,7 @@ export default async function EmployeesPage(props: {
   const query = searchParams?.query ? searchParams.query : '';
   const role = searchParams?.role ? searchParams.role : ('' as Role);
 
-  const excludeEmployeeId = session.user.id;
+  const excludeEmployeeId = session.user.employeeId;
 
   const employeesData = await employeesApiService.getEmployeesPaging(
     page,

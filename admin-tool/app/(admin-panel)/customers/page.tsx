@@ -30,17 +30,14 @@ export default async function AdminPanelUsersPage(props: {
   const filter = searchParams?.filter ? searchParams.filter : '';
   const businessSector = searchParams?.businessSector;
 
-  const customerData = await customerApiService.getCustomersPaging(
+  const { meta, data } = await customerApiService.getCustomersPaging(
     page,
     limit,
     query,
     filter,
     businessSector
   );
-  const customers = customerData.data;
-  const { meta } = customerData;
-
-  console.log('Customer Data:', customerData);
+  const customers = data;
 
   const t = await getTranslations('Dashboard');
   const tFilter = await getTranslations('FilterAndSearch');

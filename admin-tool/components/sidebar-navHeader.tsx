@@ -18,7 +18,14 @@ function ErrorComponent() {
 }
 
 const SideBarHeader = async () => {
-  const { companyName } = await siteConfigApiService.getSiteConfig();
+  const data = await siteConfigApiService.getSiteConfig();
+  console.log('Site Config Data:', data.companyName);
+
+  if (!data) {
+    return <ErrorComponent />;
+  }
+
+  const { companyName } = data;
 
   if (!companyName) {
     return <ErrorComponent />;

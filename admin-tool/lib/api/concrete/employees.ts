@@ -2,7 +2,6 @@
 import { BaseApiService } from '../base';
 import { PagingDto } from '@/lib/dtos';
 import { Employees } from '@prisma/client';
-import prisma from '@/prisma/client';
 
 export class EmployeesApiService extends BaseApiService {
   private static instance: EmployeesApiService;
@@ -44,11 +43,7 @@ export class EmployeesApiService extends BaseApiService {
   }
 
   async findAdminEmployee(): Promise<Employees | null> {
-    return await prisma.employees.findFirst({
-      where: {
-        role: 'ADMIN',
-      },
-    });
+    return await this.get<Employees | null>('employees/admin');
   }
 }
 

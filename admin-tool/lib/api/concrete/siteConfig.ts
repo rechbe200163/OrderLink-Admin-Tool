@@ -1,7 +1,6 @@
 'server only';
-import { SiteConfig } from '@prisma/client';
 import { BaseApiService } from '../base';
-import { SiteConfigWithAddress } from '@/lib/types';
+import { SiteConfigDto, SiteConfigWithAddress } from '@/lib/types';
 
 class SiteConfigApiService extends BaseApiService {
   private static instance: SiteConfigApiService;
@@ -18,20 +17,19 @@ class SiteConfigApiService extends BaseApiService {
     super(process.env.NEXT_PUBLIC_API_URL || '');
   }
 
-  async getSiteConfig(): Promise<SiteConfig> {
-    const response = await this.get<{ siteConfig: SiteConfig }>('siteConfig');
-    return response.siteConfig;
-  }
-
-  async getSiteConfigWithAddress(): Promise<SiteConfigWithAddress> {
-    const response = await this.get<SiteConfigWithAddress>(
-      'siteConfig?includeAddress=true'
-    );
+  async getSiteConfig(): Promise<SiteConfigDto> {
+    const response = await this.get<SiteConfigDto>('site-config');
+    console.log('Site Config Response:', response);
     return response;
   }
 
-  async getSiteConfigForStripe(): Promise<SiteConfig> {
-    return this.get<SiteConfig>('siteConfigForStripe');
+  async getSiteConfigWithAddress(): Promise<SiteConfigWithAddress> {
+    const response = await this.get<SiteConfigWithAddress>('site-config');
+    return response;
+  }
+
+  async getSiteConfigForStripe(): Promise<SiteConfigDto> {
+    return this.get<SiteConfigDto>('site-config-for-stripe');
   }
 }
 
