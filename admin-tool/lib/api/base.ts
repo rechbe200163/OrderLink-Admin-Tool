@@ -2,6 +2,8 @@
 import { hasPermission } from '../utlis/getSession';
 import { getCookie } from '../cookies/cookie-managment';
 import { ENDPOINTS } from './endpoints';
+import { ApiError } from './ApiError';
+import { redirect } from 'next/navigation';
 
 export class BaseApiService {
   public baseUrl: string;
@@ -69,8 +71,18 @@ export class BaseApiService {
         body,
         errorData,
       });
-      throw new Error(
-        errorData.error || `Request failed with status ${response.status}`
+
+      if (response.status === 401 || response.status === 403) {
+        redirect(
+          `/unauthorized?message=${encodeURIComponent(
+            errorData.message || errorData.error || 'Access denied'
+          )}`
+        );
+      }
+
+      throw new ApiError(
+        errorData.message || errorData.error || `Request failed with status ${response.status}`,
+        response.status
       );
     }
 
