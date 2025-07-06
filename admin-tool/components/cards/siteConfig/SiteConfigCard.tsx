@@ -14,17 +14,18 @@ import { toast } from 'sonner';
 import AddressSelectComponent from '@/components/helpers/AddressSelectComponent';
 import GenericInputMaskComponent from '@/components/InputWithMask';
 import { useRouter } from 'next/navigation';
+import { SiteConfigDto } from '@/lib/types';
 
 export default function SiteConfigCard({
   siteConfig,
   addresses,
 }: {
-  siteConfig: SiteConfig;
+  siteConfig: SiteConfigDto;
   addresses: Address[];
 }) {
   const router = useRouter();
   const [selectedAddress, setSelectedAddress] = React.useState<string>(
-    siteConfig.addressId || ''
+    siteConfig.address.addressId || ''
   );
 
   const [formState, action, isPending] = useActionState(

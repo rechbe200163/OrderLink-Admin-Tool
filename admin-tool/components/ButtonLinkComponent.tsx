@@ -6,7 +6,7 @@ interface ButtonLinkProps {
   href: string;
   label: string;
   icon?: React.ReactNode;
-  variant?: 'default' | 'secondary' | 'outline-solid' | 'link';
+  variant?: 'default' | 'secondary' | 'link';
 }
 
 export const ButtonLinkComponent = ({

@@ -1,5 +1,5 @@
-import { signOut } from '@/auth';
 import { SidebarMenuAction } from '@/components/ui/sidebar';
+import { deleteCookie } from '@/lib/cookies/cookie-managment';
 import { LogOut } from 'lucide-react';
 
 export default function SignOutComponent() {
@@ -7,7 +7,8 @@ export default function SignOutComponent() {
     <form
       action={async () => {
         'use server';
-        await signOut();
+        await deleteCookie('token');
+        await deleteCookie('user');
       }}
     >
       <SidebarMenuAction type='submit' className='items-center gap-2'>

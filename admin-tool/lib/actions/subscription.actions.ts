@@ -2,16 +2,16 @@
 
 import { FormState } from '../form.types';
 
-import { subscriptionService } from '../services/SubscriptionService';
 import { apiPost } from './api.actions';
 import { ENDPOINTS } from '../api/endpoints';
+import { getSession } from '../utlis/getSession';
 
 export async function pauseSubscription(
   subId: string,
   siteConfigId: string
 ): Promise<FormState> {
   try {
-    const session = await auth();
+    const session = await getSession();
     if (session?.user.role !== 'ADMIN') {
       return {
         success: false,
@@ -32,7 +32,7 @@ export async function cancleSubscription(
   siteConfigId: string
 ): Promise<FormState> {
   try {
-    const session = await auth();
+    const session = await getSession();
     if (session?.user.role !== 'ADMIN') {
       return {
         success: false,

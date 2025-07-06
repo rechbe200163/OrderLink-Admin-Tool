@@ -64,7 +64,7 @@ export default function DateRangeSelectComponent() {
           <PopoverTrigger asChild>
             <Button
               id={id}
-              variant={'outline-solid'}
+              variant={'outline'}
               className={cn(
                 'group bg-background hover:bg-background border-input w-full justify-between px-3 font-normal outline-offset-0 outline-hidden focus-visible:outline-[3px]',
                 !date && 'text-muted-foreground'

@@ -18,21 +18,30 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from '@/components/ui/sidebar';
-import { Session } from 'next-auth';
 import { logOut } from '@/lib/actions/auth.actions';
-import { useActionState } from 'react';
+import { Session } from '@/lib/utlis/getSession';
 
-export default function NavUser({ user }: { user: Session['user'] }) {
+export default function NavUser({ session }: { session: Session }) {
   // if user is null return generic user object
   const { isMobile } = useSidebar();
   // const user: User = await getCookie('user');
 
-  if (!user) return null;
+  if (!session) return null;
 
-  const name = `${user.firstName} ${user.lastName}`;
-  const initials = `${user.firstName.charAt(0).toUpperCase()}${user.lastName
-    .charAt(0)
-    .toUpperCase()}`;
+  const user = session?.user || {
+    firstName: 'John',
+    lastName: 'Doe',
+    email: 'john.doe@example.com',
+  };
+
+  const {
+    firstName = 'John',
+    lastName = 'Doe',
+    email = 'john.doe@example.com',
+  } = user;
+
+  const name = `${firstName} ${lastName}`;
+  const initials = `${firstName.charAt(0)}${lastName.charAt(0)}`.toUpperCase();
 
   return (
     <SidebarMenu>
