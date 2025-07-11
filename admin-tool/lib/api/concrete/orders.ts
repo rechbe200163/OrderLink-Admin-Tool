@@ -1,11 +1,12 @@
 'server only';
 import {
   OrdersWithAddressOfCustomer,
+  OrdersWithCustomer,
   OrdersWithCustomerAndProducts,
 } from '@/lib/types';
 import { PagingDto } from '@/lib/dtos';
 import { BaseApiService } from '../base';
-import { Order } from '@prisma/client';
+import { Order } from '@/lib/types';
 
 export class OrderApiService extends BaseApiService {
   private static instance: OrderApiService;
@@ -23,9 +24,7 @@ export class OrderApiService extends BaseApiService {
   }
 
   async getOrderById(orderId: string): Promise<OrdersWithCustomerAndProducts> {
-    return this.get<OrdersWithCustomerAndProducts>(
-      `orders/${orderId}`
-    );
+    return this.get<OrdersWithCustomerAndProducts>(`orders/${orderId}`);
   }
 
   async getOrdersByRouteId(

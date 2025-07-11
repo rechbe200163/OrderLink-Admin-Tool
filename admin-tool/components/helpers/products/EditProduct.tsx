@@ -2,7 +2,7 @@
 import Image from 'next/image';
 import { toast } from 'sonner';
 import { useActionState } from 'react';
-import { Category } from '@prisma/client';
+import { Category } from '@/lib/types';
 import { formatPrice } from '@/lib/utils';
 import { useRouter } from 'next/navigation';
 import { Card } from '@/components/ui/card';

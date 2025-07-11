@@ -1,10 +1,7 @@
 'server only';
-import {
-  CustomerStats,
-  CustomerWithAddressId,
-} from '@/lib/types';
+import { CustomerStats, CustomerWithAddressId } from '@/lib/types';
 import { PagingDto } from '@/lib/dtos';
-import { BusinessSector, Customer } from '@prisma/client';
+import { BusinessSector, Customer } from '@/lib/types';
 import { BaseApiService } from '../base';
 
 class CustomerApiService extends BaseApiService {

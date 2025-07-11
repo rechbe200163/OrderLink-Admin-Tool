@@ -1,6 +1,6 @@
 'server only';
 import { BaseApiService } from '../base';
-import { Category } from '@prisma/client';
+import { Category } from '@/lib/types';
 import { PagingDto } from '@/lib/dtos';
 
 class CategoryApiService extends BaseApiService {

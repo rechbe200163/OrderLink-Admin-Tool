@@ -1,4 +1,3 @@
-import { hasPermission } from '../utlis/getSession';
 import { ApiError } from './ApiError';
 import { redirect } from 'next/navigation';
 
@@ -19,10 +18,6 @@ export class ExternalApiService {
     params?: Record<string, string | number | undefined>,
     options?: RequestInit
   ): Promise<T> {
-    if (!(await hasPermission('statistics', 'read'))) {
-      throw new Error(`Unauthorized: No read access to ${endpoint}`);
-    }
-
     const url = new URL(`${this.baseUrl}/${endpoint}`);
 
     url.searchParams.append('token', token);
@@ -50,7 +45,9 @@ export class ExternalApiService {
         }
 
         throw new ApiError(
-          errorData.message || errorData.error || `Request failed with status ${response.status}`,
+          errorData.message ||
+            errorData.error ||
+            `Request failed with status ${response.status}`,
           response.status
         );
       }

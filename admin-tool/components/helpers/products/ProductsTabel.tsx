@@ -7,7 +7,7 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
-import type { Product } from '@prisma/client';
+import type { Product } from '@/lib/types';
 import { formatDateTime, formatPrice } from '@/lib/utils';
 import ImageComponent from '@/components/images/ImageComponent';
 import { Suspense } from 'react';

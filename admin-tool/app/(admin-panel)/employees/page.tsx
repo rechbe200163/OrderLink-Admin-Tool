@@ -6,10 +6,10 @@ import SearchComponent from '@/components/pagination+filtering/SearchComponent';
 import FilteringComponent from '@/components/pagination+filtering/FilteringComponent';
 import { employeesApiService } from '@/lib/api/concrete/employees';
 import { EmployeesTable } from '@/components/helpers/employees/EmployeesTable';
-import { Role } from '@prisma/client';
 import { ButtonLinkComponent } from '@/components/ButtonLinkComponent';
 import { getTranslations } from 'next-intl/server';
 import { getSession } from '@/lib/utlis/getSession';
+import { Role } from '@/lib/types';
 
 export default async function EmployeesPage(props: {
   searchParams?: Promise<{

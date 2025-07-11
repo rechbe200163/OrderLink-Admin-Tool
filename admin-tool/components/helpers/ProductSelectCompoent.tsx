@@ -20,7 +20,7 @@ import {
 import { Check, ChevronDown, Plus } from 'lucide-react';
 import { useId, useState, useEffect } from 'react';
 import Link from 'next/link';
-import { Product } from '@prisma/client';
+import { Product } from '@/lib/types';
 import { useTranslations } from 'next-intl';
 
 export default function ProductSelectComponent({

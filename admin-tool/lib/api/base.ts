@@ -1,5 +1,4 @@
 'server only';
-import { hasPermission } from '../utlis/getSession';
 import { getCookie } from '../cookies/cookie-managment';
 import { ENDPOINTS } from './endpoints';
 import { ApiError } from './ApiError';
@@ -27,12 +26,6 @@ export class BaseApiService {
       headers?: HeadersInit;
     } = {}
   ): Promise<T> {
-    const ressource = endpoint.split('?')[0].split('/')[0];
-    const isAuthEndpoint = ressource === ENDPOINTS.AUTH_LOGIN.split('/')[0];
-    // if (!isAuthEndpoint && !(await hasPermission(ressource, action))) {
-    //   throw new Error(`Unauthorized: No ${action} access to ${endpoint}`);
-    // }
-
     const url = new URL(`${this.baseUrl}/${endpoint}`);
 
     console.log('method:', method, 'url:', url.toString());

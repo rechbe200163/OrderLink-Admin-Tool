@@ -19,9 +19,9 @@ import {
 } from '@/components/ui/popover';
 import { Check, ChevronDown, Plus } from 'lucide-react';
 import { useId, useState, useEffect } from 'react';
-import { Address } from '@prisma/client';
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
+import { Address } from '@/lib/types';
 
 export default function AddressSelectComponent({
   addresses,

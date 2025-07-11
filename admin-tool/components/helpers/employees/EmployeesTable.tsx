@@ -7,10 +7,10 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
-import { Role, type Employees } from '@prisma/client';
 import Link from 'next/link';
 import { capitalizeFirstLetter } from '@/lib/utils';
 import { useTranslations } from 'next-intl';
+import { Employees, Role } from '@/lib/types';
 
 export function EmployeesTable({ employees }: { employees: Employees[] }) {
   const t = useTranslations('Dashboard.Ressource.Employees');

@@ -13,12 +13,12 @@ import { Input } from '@/components/ui/input';
 import React, { useActionState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Loader2, PlusCircle } from 'lucide-react';
-import { Address, BusinessSector } from '@prisma/client';
 import { addCustomer } from '@/lib/actions/user.actions';
 import CustomeToast from '../helpers/toasts/CustomeErrorToast';
 import AddressSelectComponent from '@/components/helpers/AddressSelectComponent';
 import { useTranslations } from 'next-intl';
 import PhoneNumberInputComponent from '../PhoneNumberInputComponent';
+import { Address, BusinessSector } from '@/lib/types';
 
 interface AddUserFormProps {
   addresses: Address[];

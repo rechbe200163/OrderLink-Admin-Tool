@@ -9,6 +9,13 @@ export enum Actions {
   CREATE = 'CREATE',
 }
 
+export enum Role {
+  ADMIN = 'ADMIN',
+  EMPLOYEE = 'EMPLOYEE',
+  SUPPPLIER = 'SUPPLIER',
+  CUSTOMER = 'CUSTOMER',
+}
+
 export enum Ressources {
   PRODUCT = 'PRODUCT',
   ORDER = 'ORDER',
@@ -107,7 +114,7 @@ export interface Employees {
   firstName: string;
   lastName: string;
   deleted: boolean;
-  role: string;
+  role: Role;
 }
 
 export interface Route {

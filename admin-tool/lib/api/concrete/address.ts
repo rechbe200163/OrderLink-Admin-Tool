@@ -1,5 +1,5 @@
 'server only';
-import { Address } from '@prisma/client';
+import { Address } from '@/lib/types';
 import { BaseApiService } from '../base';
 import { PagingDto } from '@/lib/dtos';
 

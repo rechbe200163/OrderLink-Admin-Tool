@@ -1,5 +1,4 @@
 'use client';
-import { Customer, Product } from '@prisma/client';
 import React, { useActionState, useId } from 'react';
 import { toast } from 'sonner';
 import CustomeToast from '../toasts/CustomeErrorToast';
@@ -13,6 +12,7 @@ import CustomerSelectComponent from '../CustomerSelectCompoent';
 import ProductSelectComponent from '../ProductSelectCompoent';
 import { Checkbox } from '@/components/ui/checkbox';
 import { createOrder } from '@/lib/actions/order.actions';
+import { Customer, Product } from '@/lib/types';
 
 interface CreateOrderProps {
   customer: Customer[];

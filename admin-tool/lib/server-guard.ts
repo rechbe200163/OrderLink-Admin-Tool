@@ -2,7 +2,6 @@
 
 import { getSession, Session } from './utlis/getSession';
 import { FormState } from './form.types';
-import { hasPermissionFromRole } from './access-managment/permissions';
 
 /**
  * Runs a callback only if the current user has the given permission.
@@ -22,14 +21,6 @@ export async function guardAction<Args extends any[], R = unknown>(
     return {
       success: false,
       errors: { title: ['Not authenticated'] },
-    } satisfies FormState as FormState;
-  }
-
-  const { role } = session.user;
-  if (!role || !hasPermissionFromRole(role, resource, action)) {
-    return {
-      success: false,
-      errors: { title: ['Not authorized'] },
     } satisfies FormState as FormState;
   }
 

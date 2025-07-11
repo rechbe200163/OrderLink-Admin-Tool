@@ -2,7 +2,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
-import { Address, SiteConfig } from '@prisma/client';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -14,7 +13,7 @@ import { toast } from 'sonner';
 import AddressSelectComponent from '@/components/helpers/AddressSelectComponent';
 import GenericInputMaskComponent from '@/components/InputWithMask';
 import { useRouter } from 'next/navigation';
-import { SiteConfigDto } from '@/lib/types';
+import { Address, SiteConfigDto } from '@/lib/types';
 
 export default function SiteConfigCard({
   siteConfig,

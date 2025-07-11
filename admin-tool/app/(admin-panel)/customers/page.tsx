@@ -4,12 +4,12 @@ import BreadcrumbComponent from '@/components/helpers/BreadCrumbComponent';
 import PaginationComponent from '@/components/pagination+filtering/PagingComponent';
 import SearchComponent from '@/components/pagination+filtering/SearchComponent';
 import FilteringComponent from '@/components/pagination+filtering/FilteringComponent';
-import { BusinessSector } from '@prisma/client';
 import { CustomerTable } from '@/components/helpers/customers/CustomerTable';
 import { customerApiService } from '@/lib/api/concrete/customers';
 import { ButtonLinkComponent } from '@/components/ButtonLinkComponent';
 import { getTranslations } from 'next-intl/server';
 import { getSession } from '@/lib/utlis/getSession';
+import { BusinessSector } from '@/lib/types';
 
 export default async function AdminPanelUsersPage(props: {
   searchParams?: Promise<{

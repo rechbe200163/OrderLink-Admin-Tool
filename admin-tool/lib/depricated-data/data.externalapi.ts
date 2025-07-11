@@ -1,5 +1,5 @@
 import { getCookie } from '@/lib/cookies/cookie-managment';
-import { getSession, hasPermission } from '@/lib/utlis/getSession';
+import { getSession } from '@/lib/utlis/getSession';
 import { cookies } from 'next/headers';
 
 const NEXT_PUBLIC_EXTERNAL_API = process.env.NEXT_PUBLIC_EXTERNAL_API;
@@ -26,10 +26,6 @@ export async function fetchWithQueryParams<T>(
     if (!accessToken) {
       const session = await getSession();
       const employee = session?.user;
-
-      if (!hasPermission('statistics', 'read')) {
-        throw new Error('You do not have permission to access this resource');
-      }
 
       if (!employee) {
         throw new Error('Admin employee not found');

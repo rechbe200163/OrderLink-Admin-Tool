@@ -2,5 +2,5 @@ import Stripe from 'stripe';
 
 export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   typescript: true,
-  apiVersion: '2025-04-30.basil',
+  apiVersion: '2025-06-30.basil',
 });

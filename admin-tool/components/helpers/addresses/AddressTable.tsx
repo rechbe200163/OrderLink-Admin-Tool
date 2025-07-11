@@ -7,9 +7,9 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
-import type { Address } from '@prisma/client';
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
+import { Address } from '@/lib/types';
 
 export function AddressTable({ addresses }: { addresses: Address[] }) {
   const t = useTranslations('Dashboard.Ressource.Address.Attributes');

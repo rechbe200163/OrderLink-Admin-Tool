@@ -1,7 +1,7 @@
 'use server';
 
 import { FormState } from '../form.types';
-import { getSession, hasPermission } from '../utlis/getSession';
+import { getSession } from '../utlis/getSession';
 import { apiPut } from './api.actions';
 import { ENDPOINTS } from '../api/endpoints';
 
@@ -17,15 +17,6 @@ export async function updateSiteConfig(
       success: false,
       errors: {
         title: ['Not authenticated'],
-      },
-    };
-  }
-
-  if (!(await hasPermission('siteConfig', 'write'))) {
-    return {
-      success: false,
-      errors: {
-        title: ['Not authorized'],
       },
     };
   }

@@ -13,7 +13,7 @@ import { createProduct } from '@/lib/actions/product.actions';
 import Image from 'next/image';
 import { Card } from '@/components/ui/card';
 import SelectCategoryComponent from '../categories/SelectCategoryComponent';
-import { Category } from '@prisma/client';
+import { Category } from '@/lib/types';
 import FileInputComponent from '@/components/file-upload/FileInputComponent';
 import { toast } from 'sonner';
 import CustomeToast from '../toasts/CustomeErrorToast';

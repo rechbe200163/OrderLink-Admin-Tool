@@ -1,7 +1,7 @@
 'server only';
 import { BaseApiService } from '../base';
 import { PagingDto } from '@/lib/dtos';
-import { Employees } from '@prisma/client';
+import { Employees } from '@/lib/types';
 
 export class EmployeesApiService extends BaseApiService {
   private static instance: EmployeesApiService;

@@ -1,5 +1,4 @@
 'use client';
-import { Customer, Product } from '@prisma/client';
 import React, { useActionState, useId } from 'react';
 import { toast } from 'sonner';
 
@@ -13,7 +12,7 @@ import { Checkbox } from '@/components/ui/checkbox';
 import CustomeToast from '@/components/helpers/toasts/CustomeErrorToast';
 import CustomerSelectComponent from '@/components/helpers/CustomerSelectCompoent';
 import ProductSelectComponent from '@/components/helpers/ProductSelectCompoent';
-import { OrdersWithCustomerAndProducts } from '@/lib/types';
+import { Customer, OrdersWithCustomerAndProducts, Product } from '@/lib/types';
 import { updateOrder } from '@/lib/actions/order.actions';
 import { useRouter } from 'next/navigation';
 

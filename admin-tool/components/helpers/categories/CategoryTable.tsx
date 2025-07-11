@@ -7,9 +7,9 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
-import { Category } from '@prisma/client';
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
+import { Category } from '@/lib/types';
 
 export function CategoryTable({ categories }: { categories: Category[] }) {
   const t = useTranslations('Dashboard.Ressource.Categories');

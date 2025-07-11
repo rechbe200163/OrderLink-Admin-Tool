@@ -8,10 +8,10 @@ import { Loader2Icon, MapPinHouse } from 'lucide-react';
 import React from 'react';
 import CustomeToast from '../toasts/CustomeErrorToast';
 import { updateCategory } from '@/lib/actions/categories.actions';
-import { Category } from '@prisma/client';
 import { useRouter } from 'next/navigation';
 import { Card } from '@/components/ui/card';
 import { useTranslations } from 'next-intl';
+import { Category } from '@/lib/types';
 
 export default function EditCategory({ category }: { category: Category }) {
   const t = useTranslations('Dashboard.Ressource.Categories');

@@ -7,7 +7,7 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
-import type { OrdersWithCustomerAndProducts } from '@/lib/types';
+import type { OrdersWithCustomerAndProducts, Product } from '@/lib/types';
 import { formatDateTime, formatPrice } from '@/lib/utils';
 import ImageComponent from '@/components/images/ImageComponent';
 import { Suspense, use } from 'react';
@@ -20,7 +20,6 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion';
-import type { Product } from '@prisma/client';
 import { useTranslations } from 'next-intl';
 
 export function OrderTable({

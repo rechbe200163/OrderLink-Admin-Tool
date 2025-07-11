@@ -3,12 +3,13 @@
 import { FormState } from '../form.types';
 import { apiPost, apiPut } from './api.actions';
 import { ENDPOINTS } from '../api/endpoints';
+import { getSession } from '../utlis/getSession';
 
 export async function createOrder(
   _prevState: FormState,
   formData: FormData
 ): Promise<FormState> {
-  const session = await auth();
+  const session = await getSession();
 
   if (!session) {
     return {
@@ -31,7 +32,7 @@ export async function updateOrder(
   _prevState: FormState,
   formData: FormData
 ): Promise<FormState> {
-  const session = await auth();
+  const session = await getSession();
 
   if (!session) {
     return {

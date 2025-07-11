@@ -1,5 +1,5 @@
 'server only';
-import { Address } from '@prisma/client';
+import { Address } from '@/lib/types';
 
 const baseApiUrl = process.env.NEXT_PUBLIC_API_URL;
 

@@ -2,7 +2,6 @@
 
 import * as React from 'react';
 import { Pie, PieChart, Label } from 'recharts';
-import { OrderState } from '@prisma/client';
 import { useTranslations } from 'next-intl';
 
 import {
@@ -18,7 +17,7 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from '@/components/ui/chart';
-import { OrderStateCount } from '@/lib/types';
+import { OrderState, OrderStateCount } from '@/lib/types';
 
 const chartColorVars = [
   'var(--color-chart-1)',
@@ -29,13 +28,7 @@ const chartColorVars = [
   'var(--color-chart-6)',
 ];
 
-const orderStates: OrderState[] = [
-  'ORDER_PLACED',
-  'IN_PROGRESS',
-  'DISPATCHED',
-  'DELIVERED',
-  'ORDER_COLLECTED',
-];
+const orderStates: OrderState[] = Object.values(OrderState) as OrderState[];
 
 const stateColors: Record<OrderState, string> = orderStates.reduce(
   (acc, state, idx) => {

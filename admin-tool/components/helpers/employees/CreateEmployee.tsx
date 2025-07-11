@@ -8,7 +8,6 @@ import { Loader2, MailIcon, PlusCircle } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
-import { Role } from '@prisma/client';
 import {
   Select,
   SelectContent,
@@ -19,6 +18,7 @@ import {
 } from '@/components/ui/select';
 import { createEmployee } from '@/lib/actions/employee.actions';
 import { useTranslations } from 'next-intl';
+import { Role } from '@/lib/types';
 
 const CreateEmployees = () => {
   const [formState, action, isPending] = useActionState(createEmployee, {

@@ -1,10 +1,10 @@
 import { z } from 'zod';
 import { hash } from 'bcryptjs';
-import { Role } from '@prisma/client';
+import { Role } from '@/lib/types';
 import { customAlphabet } from 'nanoid';
 import { twMerge } from 'tailwind-merge';
 import { clsx, type ClassValue } from 'clsx';
-import { BusinessSector } from '@prisma/client';
+import { BusinessSector } from '@/lib/types';
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));

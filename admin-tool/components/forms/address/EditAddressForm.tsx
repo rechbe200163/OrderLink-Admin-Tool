@@ -21,10 +21,10 @@ import { updateAddress } from '@/lib/actions/address.actions';
 import { Loader2Icon, MapPinHouse } from 'lucide-react';
 import React from 'react';
 import CustomeToast from '../../helpers/toasts/CustomeErrorToast';
-import { Address } from '@prisma/client';
 import { useRouter } from 'next/navigation';
 import { Card } from '@/components/ui/card';
 import { useTranslations } from 'next-intl';
+import { Address } from '@/lib/types';
 
 const formSchema = z.object({
   name_5020537749: z.tuple([z.string(), z.string().optional()]),

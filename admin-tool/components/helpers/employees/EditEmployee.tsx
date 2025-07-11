@@ -1,5 +1,4 @@
 'use client';
-import { Employees, Role } from '@prisma/client';
 import React, { useActionState } from 'react';
 import { toast } from 'sonner';
 import CustomeToast from '../toasts/CustomeErrorToast';
@@ -21,6 +20,7 @@ import {
 import { updateEmployee } from '@/lib/actions/employee.actions';
 import { useTranslations } from 'next-intl';
 import router from 'next/router';
+import { Employees, Role } from '@/lib/types';
 
 interface EditEmployeesProps {
   employee: Employees;

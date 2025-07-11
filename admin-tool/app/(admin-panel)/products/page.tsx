@@ -4,12 +4,12 @@ import BreadcrumbComponent from '@/components/helpers/BreadCrumbComponent';
 import PaginationComponent from '@/components/pagination+filtering/PagingComponent';
 import SearchComponent from '@/components/pagination+filtering/SearchComponent';
 import FilteringComponent from '@/components/pagination+filtering/FilteringComponent';
-import { BusinessSector, Category } from '@prisma/client';
 import { ProductTable } from '@/components/helpers/products/ProductsTabel';
 import { productApiService } from '@/lib/api/concrete/products';
 import { categoryApiService } from '@/lib/api/concrete/categories';
 import { ButtonLinkComponent } from '@/components/ButtonLinkComponent';
 import { getSession } from '@/lib/utlis/getSession';
+import { BusinessSector, Category } from '@/lib/types';
 
 export default async function ProductsPage(props: {
   searchParams?: Promise<{

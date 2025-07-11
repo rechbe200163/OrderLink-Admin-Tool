@@ -20,7 +20,7 @@ import {
 import { Check, ChevronDown, Plus } from 'lucide-react';
 import { useId, useState, useEffect } from 'react';
 import Link from 'next/link';
-import { Order } from '@prisma/client';
+import { Order } from '@/lib/types';
 import { useTranslations } from 'next-intl';
 import { OrdersWithAddressOfCustomer } from '@/lib/types';
 

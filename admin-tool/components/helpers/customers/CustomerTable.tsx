@@ -8,11 +8,11 @@ import {
 } from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
 
-import type { Customer } from '@prisma/client';
 import CopyToClipboard from '../CopyOrderId';
 import UserAvatarComponent from './UserAvatarComponent';
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
+import { Customer } from '@/lib/types';
 
 export function CustomerTable({ customers }: { customers: Customer[] }) {
   const t = useTranslations('Dashboard.Ressource.Customers');
@@ -40,7 +40,10 @@ export function CustomerTable({ customers }: { customers: Customer[] }) {
           <TableBody>
             {customers.length > 0 ? (
               customers.map((customer) => (
-                <TableRow key={customer.customerReference} className='hover:bg-muted'>
+                <TableRow
+                  key={customer.customerReference}
+                  className='hover:bg-muted'
+                >
                   <TableCell className='w-20 font-medium'>
                     <UserAvatarComponent avatarPath={customer.avatarPath!} />
                   </TableCell>

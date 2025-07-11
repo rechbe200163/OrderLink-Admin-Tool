@@ -13,9 +13,8 @@ import {
 import { Card } from '@/components/ui/card';
 import AddressSelectComponent from '@/components/helpers/AddressSelectComponent';
 import { Loader2, PlusCircle } from 'lucide-react';
-import { CustomerWithAddressId } from '@/lib/types';
+import { Address, BusinessSector, CustomerWithAddressId } from '@/lib/types';
 import { updateCustomer } from '@/lib/actions/user.actions';
-import { Address, BusinessSector } from '@prisma/client';
 import { toast } from 'sonner';
 import CustomeToast from '../toasts/CustomeErrorToast';
 import PhoneNumberInputComponent from '@/components/PhoneNumberInputComponent';

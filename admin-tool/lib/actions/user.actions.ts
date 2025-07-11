@@ -3,12 +3,13 @@ import { FormState } from '../form.types';
 
 import { apiPost, apiPut } from './api.actions';
 import { ENDPOINTS } from '../api/endpoints';
+import { getSession } from '../utlis/getSession';
 
 export async function addCustomer(
   prevState: FormState,
   formData: FormData
 ): Promise<FormState> {
-  const session = await auth();
+  const session = await getSession();
 
   if (!session?.user) {
     return {
@@ -30,7 +31,7 @@ export async function addCustomer(
 export async function deleteUser(
   customerReference: number
 ): Promise<FormState> {
-  const session = await auth();
+  const session = await getSession();
 
   if (!session?.user) {
     return {
@@ -52,7 +53,7 @@ export async function deleteUser(
 export async function restoreUser(
   customerReference: number
 ): Promise<FormState> {
-  const session = await auth();
+  const session = await getSession();
 
   if (!session?.user) {
     return {
@@ -76,7 +77,7 @@ export async function updateCustomer(
   _prevState: FormState,
   formData: FormData
 ): Promise<FormState> {
-  const session = await auth();
+  const session = await getSession();
 
   if (!session?.user) {
     return {

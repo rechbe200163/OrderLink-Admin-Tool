@@ -1,7 +1,7 @@
 'server only';
 import { RoutesWithOrders, RoutesWithCount } from '@/lib/types';
 import { BaseApiService } from '../base';
-import { Order } from '@prisma/client';
+import { Order } from '@/lib/types';
 import { PagingDto } from '@/lib/dtos';
 
 export class RouteApiService extends BaseApiService {

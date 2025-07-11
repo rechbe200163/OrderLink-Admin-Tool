@@ -16,9 +16,8 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from '@/components/ui/chart';
-import { BusinessSector } from '@prisma/client';
 import { useTranslations } from 'next-intl';
-import { CustomerByBranch } from '@/lib/types';
+import { BusinessSector, CustomerByBranch } from '@/lib/types';
 
 const chartColorVars = [
   'var(--chart-1)',
@@ -28,29 +27,20 @@ const chartColorVars = [
   'var(--chart-5)',
 ];
 
-const businessSectors: BusinessSector[] = [
-  'IT',
-  'AGRICULTURE',
-  'FINANCE',
-  'RETAIL',
-  'MANUFACTURING',
-  'EDUCATION',
-  'HOSPITALITY',
-  'CONSTRUCTION',
-  'TRANSPORTATION',
-  'HEALTH',
-  'TOURISM',
-  'TECHNOLOGY',
-  'OTHER',
-];
-
-const sectorColors: Record<BusinessSector, string> = businessSectors.reduce(
+const sectorColors: Record<BusinessSector, string> = Object.values(
+  BusinessSector
+).reduce(
   (acc, sector, idx) => {
     acc[sector] = chartColorVars[idx % chartColorVars.length];
     return acc;
   },
   {} as Record<BusinessSector, string>
 );
+
+// Get all business sector values as an array
+const businessSectors: BusinessSector[] = Object.values(
+  BusinessSector
+) as BusinessSector[];
 
 export function CustomerBusinessTypeDistrubution({
   data,
