@@ -9,8 +9,6 @@ export async function createAddress(
   formData: FormData
 ): Promise<FormState> {
   return (await guardAction(
-    'addresses',
-    'write',
     async () => {
       await apiPost(ENDPOINTS.ADDRESSES, Object.fromEntries(formData));
       return { success: true } as FormState;
@@ -25,8 +23,6 @@ export async function updateAddress(
   formData: FormData
 ): Promise<FormState> {
   return (await guardAction(
-    'addresses',
-    'write',
     async () => {
       await apiPut(ENDPOINTS.ADDRESS(addressId), Object.fromEntries(formData));
       return { success: true } as FormState;

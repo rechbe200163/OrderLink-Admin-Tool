@@ -9,8 +9,6 @@ export async function createEmployee(
   formData: FormData
 ): Promise<FormState> {
   return (await guardAction(
-    'employees',
-    'write',
     async () => {
       await apiPost(ENDPOINTS.EMPLOYEES, Object.fromEntries(formData));
       return { success: true } as FormState;
@@ -25,8 +23,6 @@ export async function updateEmployee(
   formData: FormData
 ): Promise<FormState> {
   return (await guardAction(
-    'employees',
-    'write',
     async () => {
       await apiPut(
         ENDPOINTS.EMPLOYEE(employeeId),

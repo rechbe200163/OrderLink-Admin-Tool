@@ -3,29 +3,19 @@
 import { FormState } from '../form.types';
 import { apiPost, apiPut } from './api.actions';
 import { ENDPOINTS } from '../api/endpoints';
-import { getSession } from '../utlis/getSession';
+import { guardAction } from '../server-guard';
 
 export async function createCategory(
   _prevState: FormState,
   formData: FormData
 ): Promise<FormState> {
-  const session = await getSession();
-
-  if (!session) {
-    return {
-      success: false,
-      errors: {
-        title: ['Not authenticated'],
-      },
-    };
-  }
-
-  try {
-    await apiPost(ENDPOINTS.CATEGORIES, Object.fromEntries(formData));
-    return { success: true };
-  } catch (error: any) {
-    return { success: false, errors: { title: [error.message] } };
-  }
+  return (await guardAction(
+    async () => {
+      await apiPost(ENDPOINTS.CATEGORIES, Object.fromEntries(formData));
+      return { success: true } as FormState;
+    },
+    'Failed to create category'
+  )) as FormState;
 }
 
 export async function updateCategory(
@@ -33,21 +23,11 @@ export async function updateCategory(
   _prevState: FormState,
   formData: FormData
 ): Promise<FormState> {
-  const session = await getSession();
-
-  if (!session) {
-    return {
-      success: false,
-      errors: {
-        title: ['Not authenticated'],
-      },
-    };
-  }
-
-  try {
-    await apiPut(ENDPOINTS.CATEGORY(categoryId), Object.fromEntries(formData));
-    return { success: true };
-  } catch (error: any) {
-    return { success: false, errors: { title: [error.message] } };
-  }
+  return (await guardAction(
+    async () => {
+      await apiPut(ENDPOINTS.CATEGORY(categoryId), Object.fromEntries(formData));
+      return { success: true } as FormState;
+    },
+    'Failed to update category'
+  )) as FormState;
 }
