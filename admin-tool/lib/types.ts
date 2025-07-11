@@ -1,15 +1,147 @@
-import {
-  Address,
-  BusinessSector,
-  Category,
-  Customer,
-  Employees,
-  OrderState,
-  Prisma,
-  Product,
-} from '@prisma/client';
 import Stripe from 'stripe';
 import type { PagingDto } from './dtos';
+
+// Enums replicated from the former Prisma schema
+export enum Actions {
+  READ = 'READ',
+  DELETE = 'DELETE',
+  UPDATE = 'UPDATE',
+  CREATE = 'CREATE',
+}
+
+export enum Ressources {
+  PRODUCT = 'PRODUCT',
+  ORDER = 'ORDER',
+  CUSTOMER = 'CUSTOMER',
+  CART = 'CART',
+  ADDRESS = 'ADDRESS',
+  INVOICE = 'INVOICE',
+  EMPLOYEE = 'EMPLOYEE',
+  ROLE = 'ROLE',
+  ROUTES = 'ROUTES',
+  SITE_CONFIG = 'SITE_CONFIG',
+  CATEGORY = 'CATEGORY',
+  ACTION = 'ACTION',
+  PERMISSION = 'PERMISSION',
+  STATISTICS = 'STATISTICS',
+}
+
+export enum OrderState {
+  ORDER_PLACED = 'ORDER_PLACED',
+  IN_PROGRESS = 'IN_PROGRESS',
+  DISPATCHED = 'DISPATCHED',
+  DELIVERED = 'DELIVERED',
+  ORDER_COLLECTED = 'ORDER_COLLECTED',
+}
+
+export enum BusinessSector {
+  AGRICULTURE = 'AGRICULTURE',
+  CONSTRUCTION = 'CONSTRUCTION',
+  EDUCATION = 'EDUCATION',
+  FINANCE = 'FINANCE',
+  HEALTH = 'HEALTH',
+  HOSPITALITY = 'HOSPITALITY',
+  IT = 'IT',
+  MANUFACTURING = 'MANUFACTURING',
+  OTHER = 'OTHER',
+  RETAIL = 'RETAIL',
+  TECHNOLOGY = 'TECHNOLOGY',
+  TOURISM = 'TOURISM',
+  TRANSPORTATION = 'TRANSPORTATION',
+}
+
+// Basic model interfaces extracted from the Prisma schema
+export interface Address {
+  addressId: string;
+  city: string;
+  country: string;
+  postCode: string;
+  state: string;
+  streetName: string;
+  streetNumber: string;
+  modifiedAt: Date | null;
+  deleted: boolean;
+}
+
+export interface Category {
+  categoryId: string;
+  name: string;
+  imagePath: string | null;
+  deleted: boolean;
+}
+
+export interface Product {
+  productId: string;
+  name: string;
+  price: number;
+  description: string;
+  stock: number;
+  imagePath: string | null;
+  createdAt: Date;
+  modifiedAt: Date | null;
+  deleted: boolean;
+  categoryId: string;
+}
+
+export interface Customer {
+  customerId: string;
+  customerReference: number;
+  email: string;
+  phoneNumber: string;
+  password: string;
+  firstName: string | null;
+  lastName: string;
+  companyNumber: string | null;
+  modifiedAt: Date | null;
+  deleted: boolean;
+  signedUp: Date;
+  avatarPath: string | null;
+  addressId: string;
+  businessSector: BusinessSector | null;
+}
+
+export interface Employees {
+  employeeId: string;
+  email: string;
+  password: string;
+  firstName: string;
+  lastName: string;
+  deleted: boolean;
+  role: string;
+}
+
+export interface Route {
+  routeId: string;
+  name: string;
+  deleted: boolean;
+}
+
+export interface Order {
+  orderId: string;
+  customerReference: number;
+  orderDate: Date;
+  deliveryDate: Date | null;
+  deleted: boolean;
+  orderState: OrderState;
+  selfCollect: boolean;
+}
+
+export interface SiteConfig {
+  siteConfigId: string;
+  companyName: string;
+  logoPath: string;
+  email: string;
+  phoneNumber: string;
+  iban: string;
+  companyNumber: string;
+  addressId: string;
+  modifiedAt: Date | null;
+  isPremium: boolean;
+  deleted: boolean;
+  stripeCustomerId: string | null;
+  stripeAccountId: string | null;
+  stripeConfigured: boolean;
+}
 export type AIVStats = {
   currentMonthAIV: number;
   lastMonthAIV: number;
@@ -88,124 +220,53 @@ export type CustomerGrowth = {
   cumulative_growth: number;
 }[];
 
-const routeWithCount = Prisma.validator<Prisma.RouteDefaultArgs>()({
-  include: {
-    _count: {
-      select: {
-        order: true,
-      },
-    },
-  },
-});
+export interface RoutesWithCount extends Route {
+  _count: {
+    order: number;
+  };
+}
 
-export type RoutesWithCount = Prisma.RouteGetPayload<typeof routeWithCount>;
+export interface RoutesWithOrders extends Route {
+  order: Order[];
+}
 
-const routesWithOrders = Prisma.validator<Prisma.RouteDefaultArgs>()({
-  include: {
-    order: true,
-  },
-});
+export interface ProductWithCategoryNames extends Product {
+  categories: {
+    category: Pick<Category, 'categoryId' | 'name'>;
+  }[];
+}
 
-export type RoutesWithOrders = Prisma.RouteGetPayload<typeof routesWithOrders>;
+export interface CustomerWithAddressId extends Customer {
+  address: {
+    addressId: string;
+  };
+}
 
-const productWithCategoryNames = Prisma.validator<Prisma.ProductDefaultArgs>()({
-  include: {
-    categories: {
-      select: {
-        category: {
-          select: {
-            categoryId: true,
-            name: true,
-          },
-        },
-      },
-    },
-  },
-});
+export interface OrderProduct {
+  orderId: string;
+  productId: string;
+  orderDate: Date;
+  productAmount: number;
+  product: Product;
+}
 
-export type ProductWithCategoryNames = Prisma.ProductGetPayload<
-  typeof productWithCategoryNames
->;
+export interface OrdersWithCustomer extends Order {
+  products: OrderProduct[];
+  customer: {
+    customerReference: number;
+    firstName: string | null;
+    lastName: string;
+  };
+}
 
-const customerWithAddressId = Prisma.validator<Prisma.CustomerDefaultArgs>()({
-  include: {
-    address: {
-      select: {
-        addressId: true,
-      },
-    },
-  },
-});
+export interface OrdersWithCustomerAndProducts extends OrdersWithCustomer {}
 
-export type CustomerWithAddressId = Prisma.CustomerGetPayload<
-  typeof customerWithAddressId
->;
+export interface SiteConfigWithAddress extends SiteConfig {
+  address: Address;
+}
 
-const ordersWithCustomer = Prisma.validator<Prisma.OrderDefaultArgs>()({
-  include: {
-    products: {
-      include: {
-        product: true,
-      },
-    },
-    customer: {
-      select: {
-        customerReference: true,
-        firstName: true,
-        lastName: true,
-      },
-    },
-  },
-});
-
-export type OrdersWithCustomer = Prisma.OrderGetPayload<
-  typeof ordersWithCustomer
->;
-
-const ordersWithCustomerAndProducts =
-  Prisma.validator<Prisma.OrderDefaultArgs>()({
-    include: {
-      products: {
-        include: {
-          product: true,
-        },
-      },
-      customer: {
-        select: {
-          customerReference: true,
-          firstName: true,
-          lastName: true,
-        },
-      },
-    },
-  });
-
-export type OrdersWithCustomerAndProducts = Prisma.OrderGetPayload<
-  typeof ordersWithCustomerAndProducts
->;
-
-const siteConfigWithAdress = Prisma.validator<Prisma.SiteConfigDefaultArgs>()({
-  include: {
-    address: true,
-  },
-});
-
-export type SiteConfigWithAddress = Prisma.SiteConfigGetPayload<
-  typeof siteConfigWithAdress
->;
-
-const ordersWithAddressOfCustomer = Prisma.validator<Prisma.OrderDefaultArgs>()(
-  {
-    include: {
-      customer: {
-        include: {
-          address: true,
-        },
-      },
-    },
-  }
-);
-
-export type OrdersWithAddressOfCustomer = Prisma.OrderGetPayload<
-  typeof ordersWithAddressOfCustomer
->;
+export interface OrdersWithAddressOfCustomer extends Order {
+  customer: {
+    address: Address;
+  };
+}
