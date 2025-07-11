@@ -4,15 +4,13 @@ import { getSession, Session } from './utlis/getSession';
 import { FormState } from './form.types';
 
 /**
- * Runs a callback only if the current user has the given permission.
- * Any error thrown inside the callback is caught and mapped to a
+ * Ensures the user is authenticated before executing the provided callback.
+ * Any error thrown inside the callback is caught and returned as a
  * standard FormState error object.
  */
 export async function guardAction<Args extends any[], R = unknown>(
-  resource: string,
-  action: 'read' | 'write',
   callback: (session: Session, ...args: Args) => Promise<R>,
-  errorMessage = `Failed to ${action} ${resource}`
+  errorMessage = 'Action failed'
 ): Promise<R | FormState> {
   let session: Session;
   try {
