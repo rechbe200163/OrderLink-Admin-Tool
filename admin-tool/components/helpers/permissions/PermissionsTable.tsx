@@ -27,7 +27,7 @@ export function PermissionsTable({
         return tRole('admin');
       case 'EMPLOYEE':
         return tRole('employee');
-      case 'SUPPPLIER':
+      case 'SUPPLIER':
         return tRole('supplier');
       default:
         return capitalizeFirstLetter(role);
@@ -60,9 +60,7 @@ export function PermissionsTable({
                       href={`/permissions/${permission.permissionId}/edit`}
                       className='hover:underline'
                     >
-                      <Badge variant='secondary'>
-                        {getRoleLabel(permission.role as Role)}
-                      </Badge>
+                      {getRoleLabel(permission.role as Role)}
                     </Link>
                   </TableCell>
                   <TableCell className='w-40 font-medium'>
@@ -70,9 +68,7 @@ export function PermissionsTable({
                       href={`/permissions/${permission.permissionId}/edit`}
                       className='hover:underline'
                     >
-                      <Badge variant='secondary'>
-                        {humanizeEnum(permission.action)}
-                      </Badge>
+                      {humanizeEnum(permission.action)}
                     </Link>
                   </TableCell>
                   <TableCell className='w-40 font-medium'>
@@ -80,9 +76,7 @@ export function PermissionsTable({
                       href={`/permissions/${permission.permissionId}/edit`}
                       className='hover:underline'
                     >
-                      <Badge variant='secondary'>
-                        {humanizeEnum(permission.resource)}
-                      </Badge>
+                      {humanizeEnum(permission.resource)}
                     </Link>
                   </TableCell>
                   <TableCell className='w-20 text-right'>
