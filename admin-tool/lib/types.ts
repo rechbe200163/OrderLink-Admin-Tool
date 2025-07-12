@@ -117,6 +117,14 @@ export interface Employees {
   role: Role;
 }
 
+export interface Permission {
+  permissionId: string;
+  role: Role;
+  action: Actions;
+  resource: Ressources;
+  deleted: boolean;
+}
+
 export interface Route {
   routeId: string;
   name: string;
@@ -205,6 +213,7 @@ export type OrdersPagingDto = PagingDto<OrdersWithCustomer>;
 export type EmployeesPagingDto = PagingDto<Employees>;
 export type RoutesPagingDto = PagingDto<RoutesWithCount>;
 export type CategoriesPagingDto = PagingDto<Category>;
+export type PermissionsPagingDto = PagingDto<Permission>;
 export type SiteConfigDto = {
   siteConfigId: string;
   companyName: string;

@@ -12,6 +12,7 @@ import {
   MapPin,
   Box,
   Shapes,
+  Key,
 } from 'lucide-react';
 
 import {
@@ -109,6 +110,16 @@ const navGroups = [
         title: 'Einstellungen',
         url: '/settings',
         icon: Bolt,
+      },
+    ],
+  },
+  {
+    label: 'Berechtigungen',
+    items: [
+      {
+        title: 'Berechtigungen',
+        url: '/permissions',
+        icon: Key,
       },
     ],
   },
