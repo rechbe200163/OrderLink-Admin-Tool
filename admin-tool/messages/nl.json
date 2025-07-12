@@ -345,6 +345,33 @@
         },
         "Status": { "active": "Actief", "inactive": "Inactief" }
       },
+      "Permissions": {
+        "BreadCrumps": {
+          "title": "Machtigingen",
+          "add": "Nieuwe Machtiging",
+          "edit": "Machtiging Bewerken"
+        },
+        "Attributes": {
+          "role": "Rol",
+          "action": "Actie",
+          "resource": "Resource",
+          "status": "Status",
+          "notFound": "Geen machtigingen gevonden"
+        },
+        "buttons": {
+          "delete": "Machtiging Verwijderen",
+          "deleteLoading": "Machtiging Verwijderen...",
+          "create": "Machtiging Aanmaken",
+          "createLoading": "Machtiging Aanmaken...",
+          "update": "Machtiging Bijwerken",
+          "updateLoading": "Machtiging Bijwerken...",
+          "add": "Machtiging Toevoegen",
+          "addLoading": "Machtiging Toevoegen..."
+        },
+        "add": "Nieuwe Machtiging",
+        "edit": "Machtiging Bewerken",
+        "Status": { "active": "Actief", "inactive": "Inactief" }
+      },
       "Subscription": {
         "BreadCrumps": {
           "title": "Abonnement"

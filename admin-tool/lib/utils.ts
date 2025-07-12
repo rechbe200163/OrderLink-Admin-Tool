@@ -56,6 +56,14 @@ export function capitalizeFirstLetter(word: string): string {
   return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
 }
 
+export function humanizeEnum(value: string): string {
+  return value
+    .toLowerCase()
+    .split('_')
+    .map((part) => capitalizeFirstLetter(part))
+    .join(' ');
+}
+
 export async function checkAPITokenValidity() {}
 
 export const customerFormSchema = z
