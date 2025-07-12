@@ -29,6 +29,7 @@ export function PermissionsTable({ permissions }: { permissions: Permission[] })
         return capitalizeFirstLetter(role);
     }
   }
+
   return (
     <div className='bg-background text-foreground p-4 rounded-lg shadow-xs'>
       <div className='max-h-[50vh] overflow-auto min-w-full'>
