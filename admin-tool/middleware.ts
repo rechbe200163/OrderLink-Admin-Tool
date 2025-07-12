@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getUserLocale, setUserLocale } from './services/locale';
 import { Locale } from './i18n/config';
+import { COOKIE_NAME } from './services/locale';
 
 export const ROOT = '/';
 export const PUBLIC_ROUTES = [
@@ -42,10 +42,13 @@ export default async function middleware(request: NextRequest) {
   const acceptLanguage = request.headers.get('accept-language');
   const extractedLocale = acceptLanguage?.match(/^[a-z]{2}/i)?.[0];
   const locale = locales.includes(extractedLocale || '')
-    ? extractedLocale
-    : defaultLocale;
-  await setUserLocale(locale as Locale);
-  const userLocale = await getUserLocale();
+    ? (extractedLocale as Locale)
+    : (defaultLocale as Locale);
+
+  let userLocale = request.cookies.get(COOKIE_NAME)?.value as Locale | undefined;
+  if (!userLocale) {
+    userLocale = locale;
+  }
 
   // Setup config API check
   // let isConfigured = false;
@@ -68,6 +71,7 @@ export default async function middleware(request: NextRequest) {
   // ✅ 2. Allow public routes without redirect
   if (isPublicRoute) {
     const response = NextResponse.next();
+    response.cookies.set(COOKIE_NAME, userLocale);
     response.headers.set('x-user-locale', userLocale);
     return response;
   }
@@ -75,6 +79,7 @@ export default async function middleware(request: NextRequest) {
   // 🔐 3. Redirect unauthenticated users to login
   if (!isAuthenticated) {
     const response = NextResponse.redirect(new URL(DEFAULT_REDIRECT, origin));
+    response.cookies.set(COOKIE_NAME, userLocale);
     response.headers.set('x-user-locale', userLocale);
     return response;
   }
@@ -82,12 +87,14 @@ export default async function middleware(request: NextRequest) {
   // 🔁 4. Prevent authenticated users from accessing login pages again
   if (isAuthenticated && pathname.startsWith('/auth')) {
     const response = NextResponse.redirect(new URL(ROOT, origin));
+    response.cookies.set(COOKIE_NAME, userLocale);
     response.headers.set('x-user-locale', userLocale);
     return response;
   }
 
   // ✅ 5. All other valid requests
   const response = NextResponse.next();
+  response.cookies.set(COOKIE_NAME, userLocale);
   response.headers.set('x-user-locale', userLocale);
   return response;
 }
