@@ -12,7 +12,11 @@ import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 import { Permission } from '@/lib/types';
 
-export function PermissionsTable({ permissions }: { permissions: Permission[] }) {
+export function PermissionsTable({
+  permissions,
+}: {
+  permissions: Permission[];
+}) {
   const t = useTranslations('Dashboard.Ressource.Permissions');
   return (
     <div className='bg-background text-foreground p-4 rounded-lg shadow-xs'>
@@ -23,32 +27,53 @@ export function PermissionsTable({ permissions }: { permissions: Permission[] })
               <TableHead className='w-40'>{t('Attributes.role')}</TableHead>
               <TableHead className='w-40'>{t('Attributes.action')}</TableHead>
               <TableHead className='w-40'>{t('Attributes.resource')}</TableHead>
-              <TableHead className='w-20 text-right'>{t('Attributes.status')}</TableHead>
+              <TableHead className='w-20 text-right'>
+                {t('Attributes.status')}
+              </TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {permissions.length > 0 ? (
               permissions.map((permission) => (
-                <TableRow key={permission.permissionId} className='hover:bg-muted/50 transition-colors'>
+                <TableRow
+                  key={permission.permissionId}
+                  className='hover:bg-muted/50 transition-colors'
+                >
                   <TableCell className='w-40 font-medium'>
-                    <Link href={`/permissions/${permission.permissionId}/edit`} className='hover:underline'>
+                    <Link
+                      href={`/permissions/${permission.permissionId}/edit`}
+                      className='hover:underline'
+                    >
                       {permission.role}
                     </Link>
                   </TableCell>
                   <TableCell className='w-40 font-medium'>
-                    <Link href={`/permissions/${permission.permissionId}/edit`} className='hover:underline'>
+                    <Link
+                      href={`/permissions/${permission.permissionId}/edit`}
+                      className='hover:underline'
+                    >
                       {permission.action}
                     </Link>
                   </TableCell>
                   <TableCell className='w-40 font-medium'>
-                    <Link href={`/permissions/${permission.permissionId}/edit`} className='hover:underline'>
+                    <Link
+                      href={`/permissions/${permission.permissionId}/edit`}
+                      className='hover:underline'
+                    >
                       {permission.resource}
                     </Link>
                   </TableCell>
                   <TableCell className='w-20 text-right'>
-                    <Link href={`/permissions/${permission.permissionId}/edit`} className='hover:underline'>
-                      <Badge variant={permission.deleted ? 'destructive' : 'success'}>
-                        {permission.deleted ? t('Status.inactive') : t('Status.active')}
+                    <Link
+                      href={`/permissions/${permission.permissionId}/edit`}
+                      className='hover:underline'
+                    >
+                      <Badge
+                        variant={permission.deleted ? 'destructive' : 'success'}
+                      >
+                        {permission.deleted
+                          ? t('Status.inactive')
+                          : t('Status.active')}
                       </Badge>
                     </Link>
                   </TableCell>

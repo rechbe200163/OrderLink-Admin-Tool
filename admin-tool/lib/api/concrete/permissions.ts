@@ -1,4 +1,4 @@
-'use server';
+'server only';
 import { BaseApiService } from '../base';
 import { PagingDto } from '@/lib/dtos';
 import { Permission } from '@/lib/types';
@@ -30,7 +30,11 @@ export class PermissionApiService extends BaseApiService {
     limit: number,
     role?: string
   ): Promise<PagingDto<Permission>> {
-    return this.get<PagingDto<Permission>>('permissions', { page, limit, role });
+    return this.get<PagingDto<Permission>>('permissions', {
+      page,
+      limit,
+      role,
+    });
   }
 }
 

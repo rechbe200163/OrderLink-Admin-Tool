@@ -1,15 +1,24 @@
 'use client';
-import { useActionState } from 'react';
+import { useActionState, useEffect } from 'react';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
-import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 import { Card } from '@/components/ui/card';
 import { Loader2, PlusCircle } from 'lucide-react';
 import CustomeToast from '../toasts/CustomeErrorToast';
 import { createPermission } from '@/lib/actions/permission.actions';
 import { useTranslations } from 'next-intl';
 import { Actions, Ressources, Role } from '@/lib/types';
+import router from 'next/router';
+import { Input } from '@/components/ui/input';
 
 export default function CreatePermission() {
   const [formState, action, isPending] = useActionState(createPermission, {
@@ -19,6 +28,33 @@ export default function CreatePermission() {
 
   const t = useTranslations('Dashboard.Ressource.Permissions');
   const tFilter = useTranslations('FilterAndSearch.Filter');
+
+  useEffect(() => {
+    if (formState.success) {
+      toast.custom(() => (
+        <CustomeToast
+          variant='success'
+          message='Site configuration updated successfully!'
+        />
+      ));
+      if (formState.data) {
+        router.push(`/settings/${formState.data}/edit`);
+      }
+    }
+  }, [formState, router]);
+
+  useEffect(() => {
+    if (formState.errors?.title?.length) {
+      toast.custom(() => (
+        <CustomeToast
+          variant='error'
+          message={`An error occurred: ${
+            formState.errors?.title?.join(', ') ?? ''
+          }`}
+        />
+      ));
+    }
+  }, [formState.errors]);
 
   return (
     <Card className='shadow-md p-6 min-w-full'>
@@ -75,10 +111,21 @@ export default function CreatePermission() {
             </SelectContent>
           </Select>
         </div>
+        <div>
+          <Label htmlFor='allowed'>{t('Attributes.allowed')}</Label>
+          <Input
+            type='checkbox'
+            id='allowed'
+            name='allowed'
+            className='mr-2'
+            value='true'
+          />
+        </div>
         <Button type='submit' disabled={isPending} className='mt-6'>
           {isPending ? (
             <>
-              <Loader2 className='animate-spin h-5 w-5' /> {t('buttons.addLoading')}
+              <Loader2 className='animate-spin h-5 w-5' />{' '}
+              {t('buttons.addLoading')}
             </>
           ) : (
             <>
