@@ -1,6 +1,5 @@
 'use client';
 import { toast } from 'sonner';
-import { Order } from '@/lib/types';
 import { Card } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';

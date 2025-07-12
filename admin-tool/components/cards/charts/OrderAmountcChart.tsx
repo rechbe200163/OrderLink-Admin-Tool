@@ -8,7 +8,6 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import { CustomerGrowth } from '@/lib/types';
 import {
   ChartContainer,
   ChartTooltip,

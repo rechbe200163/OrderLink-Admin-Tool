@@ -1,12 +1,7 @@
-import { ProductsBarChart } from '@/components/cards/charts/ProductAmountChartComponent';
-import { authenticateExternalAPI } from '@/lib/depricated-data/data.externalapi';
-import { productsAmountService } from '@/lib/api/external/concrete/ProductsAmount';
-import { getCookie } from '@/lib/cookies/cookie-managment';
-
 import React from 'react';
-import { ProductsMostlyBought } from '@/components/cards/charts/ProductsMostlyBought';
-import { ordersStatsService } from '@/lib/api/external/concrete/OrderStatsService';
+import { getCookie } from '@/lib/cookies/cookie-managment';
 import { OrderAmountChart } from '@/components/cards/charts/OrderAmountcChart';
+import { ordersStatsService } from '@/lib/api/external/concrete/OrderStatsService';
 
 export const OrdersChartsComponent = async (props: {
   searchParams?: Promise<{

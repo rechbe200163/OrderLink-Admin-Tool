@@ -3,6 +3,7 @@
 import { AlertCircleIcon, ImageUpIcon, XIcon } from 'lucide-react';
 
 import { useFileUpload } from '@/hooks/use-file-upload';
+import Image from 'next/image';
 
 export default function ImageUploadNew() {
   const maxSizeMB = 5;
@@ -54,7 +55,7 @@ export default function ImageUploadNew() {
           />
           {previewUrl ? (
             <div className='absolute inset-0'>
-              <img
+              <Image
                 src={previewUrl}
                 alt={files[0]?.file?.name || 'Uploaded image'}
                 className='size-full object-cover'

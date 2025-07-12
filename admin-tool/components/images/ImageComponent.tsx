@@ -7,7 +7,6 @@ interface ImagesComponentProps {
   imagePath: string;
   alt: string;
   width?: number;
-  fill?: boolean;
   style?: React.CSSProperties;
   sizes?: string;
   height?: number;
@@ -17,11 +16,9 @@ interface ImagesComponentProps {
 async function ImageComponent({
   imagePath,
   alt,
-  fill,
   sizes,
   classname = '',
 }: ImagesComponentProps) {
-  fill = fill ?? false;
   const imageURL = await supabaseService.getSingedUrlSupabase(imagePath);
 
   if (!imageURL) {

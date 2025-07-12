@@ -1,5 +1,4 @@
 'use client';
-import { Order } from '@/lib/types';
 import React, { useActionState, useId } from 'react';
 import { toast } from 'sonner';
 import CustomeToast from '../toasts/CustomeErrorToast';

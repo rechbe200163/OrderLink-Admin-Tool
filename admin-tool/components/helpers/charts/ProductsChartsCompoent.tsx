@@ -1,5 +1,4 @@
 import { ProductsBarChart } from '@/components/cards/charts/ProductAmountChartComponent';
-import { authenticateExternalAPI } from '@/lib/depricated-data/data.externalapi';
 import { productsAmountService } from '@/lib/api/external/concrete/ProductsAmount';
 import { getCookie } from '@/lib/cookies/cookie-managment';
 

@@ -1,8 +1,7 @@
 'server only';
 import { getCookie } from '../cookies/cookie-managment';
-import { ENDPOINTS } from './endpoints';
 import { ApiError } from './ApiError';
-import { forbidden, redirect } from 'next/navigation';
+import { forbidden } from 'next/navigation';
 
 export class BaseApiService {
   public baseUrl: string;

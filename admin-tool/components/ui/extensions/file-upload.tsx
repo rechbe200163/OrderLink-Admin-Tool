@@ -148,7 +148,7 @@ FileUploaderContent.displayName = 'FileUploaderContent';
 export const FileInput = forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
->(({ className, children, ...props }, ref) => {
+>(({ className, children, ..._props }, ref) => {
   const { dropzoneState, file, removeFile } = useFileUpload();
   return (
     <div ref={ref} className='relative w-full'>

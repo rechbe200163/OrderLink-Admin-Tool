@@ -34,11 +34,7 @@ export default function NavUser({ session }: { session: Session }) {
     email: 'john.doe@example.com',
   };
 
-  const {
-    firstName = 'John',
-    lastName = 'Doe',
-    email = 'john.doe@example.com',
-  } = user;
+  const { firstName = 'John', lastName = 'Doe' } = user;
 
   const name = `${firstName} ${lastName}`;
   const initials = `${firstName.charAt(0)}${lastName.charAt(0)}`.toUpperCase();

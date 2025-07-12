@@ -10,7 +10,7 @@ import { Badge } from '@/components/ui/badge';
 import type { OrdersWithCustomerAndProducts, Product } from '@/lib/types';
 import { formatDateTime, formatPrice } from '@/lib/utils';
 import ImageComponent from '@/components/images/ImageComponent';
-import { Suspense, use } from 'react';
+import { Suspense } from 'react';
 import ImageSkeleton from '@/components/images/ImageSkeleton';
 import Link from 'next/link';
 import { Package } from 'lucide-react';

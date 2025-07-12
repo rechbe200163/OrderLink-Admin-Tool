@@ -13,13 +13,12 @@ const SignInForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const error = searchParams.get('error');
-  const [formState, action, isLoading] = useActionState(logIn, {
+  const [_formState, action, isLoading] = useActionState(logIn, {
     success: false,
     errors: { title: [] as string[] },
   });
 
   const [fieldType, setFieldType] = useState('password');
-
 
   return (
     <>

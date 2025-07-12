@@ -22,7 +22,7 @@ export function LoginForm({
   const [email, setEmail] = useState('');
 
   const [password, setPassword] = useState('');
-  const [formState, action, isLoading] = useActionState(logIn, {
+  const [_formState, action, isLoading] = useActionState(logIn, {
     success: false,
     errors: { title: [] as string[] },
   });

@@ -6,7 +6,6 @@ import {
 } from '@/lib/types';
 import { PagingDto } from '@/lib/dtos';
 import { BaseApiService } from '../base';
-import { Order } from '@/lib/types';
 
 export class OrderApiService extends BaseApiService {
   private static instance: OrderApiService;
