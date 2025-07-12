@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { Locale } from './i18n/config';
-import { COOKIE_NAME } from './services/locale';
 
 export const ROOT = '/';
 export const PUBLIC_ROUTES = [
@@ -15,6 +14,7 @@ export const locales = ['en', 'de', 'fr', 'it', 'es'];
 export const config = {
   matcher: ['/((?!_next/static|_next/image|favicon.ico|api/|onboarding).*)'],
 };
+const COOKIE_NAME = 'NEXT_LOCALE';
 
 export default async function middleware(request: NextRequest) {
   const userCookie = request.cookies.get('user');
@@ -45,7 +45,9 @@ export default async function middleware(request: NextRequest) {
     ? (extractedLocale as Locale)
     : (defaultLocale as Locale);
 
-  let userLocale = request.cookies.get(COOKIE_NAME)?.value as Locale | undefined;
+  let userLocale = request.cookies.get(COOKIE_NAME)?.value as
+    | Locale
+    | undefined;
   if (!userLocale) {
     userLocale = locale;
   }
