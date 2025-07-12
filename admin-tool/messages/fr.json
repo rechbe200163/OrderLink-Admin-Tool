@@ -345,6 +345,31 @@
         },
         "Status": { "active": "Actif", "inactive": "Inactif" }
       },
+      "Permissions": {
+        "BreadCrumps": {
+          "title": "Autorisations",
+          "add": "Ajouter une autorisation",
+          "edit": "Modifier l'autorisation"
+        },
+        "Attributes": {
+          "resource": "Ressource",
+          "action": "Action",
+          "role": "Rôle",
+          "notFound": "Aucune autorisation trouvée"
+        },
+        "buttons": {
+          "delete": "Supprimer l'autorisation",
+          "deleteLoading": "Suppression de l'autorisation...",
+          "create": "Créer l'autorisation",
+          "createLoading": "Création de l'autorisation...",
+          "update": "Mettre à jour l'autorisation",
+          "updateLoading": "Mise à jour de l'autorisation...",
+          "add": "Ajouter l'autorisation",
+          "addLoading": "Ajout de l'autorisation..."
+        },
+        "add": "Ajouter une nouvelle autorisation",
+        "edit": "Modifier l'autorisation"
+      },
       "Subscription": {
         "BreadCrumps": {
           "title": "Abonnement"

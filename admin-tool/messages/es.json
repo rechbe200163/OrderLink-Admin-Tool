@@ -345,6 +345,31 @@
         },
         "Status": { "active": "Activo", "inactive": "Inactivo" }
       },
+      "Permissions": {
+        "BreadCrumps": {
+          "title": "Permisos",
+          "add": "Agregar Permiso",
+          "edit": "Editar Permiso"
+        },
+        "Attributes": {
+          "resource": "Recurso",
+          "action": "Acción",
+          "role": "Rol",
+          "notFound": "No se encontraron permisos"
+        },
+        "buttons": {
+          "delete": "Eliminar Permiso",
+          "deleteLoading": "Eliminando Permiso...",
+          "create": "Crear Permiso",
+          "createLoading": "Creando Permiso...",
+          "update": "Actualizar Permiso",
+          "updateLoading": "Actualizando Permiso...",
+          "add": "Agregar Permiso",
+          "addLoading": "Agregando Permiso..."
+        },
+        "add": "Agregar Nuevo Permiso",
+        "edit": "Editar Permiso"
+      },
       "Subscription": {
         "BreadCrumps": {
           "title": "Suscripción"

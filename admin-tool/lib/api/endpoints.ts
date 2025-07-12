@@ -20,6 +20,8 @@ export const ENDPOINTS = {
   SUBSCRIPTIONS: 'subscriptions',
   SUBSCRIPTION_PAUSE: (id: string | number) => `subscriptions/${id}/pause`,
   SUBSCRIPTION_CANCEL: (id: string | number) => `subscriptions/${id}/cancel`,
+  PERMISSIONS: 'permissions',
+  PERMISSION: (id: string | number) => `permissions/${id}`,
   AUTH_LOGIN: 'auth/signIn',
 } as const;
 

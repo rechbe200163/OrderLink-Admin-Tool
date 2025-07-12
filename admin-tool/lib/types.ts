@@ -117,6 +117,13 @@ export interface Employees {
   role: Role;
 }
 
+export interface Permission {
+  permissionId: string;
+  resource: Ressources;
+  action: Actions;
+  role: Role;
+}
+
 export interface Route {
   routeId: string;
   name: string;

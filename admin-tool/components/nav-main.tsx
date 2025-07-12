@@ -12,6 +12,7 @@ import {
   MapPin,
   Box,
   Shapes,
+  KeyRound,
 } from 'lucide-react';
 
 import {
@@ -99,6 +100,16 @@ const navGroups = [
         title: 'Mitarbeiter',
         url: '/employees',
         icon: UserPen,
+      },
+    ],
+  },
+  {
+    label: 'Berechtigungen',
+    items: [
+      {
+        title: 'Berechtigungen',
+        url: '/permissions',
+        icon: KeyRound,
       },
     ],
   },

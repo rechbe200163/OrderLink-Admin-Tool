@@ -345,6 +345,31 @@
         },
         "Status": { "active": "Actief", "inactive": "Inactief" }
       },
+      "Permissions": {
+        "BreadCrumps": {
+          "title": "Machtigingen",
+          "add": "Permissie Toevoegen",
+          "edit": "Permissie Bewerken"
+        },
+        "Attributes": {
+          "resource": "Bron",
+          "action": "Actie",
+          "role": "Rol",
+          "notFound": "Geen machtigingen gevonden"
+        },
+        "buttons": {
+          "delete": "Permissie Verwijderen",
+          "deleteLoading": "Permissie Verwijderen...",
+          "create": "Permissie Aanmaken",
+          "createLoading": "Permissie Aanmaken...",
+          "update": "Permissie Bijwerken",
+          "updateLoading": "Permissie Bijwerken...",
+          "add": "Permissie Toevoegen",
+          "addLoading": "Permissie Toevoegen..."
+        },
+        "add": "Nieuwe Permissie Toevoegen",
+        "edit": "Permissie Bewerken"
+      },
       "Subscription": {
         "BreadCrumps": {
           "title": "Abonnement"
