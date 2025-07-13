@@ -20,7 +20,7 @@ export default async function PermissionsPage(props: {
   const roleParam = searchParams?.role as string | undefined;
 
   const allPermissions = await permissionApiService.getAll();
-  const roles = Array.from(new Set(allPermissions.map((p) => p.role)));
+  const roles = Array.from(new Set(allPermissions.map((p) => p.role))) as string[];
   const selectedRole = roleParam && roles.includes(roleParam) ? roleParam : roles[0];
   const permissions = allPermissions.filter((p) => p.role === selectedRole);
 
