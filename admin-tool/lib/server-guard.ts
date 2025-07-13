@@ -2,6 +2,7 @@
 
 import { getSession, Session } from './utlis/getSession';
 import { FormState } from './form.types';
+import { ApiError } from './api/ApiError';
 
 /**
  * Ensures the user is authenticated before executing the provided callback.
@@ -27,9 +28,16 @@ export async function guardAction<Args extends any[], R = unknown>(
     return await callback(session, ...([] as unknown as Args));
   } catch (e) {
     console.error(e);
+    let message = errorMessage;
+    if (e instanceof ApiError) {
+      message = e.message;
+    } else if (e && typeof e === 'object' && 'message' in e) {
+      message = (e as Error).message;
+    }
     return {
       success: false,
-      errors: { title: [errorMessage] },
+      errors: { title: [message] },
+      message,
     } satisfies FormState as FormState;
   }
 }

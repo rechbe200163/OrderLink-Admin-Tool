@@ -113,7 +113,12 @@ export default function CreatePermission({ roles }: { roles: string[] }) {
         </div>
         <div>
           <Label htmlFor='allowed'>{t('Attributes.allowed')}</Label>
-          <Checkbox id='allowed' name='allowed' className='mr-2' />
+          <Checkbox
+            id='allowed'
+            name='allowed'
+            className='mr-2'
+            defaultChecked
+          />
         </div>
         <Button type='submit' disabled={isPending} className='mt-6'>
           {isPending ? (
