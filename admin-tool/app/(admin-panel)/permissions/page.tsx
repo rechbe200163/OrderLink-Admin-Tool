@@ -4,7 +4,7 @@ import BreadcrumbComponent from '@/components/helpers/BreadCrumbComponent';
 import PaginationComponent from '@/components/pagination+filtering/PagingComponent';
 import SearchComponent from '@/components/pagination+filtering/SearchComponent';
 import { permissionApiService } from '@/lib/api/concrete/permissions';
-import { PermissionsTable } from '@/components/helpers/permissions/PermissionsTable';
+import { PermissionsGrid } from '@/components/helpers/permissions/PermissionsGrid';
 import { ButtonLinkComponent } from '@/components/ButtonLinkComponent';
 import { getTranslations } from 'next-intl/server';
 import { getSession } from '@/lib/utlis/getSession';
@@ -52,7 +52,7 @@ export default async function PermissionsPage(props: {
           />
         </div>
         <div className='bg-white rounded-lg shadow-md'>
-          <PermissionsTable permissions={permissions} />
+          <PermissionsGrid permissions={permissions} />
         </div>
         <div className='mt-4 mb-5'>
           <PaginationComponent
