@@ -11,7 +11,12 @@ export async function createPermission(
 ): Promise<FormState> {
   return (await guardAction(
     async () => {
-      await apiPost(ENDPOINTS.PERMISSIONS, Object.fromEntries(formData));
+      const data = Object.fromEntries(formData) as Record<string, any>;
+      if ('allowed' in data) {
+        const allowed = formData.get('allowed');
+        data.allowed = allowed === 'true' || allowed === 'on';
+      }
+      await apiPost(ENDPOINTS.PERMISSIONS, data);
       return { success: true } as FormState;
     },
     'Failed to create permission'
@@ -25,10 +30,12 @@ export async function updatePermission(
 ): Promise<FormState> {
   return (await guardAction(
     async () => {
-      await apiPut(
-        ENDPOINTS.PERMISSION(permissionId),
-        Object.fromEntries(formData)
-      );
+      const data = Object.fromEntries(formData) as Record<string, any>;
+      if ('allowed' in data) {
+        const allowed = formData.get('allowed');
+        data.allowed = allowed === 'true' || allowed === 'on';
+      }
+      await apiPut(ENDPOINTS.PERMISSION(permissionId), data);
       return { success: true } as FormState;
     },
     'Failed to update permission'
