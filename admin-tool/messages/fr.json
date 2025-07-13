@@ -355,6 +355,7 @@
         "Attributes": {
           "role": "Rôle",
           "action": "Action",
+          "actions": "Actions",
           "resource": "Ressource",
           "status": "Statut",
           "notFound": "Aucune autorisation trouvée"
@@ -475,6 +476,11 @@
       "noOrderFound": "Aucune commande trouvée",
       "addNewOrder": "Ajouter une nouvelle commande",
       "findOrder": "Trouver une commande"
+    },
+    "Actions": {
+      "selectActions": "Sélectionner des actions",
+      "noActionFound": "Aucune action trouvée",
+      "findAction": "Trouver une action"
     }
   },
   "Messages": {

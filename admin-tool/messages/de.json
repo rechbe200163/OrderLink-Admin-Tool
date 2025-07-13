@@ -355,6 +355,7 @@
         "Attributes": {
           "role": "Rolle",
           "action": "Aktion",
+          "actions": "Aktionen",
           "resource": "Ressource",
           "status": "Status",
           "notFound": "Keine Berechtigungen gefunden"
@@ -486,6 +487,11 @@
       "noOrderFound": "Keine Bestellung gefunden",
       "addNewOrder": "Neue Bestellung hinzufügen",
       "findOrder": "Bestellung suchen"
+    },
+    "Actions": {
+      "selectActions": "Aktionen auswählen",
+      "noActionFound": "Keine Aktion gefunden",
+      "findAction": "Aktion suchen"
     }
   },
   "Messages": {
