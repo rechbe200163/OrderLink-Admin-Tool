@@ -65,6 +65,7 @@ export default function PermissionsGrid({ permissions, role }: { permissions: Pe
           </tbody>
         </table>
       </div>
+
     </div>
   );
 }
