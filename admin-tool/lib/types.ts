@@ -118,11 +118,11 @@ export interface Employees {
 }
 
 export interface Permission {
-  permissionId: string;
-  role: Role;
-  action: Actions;
+  id: string;
+  role: string;
   resource: Ressources;
-  deleted: boolean;
+  action: Actions;
+  allowed: boolean;
 }
 
 export interface Route {

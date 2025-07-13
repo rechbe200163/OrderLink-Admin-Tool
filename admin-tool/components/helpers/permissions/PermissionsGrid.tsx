@@ -4,7 +4,13 @@ import { CheckCircle2Icon, XIcon } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { humanizeEnum, capitalizeFirstLetter } from '@/lib/utils';
 
-export default function PermissionsGrid({ permissions, role }: { permissions: Permission[]; role: string }) {
+export default function PermissionsGrid({
+  permissions,
+  role,
+}: {
+  permissions: Permission[];
+  role: string;
+}) {
   const t = useTranslations('Dashboard.Ressource.Permissions');
   const tRole = useTranslations('FilterAndSearch.Filter.Roles.options');
 
@@ -22,7 +28,12 @@ export default function PermissionsGrid({ permissions, role }: { permissions: Pe
   }
 
   const resources = Array.from(new Set(permissions.map((p) => p.resource)));
-  const actions = [Actions.CREATE, Actions.READ, Actions.UPDATE, Actions.DELETE];
+  const actions = [
+    Actions.CREATE,
+    Actions.READ,
+    Actions.UPDATE,
+    Actions.DELETE,
+  ];
 
   return (
     <div className='space-y-2'>
@@ -31,7 +42,9 @@ export default function PermissionsGrid({ permissions, role }: { permissions: Pe
         <table className='min-w-full border-collapse text-sm [&_td]:border-border [&_th]:border-b [&_th]:border-border [&_tr:not(:last-child)_td]:border-b'>
           <thead className='sticky top-0 z-10 bg-background/90 backdrop-blur-xs'>
             <tr>
-              <th className='px-2 py-1 text-left'>{t('Attributes.resource')}</th>
+              <th className='px-2 py-1 text-left'>
+                {t('Attributes.resource')}
+              </th>
               {actions.map((action) => (
                 <th key={action} className='px-2 py-1'>
                   {humanizeEnum(action)}
@@ -49,7 +62,7 @@ export default function PermissionsGrid({ permissions, role }: { permissions: Pe
                   const permission = permissions.find(
                     (p) => p.action === action && p.resource === resource
                   );
-                  const allowed = permission && !permission.deleted;
+                  const allowed = permission ? permission.allowed : false;
                   return (
                     <td key={action} className='px-2 py-1 text-center'>
                       {allowed ? (
@@ -65,7 +78,6 @@ export default function PermissionsGrid({ permissions, role }: { permissions: Pe
           </tbody>
         </table>
       </div>
-
     </div>
   );
 }

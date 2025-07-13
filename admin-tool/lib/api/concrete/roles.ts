@@ -15,8 +15,10 @@ export class RoleApiService extends BaseApiService {
     super(process.env.NEXT_PUBLIC_API_URL || '');
   }
 
-  async getRoleNames(): Promise<string[]> {
-    return this.get<string[]>('roles/roleNames');
+  async getRoleNames(role?: string): Promise<string[]> {
+    return this.get<string[]>('roles/roleNames', {
+      role,
+    });
   }
 }
 

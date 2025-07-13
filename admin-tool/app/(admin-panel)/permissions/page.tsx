@@ -21,7 +21,9 @@ export default async function PermissionsPage(props: {
   const roleParam = searchParams?.role as string | undefined;
 
   const allPermissions = await permissionApiService.getAll();
-  const roles = await roleApiService.getRoleNames();
+
+  console.log('All permissions:', JSON.stringify(allPermissions, null, 2));
+  const roles = await roleApiService.getRoleNames(roleParam);
 
   if (!roles.length) {
     return <NoRolesError />;

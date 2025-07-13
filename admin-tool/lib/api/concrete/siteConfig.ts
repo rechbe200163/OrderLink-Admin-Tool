@@ -19,7 +19,6 @@ class SiteConfigApiService extends BaseApiService {
 
   async getSiteConfig(): Promise<SiteConfigDto> {
     const response = await this.get<SiteConfigDto>('site-config');
-    console.log('Site Config Response:', response);
     return response;
   }
 
