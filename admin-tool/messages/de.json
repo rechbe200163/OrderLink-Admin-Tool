@@ -202,7 +202,8 @@
           "title": "Routen"
         },
         "add": "Neue Route Hinzufügen",
-        "edit": "Route Bearbeiten"
+        "edit": "Route Bearbeiten",
+        "name": "Routenname"
       },
       "Orders": {
         "BreadCrumps": {
@@ -358,19 +359,23 @@
           "status": "Status",
           "notFound": "Keine Berechtigungen gefunden"
         },
-        "buttons": {
-          "delete": "Berechtigung Löschen",
-          "deleteLoading": "Berechtigung Löschen...",
-          "create": "Berechtigung Erstellen",
-          "createLoading": "Berechtigung Erstellen...",
-          "update": "Berechtigung Aktualisieren",
-          "updateLoading": "Berechtigung Aktualisieren...",
-          "add": "Berechtigung Hinzufügen",
-          "addLoading": "Berechtigung Hinzufügen..."
-        },
-        "add": "Neue Berechtigung",
-        "edit": "Berechtigung Bearbeiten",
-        "Status": { "active": "Aktiv", "inactive": "Inaktiv" }
+      "buttons": {
+        "delete": "Berechtigung Löschen",
+        "deleteLoading": "Berechtigung Löschen...",
+        "create": "Berechtigung Erstellen",
+        "createLoading": "Berechtigung Erstellen...",
+        "update": "Berechtigung Aktualisieren",
+        "updateLoading": "Berechtigung Aktualisieren...",
+        "add": "Berechtigung Hinzufügen",
+        "addLoading": "Berechtigung Hinzufügen..."
+      },
+      "add": "Neue Berechtigung",
+      "edit": "Berechtigung Bearbeiten",
+      "Status": { "active": "Aktiv", "inactive": "Inaktiv" },
+      "NoRoles": {
+        "title": "Keine Rollen verfügbar",
+        "description": "Bitte erst eine Rolle erstellen, bevor Berechtigungen verwaltet werden."
+      }
       },
       "Subscription": {
         "BreadCrumps": {
@@ -481,6 +486,35 @@
       "noOrderFound": "Keine Bestellung gefunden",
       "addNewOrder": "Neue Bestellung hinzufügen",
       "findOrder": "Bestellung suchen"
+    }
+  },
+  "Messages": {
+    "Route": {
+      "created": "Route erfolgreich erstellt"
+    }
+  },
+  "Navigation": {
+    "Groups": {
+      "overview": "Übersicht",
+      "sales": "Verkauf",
+      "products": "Produkte",
+      "customers": "Kunden",
+      "employees": "Mitarbeiter",
+      "settings": "Einstellungen",
+      "permissions": "Berechtigungen"
+    },
+    "Items": {
+      "overview": "Übersicht",
+      "statistics": "Statistiken",
+      "orders": "Bestellungen",
+      "routes": "Routen",
+      "addresses": "Adressen",
+      "products": "Produkte",
+      "categories": "Kategorien",
+      "customers": "Kunden",
+      "employees": "Mitarbeiter",
+      "settings": "Einstellungen",
+      "permissions": "Berechtigungen"
     }
   },
   "PremiumWrapper": {

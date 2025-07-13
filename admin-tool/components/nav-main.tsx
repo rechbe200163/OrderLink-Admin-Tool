@@ -31,102 +31,105 @@ import {
 } from '@/components/ui/sidebar';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-
-const navGroups = [
-  {
-    label: 'Übersicht',
-    items: [
-      {
-        title: 'Übersicht',
-        url: '/',
-        icon: HomeIcon,
-      },
-      {
-        title: 'Statistiken',
-        url: '/statistics',
-        icon: ChartLine,
-      },
-    ],
-  },
-  {
-    label: 'Verkauf',
-    items: [
-      {
-        title: 'Bestellungen',
-        url: '/orders',
-        icon: ShoppingCartIcon,
-      },
-      {
-        title: 'Routen',
-        url: '/routes',
-        icon: Route,
-      },
-      {
-        title: 'Adressen',
-        url: '/addresses',
-        icon: MapPin,
-      },
-    ],
-  },
-  {
-    label: 'Produkte',
-    items: [
-      {
-        title: 'Produkte',
-        url: '/products',
-        icon: Box,
-      },
-      {
-        title: 'Kategorien',
-        url: '/categories',
-        icon: Shapes,
-      },
-    ],
-  },
-  {
-    label: 'Kunden',
-    items: [
-      {
-        title: 'Kunden',
-        url: '/customers',
-        icon: UsersIcon,
-      },
-    ],
-  },
-  {
-    label: 'Mitarbeiter',
-    items: [
-      {
-        title: 'Mitarbeiter',
-        url: '/employees',
-        icon: UserPen,
-      },
-    ],
-  },
-  {
-    label: 'Einstellungen',
-    items: [
-      {
-        title: 'Einstellungen',
-        url: '/settings',
-        icon: Bolt,
-      },
-    ],
-  },
-  {
-    label: 'Berechtigungen',
-    items: [
-      {
-        title: 'Berechtigungen',
-        url: '/permissions',
-        icon: Key,
-      },
-    ],
-  },
-];
+import { useTranslations } from 'next-intl';
 
 export function NavMain() {
   const pathname = usePathname();
+  const tGroup = useTranslations('Navigation.Groups');
+  const tItem = useTranslations('Navigation.Items');
+
+  const navGroups = [
+    {
+      label: tGroup('overview'),
+      items: [
+        {
+          title: tItem('overview'),
+          url: '/',
+          icon: HomeIcon,
+        },
+        {
+          title: tItem('statistics'),
+          url: '/statistics',
+          icon: ChartLine,
+        },
+      ],
+    },
+    {
+      label: tGroup('sales'),
+      items: [
+        {
+          title: tItem('orders'),
+          url: '/orders',
+          icon: ShoppingCartIcon,
+        },
+        {
+          title: tItem('routes'),
+          url: '/routes',
+          icon: Route,
+        },
+        {
+          title: tItem('addresses'),
+          url: '/addresses',
+          icon: MapPin,
+        },
+      ],
+    },
+    {
+      label: tGroup('products'),
+      items: [
+        {
+          title: tItem('products'),
+          url: '/products',
+          icon: Box,
+        },
+        {
+          title: tItem('categories'),
+          url: '/categories',
+          icon: Shapes,
+        },
+      ],
+    },
+    {
+      label: tGroup('customers'),
+      items: [
+        {
+          title: tItem('customers'),
+          url: '/customers',
+          icon: UsersIcon,
+        },
+      ],
+    },
+    {
+      label: tGroup('employees'),
+      items: [
+        {
+          title: tItem('employees'),
+          url: '/employees',
+          icon: UserPen,
+        },
+      ],
+    },
+    {
+      label: tGroup('settings'),
+      items: [
+        {
+          title: tItem('settings'),
+          url: '/settings',
+          icon: Bolt,
+        },
+      ],
+    },
+    {
+      label: tGroup('permissions'),
+      items: [
+        {
+          title: tItem('permissions'),
+          url: '/permissions',
+          icon: Key,
+        },
+      ],
+    },
+  ];
 
   // Helper to check if any item in group is active
   const isGroupActive = (items: { url: string }[]) =>

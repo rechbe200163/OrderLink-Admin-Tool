@@ -202,7 +202,8 @@
           "title": "Rutas"
         },
         "add": "Agregar Nueva Ruta",
-        "edit": "Editar Ruta"
+        "edit": "Editar Ruta",
+        "name": "Nombre de Ruta"
       },
       "Orders": {
         "BreadCrumps": {
@@ -358,19 +359,23 @@
           "status": "Estado",
           "notFound": "No se encontraron permisos"
         },
-        "buttons": {
-          "delete": "Eliminar Permiso",
-          "deleteLoading": "Eliminando...",
-          "create": "Crear Permiso",
-          "createLoading": "Creando...",
-          "update": "Actualizar Permiso",
-          "updateLoading": "Actualizando...",
-          "add": "Agregar Permiso",
-          "addLoading": "Agregando..."
-        },
+      "buttons": {
+        "delete": "Eliminar Permiso",
+        "deleteLoading": "Eliminando...",
+        "create": "Crear Permiso",
+        "createLoading": "Creando...",
+        "update": "Actualizar Permiso",
+        "updateLoading": "Actualizando...",
         "add": "Agregar Permiso",
-        "edit": "Editar Permiso",
-        "Status": { "active": "Activo", "inactive": "Inactivo" }
+        "addLoading": "Agregando..."
+      },
+      "add": "Agregar Permiso",
+      "edit": "Editar Permiso",
+      "Status": { "active": "Activo", "inactive": "Inactivo" },
+      "NoRoles": {
+        "title": "No hay roles disponibles",
+        "description": "Parece que no hay roles definidos. Crea uno antes de gestionar permisos."
+      }
       },
       "Subscription": {
         "BreadCrumps": {
@@ -470,6 +475,35 @@
       "noOrderFound": "No se encontró pedido",
       "addNewOrder": "Agregar Nuevo Pedido",
       "findOrder": "Encontrar Pedido"
+    }
+  },
+  "Messages": {
+    "Route": {
+      "created": "Ruta creada con éxito"
+    }
+  },
+  "Navigation": {
+    "Groups": {
+      "overview": "Resumen",
+      "sales": "Ventas",
+      "products": "Productos",
+      "customers": "Clientes",
+      "employees": "Empleados",
+      "settings": "Configuración",
+      "permissions": "Permisos"
+    },
+    "Items": {
+      "overview": "Resumen",
+      "statistics": "Estadísticas",
+      "orders": "Pedidos",
+      "routes": "Rutas",
+      "addresses": "Direcciones",
+      "products": "Productos",
+      "categories": "Categorías",
+      "customers": "Clientes",
+      "employees": "Empleados",
+      "settings": "Configuración",
+      "permissions": "Permisos"
     }
   },
   "PremiumWrapper": {

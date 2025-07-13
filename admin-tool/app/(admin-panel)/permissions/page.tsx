@@ -68,13 +68,15 @@ export default async function PermissionsPage(props: {
 }
 
 // error component for no roles
-export function NoRolesError() {
+export async function NoRolesError() {
+  const t = await getTranslations('Dashboard');
   return (
     <div className='text-center p-6'>
-      <h2 className='text-2xl font-bold mb-4'>No Roles Available</h2>
+      <h2 className='text-2xl font-bold mb-4'>
+        {t('Ressource.Permissions.NoRoles.title')}
+      </h2>
       <p className='text-gray-600'>
-        It seems there are no roles defined in the system. Please create a role
-        before managing permissions.
+        {t('Ressource.Permissions.NoRoles.description')}
       </p>
     </div>
   );

@@ -202,7 +202,8 @@
           "title": "Routes"
         },
         "add": "Nieuwe Route Toevoegen",
-        "edit": "Route Bewerken"
+        "edit": "Route Bewerken",
+        "name": "Routenaam"
       },
       "Orders": {
         "BreadCrumps": {
@@ -358,19 +359,23 @@
           "status": "Status",
           "notFound": "Geen machtigingen gevonden"
         },
-        "buttons": {
-          "delete": "Machtiging Verwijderen",
-          "deleteLoading": "Machtiging Verwijderen...",
-          "create": "Machtiging Aanmaken",
-          "createLoading": "Machtiging Aanmaken...",
-          "update": "Machtiging Bijwerken",
-          "updateLoading": "Machtiging Bijwerken...",
-          "add": "Machtiging Toevoegen",
-          "addLoading": "Machtiging Toevoegen..."
-        },
-        "add": "Nieuwe Machtiging",
-        "edit": "Machtiging Bewerken",
-        "Status": { "active": "Actief", "inactive": "Inactief" }
+      "buttons": {
+        "delete": "Machtiging Verwijderen",
+        "deleteLoading": "Machtiging Verwijderen...",
+        "create": "Machtiging Aanmaken",
+        "createLoading": "Machtiging Aanmaken...",
+        "update": "Machtiging Bijwerken",
+        "updateLoading": "Machtiging Bijwerken...",
+        "add": "Machtiging Toevoegen",
+        "addLoading": "Machtiging Toevoegen..."
+      },
+      "add": "Nieuwe Machtiging",
+      "edit": "Machtiging Bewerken",
+      "Status": { "active": "Actief", "inactive": "Inactief" },
+      "NoRoles": {
+        "title": "Geen rollen beschikbaar",
+        "description": "Er zijn geen rollen gedefinieerd. Maak er eerst een voordat je machtigingen beheert."
+      }
       },
       "Subscription": {
         "BreadCrumps": {
@@ -470,6 +475,35 @@
       "noOrderFound": "Geen bestelling gevonden",
       "addNewOrder": "Nieuwe bestelling toevoegen",
       "findOrder": "Bestelling vinden"
+    }
+  },
+  "Messages": {
+    "Route": {
+      "created": "Route succesvol aangemaakt"
+    }
+  },
+  "Navigation": {
+    "Groups": {
+      "overview": "Overzicht",
+      "sales": "Verkoop",
+      "products": "Producten",
+      "customers": "Klanten",
+      "employees": "Werknemers",
+      "settings": "Instellingen",
+      "permissions": "Machtigingen"
+    },
+    "Items": {
+      "overview": "Overzicht",
+      "statistics": "Statistieken",
+      "orders": "Bestellingen",
+      "routes": "Routes",
+      "addresses": "Adressen",
+      "products": "Producten",
+      "categories": "Categorieën",
+      "customers": "Klanten",
+      "employees": "Werknemers",
+      "settings": "Instellingen",
+      "permissions": "Machtigingen"
     }
   },
   "PremiumWrapper": {
