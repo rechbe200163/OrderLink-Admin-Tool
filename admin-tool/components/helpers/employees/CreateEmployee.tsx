@@ -18,7 +18,7 @@ import {
 } from '@/components/ui/select';
 import { createEmployee } from '@/lib/actions/employee.actions';
 import { useTranslations } from 'next-intl';
-import { Role } from '@/lib/types';
+import { ROLE_NAMES } from '@/lib/types';
 
 const CreateEmployees = () => {
   const [formState, action, isPending] = useActionState(createEmployee, {
@@ -96,7 +96,7 @@ const CreateEmployees = () => {
             </SelectTrigger>
             <SelectContent>
               <SelectGroup>
-                {Object.values(Role).map((role) => (
+                {ROLE_NAMES.map((role) => (
                   <SelectItem key={role} value={role}>
                     {tFilter(`Roles.options.${role.toLowerCase()}`)}
                   </SelectItem>

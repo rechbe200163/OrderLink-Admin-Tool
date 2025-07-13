@@ -20,7 +20,7 @@ import {
 import { updateEmployee } from '@/lib/actions/employee.actions';
 import { useTranslations } from 'next-intl';
 import router from 'next/router';
-import { Employees, Role } from '@/lib/types';
+import { Employees, ROLE_NAMES } from '@/lib/types';
 
 interface EditEmployeesProps {
   employee: Employees;
@@ -111,7 +111,7 @@ const EditEmployee = ({ employee }: EditEmployeesProps) => {
             </SelectTrigger>
             <SelectContent>
               <SelectGroup>
-                {Object.values(Role).map((role) => (
+                {ROLE_NAMES.map((role) => (
                   <SelectItem key={role} value={role}>
                     {tRoles(`options.${role.toLowerCase()}`)}
                   </SelectItem>

@@ -9,7 +9,7 @@ import { EmployeesTable } from '@/components/helpers/employees/EmployeesTable';
 import { ButtonLinkComponent } from '@/components/ButtonLinkComponent';
 import { getTranslations } from 'next-intl/server';
 import { getSession } from '@/lib/utlis/getSession';
-import { Role } from '@/lib/types';
+import { ROLE_NAMES } from '@/lib/types';
 
 export default async function EmployeesPage(props: {
   searchParams?: Promise<{
@@ -26,7 +26,7 @@ export default async function EmployeesPage(props: {
   const page = searchParams?.page ? parseInt(searchParams.page) : 1;
   const limit = searchParams?.limit ? parseInt(searchParams.limit) : 10;
   const query = searchParams?.query ? searchParams.query : '';
-  const role = searchParams?.role ? searchParams.role : ('' as Role);
+  const role = searchParams?.role ? searchParams.role : '';
 
   const excludeEmployeeId = session.user.employeeId;
 
@@ -108,7 +108,7 @@ export default async function EmployeesPage(props: {
     value: string;
     color?: string;
   }[] {
-    return Object.values(Role)
+    return ROLE_NAMES
       .filter((role) => role !== 'CUSTOMER')
       .map((role) => ({
         label: tFilter(`Filter.Roles.options.${role.toLowerCase()}`),

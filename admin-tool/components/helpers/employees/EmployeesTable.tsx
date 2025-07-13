@@ -10,13 +10,13 @@ import { Badge } from '@/components/ui/badge';
 import Link from 'next/link';
 import { capitalizeFirstLetter } from '@/lib/utils';
 import { useTranslations } from 'next-intl';
-import { Employees, Role } from '@/lib/types';
+import { Employees } from '@/lib/types';
 
 export function EmployeesTable({ employees }: { employees: Employees[] }) {
   const t = useTranslations('Dashboard.Ressource.Employees');
   const tRole = useTranslations(`FilterAndSearch.Filter.Roles.options`);
 
-  function getRoleTranslation(string: Role): string {
+  function getRoleTranslation(role: string): string {
     switch (string) {
       case 'ADMIN':
         return tRole('admin').toLocaleUpperCase();
