@@ -1,10 +1,10 @@
 import { PlusCircle } from 'lucide-react';
 import React from 'react';
 import BreadcrumbComponent from '@/components/helpers/BreadCrumbComponent';
-import PaginationComponent from '@/components/pagination+filtering/PagingComponent';
 import SearchComponent from '@/components/pagination+filtering/SearchComponent';
 import { permissionApiService } from '@/lib/api/concrete/permissions';
-import { PermissionsTable } from '@/components/helpers/permissions/PermissionsTable';
+import PermissionsGrid from '@/components/helpers/permissions/PermissionsGrid';
+import RoleSelect from '@/components/helpers/permissions/RoleSelect';
 import { ButtonLinkComponent } from '@/components/ButtonLinkComponent';
 import { getTranslations } from 'next-intl/server';
 import { getSession } from '@/lib/utlis/getSession';
@@ -16,17 +16,13 @@ export default async function PermissionsPage(props: {
   if (!session) return null;
 
   const searchParams = await props.searchParams;
-  const page = searchParams?.page ? parseInt(searchParams.page) : 1;
-  const limit = searchParams?.limit ? parseInt(searchParams.limit) : 10;
-  const role = searchParams?.role ? searchParams.role : undefined;
+  const roleParam = searchParams?.role as string | undefined;
 
-  const permissionData = await permissionApiService.getPermissionsPaging(
-    page,
-    limit,
-    role
-  );
-  const permissions = permissionData.data;
-  const { meta } = permissionData;
+  const allPermissions = await permissionApiService.getAll();
+  const roles = Array.from(new Set(allPermissions.map((p) => p.role)));
+  const selectedRole = roleParam && roles.includes(roleParam) ? roleParam : roles[0];
+  const permissions = allPermissions.filter((p) => p.role === selectedRole);
+
   const t = await getTranslations('Dashboard');
   const tFilter = await getTranslations('FilterAndSearch');
 
@@ -44,6 +40,7 @@ export default async function PermissionsPage(props: {
         <div className='flex justify-between items-center mb-6'>
           <div className='flex justify-between items-center space-x-4'>
             <SearchComponent placeholder={tFilter('Search.searchForOption2')} />
+            <RoleSelect roles={roles} value={selectedRole} />
           </div>
           <ButtonLinkComponent
             href='/permissions/add'
@@ -51,15 +48,8 @@ export default async function PermissionsPage(props: {
             icon={<PlusCircle />}
           />
         </div>
-        <div className='bg-white rounded-lg shadow-md'>
-          <PermissionsTable permissions={permissions} />
-        </div>
-        <div className='mt-4 mb-5'>
-          <PaginationComponent
-            currentPage={meta.currentPage}
-            totalPages={meta.pageCount}
-            totalValues={meta.totalCount}
-          />
+        <div className='bg-background rounded-lg shadow-md p-4'>
+          <PermissionsGrid permissions={permissions} role={selectedRole} />
         </div>
       </div>
     </div>
