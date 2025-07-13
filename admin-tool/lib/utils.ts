@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { hash } from 'bcryptjs';
-import { Role } from '@/lib/types';
+import { ROLE_NAMES } from '@/lib/types';
 import { customAlphabet } from 'nanoid';
 import { twMerge } from 'tailwind-merge';
 import { clsx, type ClassValue } from 'clsx';
@@ -257,7 +257,7 @@ export const employeeFormSchema = z.object({
   email: z.string().email({
     message: 'Please enter a valid email address.',
   }),
-  role: z.nativeEnum(Role, {
+  role: z.enum(ROLE_NAMES, {
     message: 'Role is required.',
   }),
   password: z.string().optional().nullable(),

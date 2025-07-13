@@ -9,7 +9,7 @@ import { Loader2, Save } from 'lucide-react';
 import CustomeToast from '../toasts/CustomeErrorToast';
 import { updatePermission } from '@/lib/actions/permission.actions';
 import { useTranslations } from 'next-intl';
-import { Actions, Ressources, Role, Permission } from '@/lib/types';
+import { Actions, Resources, ROLE_NAMES, Permission } from '@/lib/types';
 
 export default function EditPermission({ permission }: { permission: Permission }) {
   const [formState, action, isPending] = useActionState(
@@ -31,7 +31,7 @@ export default function EditPermission({ permission }: { permission: Permission 
             </SelectTrigger>
             <SelectContent>
               <SelectGroup>
-                {Object.values(Role).map((role) => (
+                {ROLE_NAMES.map((role) => (
                   <SelectItem key={role} value={role}>
                     {tFilter(`Roles.options.${role.toLowerCase()}`)}
                   </SelectItem>
@@ -65,7 +65,7 @@ export default function EditPermission({ permission }: { permission: Permission 
             </SelectTrigger>
             <SelectContent>
               <SelectGroup>
-                {Object.values(Ressources).map((res) => (
+                {Object.values(Resources).map((res) => (
                   <SelectItem key={res} value={res}>
                     {res}
                   </SelectItem>

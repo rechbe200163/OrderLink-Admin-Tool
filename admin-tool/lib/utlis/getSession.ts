@@ -1,4 +1,4 @@
-import { Role } from '@/lib/types';
+import { RoleName } from '@/lib/types';
 import { getCookie } from '../cookies/cookie-managment';
 
 export interface Session {
@@ -8,7 +8,7 @@ export interface Session {
     email: string;
     firstName?: string;
     lastName?: string;
-    role?: Role;
+    role?: RoleName;
   };
 }
 
