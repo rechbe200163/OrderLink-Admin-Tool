@@ -17,7 +17,7 @@ import { Loader2, PlusCircle } from 'lucide-react';
 import CustomeToast from '../toasts/CustomeErrorToast';
 import { createPermission } from '@/lib/actions/permission.actions';
 import { useTranslations } from 'next-intl';
-import { Actions, Ressources } from '@/lib/types';
+import { Actions, Resources } from '@/lib/types';
 import router from 'next/router';
 import { Checkbox } from '@/components/ui/checkbox';
 
@@ -102,7 +102,7 @@ export default function CreatePermission({ roles }: { roles: string[] }) {
             </SelectTrigger>
             <SelectContent>
               <SelectGroup>
-                {Object.values(Ressources).map((res) => (
+                {Object.values(Resources).map((res) => (
                   <SelectItem key={res} value={res}>
                     {res}
                   </SelectItem>

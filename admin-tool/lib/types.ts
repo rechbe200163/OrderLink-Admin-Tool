@@ -9,14 +9,25 @@ export enum Actions {
   CREATE = 'CREATE',
 }
 
-export enum Role {
-  ADMIN = 'ADMIN',
-  EMPLOYEE = 'EMPLOYEE',
-  SUPPPLIER = 'SUPPLIER',
-  CUSTOMER = 'CUSTOMER',
+// Role is now a model in the Prisma schema. The enum has been removed and
+// replaced with an interface that mirrors the table structure.
+export interface Role {
+  name: string;
+  description: string | null;
+  deleted: boolean;
 }
 
-export enum Ressources {
+// Default role names for the application. These mirror the seeded roles in the
+// database and can be used for select options.
+export const ROLE_NAMES = [
+  'ADMIN',
+  'EMPLOYEE',
+  'SUPPLIER',
+  'CUSTOMER',
+] as const;
+export type RoleName = (typeof ROLE_NAMES)[number];
+
+export enum Resources {
   PRODUCT = 'PRODUCT',
   ORDER = 'ORDER',
   CUSTOMER = 'CUSTOMER',
@@ -114,15 +125,17 @@ export interface Employees {
   firstName: string;
   lastName: string;
   deleted: boolean;
-  role: Role;
+  superAdmin: boolean;
+  role: string;
 }
 
 export interface Permission {
   id: string;
   role: string;
-  resource: Ressources;
+  resource: Resources;
   action: Actions;
   allowed: boolean;
+  createdAt: Date;
 }
 
 export interface Route {

@@ -10,7 +10,7 @@ import {
 import { Badge } from '@/components/ui/badge';
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
-import { Permission, Role } from '@/lib/types';
+import { Permission } from '@/lib/types';
 import { capitalizeFirstLetter, humanizeEnum } from '@/lib/utils';
 
 export function PermissionsTable({
@@ -21,7 +21,7 @@ export function PermissionsTable({
   const t = useTranslations('Dashboard.Ressource.Permissions');
   const tRole = useTranslations('FilterAndSearch.Filter.Roles.options');
 
-  function getRoleLabel(role: Role): string {
+  function getRoleLabel(role: string): string {
     switch (role) {
       case 'ADMIN':
         return tRole('admin');
@@ -60,7 +60,7 @@ export function PermissionsTable({
                       href={`/permissions/${permission.permissionId}/edit`}
                       className='hover:underline'
                     >
-                      {getRoleLabel(permission.role as Role)}
+                      {getRoleLabel(permission.role)}
                     </Link>
                   </TableCell>
                   <TableCell className='w-40 font-medium'>
