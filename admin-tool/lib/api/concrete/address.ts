@@ -26,7 +26,6 @@ class AddressApiService extends BaseApiService {
     return this.get<Address[]>('addresses/all');
   }
 
-  // TODO on backend
   async getAddressesPaging(
     page: number,
     limit: number,

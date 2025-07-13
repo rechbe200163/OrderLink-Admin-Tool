@@ -37,6 +37,8 @@ export default async function AddressesPage(props: {
     tag
   );
   const addresses = addressData.data;
+
+  console.log('Addresses Data:', addresses);
   const { meta } = addressData;
   const t = await getTranslations('Dashboard');
   const tFilter = await getTranslations('FilterAndSearch');

@@ -1,7 +1,7 @@
 'use server';
 
 import { FormState } from '../form.types';
-import { apiPost, apiPut } from './api.actions';
+import { apiPost, apiPatch } from './api.actions';
 import { ENDPOINTS } from '../api/endpoints';
 import { guardAction } from '../server-guard';
 
@@ -9,13 +9,10 @@ export async function createCategory(
   _prevState: FormState,
   formData: FormData
 ): Promise<FormState> {
-  return (await guardAction(
-    async () => {
-      await apiPost(ENDPOINTS.CATEGORIES, Object.fromEntries(formData));
-      return { success: true } as FormState;
-    },
-    'Failed to create category'
-  )) as FormState;
+  return (await guardAction(async () => {
+    await apiPost(ENDPOINTS.CATEGORIES, Object.fromEntries(formData));
+    return { success: true } as FormState;
+  }, 'Failed to create category')) as FormState;
 }
 
 export async function updateCategory(
@@ -23,11 +20,11 @@ export async function updateCategory(
   _prevState: FormState,
   formData: FormData
 ): Promise<FormState> {
-  return (await guardAction(
-    async () => {
-      await apiPut(ENDPOINTS.CATEGORY(categoryId), Object.fromEntries(formData));
-      return { success: true } as FormState;
-    },
-    'Failed to update category'
-  )) as FormState;
+  return (await guardAction(async () => {
+    await apiPatch(
+      ENDPOINTS.CATEGORY(categoryId),
+      Object.fromEntries(formData)
+    );
+    return { success: true } as FormState;
+  }, 'Failed to update category')) as FormState;
 }
