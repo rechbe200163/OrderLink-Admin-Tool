@@ -11,7 +11,11 @@ export async function createPermission(
 ): Promise<FormState> {
   return (await guardAction(
     async () => {
-      await apiPost(ENDPOINTS.PERMISSIONS, Object.fromEntries(formData));
+      const body = Object.fromEntries(formData);
+      if ('allowed' in body) {
+        body.allowed = body.allowed === 'true' || body.allowed === 'on';
+      }
+      await apiPost(ENDPOINTS.PERMISSIONS, body);
       return { success: true } as FormState;
     },
     'Failed to create permission'

@@ -1,10 +1,12 @@
 import BreadcrumbComponent from '@/components/helpers/BreadCrumbComponent';
 import CreatePermission from '@/components/helpers/permissions/CreatePermission';
 import { getTranslations } from 'next-intl/server';
+import { roleApiService } from '@/lib/api/concrete/roles';
 import React from 'react';
 
 const AddPermissionPage = async () => {
   const t = await getTranslations('Dashboard.Ressource');
+  const roles = await roleApiService.getRoleNames();
   return (
     <div className='p-5'>
       <BreadcrumbComponent
@@ -14,7 +16,7 @@ const AddPermissionPage = async () => {
           { label: t('Permissions.BreadCrumps.add'), href: '/permissions/add' },
         ]}
       />
-      <CreatePermission />
+      <CreatePermission roles={roles} />
     </div>
   );
 };

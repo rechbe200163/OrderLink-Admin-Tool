@@ -17,6 +17,7 @@ export const ENDPOINTS = {
   ROUTE: (id: string | number) => `routes/${id}`,
   PERMISSIONS: 'permissions',
   PERMISSION: (id: string | number) => `permissions/${id}`,
+  ROLE_NAMES: 'roles/roleNames',
   SITE_CONFIG: 'siteConfig',
   SITE_CONFIG_ID: (id: string | number) => `siteConfig/${id}`,
   SUBSCRIPTIONS: 'subscriptions',

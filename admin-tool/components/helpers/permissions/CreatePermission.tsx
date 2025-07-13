@@ -16,11 +16,11 @@ import { Loader2, PlusCircle } from 'lucide-react';
 import CustomeToast from '../toasts/CustomeErrorToast';
 import { createPermission } from '@/lib/actions/permission.actions';
 import { useTranslations } from 'next-intl';
-import { Actions, Ressources, Role } from '@/lib/types';
+import { Actions, Ressources } from '@/lib/types';
 import router from 'next/router';
 import { Input } from '@/components/ui/input';
 
-export default function CreatePermission() {
+export default function CreatePermission({ roles }: { roles: string[] }) {
   const [formState, action, isPending] = useActionState(createPermission, {
     success: false,
     errors: { title: [''] },
@@ -68,7 +68,7 @@ export default function CreatePermission() {
             </SelectTrigger>
             <SelectContent>
               <SelectGroup>
-                {Object.values(Role).map((role) => (
+                {roles.map((role) => (
                   <SelectItem key={role} value={role}>
                     {tFilter(`Roles.options.${role.toLowerCase()}`)}
                   </SelectItem>
