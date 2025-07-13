@@ -202,7 +202,8 @@
           "title": "Itinéraires"
         },
         "add": "Ajouter un nouvel itinéraire",
-        "edit": "Modifier l'itinéraire"
+        "edit": "Modifier l'itinéraire",
+        "name": "Nom de l'itinéraire"
       },
       "Orders": {
         "BreadCrumps": {
@@ -358,19 +359,23 @@
           "status": "Statut",
           "notFound": "Aucune autorisation trouvée"
         },
-        "buttons": {
-          "delete": "Supprimer l'Autorisation",
-          "deleteLoading": "Suppression...",
-          "create": "Créer l'Autorisation",
-          "createLoading": "Création...",
-          "update": "Mettre à jour",
-          "updateLoading": "Mise à jour...",
-          "add": "Ajouter l'Autorisation",
-          "addLoading": "Ajout..."
-        },
-        "add": "Ajouter une Autorisation",
-        "edit": "Modifier l'Autorisation",
-        "Status": { "active": "Actif", "inactive": "Inactif" }
+      "buttons": {
+        "delete": "Supprimer l'Autorisation",
+        "deleteLoading": "Suppression...",
+        "create": "Créer l'Autorisation",
+        "createLoading": "Création...",
+        "update": "Mettre à jour",
+        "updateLoading": "Mise à jour...",
+        "add": "Ajouter l'Autorisation",
+        "addLoading": "Ajout..."
+      },
+      "add": "Ajouter une Autorisation",
+      "edit": "Modifier l'Autorisation",
+      "Status": { "active": "Actif", "inactive": "Inactif" },
+      "NoRoles": {
+        "title": "Aucun rôle disponible",
+        "description": "Aucun rôle n'est défini. Veuillez en créer un avant de gérer les autorisations."
+      }
       },
       "Subscription": {
         "BreadCrumps": {
@@ -470,6 +475,35 @@
       "noOrderFound": "Aucune commande trouvée",
       "addNewOrder": "Ajouter une nouvelle commande",
       "findOrder": "Trouver une commande"
+    }
+  },
+  "Messages": {
+    "Route": {
+      "created": "Itinéraire créé avec succès"
+    }
+  },
+  "Navigation": {
+    "Groups": {
+      "overview": "Aperçu",
+      "sales": "Ventes",
+      "products": "Produits",
+      "customers": "Clients",
+      "employees": "Employés",
+      "settings": "Paramètres",
+      "permissions": "Autorisations"
+    },
+    "Items": {
+      "overview": "Aperçu",
+      "statistics": "Statistiques",
+      "orders": "Commandes",
+      "routes": "Itinéraires",
+      "addresses": "Adresses",
+      "products": "Produits",
+      "categories": "Catégories",
+      "customers": "Clients",
+      "employees": "Employés",
+      "settings": "Paramètres",
+      "permissions": "Autorisations"
     }
   },
   "PremiumWrapper": {

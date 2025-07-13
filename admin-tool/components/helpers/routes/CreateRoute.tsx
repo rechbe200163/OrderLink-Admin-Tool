@@ -11,12 +11,15 @@ import { Input } from '@/components/ui/input';
 import OrderSelectComponent from '../OrderSelectComponent';
 import { createRoute } from '@/lib/actions/route.actions';
 import { OrdersWithAddressOfCustomer } from '@/lib/types';
+import { useTranslations } from 'next-intl';
 
 interface CreateOrderProps {
   orders: OrdersWithAddressOfCustomer[];
 }
 
 const CreateRoutes = ({ orders }: CreateOrderProps) => {
+  const t = useTranslations('Dashboard');
+  const tSelect = useTranslations('SelectComponents.Route');
   const [selectOrder, setSelectedOrders] = React.useState<string[]>([]);
   const [formState, action, isPending] = useActionState(createRoute, {
     success: false,
@@ -28,7 +31,7 @@ const CreateRoutes = ({ orders }: CreateOrderProps) => {
   React.useEffect(() => {
     if (formState.success) {
       toast.custom(() => (
-        <CustomeToast variant='success' message='Route created successfully!' />
+        <CustomeToast variant='success' message={t('Messages.Route.created')} />
       ));
     } else if (formState.errors?.title[0]) {
       toast.custom(() => (
@@ -47,10 +50,10 @@ const CreateRoutes = ({ orders }: CreateOrderProps) => {
     <Card className='shadow-md p-6 min-w-full'>
       <form action={action} className='space-y-6'>
         <h2 className='text-3xl font-bold tracking-tight mb-6'>
-          Neue Route hinzufügen
+          {tSelect('addNewRoute')}
         </h2>
         <div className=''>
-          <Label htmlFor={id}>Routenname</Label>
+          <Label htmlFor={id}>{t('Ressource.Routes.name')}</Label>
           <Input id={id} name='name' />
         </div>
         <div className='space-y-2'>
@@ -69,12 +72,11 @@ const CreateRoutes = ({ orders }: CreateOrderProps) => {
         <Button type='submit' disabled={isPending} className='mt-6'>
           {isPending ? (
             <>
-              <Loader2 className='animate-spin h-5 w-5' /> Route wird
-              hinzugefügt
+              <Loader2 className='animate-spin h-5 w-5' /> {tSelect('addNewRoute')}...
             </>
           ) : (
             <>
-              <PlusCircle /> Route hinzufügen
+              <PlusCircle /> {tSelect('addNewRoute')}
             </>
           )}
         </Button>
