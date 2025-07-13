@@ -34,7 +34,7 @@ export default function CreatePermission({ roles }: { roles: string[] }) {
       toast.custom(() => (
         <CustomeToast
           variant='success'
-          message='Site configuration updated successfully!'
+          message='Permission created successfully'
         />
       ));
       if (formState.data) {

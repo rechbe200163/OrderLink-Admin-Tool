@@ -9,6 +9,7 @@ import RoleSelect from '@/components/helpers/permissions/RoleSelect';
 import { ButtonLinkComponent } from '@/components/ButtonLinkComponent';
 import { getTranslations } from 'next-intl/server';
 import { getSession } from '@/lib/utlis/getSession';
+import { roleApiService } from '@/lib/api/concrete/roles';
 
 export default async function PermissionsPage(props: {
   searchParams?: Promise<{ page?: string; limit?: string; role?: string }>;
@@ -20,8 +21,14 @@ export default async function PermissionsPage(props: {
   const roleParam = searchParams?.role as string | undefined;
 
   const allPermissions = await permissionApiService.getAll();
-  const roles = Array.from(new Set(allPermissions.map((p) => p.role))) as string[];
-  const selectedRole = roleParam && roles.includes(roleParam) ? roleParam : roles[0];
+  const roles = await roleApiService.getRoleNames();
+
+  if (!roles.length) {
+    return <NoRolesError />;
+  }
+
+  const selectedRole =
+    roleParam && roles.includes(roleParam) ? roleParam : roles[0];
   const permissions = allPermissions.filter((p) => p.role === selectedRole);
 
   const t = await getTranslations('Dashboard');
@@ -33,7 +40,10 @@ export default async function PermissionsPage(props: {
         <BreadcrumbComponent
           items={[
             { label: t('Ressource.BreadCrumps.title'), href: '/' },
-            { label: t('Ressource.Permissions.BreadCrumps.title'), href: '/permissions/' },
+            {
+              label: t('Ressource.Permissions.BreadCrumps.title'),
+              href: '/permissions/',
+            },
           ]}
         />
       </div>
@@ -53,6 +63,19 @@ export default async function PermissionsPage(props: {
           <PermissionsGrid permissions={permissions} role={selectedRole} />
         </div>
       </div>
+    </div>
+  );
+}
+
+// error component for no roles
+export function NoRolesError() {
+  return (
+    <div className='text-center p-6'>
+      <h2 className='text-2xl font-bold mb-4'>No Roles Available</h2>
+      <p className='text-gray-600'>
+        It seems there are no roles defined in the system. Please create a role
+        before managing permissions.
+      </p>
     </div>
   );
 }
