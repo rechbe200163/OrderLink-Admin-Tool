@@ -14,20 +14,6 @@ import { Employees } from '@/lib/types';
 
 export function EmployeesTable({ employees }: { employees: Employees[] }) {
   const t = useTranslations('Dashboard.Ressource.Employees');
-  const tRole = useTranslations(`FilterAndSearch.Filter.Roles.options`);
-
-  function getRoleTranslation(role: string): string {
-    switch (string) {
-      case 'ADMIN':
-        return tRole('admin').toLocaleUpperCase();
-      case 'EMPLOYEE':
-        return tRole('employee').toLocaleUpperCase();
-      case 'SUPPLIER':
-        return tRole('supplier').toLocaleUpperCase();
-      default:
-        return capitalizeFirstLetter(string);
-    }
-  }
 
   return (
     <div className='bg-background text-foreground p-4 rounded-lg shadow-xs'>
@@ -82,7 +68,7 @@ export function EmployeesTable({ employees }: { employees: Employees[] }) {
                       href={`/employees/${employee.employeeId}/edit`}
                       className='hover:underline'
                     >
-                      {getRoleTranslation(employee.role) || 'N/A'}
+                      {employee.role}
                     </Link>
                   </TableCell>
                   <TableCell className='w-20 text-right'>

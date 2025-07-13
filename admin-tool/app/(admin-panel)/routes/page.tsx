@@ -25,7 +25,10 @@ async function RoutesPage(props: {
   const query = searchParams?.query ? searchParams.query : '';
 
   const routeData = await routeApiService.getRoutesPaging(page, limit, query);
+
   const routes = routeData.data;
+
+  console.log('RoutesPage', routes);
   const { meta } = routeData;
   const t = await getTranslations('Dashboard');
   const tFilter = await getTranslations('FilterAndSearch');
@@ -36,7 +39,10 @@ async function RoutesPage(props: {
         <BreadcrumbComponent
           items={[
             { label: t('Ressource.BreadCrumps.title'), href: '/' },
-            { label: t('Ressource.Routes.BreadCrumps.title'), href: '/routes/' },
+            {
+              label: t('Ressource.Routes.BreadCrumps.title'),
+              href: '/routes/',
+            },
           ]}
         />
       </div>

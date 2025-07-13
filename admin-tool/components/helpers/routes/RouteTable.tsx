@@ -47,7 +47,7 @@ export function RoutesTable({ routes }: { routes: RoutesWithCount[] }) {
                         href={`/orders/routes/${route.routeId}/${route.name}`}
                         className='block w-full h-full p-2 hover:underline'
                       >
-                        {route._count?.order ?? 0}
+                        {route.ordersCount ?? 0}
                       </Link>
                     </ToolTipWrapper>
                   </TableCell>

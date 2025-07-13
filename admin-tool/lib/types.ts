@@ -250,9 +250,7 @@ export type CustomerGrowth = {
 }[];
 
 export interface RoutesWithCount extends Route {
-  _count: {
-    order: number;
-  };
+  ordersCount: number;
 }
 
 export interface RoutesWithOrders extends Route {
