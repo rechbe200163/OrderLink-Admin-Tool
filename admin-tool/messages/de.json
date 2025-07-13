@@ -487,6 +487,11 @@
       "noOrderFound": "Keine Bestellung gefunden",
       "addNewOrder": "Neue Bestellung hinzufügen",
       "findOrder": "Bestellung suchen"
+    },
+    "Actions": {
+      "selectActions": "Aktionen auswählen",
+      "noActionFound": "Keine Aktion gefunden",
+      "findAction": "Aktion suchen"
     }
   },
   "Messages": {

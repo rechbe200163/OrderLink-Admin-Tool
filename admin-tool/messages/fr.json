@@ -476,6 +476,11 @@
       "noOrderFound": "Aucune commande trouvée",
       "addNewOrder": "Ajouter une nouvelle commande",
       "findOrder": "Trouver une commande"
+    },
+    "Actions": {
+      "selectActions": "Sélectionner des actions",
+      "noActionFound": "Aucune action trouvée",
+      "findAction": "Trouver une action"
     }
   },
   "Messages": {

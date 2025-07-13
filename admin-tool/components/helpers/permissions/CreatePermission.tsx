@@ -1,5 +1,5 @@
 'use client';
-import { useActionState, useEffect } from 'react';
+import { useActionState, useEffect, useState } from 'react';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
@@ -11,7 +11,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { SelectNative } from '@/components/ui/select-native';
+import ActionsSelectComponent from './ActionsSelectComponent';
 import { Card } from '@/components/ui/card';
 import { Loader2, PlusCircle } from 'lucide-react';
 import CustomeToast from '../toasts/CustomeErrorToast';
@@ -29,6 +29,7 @@ export default function CreatePermission({ roles }: { roles: string[] }) {
 
   const t = useTranslations('Dashboard.Ressource.Permissions');
   const tFilter = useTranslations('FilterAndSearch.Filter');
+  const [selectedActions, setSelectedActions] = useState<string[]>([]);
 
   useEffect(() => {
     if (formState.success) {
@@ -79,19 +80,19 @@ export default function CreatePermission({ roles }: { roles: string[] }) {
           </Select>
         </div>
         <div>
-          <Label htmlFor='actions'>{t('Attributes.actions')}</Label>
-          <SelectNative
-            id='actions'
-            name='actions'
-            multiple
-            className='mt-2 w-[180px] h-32'
-          >
-            {Object.values(Actions).map((action) => (
-              <option key={action} value={action}>
-                {action}
-              </option>
-            ))}
-          </SelectNative>
+          <ActionsSelectComponent
+            onActionSelect={(action) => {
+              setSelectedActions((prev) =>
+                prev.includes(action)
+                  ? prev.filter((a) => a !== action)
+                  : [...prev, action]
+              );
+            }}
+            defaultValue={selectedActions}
+          />
+          {selectedActions.map((action) => (
+            <input key={action} type='hidden' name='actions' value={action} />
+          ))}
         </div>
         <div>
           <Label htmlFor='resource'>{t('Attributes.resource')}</Label>

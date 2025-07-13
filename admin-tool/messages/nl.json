@@ -476,6 +476,11 @@
       "noOrderFound": "Geen bestelling gevonden",
       "addNewOrder": "Nieuwe bestelling toevoegen",
       "findOrder": "Bestelling vinden"
+    },
+    "Actions": {
+      "selectActions": "Acties selecteren",
+      "noActionFound": "Geen actie gevonden",
+      "findAction": "Actie vinden"
     }
   },
   "Messages": {
