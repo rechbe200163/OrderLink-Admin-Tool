@@ -12,6 +12,10 @@ export async function createPermission(
 ): Promise<FormState> {
   return (await guardAction(async () => {
     const data = Object.fromEntries(formData) as Record<string, any>;
+    const actions = formData.getAll('actions');
+    if (actions.length) {
+      data.actions = actions;
+    }
     if ('allowed' in data) {
       const allowed = formData.get('allowed');
       data.allowed = allowed === 'true' || allowed === 'on';
