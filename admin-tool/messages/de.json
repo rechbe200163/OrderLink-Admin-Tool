@@ -355,6 +355,7 @@
         "Attributes": {
           "role": "Rolle",
           "action": "Aktion",
+          "actions": "Aktionen",
           "resource": "Ressource",
           "status": "Status",
           "notFound": "Keine Berechtigungen gefunden"

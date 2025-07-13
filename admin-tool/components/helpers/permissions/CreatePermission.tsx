@@ -11,6 +11,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import { SelectNative } from '@/components/ui/select-native';
 import { Card } from '@/components/ui/card';
 import { Loader2, PlusCircle } from 'lucide-react';
 import CustomeToast from '../toasts/CustomeErrorToast';
@@ -78,21 +79,19 @@ export default function CreatePermission({ roles }: { roles: string[] }) {
           </Select>
         </div>
         <div>
-          <Label htmlFor='action'>{t('Attributes.action')}</Label>
-          <Select name='action'>
-            <SelectTrigger className='w-[180px]'>
-              <SelectValue placeholder={t('Attributes.action')} />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectGroup>
-                {Object.values(Actions).map((action) => (
-                  <SelectItem key={action} value={action}>
-                    {action}
-                  </SelectItem>
-                ))}
-              </SelectGroup>
-            </SelectContent>
-          </Select>
+          <Label htmlFor='actions'>{t('Attributes.actions')}</Label>
+          <SelectNative
+            id='actions'
+            name='actions'
+            multiple
+            className='mt-2 w-[180px] h-32'
+          >
+            {Object.values(Actions).map((action) => (
+              <option key={action} value={action}>
+                {action}
+              </option>
+            ))}
+          </SelectNative>
         </div>
         <div>
           <Label htmlFor='resource'>{t('Attributes.resource')}</Label>

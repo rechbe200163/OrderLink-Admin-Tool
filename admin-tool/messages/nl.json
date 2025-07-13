@@ -355,6 +355,7 @@
         "Attributes": {
           "role": "Rol",
           "action": "Actie",
+          "actions": "Acties",
           "resource": "Resource",
           "status": "Status",
           "notFound": "Geen machtigingen gevonden"
