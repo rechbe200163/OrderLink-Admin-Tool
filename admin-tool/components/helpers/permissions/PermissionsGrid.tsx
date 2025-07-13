@@ -1,23 +1,15 @@
 'use client';
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@/components/ui/table';
+import { Permission, Actions } from '@/lib/types';
+import { CheckCircle2Icon, XIcon } from 'lucide-react';
 import { useTranslations } from 'next-intl';
-import { Actions, Permission, Ressources, Role } from '@/lib/types';
-import { capitalizeFirstLetter, humanizeEnum } from '@/lib/utils';
-import { Check, X } from 'lucide-react';
+import { humanizeEnum, capitalizeFirstLetter } from '@/lib/utils';
 
-export function PermissionsGrid({ permissions }: { permissions: Permission[] }) {
+export default function PermissionsGrid({ permissions, role }: { permissions: Permission[]; role: string }) {
   const t = useTranslations('Dashboard.Ressource.Permissions');
   const tRole = useTranslations('FilterAndSearch.Filter.Roles.options');
 
-  function getRoleLabel(role: Role): string {
-    switch (role) {
+  function getRoleLabel(r: string): string {
+    switch (r) {
       case 'ADMIN':
         return tRole('admin');
       case 'EMPLOYEE':
@@ -25,70 +17,55 @@ export function PermissionsGrid({ permissions }: { permissions: Permission[] }) 
       case 'SUPPLIER':
         return tRole('supplier');
       default:
-        return capitalizeFirstLetter(role);
+        return capitalizeFirstLetter(r);
     }
   }
 
-  const permissionsByRole = permissions.reduce<Record<string, Permission[]>>( (
-    acc,
-    permission
-  ) => {
-    if (!acc[permission.role]) acc[permission.role] = [];
-    acc[permission.role].push(permission);
-    return acc;
-  }, {});
-
-  const actions = Object.values(Actions);
-  const resources = Object.values(Ressources);
+  const resources = Array.from(new Set(permissions.map((p) => p.resource)));
+  const actions = [Actions.CREATE, Actions.READ, Actions.UPDATE, Actions.DELETE];
 
   return (
-    <div className='space-y-8'>
-      {Object.entries(permissionsByRole).map(([role, perms]) => (
-        <div key={role} className='bg-background text-foreground p-4 rounded-lg shadow-xs'>
-          <h3 className='font-semibold mb-2'>{getRoleLabel(role as Role)}</h3>
-          <div className='max-h-[50vh] overflow-auto min-w-full'>
-            <Table className='border-separate border-spacing-0 [&_td]:border-border [&_tfoot_td]:border-t [&_th]:border-b [&_th]:border-border [&_tr:not(:last-child)_td]:border-b'>
-              <TableHeader className='sticky top-0 z-10 bg-background/90 backdrop-blur-xs'>
-                <TableRow className='hover:bg-muted'>
-                  <TableHead className='w-40'>{t('Attributes.resource')}</TableHead>
-                  {actions.map((action) => (
-                    <TableHead key={action} className='w-20 text-center'>
-                      {humanizeEnum(action)}
-                    </TableHead>
-                  ))}
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {resources.map((res) => (
-                  <TableRow key={res} className='hover:bg-muted/50 transition-colors'>
-                    <TableCell className='font-medium'>{humanizeEnum(res)}</TableCell>
-                    {actions.map((action) => {
-                      const hasPermission = perms.some(
-                        (p) =>
-                          p.resource === res &&
-                          p.action === action &&
-                          !p.deleted
-                      );
-                      return (
-                        <TableCell
-                          key={action}
-                          className='text-center'
-                        >
-                          {hasPermission ? (
-                            <Check className='h-4 w-4 text-green-500 mx-auto' />
-                          ) : (
-                            <X className='h-4 w-4 text-red-500 mx-auto' />
-                          )}
-                        </TableCell>
-                      );
-                    })}
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </div>
-        </div>
-      ))}
+    <div className='space-y-2'>
+      <h3 className='text-lg font-semibold'>{getRoleLabel(role)}</h3>
+      <div className='max-h-[50vh] overflow-auto'>
+        <table className='min-w-full border-collapse text-sm [&_td]:border-border [&_th]:border-b [&_th]:border-border [&_tr:not(:last-child)_td]:border-b'>
+          <thead className='sticky top-0 z-10 bg-background/90 backdrop-blur-xs'>
+            <tr>
+              <th className='px-2 py-1 text-left'>{t('Attributes.resource')}</th>
+              {actions.map((action) => (
+                <th key={action} className='px-2 py-1'>
+                  {humanizeEnum(action)}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {resources.map((resource) => (
+              <tr key={resource} className='hover:bg-muted/20'>
+                <td className='px-2 py-1 font-medium'>
+                  {humanizeEnum(resource)}
+                </td>
+                {actions.map((action) => {
+                  const permission = permissions.find(
+                    (p) => p.action === action && p.resource === resource
+                  );
+                  const allowed = permission && !permission.deleted;
+                  return (
+                    <td key={action} className='px-2 py-1 text-center'>
+                      {allowed ? (
+                        <CheckCircle2Icon className='inline-block text-green-500' />
+                      ) : (
+                        <XIcon className='inline-block text-destructive' />
+                      )}
+                    </td>
+                  );
+                })}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
     </div>
   );
 }
