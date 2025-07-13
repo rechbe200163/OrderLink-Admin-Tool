@@ -10,6 +10,7 @@ import { categoryApiService } from '@/lib/api/concrete/categories';
 import { ButtonLinkComponent } from '@/components/ButtonLinkComponent';
 import { getSession } from '@/lib/utlis/getSession';
 import { BusinessSector, Category } from '@/lib/types';
+import { getTranslations } from 'next-intl/server';
 
 export default async function ProductsPage(props: {
   searchParams?: Promise<{
@@ -40,30 +41,32 @@ export default async function ProductsPage(props: {
   const products = productData.data;
   const { meta } = productData;
   const categories = await categoryApiService.getCategories();
+  const t = await getTranslations('Dashboard');
+  const tFilter = await getTranslations('FilterAndSearch');
   return (
     <div className='px-5'>
       <div className='sticky top-0 bg-background z-1'>
         <BreadcrumbComponent
           items={[
-            { label: 'Dashboard', href: '/' },
-            { label: 'Products', href: '/products/' },
+            { label: t('Ressource.BreadCrumps.title'), href: '/' },
+            { label: t('Ressource.Products.BreadCrumps.title'), href: '/products/' },
           ]}
         />
       </div>
       <div className='container'>
         <div className='flex justify-between items-center mb-6'>
           <div className='flex justify-between items-center space-x-4'>
-            <SearchComponent placeholder={'Nach Name suchen'} />
+            <SearchComponent placeholder={tFilter('Search.searchForOption1')} />
             <FilteringComponent
-              title='Status'
+              title={tFilter('Filter.Status.title')}
               filterName='filter'
               values={[
-                { label: 'Archiviert', value: 'active', color: 'green' },
-                { label: 'Aktiv', value: 'inactive', color: 'red' },
+                { label: tFilter('Filter.Status.options.active'), value: 'active', color: 'green' },
+                { label: tFilter('Filter.Status.options.inactive'), value: 'inactive', color: 'red' },
               ]}
             />
             <FilteringComponent
-              title='Kategorien'
+              title={t('Ressource.Categories.BreadCrumps.title')}
               filterName='category'
               values={categories.map((category: Category) => ({
                 label: category.name,
@@ -74,7 +77,7 @@ export default async function ProductsPage(props: {
 
           <ButtonLinkComponent
             href='/products/add'
-            label='Neues Produkt'
+            label={t('Ressource.Products.add')}
             icon={<PlusCircle />}
           />
         </div>

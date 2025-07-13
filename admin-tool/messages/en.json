@@ -202,7 +202,8 @@
           "title": "Routes"
         },
         "add": "Add New Route",
-        "edit": "Edit Route"
+        "edit": "Edit Route",
+        "name": "Route Name"
       },
       "Orders": {
         "BreadCrumps": {
@@ -358,19 +359,23 @@
           "status": "Status",
           "notFound": "No permissions found"
         },
-        "buttons": {
-          "delete": "Delete Permission",
-          "deleteLoading": "Deleting Permission...",
-          "create": "Create Permission",
-          "createLoading": "Creating Permission...",
-          "update": "Update Permission",
-          "updateLoading": "Updating Permission...",
-          "add": "Add Permission",
-          "addLoading": "Adding Permission..."
-        },
-        "add": "Add New Permission",
-        "edit": "Edit Permission",
-        "Status": { "active": "Active", "inactive": "Inactive" }
+      "buttons": {
+        "delete": "Delete Permission",
+        "deleteLoading": "Deleting Permission...",
+        "create": "Create Permission",
+        "createLoading": "Creating Permission...",
+        "update": "Update Permission",
+        "updateLoading": "Updating Permission...",
+        "add": "Add Permission",
+        "addLoading": "Adding Permission..."
+      },
+      "add": "Add New Permission",
+      "edit": "Edit Permission",
+      "Status": { "active": "Active", "inactive": "Inactive" },
+      "NoRoles": {
+        "title": "No Roles Available",
+        "description": "It seems there are no roles defined. Please create one before managing permissions."
+      }
       },
       "Subscription": {
         "BreadCrumps": {
@@ -470,6 +475,35 @@
       "noOrderFound": "Keine Bestellung gefunden",
       "addNewOrder": "Neue Bestellung hinzufügen",
       "findOrder": "Bestellung finden"
+    }
+  },
+  "Messages": {
+    "Route": {
+      "created": "Route created successfully"
+    }
+  },
+  "Navigation": {
+    "Groups": {
+      "overview": "Overview",
+      "sales": "Sales",
+      "products": "Products",
+      "customers": "Customers",
+      "employees": "Employees",
+      "settings": "Settings",
+      "permissions": "Permissions"
+    },
+    "Items": {
+      "overview": "Overview",
+      "statistics": "Statistics",
+      "orders": "Orders",
+      "routes": "Routes",
+      "addresses": "Addresses",
+      "products": "Products",
+      "categories": "Categories",
+      "customers": "Customers",
+      "employees": "Employees",
+      "settings": "Settings",
+      "permissions": "Permissions"
     }
   },
   "PremiumWrapper": {

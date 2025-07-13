@@ -7,6 +7,7 @@ import { routeApiService } from '@/lib/api/concrete/route';
 import { getSession } from '@/lib/utlis/getSession';
 import { PlusCircle } from 'lucide-react';
 import React from 'react';
+import { getTranslations } from 'next-intl/server';
 
 async function RoutesPage(props: {
   searchParams?: Promise<{
@@ -26,26 +27,28 @@ async function RoutesPage(props: {
   const routeData = await routeApiService.getRoutesPaging(page, limit, query);
   const routes = routeData.data;
   const { meta } = routeData;
+  const t = await getTranslations('Dashboard');
+  const tFilter = await getTranslations('FilterAndSearch');
 
   return (
     <div className='px-5'>
       <div className='sticky top-0 bg-background z-10'>
         <BreadcrumbComponent
           items={[
-            { label: 'Dashboard', href: '/' },
-            { label: 'Routen', href: '/routes/' },
+            { label: t('Ressource.BreadCrumps.title'), href: '/' },
+            { label: t('Ressource.Routes.BreadCrumps.title'), href: '/routes/' },
           ]}
         />
       </div>
       <div className='container'>
         <div className='flex justify-between items-center mb-6'>
           <div className='flex justify-between items-center space-x-4'>
-            <SearchComponent placeholder={'Nach Name suchen'} />
+            <SearchComponent placeholder={tFilter('Search.searchForOption1')} />
           </div>
 
           <ButtonLinkComponent
             href='/routes/add'
-            label='Neue Route'
+            label={t('Ressource.Routes.add')}
             icon={<PlusCircle />}
           />
         </div>
