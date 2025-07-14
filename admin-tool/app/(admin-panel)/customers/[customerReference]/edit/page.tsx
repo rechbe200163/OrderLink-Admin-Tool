@@ -12,10 +12,13 @@ interface EditCustomerPageProps {
 
 async function EditCustomerPage(props: EditCustomerPageProps) {
   const { customerReference } = await props.params;
-  const customer = await customerApiService.getCustomerByReference(
-    customerReference
-  );
+  const customer =
+    await customerApiService.getCustomerByReference(customerReference);
   const addresses = await addressApiService.getAddresses();
+
+  console.log('Customer data:', customer);
+  console.log('Addresses data:', addresses);
+
   const t = await getTranslations('Dashboard');
   return (
     <div className='min-w-full p-5'>

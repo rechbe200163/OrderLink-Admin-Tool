@@ -30,9 +30,8 @@ export default function EditCustomerForm({
   const [selectedAddress, setSelectedAddress] = React.useState<string>(
     customer.addressId!
   );
-  const [selectedBusinessSector, setSelectedBusinessSector] = React.useState<string>(
-    customer.businessSector ?? 'N/A'
-  );
+  const [selectedBusinessSector, setSelectedBusinessSector] =
+    React.useState<string>(customer.businessSector ?? 'N/A');
   const [formState, action, isPending] = useActionState(
     updateCustomer.bind(null, customer.customerReference!),
     {

@@ -48,13 +48,11 @@ export async function updateCustomer(
   return (await guardAction(async () => {
     const data = Object.fromEntries(formData) as Record<string, any>;
     if (data.businessSector === 'N/A') {
-      data.businessSector = undefined;
+      data.businessSector = null;
     }
     if (!data.companyNumber) {
-      data.companyNumber = undefined;
+      data.companyNumber = null;
     }
-    console.log('Updating customer with reference:', customerReference);
-    console.log('Form data:', data);
     await apiPut(ENDPOINTS.CUSTOMER(customerReference), data);
     return { success: true } as FormState;
   }, 'Failed to update customer')) as FormState;

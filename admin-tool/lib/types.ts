@@ -264,9 +264,7 @@ export interface ProductWithCategoryNames extends Product {
 }
 
 export interface CustomerWithAddressId extends Customer {
-  address: {
-    addressId: string;
-  };
+  addressId: string;
 }
 
 export interface OrderProduct {
