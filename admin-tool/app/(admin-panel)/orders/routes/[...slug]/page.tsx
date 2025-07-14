@@ -17,7 +17,7 @@ async function EditProductPage(props: OrderPerRoutePageProps) {
   const orders = await orderApiService.getOrdersByRouteId(routeId);
   return (
     <div className='min-w-full'>
-      <div className='sticky top-0 bg-white z-10 px-4 flex justify-between items-center'>
+      <div className='sticky top-0 bg-background z-10 px-4 flex justify-between items-center'>
         <BreadcrumbComponent
           items={[
             { label: 'Dashboard', href: '/' },
