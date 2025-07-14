@@ -1,6 +1,5 @@
 import { PlusCircle } from 'lucide-react';
 import React from 'react';
-import BreadcrumbComponent from '@/components/helpers/BreadCrumbComponent';
 import SearchComponent from '@/components/pagination+filtering/SearchComponent';
 import { permissionApiService } from '@/lib/api/concrete/permissions';
 import PermissionsGrid from '@/components/helpers/permissions/PermissionsGrid';
@@ -39,15 +38,6 @@ export default async function PermissionsPage(props: {
   return (
     <div className='px-5'>
       <div className='sticky top-0 bg-background z-10'>
-        <BreadcrumbComponent
-          items={[
-            { label: t('Ressource.BreadCrumps.title'), href: '/' },
-            {
-              label: t('Ressource.Permissions.BreadCrumps.title'),
-              href: '/permissions/',
-            },
-          ]}
-        />
       </div>
       <div className='container'>
         <div className='flex justify-between items-center mb-6'>

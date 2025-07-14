@@ -1,6 +1,5 @@
 import { PlusCircle } from 'lucide-react';
 import React from 'react';
-import BreadcrumbComponent from '@/components/helpers/BreadCrumbComponent';
 import PaginationComponent from '@/components/pagination+filtering/PagingComponent';
 import SearchComponent from '@/components/pagination+filtering/SearchComponent';
 import { orderApiService } from '@/lib/api/concrete/orders';
@@ -44,15 +43,6 @@ export default async function OrdersPage(props: {
   return (
     <div className='px-5'>
       <div className='sticky top-0 bg-background z-10'>
-        <BreadcrumbComponent
-          items={[
-            { label: t('Ressource.BreadCrumps.title'), href: '/' },
-            {
-              label: t('Ressource.Orders.BreadCrumps.title'),
-              href: '/orders/',
-            },
-          ]}
-        />
       </div>
       <div className='container'>
         <div className='flex justify-between items-center mb-6'>

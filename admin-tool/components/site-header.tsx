@@ -5,6 +5,7 @@ import { getSession } from '@/lib/utlis/getSession';
 import SessionTimer from './helpers/SessionTimer';
 import PathBreadcrumbs from './helpers/PathBreadcrumbs';
 
+
 export async function SiteHeader() {
   const session = await getSession();
   const user = session?.user;

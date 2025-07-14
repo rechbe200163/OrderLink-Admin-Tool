@@ -1,4 +1,3 @@
-import BreadcrumbComponent from '@/components/helpers/BreadCrumbComponent';
 import EditRoute from '@/components/helpers/routes/EditRoute';
 import { orderApiService } from '@/lib/api/concrete/orders';
 import { routeApiService } from '@/lib/api/concrete/route';
@@ -16,13 +15,6 @@ async function EditRoutesPage(props: EditOrderPageProps) {
   const orders = await orderApiService.getAll();
   return (
     <div className='sticky top-0 bg-white z-10 px-4'>
-      <BreadcrumbComponent
-        items={[
-          { label: 'Dashboard', href: '/' },
-          { label: 'Routen', href: '/routes' },
-          { label: 'Bearbeiten', href: `/orders/${route.routeId}/edit` },
-        ]}
-      />
       <EditRoute orders={orders} route={route} />
     </div>
   );

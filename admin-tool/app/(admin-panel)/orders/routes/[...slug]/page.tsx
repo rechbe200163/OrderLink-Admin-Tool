@@ -1,5 +1,4 @@
 import GoBackButtonComponent from '@/components/BackButtonComponent';
-import BreadcrumbComponent from '@/components/helpers/BreadCrumbComponent';
 import { OrderTable } from '@/components/helpers/orders/OrdersTabel';
 import { orderApiService } from '@/lib/api/concrete/orders';
 import React from 'react';
@@ -18,16 +17,6 @@ async function EditProductPage(props: OrderPerRoutePageProps) {
   return (
     <div className='min-w-full'>
       <div className='sticky top-0 bg-background z-10 px-4 flex justify-between items-center'>
-        <BreadcrumbComponent
-          items={[
-            { label: 'Dashboard', href: '/' },
-            { label: 'Bestellungen', href: '/orders/' },
-            {
-              label: `${decodeURIComponent(name!)}`,
-              href: `/orders/routes/${routeId}/${name}`,
-            },
-          ]}
-        />
         <div className='flex justify-between items-center mb-6'>
           <GoBackButtonComponent href='/routes' label='Go Back to Routes' />
         </div>
