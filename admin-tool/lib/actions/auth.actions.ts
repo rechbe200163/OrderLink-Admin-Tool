@@ -3,7 +3,7 @@ import { FormState } from '../form.types';
 import { redirect } from 'next/navigation';
 import { apiPost } from './api.actions';
 import { ENDPOINTS } from '../api/endpoints';
-import { setCookie, deleteCookie } from '../cookies/cookie-managment';
+import { setCookie, deleteCookie, getCookie } from '../cookies/cookie-managment';
 
 export async function logOut(): Promise<FormState> {
   try {
@@ -49,4 +49,16 @@ export async function logIn(
     return { success: false, errors: { title: [error.message] } };
   }
   redirect('/');
+}
+
+export async function renewSession(): Promise<void> {
+  'use server';
+  const token = await getCookie('token');
+  const user = await getCookie('user');
+  if (token) {
+    await setCookie('token', token);
+  }
+  if (user) {
+    await setCookie('user', user);
+  }
 }

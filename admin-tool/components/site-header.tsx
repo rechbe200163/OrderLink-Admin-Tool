@@ -2,6 +2,7 @@ import { Separator } from '@/components/ui/separator';
 import { SidebarTrigger } from '@/components/ui/sidebar';
 import { ModeToggle } from './dark-mode/Toggle';
 import { getSession } from '@/lib/utlis/getSession';
+import SessionTimer from "./helpers/SessionTimer";
 
 export async function SiteHeader() {
   const session = await getSession();
@@ -19,7 +20,8 @@ export async function SiteHeader() {
             {user ? `${user.firstName} ${user.lastName}` : 'Admin Tool'}
           </h1>
         </div>
-        <div className='flex items-center gap-2 m-5'>
+        <div className="flex items-center gap-2 m-5">
+          <SessionTimer issuedAt={session.token.issuedAt} expiresAt={session.token.expiresAt} />
           <ModeToggle />
         </div>
       </div>
