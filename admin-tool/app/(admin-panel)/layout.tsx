@@ -14,7 +14,9 @@ export default function layout({
       <AppSidebar variant='inset' collapsible='icon' />
       <SidebarInset>
         <SiteHeader />
-        {children}
+        <div className='p-5'>
+          {children}
+        </div>
       </SidebarInset>
     </SidebarProvider>
   );

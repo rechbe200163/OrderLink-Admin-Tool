@@ -1,5 +1,4 @@
 import { ButtonLinkComponent } from '@/components/ButtonLinkComponent';
-import BreadcrumbComponent from '@/components/helpers/BreadCrumbComponent';
 import { RoutesTable } from '@/components/helpers/routes/RouteTable';
 import PaginationComponent from '@/components/pagination+filtering/PagingComponent';
 import SearchComponent from '@/components/pagination+filtering/SearchComponent';
@@ -34,17 +33,8 @@ async function RoutesPage(props: {
   const tFilter = await getTranslations('FilterAndSearch');
 
   return (
-    <div className='px-5'>
+    <>
       <div className='sticky top-0 bg-background z-10'>
-        <BreadcrumbComponent
-          items={[
-            { label: t('Ressource.BreadCrumps.title'), href: '/' },
-            {
-              label: t('Ressource.Routes.BreadCrumps.title'),
-              href: '/routes/',
-            },
-          ]}
-        />
       </div>
       <div className='container'>
         <div className='flex justify-between items-center mb-6'>
@@ -69,7 +59,7 @@ async function RoutesPage(props: {
           />
         </div>
       </div>
-    </div>
+    </>
   );
 }
 
