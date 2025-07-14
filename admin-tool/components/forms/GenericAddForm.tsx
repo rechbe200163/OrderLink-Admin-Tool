@@ -158,6 +158,7 @@ export default function GenericAddForm({ addresses }: AddUserFormProps) {
                     />
                   </SelectTrigger>
                   <SelectContent>
+                    <SelectItem key='N/A' value={'N/A'}>N/A</SelectItem>
                     {Object.keys(BusinessSector).map((businessSector) => (
                       <SelectItem key={businessSector} value={businessSector}>
                         {tFilter(
