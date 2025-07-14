@@ -24,6 +24,7 @@ export const ENDPOINTS = {
   SUBSCRIPTION_CANCEL: (id: string | number) => `subscriptions/${id}/cancel`,
   ROLES_ROLE_NAMES: 'roles/roleNames',
   AUTH_LOGIN: 'auth/signIn',
+  AUTH_RENEW_SESSION: 'auth/renewSession',
 } as const;
 
 export type EndpointKey = keyof typeof ENDPOINTS;

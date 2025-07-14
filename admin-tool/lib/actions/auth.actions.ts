@@ -3,8 +3,12 @@ import { FormState } from '../form.types';
 import { redirect } from 'next/navigation';
 import { apiPost } from './api.actions';
 import { ENDPOINTS } from '../api/endpoints';
-import { setCookie, deleteCookie, getCookie } from '../cookies/cookie-managment';
-import { Session } from '../utlis/getSession';
+import {
+  setCookie,
+  deleteCookie,
+  getCookie,
+} from '../cookies/cookie-managment';
+import { getSession, Session } from '../utlis/getSession';
 
 export async function logOut(): Promise<FormState> {
   try {
@@ -40,8 +44,13 @@ export async function logIn(
       email,
       password,
     });
-    await setCookie('token', resp.token.accessToken);
-    await setCookie('user', JSON.stringify(resp.user));
+    console.log('Login response:', resp);
+    await setCookie('token', {
+      accessToken: resp.token.accessToken,
+      issuedAt: resp.token.issuedAt,
+      expiresAt: resp.token.expiresAt,
+    });
+    await setCookie('user', resp.user);
   } catch (error: any) {
     console.error('Login error:', error);
     return { success: false, errors: { title: [error.message] } };
@@ -49,14 +58,30 @@ export async function logIn(
   redirect('/');
 }
 
-export async function renewSession(): Promise<void> {
-  'use server';
-  const token = await getCookie('token');
-  const user = await getCookie('user');
-  if (token) {
-    await setCookie('token', token);
+export async function renewSessionAction(
+  _prevState: any,
+  _formData: FormData
+): Promise<{ success: boolean }> {
+  const session = await getSession();
+
+  if (!session) {
+    return { success: false }; // ❌ redirect NICHT hier aufrufen
   }
-  if (user) {
-    await setCookie('user', user);
+
+  try {
+    const resp = await apiPost<Session>(ENDPOINTS.AUTH_RENEW_SESSION, {
+      token: session.token.accessToken,
+    });
+
+    if (resp?.token) {
+      await setCookie('token', resp.token);
+      await setCookie('user', resp.user);
+      return { success: true };
+    }
+
+    return { success: false };
+  } catch (err) {
+    console.error('Renew failed:', err);
+    return { success: false };
   }
 }

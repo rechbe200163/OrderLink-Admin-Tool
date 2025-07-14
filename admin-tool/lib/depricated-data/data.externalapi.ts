@@ -116,7 +116,7 @@ export async function setCookie(name: string, data: string) {
     createdAt: new Date().toISOString(),
   };
   cookieStore.set(name, JSON.stringify(value), {
-    expires: new Date(Date.now() + 30 * 60 * 1000), // 30 minutes
+    expires: new Date(Date.now() + 30 * 60), // 30 minutes
     httpOnly: true,
     secure: true,
   });

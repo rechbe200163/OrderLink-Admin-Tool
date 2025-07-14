@@ -37,7 +37,9 @@ export class BaseApiService {
       });
     }
 
-    const token = await getCookie('token');
+    const tokenData = await getCookie<{ accessToken: string }>('token');
+    const token = tokenData?.accessToken;
+
     const options: RequestInit = {
       method,
       headers: {

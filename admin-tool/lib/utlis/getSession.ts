@@ -18,13 +18,29 @@ export interface Session {
   };
 }
 
+export interface SanitizedEmployee {
+  employeeId: string;
+  email: string;
+  firstName?: string;
+  lastName?: string;
+  role?: RoleName;
+  superAdmin?: boolean;
+}
+
 export async function getSession(): Promise<Session> {
-  const raw = await getCookie('user');
-  if (!raw) {
+  const user = await getCookie<SanitizedEmployee>('user');
+  const token = await getCookie<Token>('token');
+
+  if (!user || !token) {
     throw new Error('No session found');
   }
-  const user = JSON.parse(raw);
-  return { token: user.token, user };
+
+  try {
+    return { token, user };
+  } catch (e) {
+    console.error('Session parsing error:', e);
+    throw new Error('Session parsing failed');
+  }
 }
 
 export async function authenticated(): Promise<void> {
