@@ -30,6 +30,9 @@ export default function EditCustomerForm({
   const [selectedAddress, setSelectedAddress] = React.useState<string>(
     customer.addressId!
   );
+  const [selectedBusinessSector, setSelectedBusinessSector] = React.useState<string>(
+    customer.businessSector ?? 'N/A'
+  );
   const [formState, action, isPending] = useActionState(
     updateCustomer.bind(null, customer.customerReference!),
     {
@@ -126,29 +129,31 @@ export default function EditCustomerForm({
               <h3 className='text-xl font-semibold mb-4'>
                 {t('Details.businessCustomerDetails')}
               </h3>
-              <div>
-                <Label htmlFor='companyNumber'>
-                  {t('Attributes.companyNumber')}
-                </Label>
-                <Input
-                  id='companyNumber'
-                  name='companyNumber'
-                  placeholder={t('Placeholder.companyNumber')}
-                  defaultValue={customer.companyNumber!}
-                />
-              </div>
+              {selectedBusinessSector !== 'N/A' ? (
+                <div>
+                  <Label htmlFor='companyNumber'>
+                    {t('Attributes.companyNumber')}
+                  </Label>
+                  <Input
+                    id='companyNumber'
+                    name='companyNumber'
+                    placeholder={t('Placeholder.companyNumber')}
+                    defaultValue={customer.companyNumber ?? ''}
+                    required
+                  />
+                </div>
+              ) : (
+                <input type='hidden' name='companyNumber' value='' />
+              )}
               <div>
                 <Label htmlFor='businessSector'>
                   {t('Attributes.businessSector')}
                 </Label>
                 <Select
                   name='businessSector'
-                  defaultValue={customer.businessSector!}
+                  value={selectedBusinessSector}
                   onValueChange={(value) => {
-                    const companyNumberInput = document.getElementById(
-                      'companyNumber'
-                    ) as HTMLInputElement;
-                    companyNumberInput.required = value !== 'N/A';
+                    setSelectedBusinessSector(value);
                   }}
                 >
                   <SelectTrigger>

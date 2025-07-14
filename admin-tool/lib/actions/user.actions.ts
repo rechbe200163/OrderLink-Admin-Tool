@@ -10,7 +10,14 @@ export async function addCustomer(
   formData: FormData
 ): Promise<FormState> {
   return (await guardAction(async () => {
-    await apiPost(ENDPOINTS.CUSTOMERS, Object.fromEntries(formData));
+    const data = Object.fromEntries(formData) as Record<string, any>;
+    if (data.businessSector === 'N/A') {
+      data.businessSector = undefined;
+    }
+    if (!data.companyNumber) {
+      data.companyNumber = undefined;
+    }
+    await apiPost(ENDPOINTS.CUSTOMERS, data);
     return { success: true } as FormState;
   }, 'Failed to add customer')) as FormState;
 }
@@ -39,10 +46,14 @@ export async function updateCustomer(
   formData: FormData
 ): Promise<FormState> {
   return (await guardAction(async () => {
-    await apiPatch(
-      ENDPOINTS.CUSTOMER(customerReference),
-      Object.fromEntries(formData)
-    );
+    const data = Object.fromEntries(formData) as Record<string, any>;
+    if (data.businessSector === 'N/A') {
+      data.businessSector = undefined;
+    }
+    if (!data.companyNumber) {
+      data.companyNumber = undefined;
+    }
+    await apiPatch(ENDPOINTS.CUSTOMER(customerReference), data);
     return { success: true } as FormState;
   }, 'Failed to update customer')) as FormState;
 }

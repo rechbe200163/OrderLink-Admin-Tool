@@ -26,6 +26,8 @@ interface AddUserFormProps {
 
 export default function GenericAddForm({ addresses }: AddUserFormProps) {
   const [selectedAddress, setSelectedAddress] = React.useState<string>('');
+  const [selectedBusinessSector, setSelectedBusinessSector] =
+    React.useState<string>('N/A');
   const [formState, action, isPending] = useActionState(addCustomer, {
     success: false,
     errors: {
@@ -126,27 +128,37 @@ export default function GenericAddForm({ addresses }: AddUserFormProps) {
               <h3 className='text-xl font-semibold mb-4'>
                 {t('Details.businessCustomerDetails')}
               </h3>
-              <div>
-                <Label htmlFor='companyNumber'>
-                  {t('Attributes.companyNumber')}
-                </Label>
-                <Input
-                  id='companyNumber'
-                  name='companyNumber'
-                  placeholder={t('Placeholder.companyNumber')}
-                />
-              </div>
+              {selectedBusinessSector !== 'N/A' ? (
+                <div>
+                  <Label htmlFor='companyNumber'>
+                    {t('Attributes.companyNumber')}
+                  </Label>
+                  <Input
+                    id='companyNumber'
+                    name='companyNumber'
+                    placeholder={t('Placeholder.companyNumber')}
+                    required
+                  />
+                </div>
+              ) : (
+                <input type='hidden' name='companyNumber' value='' />
+              )}
               <div>
                 <Label htmlFor='businessSector'>
                   {t('Attributes.businessSector')}
                 </Label>
-                <Select name='businessSector'>
+                <Select
+                  name='businessSector'
+                  value={selectedBusinessSector}
+                  onValueChange={(value) => setSelectedBusinessSector(value)}
+                >
                   <SelectTrigger>
                     <SelectValue
                       placeholder={t('Placeholder.selectBusinessSector')}
                     />
                   </SelectTrigger>
                   <SelectContent>
+                    <SelectItem key='N/A' value={'N/A'}>N/A</SelectItem>
                     {Object.keys(BusinessSector).map((businessSector) => (
                       <SelectItem key={businessSector} value={businessSector}>
                         {tFilter(
