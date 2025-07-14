@@ -4,6 +4,7 @@ import { redirect } from 'next/navigation';
 import { apiPost } from './api.actions';
 import { ENDPOINTS } from '../api/endpoints';
 import { setCookie, deleteCookie } from '../cookies/cookie-managment';
+import { Session } from '../utlis/getSession';
 
 export async function logOut(): Promise<FormState> {
   try {
@@ -35,14 +36,11 @@ export async function logIn(
   }
 
   try {
-    const resp = await apiPost<{ token: string; user: any }>(
-      ENDPOINTS.AUTH_LOGIN,
-      {
-        email,
-        password,
-      }
-    );
-    await setCookie('token', resp.token);
+    const resp = await apiPost<Session>(ENDPOINTS.AUTH_LOGIN, {
+      email,
+      password,
+    });
+    await setCookie('token', resp.token.accessToken);
     await setCookie('user', JSON.stringify(resp.user));
   } catch (error: any) {
     console.error('Login error:', error);
