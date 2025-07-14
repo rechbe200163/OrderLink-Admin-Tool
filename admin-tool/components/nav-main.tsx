@@ -13,6 +13,8 @@ import {
   Box,
   Shapes,
   Key,
+  Shield,
+  ShieldCheck,
 } from 'lucide-react';
 
 import {
@@ -110,22 +112,22 @@ export function NavMain() {
       ],
     },
     {
+      label: tGroup('permissions'),
+      items: [
+        {
+          title: tItem('permissions'),
+          url: '/permissions',
+          icon: ShieldCheck,
+        },
+      ],
+    },
+    {
       label: tGroup('settings'),
       items: [
         {
           title: tItem('settings'),
           url: '/settings',
           icon: Bolt,
-        },
-      ],
-    },
-    {
-      label: tGroup('permissions'),
-      items: [
-        {
-          title: tItem('permissions'),
-          url: '/permissions',
-          icon: Key,
         },
       ],
     },
