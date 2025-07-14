@@ -3,7 +3,8 @@ import { SidebarTrigger } from '@/components/ui/sidebar';
 import { ModeToggle } from './dark-mode/Toggle';
 import { getSession } from '@/lib/utlis/getSession';
 import SessionTimer from './helpers/SessionTimer';
-import DynamicBreadcrumbs from './dynamic-breadcrumbs';
+import PathBreadcrumbs from './helpers/PathBreadcrumbs';
+
 
 export async function SiteHeader() {
   const session = await getSession();
@@ -17,7 +18,7 @@ export async function SiteHeader() {
             orientation='vertical'
             className='mx-2 data-[orientation=vertical]:h-4'
           />
-          <DynamicBreadcrumbs />
+          <PathBreadcrumbs />
         </div>
         <div className='flex items-center gap-2 m-5'>
           <SessionTimer

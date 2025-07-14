@@ -23,13 +23,6 @@ export default function SessionTimer({
   const [expiry, setExpiry] = useState(expiresAtMs);
   const [remaining, setRemaining] = useState(expiry - Date.now());
 
-  const [formState, formAction, isPending] = useActionState(
-    renewSessionAction,
-    {
-      success: false,
-    }
-  );
-
   // ⏱ Timer-Tick alle 1 Sekunde
   useEffect(() => {
     const interval = setInterval(() => {
@@ -37,15 +30,6 @@ export default function SessionTimer({
     }, 1000);
     return () => clearInterval(interval);
   }, [expiry]);
-
-  // ✅ Wenn Session erfolgreich erneuert wurde, setze neue Expiry
-  useEffect(() => {
-    if (formState.success) {
-      const newExpiry = Date.now() + initialDuration;
-      setExpiry(newExpiry);
-      setRemaining(newExpiry - Date.now());
-    }
-  }, [formState.success, initialDuration]);
 
   function format(ms: number) {
     const total = Math.max(0, Math.floor(ms / 1000));
@@ -100,36 +84,6 @@ export default function SessionTimer({
         >
           {isExpired ? 'EXPIRED' : format(remaining)}
         </span>
-      </div>
-
-      {/* Hover Overlay mit Formular-Button */}
-      <div className='absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none group-hover:pointer-events-auto'>
-        <form action={formAction} className='h-full'>
-          <Button
-            type='submit'
-            disabled={isPending}
-            size='sm'
-            variant='secondary'
-            className={cn(
-              'w-full h-full rounded-lg border-2 border-primary/20',
-              'bg-background/95 backdrop-blur-sm',
-              'hover:bg-primary hover:text-primary-foreground',
-              'transition-all duration-200 shadow-lg'
-            )}
-          >
-            {isPending ? (
-              <>
-                <RefreshCw className='h-3.5 w-3.5 mr-2 animate-spin' />
-                Renewing...
-              </>
-            ) : (
-              <>
-                <RefreshCw className='h-3.5 w-3.5 mr-2' />
-                Renew Now
-              </>
-            )}
-          </Button>
-        </form>
       </div>
     </div>
   );

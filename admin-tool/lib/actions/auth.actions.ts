@@ -44,7 +44,6 @@ export async function logIn(
       email,
       password,
     });
-    console.log('Login response:', resp);
     await setCookie('token', {
       accessToken: resp.token.accessToken,
       issuedAt: resp.token.issuedAt,

@@ -1,16 +1,22 @@
 'use server';
 import { cookies } from 'next/headers';
-
-export async function setCookie<T extends object>(
-  name: string,
-  data: T
-): Promise<void> {
+export async function setCookie<T>(name: string, data: T): Promise<void> {
   const cookieStore = await cookies();
+
+  const expiresAt =
+    typeof data === 'object' &&
+    data !== null &&
+    'expiresAt' in data &&
+    typeof (data as any).expiresAt === 'number'
+      ? new Date((data as any).expiresAt)
+      : new Date(Date.now() + 30 * 60 * 1000); // Fallback
+
   cookieStore.set(name, JSON.stringify(data), {
-    expires: new Date(Date.now() + 30 * 60), // 30 Minuten
-    httpOnly: true,
-    secure: true,
     path: '/',
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: 'lax',
+    expires: expiresAt,
   });
 }
 
