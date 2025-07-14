@@ -1,8 +1,14 @@
 import { RoleName } from '@/lib/types';
 import { getCookie } from '../cookies/cookie-managment';
 
+export interface Token {
+  accessToken: string;
+  issuedAt: number;
+  expiresAt: number;
+}
+
 export interface Session {
-  token: string;
+  token: Token;
   user: {
     employeeId: string;
     email: string;

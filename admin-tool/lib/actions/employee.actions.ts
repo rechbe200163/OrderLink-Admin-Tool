@@ -19,6 +19,8 @@ export async function updateEmployee(
   _prevState: FormState,
   formData: FormData
 ): Promise<FormState> {
+  console.log('Updating employee with ID:', employeeId);
+  console.log('Form data:', Object.fromEntries(formData));
   return (await guardAction(async () => {
     await apiPut(ENDPOINTS.EMPLOYEE(employeeId), Object.fromEntries(formData));
     return { success: true } as FormState;

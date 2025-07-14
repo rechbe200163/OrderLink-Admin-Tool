@@ -1,9 +1,11 @@
 import BreadcrumbComponent from '@/components/helpers/BreadCrumbComponent';
 import CreateEmployees from '@/components/helpers/employees/CreateEmployee';
+import { roleApiService } from '@/lib/api/concrete/roles';
 import { getTranslations } from 'next-intl/server';
 
 async function CreateEmployeePage() {
   const t = await getTranslations('Dashboard');
+  const roles = await roleApiService.getRoleNames();
   return (
     <div className='min-w-full p-5'>
       <BreadcrumbComponent
@@ -19,7 +21,7 @@ async function CreateEmployeePage() {
           },
         ]}
       />
-      <CreateEmployees />
+      <CreateEmployees roles={roles} />
     </div>
   );
 }

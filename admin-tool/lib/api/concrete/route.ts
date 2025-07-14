@@ -20,6 +20,7 @@ export class RouteApiService extends BaseApiService {
   }
 
   async getRouteById(routeId: string): Promise<RoutesWithOrders> {
+    console.log('Fetching route by ID:', routeId);
     return this.get<RoutesWithOrders>(`routes/${routeId}`);
   }
 
