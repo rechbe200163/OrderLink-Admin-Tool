@@ -1,6 +1,5 @@
 import { PlusCircle } from 'lucide-react';
 import React from 'react';
-import BreadcrumbComponent from '@/components/helpers/BreadCrumbComponent';
 import PaginationComponent from '@/components/pagination+filtering/PagingComponent';
 import SearchComponent from '@/components/pagination+filtering/SearchComponent';
 import FilteringComponent from '@/components/pagination+filtering/FilteringComponent';
@@ -46,15 +45,6 @@ export default async function EmployeesPage(props: {
   return (
     <div className='px-5'>
       <div className='sticky top-0 bg-background z-10'>
-        <BreadcrumbComponent
-          items={[
-            { label: t('Ressource.BreadCrumps.title'), href: '/' },
-            {
-              label: t('Ressource.Employees.BreadCrumps.title'),
-              href: '/customers/',
-            },
-          ]}
-        />
       </div>
       <div className='container'>
         <div className='flex justify-between items-center mb-6'>

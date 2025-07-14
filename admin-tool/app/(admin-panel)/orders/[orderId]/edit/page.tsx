@@ -1,4 +1,3 @@
-import BreadcrumbComponent from '@/components/helpers/BreadCrumbComponent';
 import EditOrder from '@/components/helpers/orders/EditOrder';
 import { customerApiService } from '@/lib/api/concrete/customers';
 import { orderApiService } from '@/lib/api/concrete/orders';
@@ -16,13 +15,6 @@ async function EditOrderPage(props: EditOrderPageProps) {
   const order = await orderApiService.getOrderById(orderId);
   return (
     <div className='min-w-full p-5'>
-      <BreadcrumbComponent
-        items={[
-          { label: 'Dashboard', href: '/' },
-          { label: 'Orders', href: '/orders' },
-          { label: 'Bearbeiten', href: `/orders/${order.orderId}/edit` },
-        ]}
-      />
       <EditOrder customer={customers} products={products} order={order} />
     </div>
   );

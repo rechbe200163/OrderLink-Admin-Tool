@@ -1,6 +1,5 @@
 import { ButtonLinkComponent } from '@/components/ButtonLinkComponent';
 import { AddressTable } from '@/components/helpers/addresses/AddressTable';
-import BreadcrumbComponent from '@/components/helpers/BreadCrumbComponent';
 import FilteringComponent from '@/components/pagination+filtering/FilteringComponent';
 import PaginationComponent from '@/components/pagination+filtering/PagingComponent';
 import SearchComponent from '@/components/pagination+filtering/SearchComponent';
@@ -45,15 +44,6 @@ export default async function AddressesPage(props: {
   return (
     <div className='px-5'>
       <div className='sticky top-0 bg-background z-10 '>
-        <BreadcrumbComponent
-          items={[
-            { label: t('Ressource.BreadCrumps.title'), href: '/' },
-            {
-              label: t('Ressource.Address.BreadCrumps.title'),
-              href: '/addresses/',
-            },
-          ]}
-        />
       </div>
       <div className='container '>
         <div className='flex justify-between items-center mb-6'>
