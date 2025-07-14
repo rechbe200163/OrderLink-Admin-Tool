@@ -1,7 +1,7 @@
 'use server';
 
 import { FormState } from '../form.types';
-import { apiPost, apiPatch } from './api.actions';
+import { apiPost, apiPut } from './api.actions';
 import { ENDPOINTS } from '../api/endpoints';
 import { guardAction } from '../server-guard';
 
@@ -21,10 +21,7 @@ export async function updateCategory(
   formData: FormData
 ): Promise<FormState> {
   return (await guardAction(async () => {
-    await apiPatch(
-      ENDPOINTS.CATEGORY(categoryId),
-      Object.fromEntries(formData)
-    );
+    await apiPut(ENDPOINTS.CATEGORY(categoryId), Object.fromEntries(formData));
     return { success: true } as FormState;
   }, 'Failed to update category')) as FormState;
 }

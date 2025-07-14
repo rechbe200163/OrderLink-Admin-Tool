@@ -1,7 +1,7 @@
 'use server';
 import { FormState } from '../form.types';
 
-import { apiPost, apiPatch } from './api.actions';
+import { apiPost, apiPut } from './api.actions';
 import { ENDPOINTS } from '../api/endpoints';
 import { guardAction } from '../server-guard';
 
@@ -53,7 +53,9 @@ export async function updateCustomer(
     if (!data.companyNumber) {
       data.companyNumber = undefined;
     }
-    await apiPatch(ENDPOINTS.CUSTOMER(customerReference), data);
+    console.log('Updating customer with reference:', customerReference);
+    console.log('Form data:', data);
+    await apiPut(ENDPOINTS.CUSTOMER(customerReference), data);
     return { success: true } as FormState;
   }, 'Failed to update customer')) as FormState;
 }

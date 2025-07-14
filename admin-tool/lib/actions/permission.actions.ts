@@ -1,7 +1,7 @@
 'use server';
 
 import { FormState } from '../form.types';
-import { apiPost, apiPatch } from './api.actions';
+import { apiPost, apiPut } from './api.actions';
 import { ENDPOINTS } from '../api/endpoints';
 import { guardAction } from '../server-guard';
 import { error } from 'console';
@@ -36,7 +36,7 @@ export async function updatePermission(
       const allowed = formData.get('allowed');
       data.allowed = allowed === 'true' || allowed === 'on';
     }
-    await apiPatch(ENDPOINTS.PERMISSION(permissionId), data);
+    await apiPut(ENDPOINTS.PERMISSION(permissionId), data);
     return { success: true } as FormState;
   }, 'Failed to update permission')) as FormState;
 }
