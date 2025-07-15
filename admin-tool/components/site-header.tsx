@@ -1,6 +1,5 @@
 import { Separator } from '@/components/ui/separator';
 import { SidebarTrigger } from '@/components/ui/sidebar';
-import { ModeToggle } from './dark-mode/Toggle';
 import { getSession } from '@/lib/utlis/getSession';
 import SessionTimer from './helpers/SessionTimer';
 import PathBreadcrumbs from './helpers/PathBreadcrumbs';
@@ -25,7 +24,6 @@ export async function SiteHeader() {
             issuedAt={session.token.issuedAt}
             expiresAt={session.token.expiresAt}
           />
-          <ModeToggle />
         </div>
       </div>
     </header>

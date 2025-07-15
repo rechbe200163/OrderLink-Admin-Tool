@@ -1,6 +1,6 @@
 'use client';
 
-import { CreditCardIcon, LogOut, MoreVerticalIcon } from 'lucide-react';
+import { CreditCardIcon, LogOut, MoreVerticalIcon, UserIcon } from 'lucide-react';
 
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import {
@@ -18,6 +18,7 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from '@/components/ui/sidebar';
+import UserSettingsModal from './UserSettingsModal';
 import { logOut } from '@/lib/actions/auth.actions';
 import { Session } from '@/lib/utlis/getSession';
 
@@ -91,6 +92,14 @@ export default function NavUser({ session }: { session: Session }) {
                 <UserCircleIcon />
                 Account
               </DropdownMenuItem> */}
+              <DropdownMenuItem asChild>
+                <UserSettingsModal>
+                  <div className='flex items-center'>
+                    <UserIcon className='mr-2 h-4 w-4' />
+                    Profile
+                  </div>
+                </UserSettingsModal>
+              </DropdownMenuItem>
               <DropdownMenuItem>
                 <CreditCardIcon />
                 Billing
