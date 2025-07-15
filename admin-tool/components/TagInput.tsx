@@ -65,7 +65,7 @@ export default function Component() {
   const t = useTranslations('FilterAndSearch.Search');
 
   return (
-    <div className='not-first:*:mt-2'>
+    <div>
       <TagInput
         id={id}
         tags={exampleTags}
