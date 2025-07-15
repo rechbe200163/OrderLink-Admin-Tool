@@ -57,14 +57,3 @@ export async function updateCustomer(
     return { success: true } as FormState;
   }, 'Failed to update customer')) as FormState;
 }
-
-export async function updateCurrentUser(
-  _prevState: FormState,
-  formData: FormData
-): Promise<FormState> {
-  return (await guardAction(async () => {
-    const data = Object.fromEntries(formData) as Record<string, any>;
-    await apiPut(ENDPOINTS.USER_ME, data);
-    return { success: true } as FormState;
-  }, 'Failed to update user')) as FormState;
-}
