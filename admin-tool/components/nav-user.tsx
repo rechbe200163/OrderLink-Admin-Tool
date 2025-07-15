@@ -1,7 +1,10 @@
 'use client';
-
-import { CreditCardIcon, LogOut, MoreVerticalIcon, UserIcon } from 'lucide-react';
-
+import {
+  CreditCardIcon,
+  LogOut,
+  MoreVerticalIcon,
+  UserIcon,
+} from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import {
   DropdownMenu,
@@ -20,7 +23,7 @@ import {
 } from '@/components/ui/sidebar';
 import UserSettingsModal from './UserSettingsModal';
 import { logOut } from '@/lib/actions/auth.actions';
-import { Session } from '@/lib/utlis/getSession';
+import type { Session } from '@/lib/utlis/getSession';
 import { useTranslations } from 'next-intl';
 
 export default function NavUser({ session }: { session: Session }) {
@@ -28,20 +31,15 @@ export default function NavUser({ session }: { session: Session }) {
   const { isMobile } = useSidebar();
   const tItem = useTranslations('Navigation.Items');
   // const user: User = await getCookie('user');
-
   if (!session) return null;
-
   const user = session?.user || {
     firstName: 'John',
     lastName: 'Doe',
     email: 'john.doe@example.com',
   };
-
   const { firstName = 'John', lastName = 'Doe' } = user;
-
   const name = `${firstName} ${lastName}`;
   const initials = `${firstName.charAt(0)}${lastName.charAt(0)}`.toUpperCase();
-
   return (
     <SidebarMenu>
       <SidebarMenuItem>
@@ -90,12 +88,8 @@ export default function NavUser({ session }: { session: Session }) {
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
-              {/* <DropdownMenuItem>
-                <UserCircleIcon />
-                Account
-              </DropdownMenuItem> */}
-              <DropdownMenuItem asChild>
-                <UserSettingsModal>
+              <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
+                <UserSettingsModal user={user}>
                   <div className='flex items-center'>
                     <UserIcon className='mr-2 h-4 w-4' />
                     {tItem('profileSettings')}
@@ -103,13 +97,9 @@ export default function NavUser({ session }: { session: Session }) {
                 </UserSettingsModal>
               </DropdownMenuItem>
               <DropdownMenuItem>
-                <CreditCardIcon />
+                <CreditCardIcon className='mr-2 h-4 w-4' />
                 Billing
               </DropdownMenuItem>
-              {/* <DropdownMenuItem>
-                <BellIcon />
-                Notifications
-              </DropdownMenuItem> */}
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuItem onClick={logOut}>
