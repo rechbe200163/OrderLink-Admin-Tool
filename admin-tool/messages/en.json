@@ -344,7 +344,10 @@
           "password": "Passwort eingeben",
           "selectRole": "Rolle Auswählen"
         },
-        "Status": { "active": "Aktiv", "inactive": "Inaktiv" }
+        "Status": {
+          "active": "Aktiv",
+          "inactive": "Inaktiv"
+        }
       },
       "Permissions": {
         "BreadCrumps": {
@@ -360,23 +363,26 @@
           "status": "Status",
           "notFound": "No permissions found"
         },
-      "buttons": {
-        "delete": "Delete Permission",
-        "deleteLoading": "Deleting Permission...",
-        "create": "Create Permission",
-        "createLoading": "Creating Permission...",
-        "update": "Update Permission",
-        "updateLoading": "Updating Permission...",
-        "add": "Add Permission",
-        "addLoading": "Adding Permission..."
-      },
-      "add": "Add New Permission",
-      "edit": "Edit Permission",
-      "Status": { "active": "Active", "inactive": "Inactive" },
-      "NoRoles": {
-        "title": "No Roles Available",
-        "description": "It seems there are no roles defined. Please create one before managing permissions."
-      }
+        "buttons": {
+          "delete": "Delete Permission",
+          "deleteLoading": "Deleting Permission...",
+          "create": "Create Permission",
+          "createLoading": "Creating Permission...",
+          "update": "Update Permission",
+          "updateLoading": "Updating Permission...",
+          "add": "Add Permission",
+          "addLoading": "Adding Permission..."
+        },
+        "add": "Add New Permission",
+        "edit": "Edit Permission",
+        "Status": {
+          "active": "Active",
+          "inactive": "Inactive"
+        },
+        "NoRoles": {
+          "title": "No Roles Available",
+          "description": "It seems there are no roles defined. Please create one before managing permissions."
+        }
       },
       "Subscription": {
         "BreadCrumps": {
@@ -509,7 +515,8 @@
       "customers": "Customers",
       "employees": "Employees",
       "settings": "Settings",
-      "permissions": "Permissions"
+      "permissions": "Permissions",
+      "profileSettings": "Profile & Settings"
     }
   },
   "PremiumWrapper": {

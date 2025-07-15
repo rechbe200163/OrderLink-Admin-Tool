@@ -344,7 +344,10 @@
           "password": "Wachtwoord invoeren",
           "selectRole": "Rol Selecteren"
         },
-        "Status": { "active": "Actief", "inactive": "Inactief" }
+        "Status": {
+          "active": "Actief",
+          "inactive": "Inactief"
+        }
       },
       "Permissions": {
         "BreadCrumps": {
@@ -360,23 +363,26 @@
           "status": "Status",
           "notFound": "Geen machtigingen gevonden"
         },
-      "buttons": {
-        "delete": "Machtiging Verwijderen",
-        "deleteLoading": "Machtiging Verwijderen...",
-        "create": "Machtiging Aanmaken",
-        "createLoading": "Machtiging Aanmaken...",
-        "update": "Machtiging Bijwerken",
-        "updateLoading": "Machtiging Bijwerken...",
-        "add": "Machtiging Toevoegen",
-        "addLoading": "Machtiging Toevoegen..."
-      },
-      "add": "Nieuwe Machtiging",
-      "edit": "Machtiging Bewerken",
-      "Status": { "active": "Actief", "inactive": "Inactief" },
-      "NoRoles": {
-        "title": "Geen rollen beschikbaar",
-        "description": "Er zijn geen rollen gedefinieerd. Maak er eerst een voordat je machtigingen beheert."
-      }
+        "buttons": {
+          "delete": "Machtiging Verwijderen",
+          "deleteLoading": "Machtiging Verwijderen...",
+          "create": "Machtiging Aanmaken",
+          "createLoading": "Machtiging Aanmaken...",
+          "update": "Machtiging Bijwerken",
+          "updateLoading": "Machtiging Bijwerken...",
+          "add": "Machtiging Toevoegen",
+          "addLoading": "Machtiging Toevoegen..."
+        },
+        "add": "Nieuwe Machtiging",
+        "edit": "Machtiging Bewerken",
+        "Status": {
+          "active": "Actief",
+          "inactive": "Inactief"
+        },
+        "NoRoles": {
+          "title": "Geen rollen beschikbaar",
+          "description": "Er zijn geen rollen gedefinieerd. Maak er eerst een voordat je machtigingen beheert."
+        }
       },
       "Subscription": {
         "BreadCrumps": {
@@ -509,7 +515,8 @@
       "customers": "Klanten",
       "employees": "Werknemers",
       "settings": "Instellingen",
-      "permissions": "Machtigingen"
+      "permissions": "Machtigingen",
+      "profileSettings": "Profiel & instellingen"
     }
   },
   "PremiumWrapper": {

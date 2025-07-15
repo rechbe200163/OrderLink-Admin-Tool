@@ -344,7 +344,10 @@
           "password": "Passwort eingeben",
           "selectRole": "Rolle Auswählen"
         },
-        "Status": { "active": "Aktiv", "inactive": "Inaktiv" }
+        "Status": {
+          "active": "Aktiv",
+          "inactive": "Inaktiv"
+        }
       },
       "Permissions": {
         "BreadCrumps": {
@@ -360,23 +363,26 @@
           "status": "Status",
           "notFound": "Keine Berechtigungen gefunden"
         },
-      "buttons": {
-        "delete": "Berechtigung Löschen",
-        "deleteLoading": "Berechtigung Löschen...",
-        "create": "Berechtigung Erstellen",
-        "createLoading": "Berechtigung Erstellen...",
-        "update": "Berechtigung Aktualisieren",
-        "updateLoading": "Berechtigung Aktualisieren...",
-        "add": "Berechtigung Hinzufügen",
-        "addLoading": "Berechtigung Hinzufügen..."
-      },
-      "add": "Neue Berechtigung",
-      "edit": "Berechtigung Bearbeiten",
-      "Status": { "active": "Aktiv", "inactive": "Inaktiv" },
-      "NoRoles": {
-        "title": "Keine Rollen verfügbar",
-        "description": "Bitte erst eine Rolle erstellen, bevor Berechtigungen verwaltet werden."
-      }
+        "buttons": {
+          "delete": "Berechtigung Löschen",
+          "deleteLoading": "Berechtigung Löschen...",
+          "create": "Berechtigung Erstellen",
+          "createLoading": "Berechtigung Erstellen...",
+          "update": "Berechtigung Aktualisieren",
+          "updateLoading": "Berechtigung Aktualisieren...",
+          "add": "Berechtigung Hinzufügen",
+          "addLoading": "Berechtigung Hinzufügen..."
+        },
+        "add": "Neue Berechtigung",
+        "edit": "Berechtigung Bearbeiten",
+        "Status": {
+          "active": "Aktiv",
+          "inactive": "Inaktiv"
+        },
+        "NoRoles": {
+          "title": "Keine Rollen verfügbar",
+          "description": "Bitte erst eine Rolle erstellen, bevor Berechtigungen verwaltet werden."
+        }
       },
       "Subscription": {
         "BreadCrumps": {
@@ -520,7 +526,8 @@
       "customers": "Kunden",
       "employees": "Mitarbeiter",
       "settings": "Einstellungen",
-      "permissions": "Berechtigungen"
+      "permissions": "Berechtigungen",
+      "profileSettings": "Profil & Einstellungen"
     }
   },
   "PremiumWrapper": {
