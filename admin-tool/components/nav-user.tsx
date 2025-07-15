@@ -21,10 +21,12 @@ import {
 import UserSettingsModal from './UserSettingsModal';
 import { logOut } from '@/lib/actions/auth.actions';
 import { Session } from '@/lib/utlis/getSession';
+import { useTranslations } from 'next-intl';
 
 export default function NavUser({ session }: { session: Session }) {
   // if user is null return generic user object
   const { isMobile } = useSidebar();
+  const tItem = useTranslations('Navigation.Items');
   // const user: User = await getCookie('user');
 
   if (!session) return null;
@@ -96,7 +98,7 @@ export default function NavUser({ session }: { session: Session }) {
                 <UserSettingsModal>
                   <div className='flex items-center'>
                     <UserIcon className='mr-2 h-4 w-4' />
-                    Profile
+                    {tItem('profileSettings')}
                   </div>
                 </UserSettingsModal>
               </DropdownMenuItem>
