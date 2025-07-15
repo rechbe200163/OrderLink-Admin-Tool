@@ -40,3 +40,14 @@ export async function updatePermission(
     return { success: true } as FormState;
   }, 'Failed to update permission')) as FormState;
 }
+
+export async function requestPermission(
+  _prevState: FormState,
+  formData: FormData
+): Promise<FormState> {
+  return (await guardAction(async () => {
+    const data = Object.fromEntries(formData) as Record<string, any>;
+    await apiPost(ENDPOINTS.PERMISSION_REQUEST, data);
+    return { success: true } as FormState;
+  }, 'Failed to request permission')) as FormState;
+}

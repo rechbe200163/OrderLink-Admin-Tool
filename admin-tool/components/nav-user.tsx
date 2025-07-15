@@ -20,6 +20,8 @@ import {
 } from '@/components/ui/sidebar';
 import { logOut } from '@/lib/actions/auth.actions';
 import { Session } from '@/lib/utlis/getSession';
+import { ModeToggle } from './dark-mode/Toggle';
+import EditProfileModal from './forms/auth/EditProfileModal';
 
 export default function NavUser({ session }: { session: Session }) {
   // if user is null return generic user object
@@ -99,7 +101,12 @@ export default function NavUser({ session }: { session: Session }) {
                 <BellIcon />
                 Notifications
               </DropdownMenuItem> */}
+              <EditProfileModal session={session} />
             </DropdownMenuGroup>
+            <DropdownMenuSeparator />
+            <div className='px-2 py-1'>
+              <ModeToggle />
+            </div>
             <DropdownMenuSeparator />
             <DropdownMenuItem onClick={logOut}>
               <LogOut className='mr-2 h-4 w-4' />
