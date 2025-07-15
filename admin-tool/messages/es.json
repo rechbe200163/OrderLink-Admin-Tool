@@ -344,7 +344,10 @@
           "password": "Introduce la Contraseña",
           "selectRole": "Seleccionar Rol"
         },
-        "Status": { "active": "Activo", "inactive": "Inactivo" }
+        "Status": {
+          "active": "Activo",
+          "inactive": "Inactivo"
+        }
       },
       "Permissions": {
         "BreadCrumps": {
@@ -360,23 +363,26 @@
           "status": "Estado",
           "notFound": "No se encontraron permisos"
         },
-      "buttons": {
-        "delete": "Eliminar Permiso",
-        "deleteLoading": "Eliminando...",
-        "create": "Crear Permiso",
-        "createLoading": "Creando...",
-        "update": "Actualizar Permiso",
-        "updateLoading": "Actualizando...",
+        "buttons": {
+          "delete": "Eliminar Permiso",
+          "deleteLoading": "Eliminando...",
+          "create": "Crear Permiso",
+          "createLoading": "Creando...",
+          "update": "Actualizar Permiso",
+          "updateLoading": "Actualizando...",
+          "add": "Agregar Permiso",
+          "addLoading": "Agregando..."
+        },
         "add": "Agregar Permiso",
-        "addLoading": "Agregando..."
-      },
-      "add": "Agregar Permiso",
-      "edit": "Editar Permiso",
-      "Status": { "active": "Activo", "inactive": "Inactivo" },
-      "NoRoles": {
-        "title": "No hay roles disponibles",
-        "description": "Parece que no hay roles definidos. Crea uno antes de gestionar permisos."
-      }
+        "edit": "Editar Permiso",
+        "Status": {
+          "active": "Activo",
+          "inactive": "Inactivo"
+        },
+        "NoRoles": {
+          "title": "No hay roles disponibles",
+          "description": "Parece que no hay roles definidos. Crea uno antes de gestionar permisos."
+        }
       },
       "Subscription": {
         "BreadCrumps": {
@@ -509,7 +515,8 @@
       "customers": "Clientes",
       "employees": "Empleados",
       "settings": "Configuración",
-      "permissions": "Permisos"
+      "permissions": "Permisos",
+      "profileSettings": "Perfil y ajustes"
     }
   },
   "PremiumWrapper": {

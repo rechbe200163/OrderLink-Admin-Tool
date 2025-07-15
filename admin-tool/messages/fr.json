@@ -344,7 +344,10 @@
           "password": "Entrer le mot de passe",
           "selectRole": "Sélectionner le rôle"
         },
-        "Status": { "active": "Actif", "inactive": "Inactif" }
+        "Status": {
+          "active": "Actif",
+          "inactive": "Inactif"
+        }
       },
       "Permissions": {
         "BreadCrumps": {
@@ -360,23 +363,26 @@
           "status": "Statut",
           "notFound": "Aucune autorisation trouvée"
         },
-      "buttons": {
-        "delete": "Supprimer l'Autorisation",
-        "deleteLoading": "Suppression...",
-        "create": "Créer l'Autorisation",
-        "createLoading": "Création...",
-        "update": "Mettre à jour",
-        "updateLoading": "Mise à jour...",
-        "add": "Ajouter l'Autorisation",
-        "addLoading": "Ajout..."
-      },
-      "add": "Ajouter une Autorisation",
-      "edit": "Modifier l'Autorisation",
-      "Status": { "active": "Actif", "inactive": "Inactif" },
-      "NoRoles": {
-        "title": "Aucun rôle disponible",
-        "description": "Aucun rôle n'est défini. Veuillez en créer un avant de gérer les autorisations."
-      }
+        "buttons": {
+          "delete": "Supprimer l'Autorisation",
+          "deleteLoading": "Suppression...",
+          "create": "Créer l'Autorisation",
+          "createLoading": "Création...",
+          "update": "Mettre à jour",
+          "updateLoading": "Mise à jour...",
+          "add": "Ajouter l'Autorisation",
+          "addLoading": "Ajout..."
+        },
+        "add": "Ajouter une Autorisation",
+        "edit": "Modifier l'Autorisation",
+        "Status": {
+          "active": "Actif",
+          "inactive": "Inactif"
+        },
+        "NoRoles": {
+          "title": "Aucun rôle disponible",
+          "description": "Aucun rôle n'est défini. Veuillez en créer un avant de gérer les autorisations."
+        }
       },
       "Subscription": {
         "BreadCrumps": {
@@ -509,7 +515,8 @@
       "customers": "Clients",
       "employees": "Employés",
       "settings": "Paramètres",
-      "permissions": "Autorisations"
+      "permissions": "Autorisations",
+      "profileSettings": "Profil & paramètres"
     }
   },
   "PremiumWrapper": {
