@@ -6,18 +6,18 @@ import { guardAction } from '../server-guard';
 
 export async function updateProfile(
   _prevState: FormState,
-  formData: FormData,
+  formData: FormData
 ): Promise<FormState> {
   return (await guardAction(async () => {
     const data = Object.fromEntries(formData) as Record<string, any>;
-    await apiPut(ENDPOINTS.USER_ME, data);
+    await apiPut(ENDPOINTS.UPDATE_ME, data);
     return { success: true } as FormState;
   }, 'Failed to update profile')) as FormState;
 }
 
 export async function requestPermissionAction(
   _prevState: FormState,
-  formData: FormData,
+  formData: FormData
 ): Promise<FormState> {
   return (await guardAction(async () => {
     const data = Object.fromEntries(formData) as Record<string, any>;
