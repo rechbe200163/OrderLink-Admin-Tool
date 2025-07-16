@@ -1,4 +1,3 @@
-'use client';
 import {
   Table,
   TableBody,
@@ -10,10 +9,9 @@ import {
 import { Badge } from '@/components/ui/badge';
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
-import { useOptimisticAddresses } from './AddressProvider';
+import { Address } from '@/lib/types';
 
-export function AddressTable() {
-  const { addresses } = useOptimisticAddresses();
+export function AddressTable({ addresses }: { addresses: Address[] }) {
   const t = useTranslations('Dashboard.Ressource.Address.Attributes');
   return (
     <div className='bg-background text-foreground p-4 rounded-lg shadow-xs'>

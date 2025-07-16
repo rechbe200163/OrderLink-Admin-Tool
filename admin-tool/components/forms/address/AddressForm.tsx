@@ -23,8 +23,6 @@ import React from 'react';
 import CustomeToast from '../../helpers/toasts/CustomeErrorToast';
 import { Card } from '@/components/ui/card';
 import { useTranslations } from 'next-intl';
-import { useOptimisticAddresses } from '@/components/helpers/addresses/AddressProvider';
-import { Address } from '@/lib/types';
 
 const formSchema = z.object({
   name_5020537749: z.tuple([z.string(), z.string().optional()]),
@@ -42,7 +40,6 @@ export default function AddressForm() {
 
   const [_countryName, setCountryName] = useState<string>('');
   const [stateName, setStateName] = useState<string>('');
-  const { addOptimistic, finalize, remove } = useOptimisticAddresses();
 
   React.useEffect(() => {
     if (formState.success) {
@@ -74,33 +71,10 @@ export default function AddressForm() {
     resolver: zodResolver(formSchema),
   });
 
-  async function handleAction(formData: FormData) {
-    const countryState = form.getValues('name_5020537749') as [string, string?];
-    const tempId = `temp-${Date.now()}`;
-    const optimistic: Address = {
-      addressId: tempId,
-      country: countryState[0] || '',
-      state: countryState[1] || '',
-      city: (formData.get('city') as string) || '',
-      postCode: (formData.get('postCode') as string) || '',
-      streetName: (formData.get('streetName') as string) || '',
-      streetNumber: (formData.get('streetNumber') as string) || '',
-      deleted: false,
-      modifiedAt: null,
-    };
-    addOptimistic(optimistic);
-    const result = await action(formData);
-    if (result.success && result.data) {
-      finalize(tempId, String(result.data));
-    } else {
-      remove(tempId);
-    }
-  }
-
   return (
     <Card className='shadow-md p-6 min-w-full'>
       <Form {...form}>
-        <form action={handleAction} className='space-y-8 max-w-3xl mx-auto py-2'>
+        <form action={action} className='space-y-8 max-w-3xl mx-auto py-2'>
           <FormField
             control={form.control}
             name='name_5020537749'
