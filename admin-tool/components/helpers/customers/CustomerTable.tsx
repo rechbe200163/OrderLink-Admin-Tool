@@ -13,9 +13,11 @@ import UserAvatarComponent from './UserAvatarComponent';
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 import { Customer } from '@/lib/types';
+import { useOptimisticCustomers } from './CustomerProvider';
 
-export function CustomerTable({ customers }: { customers: Customer[] }) {
+export function CustomerTable() {
   const t = useTranslations('Dashboard.Ressource.Customers');
+  const { customers } = useOptimisticCustomers();
   return (
     <div className='bg-background text-foreground p-4 rounded-lg shadow-xs'>
       <div className='[&>div]:max-h-[50vh] min-w-full'>

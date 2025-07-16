@@ -4,6 +4,7 @@ import PaginationComponent from '@/components/pagination+filtering/PagingCompone
 import SearchComponent from '@/components/pagination+filtering/SearchComponent';
 import FilteringComponent from '@/components/pagination+filtering/FilteringComponent';
 import { CustomerTable } from '@/components/helpers/customers/CustomerTable';
+import { CustomerProvider } from '@/components/helpers/customers/CustomerProvider';
 import { customerApiService } from '@/lib/api/concrete/customers';
 import { ButtonLinkComponent } from '@/components/ButtonLinkComponent';
 import { getTranslations } from 'next-intl/server';
@@ -88,9 +89,11 @@ export default async function AdminPanelUsersPage(props: {
             icon={<PlusCircle />}
           />
         </div>
-        <div className='bg-white rounded-lg shadow-md'>
-          <CustomerTable customers={customers} />
-        </div>
+        <CustomerProvider initialCustomers={customers}>
+          <div className='bg-white rounded-lg shadow-md'>
+            <CustomerTable />
+          </div>
+        </CustomerProvider>
         <div className='mt-4 mb-5'>
           <PaginationComponent
             currentPage={meta.currentPage}

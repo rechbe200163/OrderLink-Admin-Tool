@@ -14,6 +14,7 @@ import AddressSelectComponent from '@/components/helpers/AddressSelectComponent'
 import GenericInputMaskComponent from '@/components/InputWithMask';
 import { useRouter } from 'next/navigation';
 import { Address, SiteConfigDto } from '@/lib/types';
+import { useOptimisticSiteConfig } from '@/components/helpers/siteConfig/SiteConfigProvider';
 
 export default function SiteConfigCard({
   siteConfig,
@@ -36,6 +37,24 @@ export default function SiteConfigCard({
       },
     }
   );
+  const { update } = useOptimisticSiteConfig();
+
+  async function handleAction(formData: FormData) {
+    const updateData = {
+      companyName: (formData.get('companyName') as string) || '',
+      email: (formData.get('email') as string) || '',
+      phoneNumber: (formData.get('phoneNumber') as string) || '',
+      iban: (formData.get('iban') as string) || '',
+      companyNumber: (formData.get('companyNumber') as string) || '',
+      addressId: (formData.get('addressId') as string) || '',
+    } as Partial<SiteConfigDto>;
+    const previous = { ...siteConfig };
+    update(updateData);
+    const result = await action(formData);
+    if (!result.success) {
+      update(previous);
+    }
+  }
 
   React.useEffect(() => {
     if (formState.success) {
@@ -75,7 +94,7 @@ export default function SiteConfigCard({
         </CardTitle>
       </CardHeader>
       <CardContent>
-        <form action={action} className='space-y-6'>
+        <form action={handleAction} className='space-y-6'>
           <div className='grid gap-5'>
             <div className='grid grid-cols-4 items-center gap-4'>
               <Label
