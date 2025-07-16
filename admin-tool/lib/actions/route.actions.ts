@@ -1,7 +1,7 @@
 'use server';
 
 import { FormState } from '../form.types';
-import { apiPost, apiPut } from './api.actions';
+import { apiPost, apiPatch, formDataToPartial } from './api.actions';
 import { ENDPOINTS } from '../api/endpoints';
 import { guardAction } from '../server-guard';
 
@@ -21,7 +21,10 @@ export async function updateRoute(
   formData: FormData
 ): Promise<FormState> {
   return (await guardAction(async () => {
-    await apiPut(ENDPOINTS.ROUTE(routeId), Object.fromEntries(formData));
+    await apiPatch(
+      ENDPOINTS.ROUTE(routeId),
+      formDataToPartial(formData)
+    );
     return { success: true } as FormState;
   }, 'Failed to update route')) as FormState;
 }

@@ -1,7 +1,7 @@
 'use server';
 import { FormState } from '../form.types';
 
-import { apiPost, apiPut } from './api.actions';
+import { apiPost, apiPatch, formDataToPartial } from './api.actions';
 import { ENDPOINTS } from '../api/endpoints';
 import { guardAction } from '../server-guard';
 
@@ -46,14 +46,14 @@ export async function updateCustomer(
   formData: FormData
 ): Promise<FormState> {
   return (await guardAction(async () => {
-    const data = Object.fromEntries(formData) as Record<string, any>;
+    const data = formDataToPartial(formData) as Record<string, any>;
     if (data.businessSector === 'N/A') {
       data.businessSector = null;
     }
     if (!data.companyNumber) {
       data.companyNumber = null;
     }
-    await apiPut(ENDPOINTS.CUSTOMER(customerReference), data);
+    await apiPatch(ENDPOINTS.CUSTOMER(customerReference), data);
     return { success: true } as FormState;
   }, 'Failed to update customer')) as FormState;
 }
