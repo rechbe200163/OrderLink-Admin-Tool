@@ -66,6 +66,36 @@ export function humanizeEnum(value: string): string {
 
 export async function checkAPITokenValidity() {}
 
+export function formDataToPartial(formData: FormData) {
+  const data: Record<string, any> = {};
+  for (const [key, value] of formData.entries()) {
+    if (key in data) {
+      if (Array.isArray(data[key])) {
+        (data[key] as unknown[]).push(value);
+      } else {
+        data[key] = [data[key], value];
+      }
+    } else {
+      data[key] = value;
+    }
+  }
+  return data;
+}
+
+export function getChangedFormData(
+  current: Record<string, any>,
+  formData: FormData,
+) {
+  const partial = formDataToPartial(formData);
+  const changed: Record<string, any> = {};
+  for (const [key, value] of Object.entries(partial)) {
+    if (String(current[key] ?? '') !== String(value)) {
+      changed[key] = value;
+    }
+  }
+  return changed;
+}
+
 export const customerFormSchema = z
   .object({
     firstName: z.string().min(1, {

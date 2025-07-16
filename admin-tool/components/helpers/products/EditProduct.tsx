@@ -36,7 +36,7 @@ const EditProductPage = ({
   const [_image, setImage] = useState<File | null>(null);
 
   const [formState, action, isPending] = useActionState(
-    updateProduct.bind(null, product.productId),
+    updateProduct.bind(null, product.productId, product),
     {
       success: false,
       errors: {

@@ -31,7 +31,9 @@ export default function UserSettingsModal({
   user: SanitizedEmployee;
 }) {
   const [showPassword, setShowPassword] = useState(false);
-  const [profileState, updateAction, updating] = useActionState(updateProfile, {
+  const [profileState, updateAction, updating] = useActionState(
+    updateProfile.bind(null, user),
+    {
     success: false,
     errors: { title: [] as string[] },
   });

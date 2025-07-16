@@ -1,7 +1,8 @@
 'use server';
 
 import { FormState } from '../form.types';
-import { apiPost, apiPut } from './api.actions';
+import { apiPost, apiPatch } from './api.actions';
+import { formDataToPartial, getChangedFormData } from '../utils';
 import { ENDPOINTS } from '../api/endpoints';
 import { guardAction } from '../server-guard';
 
@@ -17,11 +18,15 @@ export async function createProduct(
 
 export async function updateProduct(
   productId: string,
+  current: Record<string, any>,
   _prevState: FormState,
-  formData: FormData
+  formData: FormData,
 ): Promise<FormState> {
   return (await guardAction(async () => {
-    await apiPut(ENDPOINTS.PRODUCT(productId), Object.fromEntries(formData));
+    await apiPatch(
+      ENDPOINTS.PRODUCT(productId),
+      getChangedFormData(current, formData)
+    );
     return { success: true } as FormState;
   }, 'Failed to update product')) as FormState;
 }

@@ -17,7 +17,7 @@ export default function EditCategory({ category }: { category: Category }) {
   const t = useTranslations('Dashboard.Ressource.Categories');
   const router = useRouter();
   const [formState, action, isPending] = useActionState(
-    updateCategory.bind(null, category.categoryId),
+    updateCategory.bind(null, category.categoryId, category),
     {
       success: false,
       errors: {

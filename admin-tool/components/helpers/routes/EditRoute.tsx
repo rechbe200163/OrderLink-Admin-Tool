@@ -22,7 +22,7 @@ const EditRoute = ({ orders, route }: CreateOrderProps) => {
     route.order.map((order) => order.orderId)
   );
   const [formState, action, isPending] = useActionState(
-    updateRoute.bind(null, route.routeId),
+    updateRoute.bind(null, route.routeId, route),
     {
       success: false,
       errors: {

@@ -1,6 +1,7 @@
 'use server';
 import { FormState } from '../form.types';
-import { apiPost, apiPut } from './api.actions';
+import { apiPost, apiPatch } from './api.actions';
+import { formDataToPartial, getChangedFormData } from '../utils';
 import { ENDPOINTS } from '../api/endpoints';
 import { guardAction } from '../server-guard';
 
@@ -16,11 +17,15 @@ export async function createAddress(
 
 export async function updateAddress(
   addressId: string,
+  current: Record<string, any>,
   _prevState: FormState,
-  formData: FormData
+  formData: FormData,
 ): Promise<FormState> {
   return (await guardAction(async () => {
-    await apiPut(ENDPOINTS.ADDRESS(addressId), Object.fromEntries(formData));
+    await apiPatch(
+      ENDPOINTS.ADDRESS(addressId),
+      getChangedFormData(current, formData)
+    );
     return { success: true } as FormState;
   }, 'Failed to update address')) as FormState;
 }

@@ -1,19 +1,21 @@
 'use server';
 
 import { FormState } from '../form.types';
-import { apiPut } from './api.actions';
+import { apiPatch } from './api.actions';
+import { formDataToPartial, getChangedFormData } from '../utils';
 import { ENDPOINTS } from '../api/endpoints';
 import { guardAction } from '../server-guard';
 
 export async function updateSiteConfig(
   siteConfigId: string,
+  current: Record<string, any>,
   _prevState: FormState,
-  formData: FormData
+  formData: FormData,
 ): Promise<FormState> {
   return (await guardAction(async () => {
-    await apiPut(
+    await apiPatch(
       ENDPOINTS.SITE_CONFIG_ID(siteConfigId),
-      Object.fromEntries(formData)
+      getChangedFormData(current, formData)
     );
     return { success: true } as FormState;
   }, 'Failed to update site config')) as FormState;

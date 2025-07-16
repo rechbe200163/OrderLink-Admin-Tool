@@ -33,7 +33,7 @@ export default function EditCustomerForm({
   const [selectedBusinessSector, setSelectedBusinessSector] =
     React.useState<string>(customer.businessSector ?? 'N/A');
   const [formState, action, isPending] = useActionState(
-    updateCustomer.bind(null, customer.customerReference!),
+    updateCustomer.bind(null, customer.customerReference!, customer),
     {
       success: false,
       errors: {
