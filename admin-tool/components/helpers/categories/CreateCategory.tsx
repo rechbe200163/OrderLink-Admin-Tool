@@ -4,12 +4,13 @@ import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
 import { Label } from '../../ui/label';
 import { Input } from '../../ui/input';
-import { Loader2Icon, MapPinHouse } from 'lucide-react';
+import { Loader2, Loader2Icon, MapPinHouse } from 'lucide-react';
 import React from 'react';
 import CustomeToast from '../../helpers/toasts/CustomeErrorToast';
 import { createCategory } from '@/lib/actions/categories.actions';
 import { Card } from '@/components/ui/card';
 import { useTranslations } from 'next-intl';
+import { Spinner } from '@/components/ui/kibo-ui/spinner';
 
 export default function CategoryForm() {
   const t = useTranslations('Dashboard.Ressource.Categories');
@@ -66,7 +67,7 @@ export default function CategoryForm() {
         <Button type='submit'>
           {isPending ? (
             <>
-              <Loader2Icon className='animate-spin' />
+              <Spinner className='animate-spin' />
               {t('buttons.addLoading')}
             </>
           ) : (

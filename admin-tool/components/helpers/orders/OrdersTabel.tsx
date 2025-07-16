@@ -1,3 +1,8 @@
+'use client';
+
+import React from 'react';
+
+import { useState } from 'react'; // Import useState for managing expanded state
 import {
   Table,
   TableBody,
@@ -7,19 +12,14 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button'; // Import Button for the expand/collapse trigger
 import type { OrdersWithCustomerAndProducts, Product } from '@/lib/types';
 import { formatDateTime, formatPrice } from '@/lib/utils';
 import ImageComponent from '@/components/images/ImageComponent';
 import { Suspense } from 'react';
 import ImageSkeleton from '@/components/images/ImageSkeleton';
 import Link from 'next/link';
-import { Package } from 'lucide-react';
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from '@/components/ui/accordion';
+import { Package, ChevronDown } from 'lucide-react'; // ChevronDown for the expand/collapse icon
 import { useTranslations } from 'next-intl';
 
 export function OrderTable({
@@ -31,9 +31,18 @@ export function OrderTable({
   const tOrderState = useTranslations(
     'FilterAndSearch.Filter.OrderState.options'
   );
+
+  // State to manage which order's product details are currently expanded
+  const [expandedOrderId, setExpandedOrderId] = useState<string | null>(null);
+
+  // Function to toggle the expanded state for a given orderId
+  const toggleExpand = (orderId: string) => {
+    setExpandedOrderId((prevId) => (prevId === orderId ? null : orderId));
+  };
+
   return (
     <div className='bg-background text-foreground p-4 rounded-lg shadow-xs'>
-      <div className='max-h-[50vh] min-w-full'>
+      <div className='max-h-[50vh] min-w-full overflow-auto'>
         <Table className='border-separate border-spacing-0 [&_td]:border-border [&_tfoot_td]:border-t [&_th]:border-b [&_th]:border-border [&_tr:not(:last-child)_td]:border-b'>
           <TableHeader className='sticky top-0 z-10 bg-background/90 backdrop-blur-xs'>
             <TableRow className='hover:bg-muted/50'>
@@ -50,87 +59,115 @@ export function OrderTable({
               <TableHead className='w-40 text-right'>
                 {t('Attributes.deliveryMethode')}
               </TableHead>
-              <TableHead className='w-40 text-right'>
-                {t('Attributes.Products.title')}
+              {/* This column is now dedicated to the expand/collapse button */}
+              <TableHead className='w-10 text-center'>
+                <span className='sr-only'>
+                  {t('Attributes.Products.title')}
+                </span>
               </TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {orders.length > 0 ? (
               orders.map((order) => (
-                <TableRow
-                  key={order.orderId}
-                  className='hover:bg-muted/50 transition-colors'
-                >
-                  <TableCell className='w-40 font-medium'>
-                    <Link
-                      href={`/customers/${order.customer.customerReference}/edit`}
-                      className='hover:underline'
-                    >
-                      {order.customer.lastName} {order.customer.firstName}
-                    </Link>
-                  </TableCell>
-                  <TableCell className='w-40'>
-                    <Link
-                      href={`/orders/${order.orderId}/edit`}
-                      className='hover:underline'
-                    >
-                      {formatDateTime(order.orderDate)}
-                    </Link>
-                  </TableCell>
-                  <TableCell className='w-60'>
-                    <Link
-                      href={`/orders/${order.orderId}/edit`}
-                      className='hover:underline'
-                    >
-                      {order.deliveryDate ? (
-                        formatDateTime(order.deliveryDate)
-                      ) : (
-                        <Badge variant='destructive'>
-                          {t('Attributes.notDeliveredYet')}
-                        </Badge>
-                      )}
-                    </Link>
-                  </TableCell>
-                  <TableCell className='w-40'>
-                    <Link
-                      href={`/orders/${order.orderId}/edit`}
-                      className='hover:underline'
-                    >
-                      <Badge variant='success'>
-                        {tOrderState(`${order.orderState.toLowerCase()}`)}
-                      </Badge>
-                    </Link>
-                  </TableCell>
-                  <TableCell className='w-40 text-right'>
-                    <Link
-                      href={`/orders/${order.orderId}/edit`}
-                      className='hover:underline'
-                    >
-                      <Badge
-                        variant={order.selfCollect ? 'success' : 'secondary'}
+                // Use React.Fragment to group the main row and the expandable row
+                <React.Fragment key={order.orderId}>
+                  <TableRow className='hover:bg-muted/50 transition-colors'>
+                    <TableCell className='w-40 font-medium'>
+                      <Link
+                        href={`/customers/${order.customer.customerReference}/edit`}
+                        className='hover:underline'
                       >
-                        {order.selfCollect ? (
-                          <>{t('Attributes.selfCollect')}</>
+                        {order.customer.lastName} {order.customer.firstName}
+                      </Link>
+                    </TableCell>
+                    <TableCell className='w-40'>
+                      <Link
+                        href={`/orders/${order.orderId}/edit`}
+                        className='hover:underline'
+                      >
+                        {formatDateTime(order.orderDate)}
+                      </Link>
+                    </TableCell>
+                    <TableCell className='w-60'>
+                      <Link
+                        href={`/orders/${order.orderId}/edit`}
+                        className='hover:underline'
+                      >
+                        {order.deliveryDate ? (
+                          formatDateTime(order.deliveryDate)
                         ) : (
-                          <>{t('Attributes.selfCollectNo')}</>
+                          <Badge variant='destructive'>
+                            {t('Attributes.notDeliveredYet')}
+                          </Badge>
                         )}
-                      </Badge>
-                    </Link>
-                  </TableCell>
-                  <TableCell className='w-40 text-right'>
-                    <Accordion type='single' collapsible>
-                      <AccordionItem value={order.orderId} className='border-0'>
-                        <AccordionTrigger className='flex h-full py-0 hover:underline'>
-                          {t('Attributes.Products.title')}
-                        </AccordionTrigger>
-                        <AccordionContent>
-                          <OrderProductsTable products={order.products} />
-                        </AccordionContent>
-                      </AccordionItem>
-                    </Accordion>
-                  </TableCell>
-                </TableRow>
+                      </Link>
+                    </TableCell>
+                    <TableCell className='w-40'>
+                      <Link
+                        href={`/orders/${order.orderId}/edit`}
+                        className='hover:underline'
+                      >
+                        <Badge variant='success'>
+                          {tOrderState(`${order.orderState.toLowerCase()}`)}
+                        </Badge>
+                      </Link>
+                    </TableCell>
+                    <TableCell className='w-40 text-right'>
+                      <Link
+                        href={`/orders/${order.orderId}/edit`}
+                        className='hover:underline'
+                      >
+                        <Badge
+                          variant={order.selfCollect ? 'success' : 'secondary'}
+                        >
+                          {order.selfCollect ? (
+                            <>{t('Attributes.selfCollect')}</>
+                          ) : (
+                            <>{t('Attributes.selfCollectNo')}</>
+                          )}
+                        </Badge>
+                      </Link>
+                    </TableCell>
+                    {/* Cell for the expand/collapse button */}
+                    <TableCell className='w-10 text-center'>
+                      <Button
+                        variant='ghost'
+                        size='icon'
+                        onClick={() => toggleExpand(order.orderId)}
+                        aria-expanded={expandedOrderId === order.orderId}
+                        aria-controls={`products-row-${order.orderId}`}
+                        className='h-auto w-auto p-1' // Adjust padding/size for the button
+                      >
+                        <ChevronDown
+                          className={`h-4 w-4 transition-transform duration-200 ${
+                            expandedOrderId === order.orderId
+                              ? 'rotate-180'
+                              : ''
+                          }`}
+                        />
+                        <span className='sr-only'>
+                          {expandedOrderId === order.orderId
+                            ? 'Collapse'
+                            : 'Expand'}{' '}
+                          products for order {order.orderId}
+                        </span>
+                      </Button>
+                    </TableCell>
+                  </TableRow>
+                  {/* Conditionally rendered row for product details */}
+                  {expandedOrderId === order.orderId && (
+                    <TableRow
+                      id={`products-row-${order.orderId}`}
+                      className='bg-muted/20'
+                    >
+                      {/* This cell spans all columns to contain the product table */}
+                      <TableCell colSpan={6} className='p-0'>
+                        <OrderProductsTable products={order.products} />
+                      </TableCell>
+                    </TableRow>
+                  )}
+                </React.Fragment>
               ))
             ) : (
               <TableRow>
@@ -153,11 +190,7 @@ function OrderProductsTable({
 }) {
   const t = useTranslations('Dashboard.Ressource.Orders.Attributes.Products');
   return (
-    <div className='py-4'>
-      <h4 className='text-sm font-medium mb-2 flex items-center gap-2'>
-        <Package className='h-4 w-4' />
-        Order Products
-      </h4>
+    <div className='py-4 px-4'>
       <div className='rounded-md border'>
         <Table>
           <TableHeader>

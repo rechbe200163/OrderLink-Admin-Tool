@@ -126,7 +126,7 @@ const SignInForm = () => {
           <Button type='submit' className='w-full ' disabled={isLoading}>
             {isLoading ? (
               <>
-                <Loader2 size={20} className='animate-spin' /> &nbsp; Loging you
+                 <Spinner />; size={20} className='animate-spin' /> &nbsp; Loging you
                 in...
               </>
             ) : (

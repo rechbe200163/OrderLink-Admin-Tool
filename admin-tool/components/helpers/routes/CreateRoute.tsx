@@ -72,7 +72,7 @@ const CreateRoutes = ({ orders }: CreateOrderProps) => {
         <Button type='submit' disabled={isPending} className='mt-6'>
           {isPending ? (
             <>
-              <Loader2 className='animate-spin h-5 w-5' /> {tSelect('addNewRoute')}...
+               <Spinner />; className='animate-spin h-5 w-5' /> {tSelect('addNewRoute')}...
             </>
           ) : (
             <>

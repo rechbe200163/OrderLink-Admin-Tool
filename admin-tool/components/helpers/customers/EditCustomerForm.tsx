@@ -179,7 +179,7 @@ export default function EditCustomerForm({
           <Button type='submit' disabled={isPending}>
             {isPending ? (
               <>
-                <Loader2 className='animate-spin h-5 w-5' />
+                 <Spinner />; className='animate-spin h-5 w-5' />
                 {t('buttons.addLoading')}
               </>
             ) : (

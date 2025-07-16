@@ -18,11 +18,12 @@ import { Label } from '../../ui/label';
 import { Input } from '../../ui/input';
 import { withMask } from 'use-mask-input';
 import { createAddress } from '@/lib/actions/address.actions';
-import { Loader2Icon, MapPinHouse } from 'lucide-react';
+import { Loader, Loader2, Loader2Icon, MapPinHouse } from 'lucide-react';
 import React from 'react';
 import CustomeToast from '../../helpers/toasts/CustomeErrorToast';
 import { Card } from '@/components/ui/card';
 import { useTranslations } from 'next-intl';
+import { Spinner } from '@/components/ui/kibo-ui/spinner';
 
 const formSchema = z.object({
   name_5020537749: z.tuple([z.string(), z.string().optional()]),
@@ -150,8 +151,7 @@ export default function AddressForm() {
           <Button type='submit'>
             {isPending ? (
               <>
-                <Loader2Icon />
-                {t('buttons.addLoading')}
+                <Spinner />; {t('buttons.addLoading')}
               </>
             ) : (
               <>

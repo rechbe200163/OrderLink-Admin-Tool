@@ -123,7 +123,7 @@ export default function CreatePermission({ roles }: { roles: string[] }) {
         <Button type='submit' disabled={isPending} className='mt-6'>
           {isPending ? (
             <>
-              <Loader2 className='animate-spin h-5 w-5' />{' '}
+               <Spinner />; className='animate-spin h-5 w-5' />{' '}
               {t('buttons.addLoading')}
             </>
           ) : (

@@ -15,6 +15,7 @@ import ProductSelectComponent from '@/components/helpers/ProductSelectCompoent';
 import { Customer, OrdersWithCustomerAndProducts, Product } from '@/lib/types';
 import { updateOrder } from '@/lib/actions/order.actions';
 import { useRouter } from 'next/navigation';
+import { Spinner } from '@/components/ui/kibo-ui/spinner';
 
 interface EditOrderProps {
   customer: Customer[];
@@ -144,7 +145,7 @@ const EditOrder = ({ customer, products, order }: EditOrderProps) => {
         <Button type='submit' disabled={isPending} className='mt-6'>
           {isPending ? (
             <>
-              <Loader2 className='animate-spin h-5 w-5' /> Updating Order
+              <Spinner className='animate-spin h-5 w-5' /> Updating Order
             </>
           ) : (
             <>

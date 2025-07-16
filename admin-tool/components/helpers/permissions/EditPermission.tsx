@@ -77,7 +77,7 @@ export default function EditPermission({ permission }: { permission: Permission 
         <Button type='submit' disabled={isPending} className='mt-6'>
           {isPending ? (
             <>
-              <Loader2 className='animate-spin h-5 w-5' /> {t('buttons.updateLoading')}
+               <Spinner />; className='animate-spin h-5 w-5' /> {t('buttons.updateLoading')}
             </>
           ) : (
             <>

@@ -242,7 +242,7 @@ const EditProductPage = ({
           />
 
           <Button type='submit' disabled={isPending}>
-            {isPending ? <Loader2 className='animate-spin' /> : <Plus />} Edit
+            {isPending ?  <Spinner />; className='animate-spin' /> : <Plus />} Edit
             Product
           </Button>
         </form>

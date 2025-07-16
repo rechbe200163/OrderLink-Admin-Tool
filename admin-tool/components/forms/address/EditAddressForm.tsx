@@ -163,7 +163,7 @@ export default function EditAddressForm({ address }: { address: Address }) {
           <Button type='submit'>
             {isPending ? (
               <>
-                <Loader2Icon />
+                 <Spinner />;Icon />
                 {t('buttons.updateLoading')}
               </>
             ) : (

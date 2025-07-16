@@ -11,6 +11,7 @@ import CustomeToast from '../toasts/CustomeErrorToast';
 import OrderSelectComponent from '../OrderSelectComponent';
 import { updateRoute } from '@/lib/actions/route.actions';
 import { useRouter } from 'next/navigation';
+import { Spinner } from '@/components/ui/kibo-ui/spinner';
 
 interface CreateOrderProps {
   route: RoutesWithOrders;
@@ -78,7 +79,8 @@ const EditRoute = ({ orders, route }: CreateOrderProps) => {
         <Button type='submit' disabled={isPending} className='mt-6'>
           {isPending ? (
             <>
-              <Loader2 className='animate-spin h-5 w-5' /> Updating Route
+              <Spinner />
+              Updating Route
             </>
           ) : (
             <>

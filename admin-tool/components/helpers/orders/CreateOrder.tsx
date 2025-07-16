@@ -13,6 +13,7 @@ import ProductSelectComponent from '../ProductSelectCompoent';
 import { Checkbox } from '@/components/ui/checkbox';
 import { createOrder } from '@/lib/actions/order.actions';
 import { Customer, Product } from '@/lib/types';
+import { Spinner } from '@/components/ui/kibo-ui/spinner';
 
 interface CreateOrderProps {
   customer: Customer[];
@@ -123,7 +124,7 @@ const CreateOrder = ({ customer, products }: CreateOrderProps) => {
         <Button type='submit' disabled={isPending} className='mt-6'>
           {isPending ? (
             <>
-              <Loader2 className='animate-spin h-5 w-5' /> Adding Order
+              <Spinner /> Adding Order
             </>
           ) : (
             <>

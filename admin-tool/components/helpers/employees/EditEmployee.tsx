@@ -131,7 +131,7 @@ const EditEmployee = ({ employee }: EditEmployeesProps) => {
           <Button type='submit' disabled={isPending}>
             {isPending ? (
               <>
-                <Loader2 className='animate-spin h-5 w-5' />
+                 <Spinner />; className='animate-spin h-5 w-5' />
                 {t('buttons.updateLoading')}
               </>
             ) : (
