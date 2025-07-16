@@ -15,11 +15,11 @@ import { createOrder } from '@/lib/actions/order.actions';
 import { Customer, Product } from '@/lib/types';
 
 interface CreateOrderProps {
-  customer: Customer[];
-  products: Product[];
+  customer?: Customer[];
+  products?: Product[];
 }
 
-const CreateOrder = ({ customer, products }: CreateOrderProps) => {
+const CreateOrder = ({ customer = [], products = [] }: CreateOrderProps) => {
   const [selectedCustomer, setSelectedCustomer] = React.useState<string>('');
   const [selectedProducts, setSelectedProducts] = React.useState<string[]>([]);
   const [formState, action, isPending] = useActionState(createOrder, {
@@ -68,7 +68,6 @@ const CreateOrder = ({ customer, products }: CreateOrderProps) => {
         </div>
         <div className='space-y-2'>
           <CustomerSelectComponent
-            customers={customer}
             onCustomerSelect={setSelectedCustomer}
             defaultValue={selectedCustomer}
           />
@@ -81,7 +80,6 @@ const CreateOrder = ({ customer, products }: CreateOrderProps) => {
         </div>
         <div className='space-y-2'>
           <ProductSelectComponent
-            products={products}
             onProductSelect={(productId) => {
               if (selectedProducts.includes(productId)) {
                 setSelectedProducts(
