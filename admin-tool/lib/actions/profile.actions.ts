@@ -10,7 +10,7 @@ export async function updateProfile(
 ): Promise<FormState> {
   return (await guardAction(async () => {
     const data = formDataToPartial(formData) as Record<string, any>;
-    await apiPatch(ENDPOINTS.USER_ME, data);
+    await apiPatch(ENDPOINTS.UPDATE_ME, data);
     return { success: true } as FormState;
   }, 'Failed to update profile')) as FormState;
 }
