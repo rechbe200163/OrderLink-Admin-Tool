@@ -28,7 +28,7 @@ export default function SiteConfigCard({
   );
 
   const [formState, action, isPending] = useActionState(
-    updateSiteConfig.bind(null, siteConfig.siteConfigId),
+    updateSiteConfig.bind(null, siteConfig.siteConfigId, siteConfig),
     {
       success: false,
       errors: {

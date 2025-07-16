@@ -32,7 +32,7 @@ const EditEmployee = ({ employee }: EditEmployeesProps) => {
   const tRoles = useTranslations('FilterAndSearch.Filter.Roles');
 
   const [formState, action, isPending] = useActionState(
-    updateEmployee.bind(null, employee.employeeId),
+    updateEmployee.bind(null, employee.employeeId, employee),
     {
       success: false,
       errors: {

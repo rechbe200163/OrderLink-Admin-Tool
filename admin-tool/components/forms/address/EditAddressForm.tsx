@@ -36,7 +36,7 @@ export default function EditAddressForm({ address }: { address: Address }) {
   const router = useRouter();
 
   const [formState, action, isPending] = useActionState(
-    updateAddress.bind(null, address.addressId),
+    updateAddress.bind(null, address.addressId, address),
     {
       success: false,
       errors: {

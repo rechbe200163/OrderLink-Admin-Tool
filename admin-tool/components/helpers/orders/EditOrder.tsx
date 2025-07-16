@@ -32,7 +32,7 @@ const EditOrder = ({ customer, products, order }: EditOrderProps) => {
   const router = useRouter();
 
   const [formState, action, isPending] = useActionState(
-    updateOrder.bind(null, order.orderId),
+    updateOrder.bind(null, order.orderId, order),
     {
       success: false,
       errors: {

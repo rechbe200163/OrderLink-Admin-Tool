@@ -1,6 +1,7 @@
 'use server';
 import { FormState } from '../form.types';
-import { apiPatch, apiPost, formDataToPartial } from './api.actions';
+import { apiPatch, apiPost } from './api.actions';
+import { formDataToPartial, getChangedFormData } from '../utils';
 import { ENDPOINTS } from '../api/endpoints';
 import { guardAction } from '../server-guard';
 
@@ -16,15 +17,14 @@ export async function createEmployee(
 
 export async function updateEmployee(
   employeeId: string,
+  current: Record<string, any>,
   _prevState: FormState,
-  formData: FormData
+  formData: FormData,
 ): Promise<FormState> {
-  console.log('Updating employee with ID:', employeeId);
-  console.log('Form data:', formDataToPartial(formData));
   return (await guardAction(async () => {
     await apiPatch(
       ENDPOINTS.EMPLOYEE(employeeId),
-      formDataToPartial(formData)
+      getChangedFormData(current, formData)
     );
     return { success: true } as FormState;
   }, 'Failed to update employee')) as FormState;

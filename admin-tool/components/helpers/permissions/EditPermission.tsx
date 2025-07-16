@@ -13,7 +13,7 @@ import { Actions, Resources, ROLE_NAMES, Permission } from '@/lib/types';
 
 export default function EditPermission({ permission }: { permission: Permission }) {
   const [formState, action, isPending] = useActionState(
-    updatePermission.bind(null, permission.permissionId),
+    updatePermission.bind(null, permission.permissionId, permission),
     { success: false, errors: { title: [''] } }
   );
 

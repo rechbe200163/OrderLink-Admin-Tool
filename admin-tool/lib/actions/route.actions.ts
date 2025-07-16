@@ -1,7 +1,8 @@
 'use server';
 
 import { FormState } from '../form.types';
-import { apiPost, apiPatch, formDataToPartial } from './api.actions';
+import { apiPost, apiPatch } from './api.actions';
+import { formDataToPartial, getChangedFormData } from '../utils';
 import { ENDPOINTS } from '../api/endpoints';
 import { guardAction } from '../server-guard';
 
@@ -17,13 +18,14 @@ export async function createRoute(
 
 export async function updateRoute(
   routeId: string,
+  current: Record<string, any>,
   _prevState: FormState,
-  formData: FormData
+  formData: FormData,
 ): Promise<FormState> {
   return (await guardAction(async () => {
     await apiPatch(
       ENDPOINTS.ROUTE(routeId),
-      formDataToPartial(formData)
+      getChangedFormData(current, formData)
     );
     return { success: true } as FormState;
   }, 'Failed to update route')) as FormState;

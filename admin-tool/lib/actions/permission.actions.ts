@@ -1,7 +1,8 @@
 'use server';
 
 import { FormState } from '../form.types';
-import { apiPost, apiPatch, formDataToPartial } from './api.actions';
+import { apiPost, apiPatch } from './api.actions';
+import { formDataToPartial, getChangedFormData } from '../utils';
 import { ENDPOINTS } from '../api/endpoints';
 import { guardAction } from '../server-guard';
 import { error } from 'console';
@@ -27,11 +28,12 @@ export async function createPermission(
 
 export async function updatePermission(
   permissionId: string,
+  current: Record<string, any>,
   _prevState: FormState,
-  formData: FormData
+  formData: FormData,
 ): Promise<FormState> {
   return (await guardAction(async () => {
-    const data = formDataToPartial(formData) as Record<string, any>;
+    const data = getChangedFormData(current, formData) as Record<string, any>;
     if ('allowed' in data) {
       const allowed = formData.get('allowed');
       data.allowed = allowed === 'true' || allowed === 'on';
