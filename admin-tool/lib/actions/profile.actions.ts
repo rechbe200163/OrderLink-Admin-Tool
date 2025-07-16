@@ -8,7 +8,7 @@ import { guardAction } from '../server-guard';
 export async function updateProfile(
   current: Record<string, any>,
   _prevState: FormState,
-  formData: FormData,
+  formData: FormData
 ): Promise<FormState> {
   return (await guardAction(async () => {
     const data = getChangedFormData(current, formData) as Record<string, any>;
@@ -19,7 +19,7 @@ export async function updateProfile(
 
 export async function requestPermissionAction(
   _prevState: FormState,
-  formData: FormData,
+  formData: FormData
 ): Promise<FormState> {
   return (await guardAction(async () => {
     const data = Object.fromEntries(formData) as Record<string, any>;

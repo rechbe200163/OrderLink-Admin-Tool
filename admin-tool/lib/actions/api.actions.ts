@@ -44,4 +44,3 @@ export async function apiDelete<T>(
 ): Promise<T> {
   return baseApiService.delete<T>(endpoint, params, action);
 }
-

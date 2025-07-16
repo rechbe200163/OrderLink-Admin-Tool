@@ -25,7 +25,8 @@ export const ENDPOINTS = {
   ROLES_ROLE_NAMES: 'roles/roleNames',
   AUTH_LOGIN: 'auth/signIn',
   AUTH_RENEW_SESSION: 'auth/renewSession',
-  USER_ME: 'auth/me',
+  GET_ME: 'employees/me',
+  UPDATE_ME: 'employees/me',
 } as const;
 
 export type EndpointKey = keyof typeof ENDPOINTS;
