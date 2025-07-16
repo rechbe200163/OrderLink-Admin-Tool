@@ -2,7 +2,6 @@
 import { getCookie } from '../cookies/cookie-managment';
 import { ApiError } from './ApiError';
 import { forbidden } from 'next/navigation';
-import { logError } from '../logger';
 
 export class BaseApiService {
   public baseUrl: string;
@@ -54,17 +53,10 @@ export class BaseApiService {
       options.body = JSON.stringify(body);
     }
 
-    let response: Response;
-    try {
-      response = await fetch(url.toString(), options);
-    } catch (e) {
-      await logError(`Network error ${method} ${url.toString()} - ${String(e)}`);
-      throw e;
-    }
+    const response = await fetch(url.toString(), options);
 
     if (!response.ok) {
       const errorData = await response.json().catch(() => ({}));
-      await logError(`API error ${method} ${url.toString()} ${response.status} ${response.statusText}`);
 
       console.error('API Error:', {
         status: response.status,

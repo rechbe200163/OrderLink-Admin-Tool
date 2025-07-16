@@ -18,8 +18,8 @@ export async function addCustomer(
     if (!data.companyNumber) {
       data.companyNumber = undefined;
     }
-    const created = await apiPost<{ customerReference: number }>(ENDPOINTS.CUSTOMERS, data);
-    return { success: true, data: created.customerReference } as FormState;
+    await apiPost(ENDPOINTS.CUSTOMERS, data);
+    return { success: true } as FormState;
   }, 'Failed to add customer')) as FormState;
 }
 

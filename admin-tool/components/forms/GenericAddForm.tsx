@@ -11,7 +11,6 @@ import { Card } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import React, { useActionState } from 'react';
-import { useOptimisticCustomers } from '../helpers/customers/CustomerProvider';
 import { Button } from '@/components/ui/button';
 import { Loader2, PlusCircle } from 'lucide-react';
 import { addCustomer } from '@/lib/actions/user.actions';
@@ -19,7 +18,7 @@ import CustomeToast from '../helpers/toasts/CustomeErrorToast';
 import AddressSelectComponent from '@/components/helpers/AddressSelectComponent';
 import { useTranslations } from 'next-intl';
 import PhoneNumberInputComponent from '../PhoneNumberInputComponent';
-import { Address, BusinessSector, Customer } from '@/lib/types';
+import { Address, BusinessSector } from '@/lib/types';
 
 interface AddUserFormProps {
   addresses: Address[];
@@ -35,35 +34,6 @@ export default function GenericAddForm({ addresses }: AddUserFormProps) {
       title: [''],
     },
   });
-  const { addOptimistic, finalize, remove } = useOptimisticCustomers();
-
-  async function handleAction(formData: FormData) {
-    const tempRef = Date.now();
-    const optimistic = {
-      customerId: `temp-${tempRef}`,
-      customerReference: tempRef,
-      email: String(formData.get('email') || ''),
-      phoneNumber: String(formData.get('phoneNumber') || ''),
-      password: '',
-      firstName: String(formData.get('firstName') || ''),
-      lastName: String(formData.get('lastName') || ''),
-      companyNumber: (formData.get('companyNumber') as string) || null,
-      modifiedAt: null,
-      deleted: false,
-      signedUp: new Date(),
-      avatarPath: null,
-      addressId: String(formData.get('addressId') || ''),
-      businessSector:
-        (formData.get('businessSector') as BusinessSector | null) || null,
-    } as Customer;
-    addOptimistic(optimistic);
-    const result = await action(formData);
-    if (result.success && result.data) {
-      finalize(tempRef, Number(result.data));
-    } else {
-      remove(tempRef);
-    }
-  }
 
   // Handle form submission feedback
   React.useEffect(() => {
@@ -87,7 +57,7 @@ export default function GenericAddForm({ addresses }: AddUserFormProps) {
         {t('header')}
       </h2>
       <Card className='shadow-md p-6'>
-        <form action={handleAction} className='space-y-6'>
+        <form action={action} className='space-y-6'>
           <div className='grid md:grid-cols-2 gap-6'>
             {/* Customer Details Section */}
             <div className='space-y-4'>
