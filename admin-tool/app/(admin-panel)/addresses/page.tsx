@@ -1,5 +1,6 @@
 import { ButtonLinkComponent } from '@/components/ButtonLinkComponent';
 import { AddressTable } from '@/components/helpers/addresses/AddressTable';
+import { AddressProvider } from '@/components/helpers/addresses/AddressProvider';
 import FilteringComponent from '@/components/pagination+filtering/FilteringComponent';
 import PaginationComponent from '@/components/pagination+filtering/PagingComponent';
 import SearchComponent from '@/components/pagination+filtering/SearchComponent';
@@ -73,9 +74,11 @@ export default async function AddressesPage(props: {
             icon={<PlusCircle size={24} />}
           />
         </div>
-        <div className='bg-white rounded-lg shadow-md'>
-          <AddressTable addresses={addresses} />
-        </div>
+        <AddressProvider initialAddresses={addresses}>
+          <div className='bg-white rounded-lg shadow-md'>
+            <AddressTable />
+          </div>
+        </AddressProvider>
         <div className='mt-4 mb-5'>
           <PaginationComponent
             currentPage={meta.currentPage}
