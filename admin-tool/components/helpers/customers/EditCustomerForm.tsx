@@ -1,5 +1,6 @@
 'use client';
 import React, { useActionState } from 'react';
+import { useOptimisticCustomers } from './CustomerProvider';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -13,7 +14,7 @@ import {
 import { Card } from '@/components/ui/card';
 import AddressSelectComponent from '@/components/helpers/AddressSelectComponent';
 import { Loader2, PlusCircle } from 'lucide-react';
-import { Address, BusinessSector, CustomerWithAddressId } from '@/lib/types';
+import { Address, BusinessSector, CustomerWithAddressId, Customer } from '@/lib/types';
 import { updateCustomer } from '@/lib/actions/user.actions';
 import { toast } from 'sonner';
 import CustomeToast from '../toasts/CustomeErrorToast';
@@ -41,6 +42,28 @@ export default function EditCustomerForm({
       },
     }
   );
+  const { update } = useOptimisticCustomers();
+
+  async function handleAction(formData: FormData) {
+    const updateData: Partial<Customer> = {
+      firstName: (formData.get('firstName') as string) || null,
+      lastName: (formData.get('lastName') as string) || '',
+      email: (formData.get('email') as string) || '',
+      phoneNumber: (formData.get('phoneNumber') as string) || '',
+      companyNumber: (formData.get('companyNumber') as string) || null,
+      businessSector:
+        (formData.get('businessSector') as BusinessSector | 'N/A') === 'N/A'
+          ? null
+          : ((formData.get('businessSector') as BusinessSector) || null),
+      addressId: (formData.get('addressId') as string) || '',
+    };
+    const previous = { ...customer } as Customer;
+    update(customer.customerReference!, updateData);
+    const result = await action(formData);
+    if (!result.success) {
+      update(customer.customerReference!, previous);
+    }
+  }
 
   const t = useTranslations('Dashboard.Ressource.Customers');
   const tFilter = useTranslations('FilterAndSearch.Filter');
@@ -64,7 +87,7 @@ export default function EditCustomerForm({
         {t('headerUpdate')}: {customer.firstName} {customer.lastName}
       </h2>
       <Card className='shadow-md p-6 bg-background'>
-        <form action={action} className='space-y-6'>
+        <form action={handleAction} className='space-y-6'>
           <div className='grid md:grid-cols-2 gap-6'>
             {/* Kundendetails */}
             <div className='space-y-4'>
