@@ -13,14 +13,12 @@ import { toast } from 'sonner';
 import AddressSelectComponent from '@/components/helpers/AddressSelectComponent';
 import GenericInputMaskComponent from '@/components/InputWithMask';
 import { useRouter } from 'next/navigation';
-import { Address, SiteConfigDto } from '@/lib/types';
+import { SiteConfigDto } from '@/lib/types';
 
 export default function SiteConfigCard({
   siteConfig,
-  addresses,
 }: {
   siteConfig: SiteConfigDto;
-  addresses: Address[];
 }) {
   const router = useRouter();
   const [selectedAddress, setSelectedAddress] = React.useState<string>(
@@ -140,7 +138,6 @@ export default function SiteConfigCard({
               />
             </div>
             <AddressSelectComponent
-              addresses={addresses}
               onAddressSelect={setSelectedAddress}
               defaultValue={selectedAddress}
             />
