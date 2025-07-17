@@ -120,32 +120,29 @@ export default function OrderSelectComponent({
             <CommandList className='max-h-[300px] overflow-y-auto'>
               <CommandEmpty>{t('noOrderFound')}</CommandEmpty>
               <CommandGroup>
-                {orders.map((order) => (
-                  <CommandItem
-                    key={order.orderId}
-                    value={order.orderId}
-                    onSelect={() => toggleSelect(order.orderId)}
-                    className='flex flex-col items-start'
-                  >
-                    <span>
-                      {`Order #${order.customerReference} - ${new Date(
-                        order.orderDate
-                      ).toLocaleDateString()}`}
-                      {selectedValues.includes(order.orderId) && (
-                        <Check
-                          size={16}
-                          strokeWidth={2}
-                          className='ml-2 inline'
-                        />
-                      )}
-                    </span>
-                    <span className='text-xs text-muted-foreground'>
-                      {order.customer.address
-                        ? `${order.customer.address.streetName}, ${order.customer.address.postCode} ${order.customer.address.city}`
-                        : ''}
-                    </span>
-                  </CommandItem>
-                ))}
+                {orders.map((order) => {
+                  const label = `Order #${order.customerReference} - ${new Date(order.orderDate).toLocaleDateString()}`;
+                  return (
+                    <CommandItem
+                      key={order.orderId}
+                      value={label}
+                      onSelect={() => toggleSelect(order.orderId)}
+                      className='flex flex-col items-start'
+                    >
+                      <span>
+                        {label}
+                        {selectedValues.includes(order.orderId) && (
+                          <Check size={16} strokeWidth={2} className='ml-2 inline' />
+                        )}
+                      </span>
+                      <span className='text-xs text-muted-foreground'>
+                        {order.customer.address
+                          ? `${order.customer.address.streetName}, ${order.customer.address.postCode} ${order.customer.address.city}`
+                          : ''}
+                      </span>
+                    </CommandItem>
+                  );
+                })}
               </CommandGroup>
               <CommandSeparator />
               <CommandGroup>

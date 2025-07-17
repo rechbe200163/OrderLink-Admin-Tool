@@ -134,18 +134,21 @@ export default function ProductSelectComponent({
             <CommandList className='max-h-[300px] overflow-y-auto'>
               <CommandEmpty>{t('noProductFound')}</CommandEmpty>
               <CommandGroup>
-                {products.map((product) => (
-                  <CommandItem
-                    key={product.productId}
-                    value={product.productId}
-                    onSelect={() => handleSelect(product.productId)}
-                  >
-                    {`${product.name} - $${(product.price / 100).toFixed(2)}`}
-                    {selectedValues.includes(product.productId) && (
-                      <Check size={16} strokeWidth={2} className='ml-auto' />
-                    )}
-                  </CommandItem>
-                ))}
+                {products.map((product) => {
+                  const label = `${product.name} - $${(product.price / 100).toFixed(2)}`;
+                  return (
+                    <CommandItem
+                      key={product.productId}
+                      value={label}
+                      onSelect={() => handleSelect(product.productId)}
+                    >
+                      {label}
+                      {selectedValues.includes(product.productId) && (
+                        <Check size={16} strokeWidth={2} className='ml-auto' />
+                      )}
+                    </CommandItem>
+                  );
+                })}
               </CommandGroup>
               <CommandSeparator />
             </CommandList>

@@ -120,18 +120,18 @@ export default function AddressSelectComponent({
               <CommandEmpty>{t('noAddressFound')}</CommandEmpty>
               <CommandGroup>
                 {addresses.map((address) => {
-                  console.log('Rendering address:', address); // <== Das brauchst du jetzt
+                  const label = `${address.streetNumber} ${address.streetName}, ${address.city}, ${address.state} ${address.postCode}, ${address.country}`;
                   return (
                     <CommandItem
                       key={address.addressId}
-                      value={address.addressId}
-                      onSelect={(currentValue) => {
-                        setValue(currentValue === value ? '' : currentValue);
-                        onAddressSelect(currentValue);
+                      value={label}
+                      onSelect={() => {
+                        setValue(address.addressId);
+                        onAddressSelect(address.addressId);
                         setOpen(false);
                       }}
                     >
-                      {`${address.streetNumber} ${address.streetName}, ${address.city}, ${address.state} ${address.postCode}, ${address.country}`}
+                      {label}
                       {value === address.addressId && (
                         <Check size={16} strokeWidth={2} className='ml-auto' />
                       )}
