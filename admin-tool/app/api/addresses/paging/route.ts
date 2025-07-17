@@ -17,6 +17,7 @@ export async function GET(req: NextRequest) {
       filter,
       tag
     );
+    console.log('Fetched addresses:', data);
     return NextResponse.json(data);
   } catch (error: any) {
     return NextResponse.json({ message: error.message }, { status: 500 });

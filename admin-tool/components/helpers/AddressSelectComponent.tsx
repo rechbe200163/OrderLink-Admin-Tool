@@ -17,7 +17,13 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover';
-import { Check, ChevronDown, ChevronLeft, ChevronRight, Plus } from 'lucide-react';
+import {
+  Check,
+  ChevronDown,
+  ChevronLeft,
+  ChevronRight,
+  Plus,
+} from 'lucide-react';
 import { useId, useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
@@ -50,19 +56,30 @@ export default function AddressSelectComponent({
     const params = new URLSearchParams({ page: String(page), limit: '10' });
     if (search) params.append('query', search);
 
-    fetch(`/api/addresses/paging?${params.toString()}`, {
-      signal: controller.signal,
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        setAddresses(data.data);
-        setMeta(data.meta);
+    const handler = setTimeout(() => {
+      fetch(`/api/addresses/paging?${params.toString()}`, {
+        signal: controller.signal,
       })
-      .catch(() => {});
-    return () => controller.abort();
+        .then((res) => res.json())
+        .then((data) => {
+          setAddresses(data.data);
+          setMeta(data.meta);
+        })
+        .catch(() => {});
+    }, 400); // 400ms debounce
+
+    return () => {
+      clearTimeout(handler);
+      controller.abort();
+    };
   }, [page, search]);
 
-  const selectedAddress = addresses.find((address) => address.addressId === value);
+  const selectedAddress = addresses.find(
+    (address) => address.addressId === value
+  );
+
+  console.log('Selected address:', selectedAddress);
+  console.log('Current value:', addresses);
 
   const t = useTranslations('SelectComponents.Address');
   return (
@@ -102,22 +119,25 @@ export default function AddressSelectComponent({
             <CommandList className='max-h-[300px] overflow-y-auto'>
               <CommandEmpty>{t('noAddressFound')}</CommandEmpty>
               <CommandGroup>
-                {addresses.map((address) => (
-                  <CommandItem
-                    key={address.addressId}
-                    value={address.addressId}
-                    onSelect={(currentValue) => {
-                      setValue(currentValue === value ? '' : currentValue);
-                      onAddressSelect(currentValue); // Update parent on selection
-                      setOpen(false);
-                    }}
-                  >
-                    {`${address.streetNumber} ${address.streetName}, ${address.city}, ${address.state} ${address.postCode}, ${address.country}`}
-                    {value === address.addressId && (
-                      <Check size={16} strokeWidth={2} className='ml-auto' />
-                    )}
-                  </CommandItem>
-                ))}
+                {addresses.map((address) => {
+                  console.log('Rendering address:', address); // <== Das brauchst du jetzt
+                  return (
+                    <CommandItem
+                      key={address.addressId}
+                      value={address.addressId}
+                      onSelect={(currentValue) => {
+                        setValue(currentValue === value ? '' : currentValue);
+                        onAddressSelect(currentValue);
+                        setOpen(false);
+                      }}
+                    >
+                      {`${address.streetNumber} ${address.streetName}, ${address.city}, ${address.state} ${address.postCode}, ${address.country}`}
+                      {value === address.addressId && (
+                        <Check size={16} strokeWidth={2} className='ml-auto' />
+                      )}
+                    </CommandItem>
+                  );
+                })}
               </CommandGroup>
               <CommandSeparator />
               <CommandGroup>
@@ -136,22 +156,28 @@ export default function AddressSelectComponent({
                   </Link>
                 </div>
               </CommandGroup>
-              <div className='flex items-center justify-between p-2'>
-                <button
-                  className='disabled:opacity-50'
+              <div className='flex items-center justify-between p-2 border-t mt-2'>
+                <Button
+                  variant='ghost'
+                  size='icon'
                   onClick={() => setPage((p) => Math.max(1, p - 1))}
                   disabled={meta?.isFirstPage}
+                  aria-label='Previous page'
                 >
                   <ChevronLeft size={16} />
-                </button>
-                <span className='text-sm'>{meta?.currentPage ?? page}</span>
-                <button
-                  className='disabled:opacity-50'
+                </Button>
+                <span className='inline-flex items-center justify-center h-8 px-3 text-sm font-medium rounded-md border bg-accent text-accent-foreground'>
+                  {meta?.currentPage ?? page}
+                </span>
+                <Button
+                  variant='ghost'
+                  size='icon'
                   onClick={() => setPage((p) => p + 1)}
                   disabled={meta?.isLastPage}
+                  aria-label='Next page'
                 >
                   <ChevronRight size={16} />
-                </button>
+                </Button>
               </div>
             </CommandList>
           </Command>

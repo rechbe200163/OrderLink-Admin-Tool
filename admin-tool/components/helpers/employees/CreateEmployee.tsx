@@ -20,6 +20,7 @@ import { Loader2, MailIcon, PlusCircle } from 'lucide-react';
 import CustomeToast from '../toasts/CustomeErrorToast';
 import { createEmployee } from '@/lib/actions/employee.actions';
 import { useTranslations } from 'next-intl';
+import { Spinner } from '@/components/ui/kibo-ui/spinner';
 
 const CreateEmployees = ({ roles }: { roles: string[] }) => {
   const [formState, action, isPending] = useActionState(createEmployee, {
@@ -132,7 +133,7 @@ const CreateEmployees = ({ roles }: { roles: string[] }) => {
           <Button type='submit' disabled={isPending}>
             {isPending ? (
               <>
-                 <Spinner />; className='animate-spin h-5 w-5' />
+                <Spinner />
                 {t('buttons.addLoading')}
               </>
             ) : (

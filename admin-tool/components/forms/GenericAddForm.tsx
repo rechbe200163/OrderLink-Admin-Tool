@@ -19,6 +19,7 @@ import AddressSelectComponent from '@/components/helpers/AddressSelectComponent'
 import { useTranslations } from 'next-intl';
 import PhoneNumberInputComponent from '../PhoneNumberInputComponent';
 import { BusinessSector } from '@/lib/types';
+import { Spinner } from '../ui/kibo-ui/spinner';
 
 export default function GenericAddForm() {
   const [selectedAddress, setSelectedAddress] = React.useState<string>('');
@@ -107,9 +108,7 @@ export default function GenericAddForm() {
                 </span>
               </div>
               <div>
-                <AddressSelectComponent
-                  onAddressSelect={setSelectedAddress}
-                />
+                <AddressSelectComponent onAddressSelect={setSelectedAddress} />
                 <input
                   id='addressId'
                   name='addressId'
@@ -153,7 +152,9 @@ export default function GenericAddForm() {
                     />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem key='N/A' value={'N/A'}>N/A</SelectItem>
+                    <SelectItem key='N/A' value={'N/A'}>
+                      N/A
+                    </SelectItem>
                     {Object.keys(BusinessSector).map((businessSector) => (
                       <SelectItem key={businessSector} value={businessSector}>
                         {tFilter(
@@ -169,7 +170,7 @@ export default function GenericAddForm() {
           <Button type='submit' disabled={isPending}>
             {isPending ? (
               <>
-                 <Spinner />; className='animate-spin h-5 w-5' />
+                <Spinner />
                 {t('buttons.addLoading')}
               </>
             ) : (
