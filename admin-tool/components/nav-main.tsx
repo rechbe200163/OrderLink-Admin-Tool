@@ -228,6 +228,7 @@ export function NavMain() {
     if (!query) return allGroups;
     const lower = query.toLowerCase();
     return allGroups
+
       .map((g) => ({
         ...g,
         items: g.items.filter((i) => i.title.toLowerCase().includes(lower)),
@@ -237,6 +238,8 @@ export function NavMain() {
           g.items.length > 0 || g.label.toLowerCase().includes(lower)
       );
   }, [query, allGroups]);
+
+
 
   // Helper to check if any item in group is active
   const isGroupActive = (items: { url: string }[]) =>
