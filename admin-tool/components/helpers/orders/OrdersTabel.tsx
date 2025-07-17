@@ -15,7 +15,7 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button'; // Import Button for the expand/collapse trigger
 import type { OrdersWithCustomerAndProducts, Product } from '@/lib/types';
 import { formatDateTime, formatPrice } from '@/lib/utils';
-import ImageComponent from '@/components/images/ImageComponent';
+import Image from 'next/image'; // Use next/image for optimized images
 import { Suspense } from 'react';
 import ImageSkeleton from '@/components/images/ImageSkeleton';
 import Link from 'next/link';
@@ -210,8 +210,8 @@ function OrderProductsTable({
                     <Suspense fallback={<ImageSkeleton />}>
                       <div className='relative w-12 h-12 overflow-hidden rounded-md'>
                         {product.imagePath ? (
-                          <ImageComponent
-                            imagePath={product.imagePath || '/placeholder.svg'}
+                          <Image
+                            src={product.imagePath || '/placeholder.svg'}
                             alt={product.name}
                             width={48}
                             height={48}

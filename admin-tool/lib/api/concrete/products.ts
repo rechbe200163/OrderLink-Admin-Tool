@@ -30,14 +30,14 @@ export class ProductApiService extends BaseApiService {
   async getProductsPaging(
     page: number,
     limit: number,
-    query?: string,
+    search?: string,
     filter?: string,
     category?: string
   ): Promise<PagingDto<Product>> {
     return this.get<PagingDto<Product>>('products', {
       page,
       limit,
-      query,
+      search,
       filter,
       category,
     });

@@ -15,7 +15,7 @@ export default async function ProductsPage(props: {
   searchParams?: Promise<{
     page?: string;
     limit?: string;
-    query?: string;
+    search?: string;
     filter?: string;
     category?: BusinessSector;
   }>;
@@ -26,14 +26,14 @@ export default async function ProductsPage(props: {
   const searchParams = await props.searchParams;
   const page = searchParams?.page ? parseInt(searchParams.page) : 1;
   const limit = searchParams?.limit ? parseInt(searchParams.limit) : 10;
-  const query = searchParams?.query ? searchParams.query : '';
+  const search = searchParams?.search ? searchParams.search : '';
   const filter = searchParams?.filter ? searchParams.filter : '';
   const category = searchParams?.category;
 
   const productData = await productApiService.getProductsPaging(
     page,
     limit,
-    query,
+    search,
     filter,
     category
   );
@@ -44,8 +44,7 @@ export default async function ProductsPage(props: {
   const tFilter = await getTranslations('FilterAndSearch');
   return (
     <div className='px-5'>
-      <div className='sticky top-0 bg-background z-1'>
-      </div>
+      <div className='sticky top-0 bg-background z-1'></div>
       <div className='container'>
         <div className='flex justify-between items-center mb-6'>
           <div className='flex justify-between items-center space-x-4'>
@@ -54,8 +53,16 @@ export default async function ProductsPage(props: {
               title={tFilter('Filter.Status.title')}
               filterName='filter'
               values={[
-                { label: tFilter('Filter.Status.options.active'), value: 'active', color: 'green' },
-                { label: tFilter('Filter.Status.options.inactive'), value: 'inactive', color: 'red' },
+                {
+                  label: tFilter('Filter.Status.options.active'),
+                  value: 'active',
+                  color: 'green',
+                },
+                {
+                  label: tFilter('Filter.Status.options.inactive'),
+                  value: 'inactive',
+                  color: 'red',
+                },
               ]}
             />
             <FilteringComponent
