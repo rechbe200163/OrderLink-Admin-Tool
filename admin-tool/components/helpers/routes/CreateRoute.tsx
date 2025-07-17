@@ -13,11 +13,7 @@ import { createRoute } from '@/lib/actions/route.actions';
 import { OrdersWithAddressOfCustomer } from '@/lib/types';
 import { useTranslations } from 'next-intl';
 
-interface CreateOrderProps {
-  orders: OrdersWithAddressOfCustomer[];
-}
-
-const CreateRoutes = ({ orders }: CreateOrderProps) => {
+const CreateRoutes = () => {
   const t = useTranslations('Dashboard');
   const tSelect = useTranslations('SelectComponents.Route');
   const [selectOrder, setSelectedOrders] = React.useState<string[]>([]);
@@ -58,7 +54,6 @@ const CreateRoutes = ({ orders }: CreateOrderProps) => {
         </div>
         <div className='space-y-2'>
           <OrderSelectComponent
-            orders={orders}
             onOrderSelect={setSelectedOrders}
             defaultValues={selectOrder}
           />

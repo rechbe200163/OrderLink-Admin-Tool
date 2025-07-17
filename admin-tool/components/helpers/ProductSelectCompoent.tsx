@@ -17,24 +17,33 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover';
-import { Check, ChevronDown, Plus } from 'lucide-react';
+import {
+  Check,
+  ChevronDown,
+  ChevronLeft,
+  ChevronRight,
+  Plus,
+} from 'lucide-react';
 import { useId, useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Product } from '@/lib/types';
+import { PagingMeta } from '@/lib/dtos';
 import { useTranslations } from 'next-intl';
 
 export default function ProductSelectComponent({
-  products,
   onProductSelect,
   defaultValue = [],
 }: {
-  products: Product[];
   onProductSelect: (productId: string) => void;
   defaultValue?: string[];
 }) {
   const id = useId();
   const [open, setOpen] = useState<boolean>(false);
   const [selectedValues, setSelectedValues] = useState<string[]>(defaultValue);
+  const [page, setPage] = useState<number>(1);
+  const [products, setProducts] = useState<Product[]>([]);
+  const [meta, setMeta] = useState<PagingMeta | null>(null);
+  const [search, setSearch] = useState<string>('');
 
   // Update selected values when defaultValue changes
   useEffect(() => {
@@ -42,6 +51,26 @@ export default function ProductSelectComponent({
       setSelectedValues(defaultValue);
     }
   }, [defaultValue]);
+
+  useEffect(() => {
+    const controller = new AbortController();
+    const params = new URLSearchParams({
+      page: String(page),
+      limit: '10',
+    });
+    if (search) params.append('query', search);
+
+    fetch(`/api/products/paging?${params.toString()}`, {
+      signal: controller.signal,
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setProducts(data.data);
+        setMeta(data.meta);
+      })
+      .catch(() => {});
+    return () => controller.abort();
+  }, [page, search]);
 
   const handleSelect = (productId: string) => {
     if (selectedValues.includes(productId)) {
@@ -98,7 +127,10 @@ export default function ProductSelectComponent({
           align='start'
         >
           <Command>
-            <CommandInput placeholder={t('findProduct')} />
+            <CommandInput
+              placeholder={t('findProduct')}
+              onValueChange={setSearch}
+            />
             <CommandList className='max-h-[300px] overflow-y-auto'>
               <CommandEmpty>{t('noProductFound')}</CommandEmpty>
               <CommandGroup>
@@ -133,6 +165,23 @@ export default function ProductSelectComponent({
                   {t('addNewProduct')}
                 </Link>
               </CommandGroup>
+              <div className='flex items-center justify-between p-2'>
+                <button
+                  className='disabled:opacity-50'
+                  onClick={() => setPage((p) => Math.max(1, p - 1))}
+                  disabled={meta?.isFirstPage}
+                >
+                  <ChevronLeft size={16} />
+                </button>
+                <span className='text-sm'>{meta?.currentPage ?? page}</span>
+                <button
+                  className='disabled:opacity-50'
+                  onClick={() => setPage((p) => p + 1)}
+                  disabled={meta?.isLastPage}
+                >
+                  <ChevronRight size={16} />
+                </button>
+              </div>
             </div>
           </Command>
         </PopoverContent>

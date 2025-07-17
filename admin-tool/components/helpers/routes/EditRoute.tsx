@@ -14,10 +14,9 @@ import { useRouter } from 'next/navigation';
 
 interface CreateOrderProps {
   route: RoutesWithOrders;
-  orders: OrdersWithAddressOfCustomer[];
 }
 
-const EditRoute = ({ orders, route }: CreateOrderProps) => {
+const EditRoute = ({ route }: CreateOrderProps) => {
   const [selectOrder, setSelectedOrders] = React.useState<string[]>(
     route.order.map((order) => order.orderId)
   );
@@ -64,7 +63,6 @@ const EditRoute = ({ orders, route }: CreateOrderProps) => {
         </div>
         <div className='space-y-2'>
           <OrderSelectComponent
-            orders={orders}
             onOrderSelect={setSelectedOrders}
             defaultValues={selectOrder}
           />

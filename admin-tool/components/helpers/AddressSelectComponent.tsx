@@ -17,24 +17,27 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover';
-import { Check, ChevronDown, Plus } from 'lucide-react';
+import { Check, ChevronDown, ChevronLeft, ChevronRight, Plus } from 'lucide-react';
 import { useId, useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 import { Address } from '@/lib/types';
+import { PagingMeta } from '@/lib/dtos';
 
 export default function AddressSelectComponent({
-  addresses,
-  onAddressSelect, // Callback function passed from parent
+  onAddressSelect,
   defaultValue,
 }: {
-  addresses: Address[];
-  onAddressSelect: (addressId: string) => void; // Callback type definition
+  onAddressSelect: (addressId: string) => void;
   defaultValue?: string;
 }) {
   const id = useId();
   const [open, setOpen] = useState<boolean>(false);
   const [value, setValue] = useState<string>(defaultValue || '');
+  const [page, setPage] = useState<number>(1);
+  const [addresses, setAddresses] = useState<Address[]>([]);
+  const [meta, setMeta] = useState<PagingMeta | null>(null);
+  const [search, setSearch] = useState<string>('');
 
   useEffect(() => {
     if (defaultValue) {
@@ -42,9 +45,24 @@ export default function AddressSelectComponent({
     }
   }, [defaultValue]);
 
-  const selectedAddress = addresses.find(
-    (address) => address.addressId === value
-  );
+  useEffect(() => {
+    const controller = new AbortController();
+    const params = new URLSearchParams({ page: String(page), limit: '10' });
+    if (search) params.append('query', search);
+
+    fetch(`/api/addresses/paging?${params.toString()}`, {
+      signal: controller.signal,
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setAddresses(data.data);
+        setMeta(data.meta);
+      })
+      .catch(() => {});
+    return () => controller.abort();
+  }, [page, search]);
+
+  const selectedAddress = addresses.find((address) => address.addressId === value);
 
   const t = useTranslations('SelectComponents.Address');
   return (
@@ -77,8 +95,11 @@ export default function AddressSelectComponent({
           align='start'
         >
           <Command>
-            <CommandInput placeholder={t('findAddress')} />
-            <CommandList>
+            <CommandInput
+              placeholder={t('findAddress')}
+              onValueChange={setSearch}
+            />
+            <CommandList className='max-h-[300px] overflow-y-auto'>
               <CommandEmpty>{t('noAddressFound')}</CommandEmpty>
               <CommandGroup>
                 {addresses.map((address) => (
@@ -115,6 +136,23 @@ export default function AddressSelectComponent({
                   </Link>
                 </div>
               </CommandGroup>
+              <div className='flex items-center justify-between p-2'>
+                <button
+                  className='disabled:opacity-50'
+                  onClick={() => setPage((p) => Math.max(1, p - 1))}
+                  disabled={meta?.isFirstPage}
+                >
+                  <ChevronLeft size={16} />
+                </button>
+                <span className='text-sm'>{meta?.currentPage ?? page}</span>
+                <button
+                  className='disabled:opacity-50'
+                  onClick={() => setPage((p) => p + 1)}
+                  disabled={meta?.isLastPage}
+                >
+                  <ChevronRight size={16} />
+                </button>
+              </div>
             </CommandList>
           </Command>
         </PopoverContent>

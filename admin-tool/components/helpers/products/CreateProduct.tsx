@@ -13,12 +13,11 @@ import { createProduct } from '@/lib/actions/product.actions';
 import Image from 'next/image';
 import { Card } from '@/components/ui/card';
 import SelectCategoryComponent from '../categories/SelectCategoryComponent';
-import { Category } from '@/lib/types';
 import FileInputComponent from '@/components/file-upload/FileInputComponent';
 import { toast } from 'sonner';
 import CustomeToast from '../toasts/CustomeErrorToast';
 
-const CreateProduct = ({ categories }: { categories: Category[] }) => {
+const CreateProduct = () => {
   const [selectedCategories, setSelectedCategories] = React.useState<string[]>(
     []
   );
@@ -162,7 +161,7 @@ const CreateProduct = ({ categories }: { categories: Category[] }) => {
             <div className='flex gap-2 items-start flex-wrap'>
               {productData.categories.map((categoryId) => (
                 <Badge key={categoryId} variant='secondary' className='text-xs'>
-                  {categories.find((c) => c.categoryId === categoryId)?.name}
+                  {categoryId}
                 </Badge>
               ))}
             </div>
@@ -259,7 +258,6 @@ const CreateProduct = ({ categories }: { categories: Category[] }) => {
             </div>
             <div className='space-y-2'>
               <SelectCategoryComponent
-                categories={categories}
                 onCategorySelect={handleCategoryChange}
                 defaultValues={selectedCategories}
               />

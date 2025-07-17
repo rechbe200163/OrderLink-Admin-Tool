@@ -17,30 +17,56 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover';
-import { Check, ChevronDown, Plus } from 'lucide-react';
+import {
+  Check,
+  ChevronDown,
+  ChevronLeft,
+  ChevronRight,
+  Plus,
+} from 'lucide-react';
 import { useId, useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
-import { OrdersWithAddressOfCustomer } from '@/lib/types';
+import { OrdersWithCustomer } from '@/lib/types';
+import { PagingMeta } from '@/lib/dtos';
 
 export default function OrderSelectComponent({
-  orders,
   onOrderSelect,
   defaultValues = [],
 }: {
-  orders: OrdersWithAddressOfCustomer[];
   onOrderSelect: (orderIds: string[]) => void;
   defaultValues?: string[];
 }) {
   const id = useId();
   const [open, setOpen] = useState<boolean>(false);
   const [selectedValues, setSelectedValues] = useState<string[]>(defaultValues);
+  const [page, setPage] = useState<number>(1);
+  const [orders, setOrders] = useState<OrdersWithCustomer[]>([]);
+  const [meta, setMeta] = useState<PagingMeta | null>(null);
+  const [search, setSearch] = useState<string>('');
 
   useEffect(() => {
     if (defaultValues) {
       setSelectedValues(defaultValues);
     }
   }, [defaultValues]);
+
+  useEffect(() => {
+    const controller = new AbortController();
+    const params = new URLSearchParams({ page: String(page), limit: '10' });
+    if (search) params.append('query', search);
+
+    fetch(`/api/orders/paging?${params.toString()}`, {
+      signal: controller.signal,
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setOrders(data.data);
+        setMeta(data.meta);
+      })
+      .catch(() => {});
+    return () => controller.abort();
+  }, [page, search]);
 
   const toggleSelect = (orderId: string) => {
     const newValues = selectedValues.includes(orderId)
@@ -87,8 +113,11 @@ export default function OrderSelectComponent({
           align='start'
         >
           <Command>
-            <CommandInput placeholder={t('findOrder')} />
-            <CommandList>
+            <CommandInput
+              placeholder={t('findOrder')}
+              onValueChange={setSearch}
+            />
+            <CommandList className='max-h-[300px] overflow-y-auto'>
               <CommandEmpty>{t('noOrderFound')}</CommandEmpty>
               <CommandGroup>
                 {orders.map((order) => (
@@ -135,6 +164,23 @@ export default function OrderSelectComponent({
                   </Link>
                 </div>
               </CommandGroup>
+              <div className='flex items-center justify-between p-2'>
+                <button
+                  className='disabled:opacity-50'
+                  onClick={() => setPage((p) => Math.max(1, p - 1))}
+                  disabled={meta?.isFirstPage}
+                >
+                  <ChevronLeft size={16} />
+                </button>
+                <span className='text-sm'>{meta?.currentPage ?? page}</span>
+                <button
+                  className='disabled:opacity-50'
+                  onClick={() => setPage((p) => p + 1)}
+                  disabled={meta?.isLastPage}
+                >
+                  <ChevronRight size={16} />
+                </button>
+              </div>
             </CommandList>
           </Command>
         </PopoverContent>

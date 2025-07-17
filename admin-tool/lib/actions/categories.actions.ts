@@ -24,7 +24,7 @@ export async function updateCategory(
 ): Promise<FormState> {
   return (await guardAction(async () => {
     await apiPatch(
-      ENDPOINTS.CATEGORY(categoryId)
+      ENDPOINTS.CATEGORY(categoryId),
       getChangedFormData(current, formData)
     );
     return { success: true } as FormState;

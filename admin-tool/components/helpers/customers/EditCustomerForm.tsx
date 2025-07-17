@@ -13,7 +13,7 @@ import {
 import { Card } from '@/components/ui/card';
 import AddressSelectComponent from '@/components/helpers/AddressSelectComponent';
 import { Loader2, PlusCircle } from 'lucide-react';
-import { Address, BusinessSector, CustomerWithAddressId } from '@/lib/types';
+import { BusinessSector, CustomerWithAddressId } from '@/lib/types';
 import { updateCustomer } from '@/lib/actions/user.actions';
 import { toast } from 'sonner';
 import CustomeToast from '../toasts/CustomeErrorToast';
@@ -22,10 +22,8 @@ import { useTranslations } from 'next-intl';
 
 export default function EditCustomerForm({
   customer,
-  addresses,
 }: {
   customer: CustomerWithAddressId;
-  addresses: Address[];
 }) {
   const [selectedAddress, setSelectedAddress] = React.useState<string>(
     customer.addressId!
@@ -110,7 +108,6 @@ export default function EditCustomerForm({
               </div>
               <div>
                 <AddressSelectComponent
-                  addresses={addresses}
                   onAddressSelect={setSelectedAddress}
                   defaultValue={customer.addressId}
                 />
