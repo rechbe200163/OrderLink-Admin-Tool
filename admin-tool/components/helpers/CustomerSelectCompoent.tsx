@@ -108,24 +108,25 @@ export default function CustomerSelectComponent({
             <CommandList>
               <CommandEmpty>{t('noCustomerFound')}</CommandEmpty>
               <CommandGroup>
-                {customers.map((customer) => (
-                  <CommandItem
-                    key={customer.customerReference}
-                    value={String(customer.customerReference)}
-                    onSelect={(currentValue) => {
-                      setValue(currentValue === value ? '' : currentValue);
-                      onCustomerSelect(currentValue);
-                      setOpen(false);
-                    }}
-                  >
-                    {`${customer.firstName ?? ''} ${customer.lastName} (${
-                      customer.email
-                    })`}
-                    {value === String(customer.customerReference) && (
-                      <Check size={16} strokeWidth={2} className='ml-auto' />
-                    )}
-                  </CommandItem>
-                ))}
+                {customers.map((customer) => {
+                  const label = `${customer.firstName ?? ''} ${customer.lastName} (${customer.email})`;
+                  return (
+                    <CommandItem
+                      key={customer.customerReference}
+                      value={label}
+                      onSelect={() => {
+                        setValue(String(customer.customerReference));
+                        onCustomerSelect(String(customer.customerReference));
+                        setOpen(false);
+                      }}
+                    >
+                      {label}
+                      {value === String(customer.customerReference) && (
+                        <Check size={16} strokeWidth={2} className='ml-auto' />
+                      )}
+                    </CommandItem>
+                  );
+                })}
               </CommandGroup>
               <CommandSeparator />
               <CommandGroup>

@@ -121,18 +121,21 @@ export default function SelectCategoryComponent({
             <CommandList className='max-h-[300px] overflow-y-auto'>
               <CommandEmpty>{t('noCategoryFound')}</CommandEmpty>
               <CommandGroup>
-                {categories.map((category) => (
-                  <CommandItem
-                    key={category.categoryId}
-                    value={category.categoryId}
-                    onSelect={() => handleSelect(category.categoryId)}
-                  >
-                    {`${category.name}`}
-                    {values.includes(category.categoryId) && (
-                      <Check size={16} strokeWidth={2} className='ml-auto' />
-                    )}
-                  </CommandItem>
-                ))}
+                {categories.map((category) => {
+                  const label = `${category.name}`;
+                  return (
+                    <CommandItem
+                      key={category.categoryId}
+                      value={label}
+                      onSelect={() => handleSelect(category.categoryId)}
+                    >
+                      {label}
+                      {values.includes(category.categoryId) && (
+                        <Check size={16} strokeWidth={2} className='ml-auto' />
+                      )}
+                    </CommandItem>
+                  );
+                })}
               </CommandGroup>
               <CommandSeparator />
               <CommandGroup>

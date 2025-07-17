@@ -82,18 +82,21 @@ export default function ActionsSelectComponent({
             <CommandList className='max-h-[300px] overflow-y-auto'>
               <CommandEmpty>{t('noActionFound')}</CommandEmpty>
               <CommandGroup>
-                {Object.values(Actions).map((action) => (
-                  <CommandItem
-                    key={action}
-                    value={action}
-                    onSelect={() => handleSelect(action)}
-                  >
-                    {action}
-                    {selectedValues.includes(action) && (
-                      <Check size={16} strokeWidth={2} className='ml-auto' />
-                    )}
-                  </CommandItem>
-                ))}
+                {Object.values(Actions).map((action) => {
+                  const label = action;
+                  return (
+                    <CommandItem
+                      key={action}
+                      value={label}
+                      onSelect={() => handleSelect(action)}
+                    >
+                      {label}
+                      {selectedValues.includes(action) && (
+                        <Check size={16} strokeWidth={2} className='ml-auto' />
+                      )}
+                    </CommandItem>
+                  );
+                })}
               </CommandGroup>
             </CommandList>
           </Command>
