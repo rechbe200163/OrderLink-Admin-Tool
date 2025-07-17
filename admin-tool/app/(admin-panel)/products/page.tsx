@@ -16,7 +16,6 @@ export default async function ProductsPage(props: {
     page?: string;
     limit?: string;
     search?: string;
-    filter?: string;
     category?: BusinessSector;
   }>;
 }) {
@@ -27,14 +26,12 @@ export default async function ProductsPage(props: {
   const page = searchParams?.page ? parseInt(searchParams.page) : 1;
   const limit = searchParams?.limit ? parseInt(searchParams.limit) : 10;
   const search = searchParams?.search ? searchParams.search : '';
-  const filter = searchParams?.filter ? searchParams.filter : '';
   const category = searchParams?.category;
 
   const productData = await productApiService.getProductsPaging(
     page,
     limit,
     search,
-    filter,
     category
   );
   const products = productData.data;
@@ -49,22 +46,6 @@ export default async function ProductsPage(props: {
         <div className='flex justify-between items-center mb-6'>
           <div className='flex justify-between items-center space-x-4'>
             <SearchComponent placeholder={tFilter('Search.searchForOption1')} />
-            <FilteringComponent
-              title={tFilter('Filter.Status.title')}
-              filterName='filter'
-              values={[
-                {
-                  label: tFilter('Filter.Status.options.active'),
-                  value: 'active',
-                  color: 'green',
-                },
-                {
-                  label: tFilter('Filter.Status.options.inactive'),
-                  value: 'inactive',
-                  color: 'red',
-                },
-              ]}
-            />
             <FilteringComponent
               title={t('Ressource.Categories.BreadCrumps.title')}
               filterName='category'
