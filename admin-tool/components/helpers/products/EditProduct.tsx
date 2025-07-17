@@ -21,11 +21,9 @@ import FileInputComponent from '@/components/file-upload/FileInputComponent';
 
 const EditProductPage = ({
   product,
-  categories,
   signedImageUrl,
 }: {
   product: ProductWithCategoryNames;
-  categories: Category[];
   signedImageUrl: string; // Passed from server as pre-fetched signed URL
 }) => {
   const router = useRouter();
@@ -230,7 +228,6 @@ const EditProductPage = ({
 
           <Label>Categories</Label>
           <SelectCategoryComponent
-            categories={categories}
             defaultValues={selectedCategories}
             onCategorySelect={handleCategoryChange}
           />

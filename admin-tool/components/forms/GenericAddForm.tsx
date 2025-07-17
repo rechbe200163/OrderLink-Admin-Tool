@@ -18,13 +18,9 @@ import CustomeToast from '../helpers/toasts/CustomeErrorToast';
 import AddressSelectComponent from '@/components/helpers/AddressSelectComponent';
 import { useTranslations } from 'next-intl';
 import PhoneNumberInputComponent from '../PhoneNumberInputComponent';
-import { Address, BusinessSector } from '@/lib/types';
+import { BusinessSector } from '@/lib/types';
 
-interface AddUserFormProps {
-  addresses: Address[];
-}
-
-export default function GenericAddForm({ addresses }: AddUserFormProps) {
+export default function GenericAddForm() {
   const [selectedAddress, setSelectedAddress] = React.useState<string>('');
   const [selectedBusinessSector, setSelectedBusinessSector] =
     React.useState<string>('N/A');
@@ -112,8 +108,7 @@ export default function GenericAddForm({ addresses }: AddUserFormProps) {
               </div>
               <div>
                 <AddressSelectComponent
-                  addresses={addresses}
-                  onAddressSelect={setSelectedAddress} // Pass selected address ID back to the parent
+                  onAddressSelect={setSelectedAddress}
                 />
                 <input
                   id='addressId'

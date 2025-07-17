@@ -1,5 +1,4 @@
 import EditProduct from '@/components/helpers/products/EditProduct';
-import { categoryApiService } from '@/lib/api/concrete/categories';
 import { productApiService } from '@/lib/api/concrete/products';
 import { supabaseService } from '@/lib/utlis/SupabaseStorageService';
 import React from 'react';
@@ -16,12 +15,10 @@ async function EditProductPage(props: EditProductPageProps) {
   const singedProductImageUrl = await supabaseService.getSingedUrlSupabase(
     product.imagePath!
   );
-  const categories = await categoryApiService.getCategories();
   return (
     <div className='sticky top-0 z-10 px-4 '>
       <EditProduct
         product={product}
-        categories={categories}
         signedImageUrl={singedProductImageUrl!}
       />
     </div>
