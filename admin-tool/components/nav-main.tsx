@@ -15,8 +15,6 @@ import {
   Key,
   Settings,
   ShieldCheck,
-  Star,
-  FolderPlus,
 } from 'lucide-react';
 
 import {
@@ -25,13 +23,7 @@ import {
   CollapsibleTrigger,
 } from '@/components/ui/collapsible';
 import { Input } from '@/components/ui/input';
-import { useState, useMemo, useEffect } from 'react';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
+import { useState, useMemo } from 'react';
 import {
   SidebarGroup,
   SidebarMenu,
@@ -40,7 +32,6 @@ import {
   SidebarMenuSub,
   SidebarMenuSubButton,
   SidebarMenuSubItem,
-  SidebarMenuAction,
 } from '@/components/ui/sidebar';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -51,41 +42,6 @@ export function NavMain() {
   const tGroup = useTranslations('Navigation.Groups');
   const tItem = useTranslations('Navigation.Items');
   const [query, setQuery] = useState('');
-  const [favorites, setFavorites] = useState<string[]>([]);
-  const [groupMap, setGroupMap] = useState<Record<string, string>>({});
-
-  // Load favorites and custom groups from localStorage
-  useEffect(() => {
-    try {
-      const fav = JSON.parse(localStorage.getItem('nav:favorites') || '[]');
-      setFavorites(Array.isArray(fav) ? fav : []);
-      const map = JSON.parse(localStorage.getItem('nav:groups') || '{}');
-      setGroupMap(map && typeof map === 'object' ? map : {});
-    } catch {
-      /* ignore */
-    }
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem('nav:favorites', JSON.stringify(favorites));
-  }, [favorites]);
-
-  useEffect(() => {
-    localStorage.setItem('nav:groups', JSON.stringify(groupMap));
-  }, [groupMap]);
-
-  const toggleFavorite = (url: string) => {
-    setFavorites((prev) =>
-      prev.includes(url) ? prev.filter((f) => f !== url) : [...prev, url]
-    );
-  };
-
-  const promptGroup = (url: string) => {
-    const label = window.prompt('Group name');
-    if (label) {
-      setGroupMap((prev) => ({ ...prev, [url]: label }));
-    }
-  };
 
   const navGroups = useMemo(
     () => [
@@ -190,56 +146,18 @@ export function NavMain() {
     [tGroup, tItem]
   );
 
-  // Build groups including user-defined mappings
-  const groupsWithCustom = useMemo(() => {
-    const custom: Record<string, { label: string; icon: any; items: typeof navGroups[0]['items'] }> = {};
-    const base = navGroups.map((g) => ({ ...g, items: [...g.items] }));
-
-    base.forEach((g) => {
-      g.items = g.items.filter((item) => {
-        const label = groupMap[item.url];
-        if (label) {
-          if (!custom[label]) {
-            custom[label] = { label, icon: FolderPlus, items: [] };
-          }
-          custom[label].items.push(item);
-          return false;
-        }
-        return true;
-      });
-    });
-
-    return [...base, ...Object.values(custom)];
-  }, [navGroups, groupMap]);
-
-  const favoritesGroup = useMemo(() => {
-    const allItems = groupsWithCustom.flatMap((g) => g.items);
-    const favItems = allItems.filter((i) => favorites.includes(i.url));
-    return { label: 'Favorites', icon: Star, items: favItems };
-  }, [groupsWithCustom, favorites]);
-
-  const allGroups = useMemo(() => {
-    return favoritesGroup.items.length > 0
-      ? [favoritesGroup, ...groupsWithCustom]
-      : groupsWithCustom;
-  }, [favoritesGroup, groupsWithCustom]);
-
   const filteredGroups = useMemo(() => {
-    if (!query) return allGroups;
+    if (!query) return navGroups;
     const lower = query.toLowerCase();
-    return allGroups
-
+    return navGroups
       .map((g) => ({
         ...g,
         items: g.items.filter((i) => i.title.toLowerCase().includes(lower)),
       }))
       .filter(
-        (g) =>
-          g.items.length > 0 || g.label.toLowerCase().includes(lower)
+        (g) => g.items.length > 0 || g.label.toLowerCase().includes(lower)
       );
-  }, [query, allGroups]);
-
-
+  }, [query, navGroups]);
 
   // Helper to check if any item in group is active
   const isGroupActive = (items: { url: string }[]) =>
@@ -249,7 +167,7 @@ export function NavMain() {
 
   return (
     <>
-      <div className='mb-4'>
+      <div className='mt-4'>
         <Input
           type='search'
           placeholder='Search items...'
@@ -262,11 +180,11 @@ export function NavMain() {
           <div key={group.label} className='mb-4 last:mb-0'>
             <SidebarMenu>
               {group.items.length > 1 ? (
-              <Collapsible
-                asChild
-                defaultOpen={isGroupActive(group.items)}
-                className='group/collapsible'
-              >
+                <Collapsible
+                  asChild
+                  defaultOpen={isGroupActive(group.items)}
+                  className='group/collapsible'
+                >
                   <SidebarMenuItem>
                     <CollapsibleTrigger asChild>
                       <SidebarMenuButton>
@@ -275,87 +193,56 @@ export function NavMain() {
                         <ChevronRight className='ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90' />
                       </SidebarMenuButton>
                     </CollapsibleTrigger>
-                  <CollapsibleContent>
-                    <SidebarMenuSub>
-                      {group.items.map((item) => (
-                        <SidebarMenuSubItem key={item.title}>
-                          <SidebarMenuSubButton
-                            asChild
-                            className={
-                              pathname === item.url ||
-                              pathname.startsWith(item.url + '/')
-                                ? 'bg-primary text-primary-foreground'
-                                : ''
-                            }
-                          >
-                            <Link href={item.url}>
-                              <span className='flex items-center gap-2'>
-                                {item.icon && <item.icon size={16} />}
-                                {item.title}
-                              </span>
-                            </Link>
-                          </SidebarMenuSubButton>
-                          <SidebarMenuAction
-                            showOnHover
-                            onClick={() => toggleFavorite(item.url)}
-                          >
-                            <Star
-                              size={14}
-                              className={favorites.includes(item.url) ? 'fill-yellow-400 text-yellow-400' : ''}
-                            />
-                            <span className='sr-only'>Favorite</span>
-                          </SidebarMenuAction>
-                          <SidebarMenuAction
-                            showOnHover
-                            onClick={() => promptGroup(item.url)}
-                          >
-                            <FolderPlus size={14} />
-                            <span className='sr-only'>Group</span>
-                          </SidebarMenuAction>
-                        </SidebarMenuSubItem>
-                      ))}
-                    </SidebarMenuSub>
-                  </CollapsibleContent>
-                </SidebarMenuItem>
-              </Collapsible>
-            ) : (
-              group.items.map((item) => (
-                <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton
-                    asChild
-                    tooltip={item.title}
-                    className={
-                      pathname === item.url ||
-                      pathname.startsWith(item.url + '/')
-                        ? 'bg-primary text-primary-foreground'
-                        : ''
-                    }
-                  >
-                    <Link href={item.url}>
-                      {item.icon && <item.icon size={16} />}
-                      <span>{item.title}</span>
-                    </Link>
-                  </SidebarMenuButton>
-                  <SidebarMenuAction
-                    showOnHover
-                    onClick={() => toggleFavorite(item.url)}
-                  >
-                    <Star
-                      size={14}
-                      className={favorites.includes(item.url) ? 'fill-yellow-400 text-yellow-400' : ''}
-                    />
-                    <span className='sr-only'>Favorite</span>
-                  </SidebarMenuAction>
-                  <SidebarMenuAction showOnHover onClick={() => promptGroup(item.url)}>
-                    <FolderPlus size={14} />
-                    <span className='sr-only'>Group</span>
-                  </SidebarMenuAction>
-                </SidebarMenuItem>
-              ))
-            )}
-          </SidebarMenu>
-        </div>
-      ))}
+                    <CollapsibleContent>
+                      <SidebarMenuSub>
+                        {group.items.map((item) => (
+                          <SidebarMenuSubItem key={item.title}>
+                            <SidebarMenuSubButton
+                              asChild
+                              className={
+                                pathname === item.url ||
+                                pathname.startsWith(item.url + '/')
+                                  ? 'bg-primary text-primary-foreground'
+                                  : ''
+                              }
+                            >
+                              <Link href={item.url}>
+                                <span className='flex items-center gap-2'>
+                                  {item.icon && <item.icon size={16} />}
+                                  {item.title}
+                                </span>
+                              </Link>
+                            </SidebarMenuSubButton>
+                          </SidebarMenuSubItem>
+                        ))}
+                      </SidebarMenuSub>
+                    </CollapsibleContent>
+                  </SidebarMenuItem>
+                </Collapsible>
+              ) : (
+                group.items.map((item) => (
+                  <SidebarMenuItem key={item.title}>
+                    <SidebarMenuButton
+                      asChild
+                      tooltip={item.title}
+                      className={
+                        pathname === item.url ||
+                        pathname.startsWith(item.url + '/')
+                          ? 'bg-primary text-primary-foreground'
+                          : ''
+                      }
+                    >
+                      <Link href={item.url}>
+                        {item.icon && <item.icon size={16} />}
+                        <span>{item.title}</span>
+                      </Link>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                ))
+              )}
+            </SidebarMenu>
+          </div>
+        ))}
       </SidebarGroup>
     </>
   );
