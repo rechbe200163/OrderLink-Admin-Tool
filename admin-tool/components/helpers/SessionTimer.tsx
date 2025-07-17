@@ -6,6 +6,7 @@ import { renewSessionAction } from '@/lib/actions/auth.actions'; // Server Actio
 import { Button } from '../ui/button';
 import { Clock, RefreshCw } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { SlidingNumber } from '../ui/sliding-number';
 
 interface SessionTimerProps {
   issuedAt: number;
@@ -42,7 +43,13 @@ export default function SessionTimer({
   const totalSeconds = Math.floor(remaining / 1000);
   const isLowTime = totalSeconds < 300;
   const isCriticalTime = totalSeconds < 60;
+  // Use SlidingNumber to display remaining time
   const isExpired = totalSeconds <= 0;
+
+  // Parse remaining time into hours, minutes, seconds
+  const remHrs = Math.floor(Math.max(0, totalSeconds) / 3600);
+  const remMins = Math.floor((Math.max(0, totalSeconds) % 3600) / 60);
+  const remSecs = Math.max(0, totalSeconds) % 60;
 
   return (
     <div className='relative group w-[130px]'>
@@ -82,7 +89,17 @@ export default function SessionTimer({
             !isLowTime && 'text-foreground'
           )}
         >
-          {isExpired ? 'EXPIRED' : format(remaining)}
+          {isExpired ? (
+            'EXPIRED'
+          ) : (
+            <div className='flex items-center gap-0.5 font-mono'>
+              <SlidingNumber value={remHrs} padStart={true} />
+              <span className='text-zinc-500'>:</span>
+              <SlidingNumber value={remMins} padStart={true} />
+              <span className='text-zinc-500'>:</span>
+              <SlidingNumber value={remSecs} padStart={true} />
+            </div>
+          )}
         </span>
       </div>
     </div>

@@ -19,6 +19,7 @@ import { toast } from 'sonner';
 import CustomeToast from '../toasts/CustomeErrorToast';
 import PhoneNumberInputComponent from '@/components/PhoneNumberInputComponent';
 import { useTranslations } from 'next-intl';
+import { Spinner } from '@/components/ui/kibo-ui/spinner';
 
 export default function EditCustomerForm({
   customer,
@@ -176,7 +177,7 @@ export default function EditCustomerForm({
           <Button type='submit' disabled={isPending}>
             {isPending ? (
               <>
-                 <Spinner />; className='animate-spin h-5 w-5' />
+                <Spinner />
                 {t('buttons.addLoading')}
               </>
             ) : (
