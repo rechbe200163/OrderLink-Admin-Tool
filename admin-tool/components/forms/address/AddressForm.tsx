@@ -18,7 +18,7 @@ import { Label } from '../../ui/label';
 import { Input } from '../../ui/input';
 import { withMask } from 'use-mask-input';
 import { createAddress } from '@/lib/actions/address.actions';
-import { Loader, Loader2, Loader2Icon, MapPinHouse } from 'lucide-react';
+import { MapPinHouse } from 'lucide-react';
 import React from 'react';
 import CustomeToast from '../../helpers/toasts/CustomeErrorToast';
 import { Card } from '@/components/ui/card';

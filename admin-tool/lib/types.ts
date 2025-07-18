@@ -130,12 +130,13 @@ export interface Employees {
 }
 
 export interface Permission {
-  id: string;
+  permissionId: string;
   role: string;
   resource: Resources;
   action: Actions;
   allowed: boolean;
   createdAt: Date;
+  deleted: boolean;
 }
 
 export interface Route {
@@ -281,6 +282,7 @@ export interface OrdersWithCustomer extends Order {
     customerReference: number;
     firstName: string | null;
     lastName: string;
+    address: Address | null;
   };
 }
 

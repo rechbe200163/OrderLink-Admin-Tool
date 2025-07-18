@@ -21,7 +21,6 @@ export default async function PermissionsPage(props: {
 
   const allPermissions = await permissionApiService.getAll();
 
-  console.log('All permissions:', JSON.stringify(allPermissions, null, 2));
   const roles = await roleApiService.getRoleNames(roleParam);
 
   if (!roles.length) {
@@ -37,8 +36,7 @@ export default async function PermissionsPage(props: {
 
   return (
     <div className='px-5'>
-      <div className='sticky top-0 bg-background z-10'>
-      </div>
+      <div className='sticky top-0 bg-background z-10'></div>
       <div className='container'>
         <div className='flex justify-between items-center mb-6'>
           <div className='flex justify-between items-center space-x-4'>
@@ -60,7 +58,7 @@ export default async function PermissionsPage(props: {
 }
 
 // error component for no roles
-export async function NoRolesError() {
+async function NoRolesError() {
   const t = await getTranslations('Dashboard');
   return (
     <div className='text-center p-6'>

@@ -20,8 +20,7 @@ class CategoryApiService extends BaseApiService {
   async getCategories(): Promise<Category[]> {
     const response = await this.get<{ categories: Category[] }>(
       'categories',
-      {},
-      'read'
+      {}
     );
     return response.categories;
   }
@@ -36,11 +35,12 @@ class CategoryApiService extends BaseApiService {
     query?: string,
     filter?: string
   ): Promise<PagingDto<Category>> {
-    return this.get<PagingDto<Category>>(
-      'categories',
-      { page, limit, query, filter },
-      'read'
-    );
+    return this.get<PagingDto<Category>>('categories', {
+      page,
+      limit,
+      query,
+      filter,
+    });
   }
 }
 

@@ -12,7 +12,7 @@ interface OrderPerRoutePageProps {
 async function EditProductPage(props: OrderPerRoutePageProps) {
   const { slug } = await props.params;
   const routeId = slug![0]!;
-  const name = slug![1];
+  const _name = slug![1];
   const orders = await orderApiService.getOrdersByRouteId(routeId);
   return (
     <div className='min-w-full'>

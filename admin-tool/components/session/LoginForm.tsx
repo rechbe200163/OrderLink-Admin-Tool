@@ -11,13 +11,7 @@ import {
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useActionState, useState } from 'react';
-import {
-  EyeIcon,
-  EyeOff,
-  Loader2,
-  Loader2Icon,
-  LockKeyhole,
-} from 'lucide-react';
+import { EyeIcon, EyeOff, LockKeyhole } from 'lucide-react';
 import { logIn } from '@/lib/actions/auth.actions';
 import { Spinner } from '../ui/kibo-ui/spinner';
 

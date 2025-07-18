@@ -1,10 +1,11 @@
 'use client';
 
 import { Alert, AlertDescription } from '../ui/alert';
-import { AlertCircle, Loader2, LogOutIcon } from 'lucide-react';
+import { AlertCircle, LogOutIcon } from 'lucide-react';
 import { useActionState } from 'react';
 import { DropdownMenuItem } from '@radix-ui/react-dropdown-menu';
 import { logOut } from '@/lib/actions/auth.actions';
+import { Spinner } from '../ui/kibo-ui/spinner';
 
 export function LogoutForm() {
   const [formState, action, isPending] = useActionState(logOut, {
@@ -30,7 +31,7 @@ export function LogoutForm() {
         <button type='submit' className='w-full' disabled={isPending}>
           {isPending ? (
             <>
-               <Spinner />; className='mr-2 h-4 w-4 animate-spin' />
+              <Spinner />
             </>
           ) : (
             <>

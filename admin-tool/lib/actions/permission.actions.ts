@@ -2,10 +2,9 @@
 
 import { FormState } from '../form.types';
 import { apiPost, apiPatch } from './api.actions';
-import { formDataToPartial, getChangedFormData } from '../utils';
+import { getChangedFormData } from '../utils';
 import { ENDPOINTS } from '../api/endpoints';
 import { guardAction } from '../server-guard';
-import { error } from 'console';
 
 export async function createPermission(
   _prevState: FormState,
@@ -30,7 +29,7 @@ export async function updatePermission(
   permissionId: string,
   current: Record<string, any>,
   _prevState: FormState,
-  formData: FormData,
+  formData: FormData
 ): Promise<FormState> {
   return (await guardAction(async () => {
     const data = getChangedFormData(current, formData) as Record<string, any>;

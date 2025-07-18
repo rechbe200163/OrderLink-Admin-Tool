@@ -12,7 +12,7 @@ import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import React, { useActionState } from 'react';
 import { Button } from '@/components/ui/button';
-import { Loader2, PlusCircle } from 'lucide-react';
+import { PlusCircle } from 'lucide-react';
 import { addCustomer } from '@/lib/actions/user.actions';
 import CustomeToast from '../helpers/toasts/CustomeErrorToast';
 import AddressSelectComponent from '@/components/helpers/AddressSelectComponent';

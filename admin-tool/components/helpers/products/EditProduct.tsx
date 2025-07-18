@@ -2,7 +2,6 @@
 import Image from 'next/image';
 import { toast } from 'sonner';
 import { useActionState } from 'react';
-import { Category } from '@/lib/types';
 import { formatPrice } from '@/lib/utils';
 import { useRouter } from 'next/navigation';
 import { Card } from '@/components/ui/card';
@@ -11,13 +10,14 @@ import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
-import { ImageOff, Loader2, Plus } from 'lucide-react';
+import { ImageOff, Plus } from 'lucide-react';
 import CustomeToast from '../toasts/CustomeErrorToast';
 import { ProductWithCategoryNames } from '@/lib/types';
 import { updateProduct } from '@/lib/actions/product.actions';
 import React, { useState, useCallback, useEffect } from 'react';
 import SelectCategoryComponent from '../categories/SelectCategoryComponent';
 import FileInputComponent from '@/components/file-upload/FileInputComponent';
+import { Spinner } from '@/components/ui/kibo-ui/spinner';
 
 const EditProductPage = ({
   product,
@@ -239,8 +239,7 @@ const EditProductPage = ({
           />
 
           <Button type='submit' disabled={isPending}>
-            {isPending ?  <Spinner />; className='animate-spin' /> : <Plus />} Edit
-            Product
+            {isPending ? <Spinner /> : <Plus />} Edit Product
           </Button>
         </form>
       </Card>

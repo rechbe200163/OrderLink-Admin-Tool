@@ -16,12 +16,10 @@ export class BaseApiService {
     {
       params,
       body,
-      action = method === 'GET' ? 'read' : 'write',
       headers,
     }: {
       params?: Record<string, string | number | undefined>;
       body?: unknown;
-      action?: 'read' | 'write';
       headers?: HeadersInit;
     } = {}
   ): Promise<T> {
@@ -83,45 +81,40 @@ export class BaseApiService {
 
   public get<T>(
     endpoint: string,
-    params?: Record<string, string | number | undefined>,
-    action: 'read' | 'write' = 'read'
+    params?: Record<string, string | number | undefined>
   ): Promise<T> {
-    return this.request('GET', endpoint, { params, action });
+    return this.request('GET', endpoint, { params });
   }
 
   public post<T>(
     endpoint: string,
     body?: unknown,
-    params?: Record<string, string | number | undefined>,
-    action: 'read' | 'write' = 'write'
+    params?: Record<string, string | number | undefined>
   ): Promise<T> {
-    return this.request('POST', endpoint, { body, params, action });
+    return this.request('POST', endpoint, { body, params });
   }
 
   public put<T>(
     endpoint: string,
     body?: unknown,
-    params?: Record<string, string | number | undefined>,
-    action: 'read' | 'write' = 'write'
+    params?: Record<string, string | number | undefined>
   ): Promise<T> {
-    return this.request('PUT', endpoint, { body, params, action });
+    return this.request('PUT', endpoint, { body, params });
   }
 
   public patch<T>(
     endpoint: string,
     body?: unknown,
-    params?: Record<string, string | number | undefined>,
-    action: 'read' | 'write' = 'write'
+    params?: Record<string, string | number | undefined>
   ): Promise<T> {
-    return this.request('PATCH', endpoint, { body, params, action });
+    return this.request('PATCH', endpoint, { body, params });
   }
 
   public delete<T>(
     endpoint: string,
-    params?: Record<string, string | number | undefined>,
-    action: 'read' | 'write' = 'write'
+    params?: Record<string, string | number | undefined>
   ): Promise<T> {
-    return this.request('DELETE', endpoint, { params, action });
+    return this.request('DELETE', endpoint, { params });
   }
 }
 

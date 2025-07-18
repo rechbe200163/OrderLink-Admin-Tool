@@ -3,10 +3,10 @@
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Loader2 } from 'lucide-react';
 import { useSearchParams } from 'next/navigation';
 import { useActionState, useState } from 'react';
 import { logIn } from '@/lib/actions/auth.actions';
+import { Spinner } from '@/components/ui/kibo-ui/spinner';
 
 const SignInForm = () => {
   const searchParams = useSearchParams();
@@ -126,8 +126,8 @@ const SignInForm = () => {
           <Button type='submit' className='w-full ' disabled={isLoading}>
             {isLoading ? (
               <>
-                 <Spinner />; size={20} className='animate-spin' /> &nbsp; Loging you
-                in...
+                <Spinner />
+                &nbsp; Logging you in...
               </>
             ) : (
               'Sign In'

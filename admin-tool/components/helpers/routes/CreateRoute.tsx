@@ -4,14 +4,14 @@ import { toast } from 'sonner';
 import CustomeToast from '../toasts/CustomeErrorToast';
 
 import { Button } from '@/components/ui/button';
-import { Loader2, PlusCircle } from 'lucide-react';
+import { PlusCircle } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import OrderSelectComponent from '../OrderSelectComponent';
 import { createRoute } from '@/lib/actions/route.actions';
-import { OrdersWithAddressOfCustomer } from '@/lib/types';
 import { useTranslations } from 'next-intl';
+import { Spinner } from '@/components/ui/kibo-ui/spinner';
 
 const CreateRoutes = () => {
   const t = useTranslations('Dashboard');
@@ -39,7 +39,7 @@ const CreateRoutes = () => {
         />
       ));
     }
-  }, [formState]);
+  }, [formState, t]);
 
   const id = useId();
   return (
@@ -67,7 +67,8 @@ const CreateRoutes = () => {
         <Button type='submit' disabled={isPending} className='mt-6'>
           {isPending ? (
             <>
-               <Spinner />; className='animate-spin h-5 w-5' /> {tSelect('addNewRoute')}...
+              <Spinner />
+              {tSelect('addNewRoute')}...
             </>
           ) : (
             <>

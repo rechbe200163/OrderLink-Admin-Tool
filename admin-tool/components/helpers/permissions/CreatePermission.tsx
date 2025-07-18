@@ -13,13 +13,14 @@ import {
 } from '@/components/ui/select';
 import ActionsSelectComponent from './ActionsSelectComponent';
 import { Card } from '@/components/ui/card';
-import { Loader2, PlusCircle } from 'lucide-react';
+import { PlusCircle } from 'lucide-react';
 import CustomeToast from '../toasts/CustomeErrorToast';
 import { createPermission } from '@/lib/actions/permission.actions';
 import { useTranslations } from 'next-intl';
-import { Actions, Resources } from '@/lib/types';
+import { Resources } from '@/lib/types';
 import router from 'next/router';
 import { Checkbox } from '@/components/ui/checkbox';
+import { Spinner } from '@/components/ui/kibo-ui/spinner';
 
 export default function CreatePermission({ roles }: { roles: string[] }) {
   const [formState, action, isPending] = useActionState(createPermission, {
@@ -43,7 +44,7 @@ export default function CreatePermission({ roles }: { roles: string[] }) {
         router.push(`/settings/${formState.data}/edit`);
       }
     }
-  }, [formState, router]);
+  }, [formState]);
 
   useEffect(() => {
     if (formState.errors?.title?.length) {
@@ -123,7 +124,7 @@ export default function CreatePermission({ roles }: { roles: string[] }) {
         <Button type='submit' disabled={isPending} className='mt-6'>
           {isPending ? (
             <>
-               <Spinner />; className='animate-spin h-5 w-5' />{' '}
+              <Spinner />
               {t('buttons.addLoading')}
             </>
           ) : (

@@ -3,11 +3,7 @@ import { FormState } from '../form.types';
 import { redirect } from 'next/navigation';
 import { apiPost } from './api.actions';
 import { ENDPOINTS } from '../api/endpoints';
-import {
-  setCookie,
-  deleteCookie,
-  getCookie,
-} from '../cookies/cookie-managment';
+import { setCookie, deleteCookie } from '../cookies/cookie-managment';
 import { getSession, Session } from '../utlis/getSession';
 
 export async function logOut(): Promise<FormState> {

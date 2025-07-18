@@ -12,3 +12,19 @@ services:
     env_file:
       - .env
       - .env.local
+  unleash:
+    image: unleashorg/unleash-server
+    ports:
+      - '4242:4242'
+    environment:
+      DATABASE_URL: postgres://unleash:password@postgres/unleash
+      # Oder SQLite z.B.: file:./data/unleash.db
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres
+    environment:
+      POSTGRES_USER: unleash
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: unleash

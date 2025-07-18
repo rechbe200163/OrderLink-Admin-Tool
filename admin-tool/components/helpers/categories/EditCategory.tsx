@@ -4,7 +4,7 @@ import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
 import { Label } from '../../ui/label';
 import { Input } from '../../ui/input';
-import { Loader2, Loader2Icon, MapPinHouse } from 'lucide-react';
+import { MapPinHouse } from 'lucide-react';
 import React from 'react';
 import CustomeToast from '../toasts/CustomeErrorToast';
 import { updateCategory } from '@/lib/actions/categories.actions';

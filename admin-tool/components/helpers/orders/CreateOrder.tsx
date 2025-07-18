@@ -4,7 +4,7 @@ import { toast } from 'sonner';
 import CustomeToast from '../toasts/CustomeErrorToast';
 
 import { Button } from '@/components/ui/button';
-import { Loader2, PlusCircle } from 'lucide-react';
+import { PlusCircle } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
@@ -12,15 +12,14 @@ import CustomerSelectComponent from '../CustomerSelectCompoent';
 import ProductSelectComponent from '../ProductSelectCompoent';
 import { Checkbox } from '@/components/ui/checkbox';
 import { createOrder } from '@/lib/actions/order.actions';
-import { Customer, Product } from '@/lib/types';
+import { Product } from '@/lib/types';
 import { Spinner } from '@/components/ui/kibo-ui/spinner';
 
 interface CreateOrderProps {
-  customer?: Customer[];
   products?: Product[];
 }
 
-const CreateOrder = ({ customer = [], products = [] }: CreateOrderProps) => {
+const CreateOrder = ({ products = [] }: CreateOrderProps) => {
   const [selectedCustomer, setSelectedCustomer] = React.useState<string>('');
   const [selectedProducts, setSelectedProducts] = React.useState<string[]>([]);
   const [formState, action, isPending] = useActionState(createOrder, {

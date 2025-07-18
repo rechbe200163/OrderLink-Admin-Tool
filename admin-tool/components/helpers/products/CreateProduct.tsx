@@ -8,7 +8,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { formatPrice } from '@/lib/utils';
 import { Label } from '@/components/ui/label';
-import { ImageOff, Loader2, Plus } from 'lucide-react';
+import { ImageOff, Plus } from 'lucide-react';
 import { createProduct } from '@/lib/actions/product.actions';
 import Image from 'next/image';
 import { Card } from '@/components/ui/card';
@@ -16,6 +16,7 @@ import SelectCategoryComponent from '../categories/SelectCategoryComponent';
 import FileInputComponent from '@/components/file-upload/FileInputComponent';
 import { toast } from 'sonner';
 import CustomeToast from '../toasts/CustomeErrorToast';
+import { Spinner } from '@/components/ui/kibo-ui/spinner';
 
 const CreateProduct = () => {
   const [selectedCategories, setSelectedCategories] = React.useState<string[]>(
@@ -275,7 +276,7 @@ const CreateProduct = () => {
             >
               {isPending ? (
                 <>
-                   <Spinner />; className='mr-2 h-4 w-4 animate-spin' />
+                  <Spinner />
                   Wird erstellt...
                 </>
               ) : (

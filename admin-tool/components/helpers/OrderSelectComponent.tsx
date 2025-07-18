@@ -132,7 +132,11 @@ export default function OrderSelectComponent({
                       <span>
                         {label}
                         {selectedValues.includes(order.orderId) && (
-                          <Check size={16} strokeWidth={2} className='ml-2 inline' />
+                          <Check
+                            size={16}
+                            strokeWidth={2}
+                            className='ml-2 inline'
+                          />
                         )}
                       </span>
                       <span className='text-xs text-muted-foreground'>

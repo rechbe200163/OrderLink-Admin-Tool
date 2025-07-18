@@ -10,7 +10,7 @@ import { Employees, ROLE_NAMES } from '@/lib/types';
 
 import CustomeToast from '../toasts/CustomeErrorToast';
 import { Button } from '@/components/ui/button';
-import { Loader2, MailIcon, PlusCircle } from 'lucide-react';
+import { MailIcon, PlusCircle } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
@@ -22,6 +22,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import { Spinner } from '@/components/ui/kibo-ui/spinner';
 
 interface EditEmployeesProps {
   employee: Employees;
@@ -131,7 +132,7 @@ const EditEmployee = ({ employee }: EditEmployeesProps) => {
           <Button type='submit' disabled={isPending}>
             {isPending ? (
               <>
-                 <Spinner />; className='animate-spin h-5 w-5' />
+                <Spinner />
                 {t('buttons.updateLoading')}
               </>
             ) : (

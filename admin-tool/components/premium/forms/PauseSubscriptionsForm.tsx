@@ -1,7 +1,8 @@
 'use client';
 import { Button } from '@/components/ui/button';
+import { Spinner } from '@/components/ui/kibo-ui/spinner';
 import { pauseSubscription } from '@/lib/actions/subscription.actions';
-import { Loader2, PauseCircle } from 'lucide-react';
+import { PauseCircle } from 'lucide-react';
 
 import React, { useActionState } from 'react';
 import { toast } from 'sonner';
@@ -36,7 +37,7 @@ const PauseSubscriptionsForm = ({
       <Button type='submit' variant={'secondary'} disabled={isPending}>
         {isPending ? (
           <>
-             <Spinner />; className='mr-2 h-4 w-4 animate-spin' />
+            <Spinner />
             Pausing...
           </>
         ) : (

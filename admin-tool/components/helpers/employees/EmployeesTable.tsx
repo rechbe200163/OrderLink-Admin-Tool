@@ -8,7 +8,6 @@ import {
 } from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
 import Link from 'next/link';
-import { capitalizeFirstLetter } from '@/lib/utils';
 import { useTranslations } from 'next-intl';
 import { Employees } from '@/lib/types';
 

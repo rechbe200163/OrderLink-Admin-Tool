@@ -1,8 +1,7 @@
 'use client';
 
-import React, { useActionState, useId } from 'react';
 import { toast } from 'sonner';
-
+import { useTranslations } from 'next-intl';
 import { Card } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
@@ -15,12 +14,11 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { Button } from '@/components/ui/button';
-import { Loader2, MailIcon, PlusCircle } from 'lucide-react';
-
+import { MailIcon, PlusCircle } from 'lucide-react';
+import React, { useActionState, useId } from 'react';
 import CustomeToast from '../toasts/CustomeErrorToast';
-import { createEmployee } from '@/lib/actions/employee.actions';
-import { useTranslations } from 'next-intl';
 import { Spinner } from '@/components/ui/kibo-ui/spinner';
+import { createEmployee } from '@/lib/actions/employee.actions';
 
 const CreateEmployees = ({ roles }: { roles: string[] }) => {
   const [formState, action, isPending] = useActionState(createEmployee, {

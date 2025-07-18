@@ -4,10 +4,11 @@ import { getSession } from '@/lib/utlis/getSession';
 import SessionTimer from './helpers/SessionTimer';
 import PathBreadcrumbs from './helpers/PathBreadcrumbs';
 
-
 export async function SiteHeader() {
   const session = await getSession();
-  const user = session?.user;
+
+  if (!session) return <NoSessionError />;
+
   return (
     <header className='group-has-data-[collapsible=icon]/sidebar-wrapper:h-12 flex h-12 shrink-0 items-center gap-2 border-b transition-[width,height] ease-linear'>
       <div className='flex w-full items-center gap-1 px-4 lg:gap-2 lg:px-6 justify-between'>
@@ -27,5 +28,15 @@ export async function SiteHeader() {
         </div>
       </div>
     </header>
+  );
+}
+
+async function NoSessionError() {
+  return (
+    <div className='flex items-center justify-center h-full'>
+      <p className='text-red-500'>
+        You are not logged in. Please log in to continue.
+      </p>
+    </div>
   );
 }

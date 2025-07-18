@@ -1,18 +1,28 @@
 'use client';
 import { useActionState } from 'react';
-import { toast } from 'sonner';
-import { Button } from '@/components/ui/button';
-import { Label } from '@/components/ui/label';
-import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Card } from '@/components/ui/card';
-import { Loader2, Save } from 'lucide-react';
-import CustomeToast from '../toasts/CustomeErrorToast';
-import { updatePermission } from '@/lib/actions/permission.actions';
 import { useTranslations } from 'next-intl';
+import { Label } from '@/components/ui/label';
+import { Button } from '@/components/ui/button';
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+import { Save } from 'lucide-react';
+import { Spinner } from '@/components/ui/kibo-ui/spinner';
+import { updatePermission } from '@/lib/actions/permission.actions';
 import { Actions, Resources, ROLE_NAMES, Permission } from '@/lib/types';
 
-export default function EditPermission({ permission }: { permission: Permission }) {
-  const [formState, action, isPending] = useActionState(
+export default function EditPermission({
+  permission,
+}: {
+  permission: Permission;
+}) {
+  const [_formState, action, isPending] = useActionState(
     updatePermission.bind(null, permission.permissionId, permission),
     { success: false, errors: { title: [''] } }
   );
@@ -77,7 +87,8 @@ export default function EditPermission({ permission }: { permission: Permission 
         <Button type='submit' disabled={isPending} className='mt-6'>
           {isPending ? (
             <>
-               <Spinner />; className='animate-spin h-5 w-5' /> {t('buttons.updateLoading')}
+              <Spinner />
+              {t('buttons.updateLoading')}
             </>
           ) : (
             <>

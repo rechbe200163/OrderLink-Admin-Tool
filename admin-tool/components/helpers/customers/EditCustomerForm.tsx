@@ -12,7 +12,7 @@ import {
 } from '@/components/ui/select';
 import { Card } from '@/components/ui/card';
 import AddressSelectComponent from '@/components/helpers/AddressSelectComponent';
-import { Loader2, PlusCircle } from 'lucide-react';
+import { PlusCircle } from 'lucide-react';
 import { BusinessSector, CustomerWithAddressId } from '@/lib/types';
 import { updateCustomer } from '@/lib/actions/user.actions';
 import { toast } from 'sonner';

@@ -3,7 +3,7 @@ import React, { useActionState, useId } from 'react';
 import { toast } from 'sonner';
 
 import { Button } from '@/components/ui/button';
-import { Loader2, PlusCircle } from 'lucide-react';
+import { PlusCircle } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
@@ -12,18 +12,17 @@ import { Checkbox } from '@/components/ui/checkbox';
 import CustomeToast from '@/components/helpers/toasts/CustomeErrorToast';
 import CustomerSelectComponent from '@/components/helpers/CustomerSelectCompoent';
 import ProductSelectComponent from '@/components/helpers/ProductSelectCompoent';
-import { Customer, OrdersWithCustomerAndProducts, Product } from '@/lib/types';
+import { OrdersWithCustomerAndProducts, Product } from '@/lib/types';
 import { updateOrder } from '@/lib/actions/order.actions';
 import { useRouter } from 'next/navigation';
 import { Spinner } from '@/components/ui/kibo-ui/spinner';
 
 interface EditOrderProps {
-  customer: Customer[];
   products: Product[];
   order: OrdersWithCustomerAndProducts;
 }
 
-const EditOrder = ({ customer, products, order }: EditOrderProps) => {
+const EditOrder = ({ products, order }: EditOrderProps) => {
   const [selectedCustomer, setSelectedCustomer] = React.useState<string>(
     String(order.customerReference)
   );
@@ -84,7 +83,6 @@ const EditOrder = ({ customer, products, order }: EditOrderProps) => {
         </div>
         <div className='space-y-2'>
           <CustomerSelectComponent
-            customers={customer}
             onCustomerSelect={setSelectedCustomer}
             defaultValue={selectedCustomer}
           />
@@ -97,7 +95,6 @@ const EditOrder = ({ customer, products, order }: EditOrderProps) => {
         </div>
         <div className='space-y-2'>
           <ProductSelectComponent
-            products={products}
             onProductSelect={(productId) => {
               if (selectedProducts.includes(productId)) {
                 setSelectedProducts(

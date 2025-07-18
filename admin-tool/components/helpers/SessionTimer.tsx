@@ -1,10 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useActionState } from 'react';
-import { renewSessionAction } from '@/lib/actions/auth.actions'; // Server Action
-import { Button } from '../ui/button';
-import { Clock, RefreshCw } from 'lucide-react';
+import { Clock } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { SlidingNumber } from '../ui/sliding-number';
 
@@ -17,11 +14,8 @@ export default function SessionTimer({
   issuedAt,
   expiresAt,
 }: SessionTimerProps) {
-  const issuedAtMs = issuedAt;
   const expiresAtMs = expiresAt;
-  const initialDuration = expiresAtMs - issuedAtMs;
-
-  const [expiry, setExpiry] = useState(expiresAtMs);
+  const expiry = expiresAtMs - issuedAt;
   const [remaining, setRemaining] = useState(expiry - Date.now());
 
   // ⏱ Timer-Tick alle 1 Sekunde

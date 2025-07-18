@@ -1,7 +1,8 @@
 'use client';
 import { Button } from '@/components/ui/button';
+import { Spinner } from '@/components/ui/kibo-ui/spinner';
 import { deleteUser } from '@/lib/actions/user.actions';
-import { Loader2, Trash2 } from 'lucide-react';
+import { Trash2 } from 'lucide-react';
 import React, { useActionState } from 'react';
 
 const DeleteUser = ({ customerReference }: { customerReference: number }) => {
@@ -27,7 +28,7 @@ const DeleteUser = ({ customerReference }: { customerReference: number }) => {
       >
         {isPending ? (
           <>
-             <Spinner />; className='mr-2 h-4 w-4 animate-spin' /> Deleting
+            <Spinner />
           </>
         ) : (
           <>

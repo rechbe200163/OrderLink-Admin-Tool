@@ -1,7 +1,7 @@
 'use server';
 import { FormState } from '../form.types';
 import { apiPatch, apiPost } from './api.actions';
-import { formDataToPartial, getChangedFormData } from '../utils';
+import { getChangedFormData } from '../utils';
 import { ENDPOINTS } from '../api/endpoints';
 import { guardAction } from '../server-guard';
 
@@ -12,7 +12,7 @@ export async function updateProfile(
 ): Promise<FormState> {
   return (await guardAction(async () => {
     const data = getChangedFormData(current, formData) as Record<string, any>;
-    await apiPatch(ENDPOINTS.USER_ME, data);
+    await apiPatch(ENDPOINTS.UPDATE_ME, data);
     return { success: true } as FormState;
   }, 'Failed to update profile')) as FormState;
 }

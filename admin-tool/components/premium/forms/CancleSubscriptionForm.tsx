@@ -1,7 +1,8 @@
 'use client';
 import { Button } from '@/components/ui/button';
+import { Spinner } from '@/components/ui/kibo-ui/spinner';
 import { cancleSubscription } from '@/lib/actions/subscription.actions';
-import { CircleX, Loader2 } from 'lucide-react';
+import { CircleX } from 'lucide-react';
 
 import React, { useActionState } from 'react';
 import { toast } from 'sonner';
@@ -36,7 +37,7 @@ const CancleSubscriptionForm = ({
       <Button type='submit' variant={'destructive'} disabled={isPending}>
         {isPending ? (
           <>
-             <Spinner />; className='mr-2 h-4 w-4 animate-spin' />
+            <Spinner />
             Canceling...
           </>
         ) : (
