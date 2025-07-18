@@ -8,3 +8,10 @@ export const myFeatureFlag = flag<boolean>({
   defaultValue: false,
   identify,
 });
+
+export const favoritesFeatureFlag = flag<boolean>({
+  key: 'nav-favorites',
+  adapter: growthbookAdapter.feature<boolean>(),
+  defaultValue: false,
+  identify,
+});
