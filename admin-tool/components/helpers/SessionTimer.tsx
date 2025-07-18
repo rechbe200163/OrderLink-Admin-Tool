@@ -14,8 +14,11 @@ export default function SessionTimer({
   issuedAt,
   expiresAt,
 }: SessionTimerProps) {
+  const issuedAtMs = issuedAt;
   const expiresAtMs = expiresAt;
-  const expiry = expiresAtMs - issuedAt;
+  const initialDuration = expiresAtMs - issuedAtMs;
+
+  const [expiry, setExpiry] = useState(expiresAtMs);
   const [remaining, setRemaining] = useState(expiry - Date.now());
 
   // ⏱ Timer-Tick alle 1 Sekunde

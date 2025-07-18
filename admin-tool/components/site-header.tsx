@@ -3,10 +3,12 @@ import { SidebarTrigger } from '@/components/ui/sidebar';
 import { getSession } from '@/lib/utlis/getSession';
 import SessionTimer from './helpers/SessionTimer';
 import PathBreadcrumbs from './helpers/PathBreadcrumbs';
+import { myFeatureFlag } from '@/lib/feature-flags/flags';
 
 export async function SiteHeader() {
   const session = await getSession();
-
+  const enabled = await myFeatureFlag();
+  console.log('Feature Flag Enabled:', enabled);
   if (!session) return <NoSessionError />;
 
   return (
@@ -20,12 +22,16 @@ export async function SiteHeader() {
           />
           <PathBreadcrumbs />
         </div>
-        <div className='flex items-center gap-2 m-5'>
-          <SessionTimer
-            issuedAt={session.token.issuedAt}
-            expiresAt={session.token.expiresAt}
-          />
-        </div>
+        {enabled ? (
+          <div className='flex items-center gap-2 m-5'>
+            <SessionTimer
+              issuedAt={session.token.issuedAt}
+              expiresAt={session.token.expiresAt}
+            />
+          </div>
+        ) : (
+          <div>Feature Nicht Aktiviert</div>
+        )}
       </div>
     </header>
   );
