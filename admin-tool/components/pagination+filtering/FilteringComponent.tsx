@@ -1,12 +1,14 @@
 'use client';
 import { Label } from '@/components/ui/label';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import { useId } from 'react';
+import { useId, useState, useEffect } from 'react';
 import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover';
 import { Button } from '../ui/button';
 import { Checkbox } from '../ui/checkbox';
-import { Filter } from 'lucide-react';
+import { Filter, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useTranslations } from 'next-intl';
+import { ENDPOINTS, type EndpointKey } from '@/lib/api/endpoints';
+import { type PagingMeta } from '@/lib/dtos';
 
 function StatusDot({ color }: { color: string }) {
   return (
@@ -25,21 +27,51 @@ function StatusDot({ color }: { color: string }) {
 }
 
 interface FilteringComponentProps {
-  values: { label: string; value: string; color?: string }[];
+  values?: { label: string; value: string; color?: string }[];
   filterName: string; // This prop will indicate which filter is being applied (e.g., 'filter' or 'category')
   title: string;
+  endpoint?: EndpointKey; // optional API endpoint for dynamic values
 }
 
 export default function FilteringComponent({
-  values,
+  values: propValues,
   filterName,
   title,
+  endpoint,
 }: FilteringComponentProps) {
   const id = useId();
   const t = useTranslations('FilterAndSearch');
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { replace } = useRouter();
+
+  useEffect(() => {
+    if (!endpoint || !open) return;
+    const controller = new AbortController();
+    const params = new URLSearchParams({ page: String(page), limit: '10' });
+    fetch(`/api/${ENDPOINTS[endpoint]}/paging?${params.toString()}`, {
+      signal: controller.signal,
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setFetchedValues(
+          data.data.map((item: any) => ({
+            label: item.name ?? item.label,
+            value: item.name ?? item.value,
+          }))
+        );
+        setMeta(data.meta as PagingMeta);
+      })
+      .catch(() => {});
+    return () => controller.abort();
+  }, [endpoint, open, page]);
+
+  const [open, setOpen] = useState(false);
+  const [page, setPage] = useState(1);
+  const [fetchedValues, setFetchedValues] = useState<{ label: string; value: string; color?: string }[]>([]);
+  const [meta, setMeta] = useState<PagingMeta | null>(null);
+
+  const values = endpoint ? fetchedValues : propValues || [];
 
   // Get the current filter parameter from the URL based on filterName (e.g., 'filter' or 'category')
   const currentFilter = searchParams.get(filterName) || '';
@@ -65,12 +97,13 @@ export default function FilteringComponent({
     } else {
       params.delete(filterName);
     }
+    params.delete('page'); // reset paging when filter changes
 
     replace(`${pathname}?${params.toString()}`); // Update the URL with the new search params
   };
 
   return (
-    <Popover>
+    <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
         <Button variant='outline'>
           <Filter
@@ -94,7 +127,7 @@ export default function FilteringComponent({
           </div>
           <div className='space-y-3'>
             {values.map((value, i) => (
-              <div key={value.value} className='flex items-center gap-2'>
+              <div key={`${value.value}-${i}`} className='flex items-center gap-2'>
                 <Checkbox
                   id={`${id}-${i}`}
                   checked={selectedValues.includes(value.value)} // Check if this filter value is selected
@@ -124,6 +157,27 @@ export default function FilteringComponent({
                 </Label>
               </div>
             ))}
+            {endpoint && (
+              <div className='flex items-center justify-between pt-2'>
+                <button
+                  onClick={() => setPage((p) => Math.max(1, p - 1))}
+                  disabled={meta?.isFirstPage}
+                  className='disabled:opacity-50'
+                  aria-label='Previous page'
+                >
+                  <ChevronLeft size={16} strokeWidth={2} />
+                </button>
+                <span className='text-sm'>{meta?.currentPage ?? page}</span>
+                <button
+                  onClick={() => setPage((p) => p + 1)}
+                  disabled={meta?.isLastPage}
+                  className='disabled:opacity-50'
+                  aria-label='Next page'
+                >
+                  <ChevronRight size={16} strokeWidth={2} />
+                </button>
+              </div>
+            )}
           </div>
         </div>
       </PopoverContent>
