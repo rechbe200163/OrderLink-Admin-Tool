@@ -5,7 +5,7 @@ import SearchComponent from '@/components/pagination+filtering/SearchComponent';
 import FilteringComponent from '@/components/pagination+filtering/FilteringComponent';
 import { ProductTable } from '@/components/helpers/products/ProductsTabel';
 import { productApiService } from '@/lib/api/concrete/products';
-import { categoryApiService } from '@/lib/api/concrete/categories';
+import { ENDPOINTS } from '@/lib/api/endpoints';
 import { ButtonLinkComponent } from '@/components/ButtonLinkComponent';
 import { getSession } from '@/lib/utlis/getSession';
 import { BusinessSector, Category } from '@/lib/types';
@@ -36,7 +36,6 @@ export default async function ProductsPage(props: {
   );
   const products = productData.data;
   const { meta } = productData;
-  const categories = await categoryApiService.getCategories();
   const t = await getTranslations('Dashboard');
   const tFilter = await getTranslations('FilterAndSearch');
   return (
@@ -49,10 +48,7 @@ export default async function ProductsPage(props: {
             <FilteringComponent
               title={t('Ressource.Categories.BreadCrumps.title')}
               filterName='category'
-              values={categories.map((category: Category) => ({
-                label: category.name,
-                value: category.name,
-              }))}
+              endpoint='CATEGORIES'
             />
           </div>
 
