@@ -3,6 +3,7 @@ import { AppSidebar } from '../../components/app-sidebar';
 
 import { SiteHeader } from '../../components/site-header';
 import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar';
+import MetadataTitleUpdater from '@/components/helpers/MetadataTitleUpdater';
 
 export default function layout({
   children,
@@ -11,6 +12,7 @@ export default function layout({
 }>) {
   return (
     <SidebarProvider>
+      <MetadataTitleUpdater />
       <AppSidebar variant='inset' collapsible='icon' />
       <SidebarInset>
         <SiteHeader />
