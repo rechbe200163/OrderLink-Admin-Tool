@@ -5,12 +5,9 @@ import { useState, useCallback, useActionState } from 'react';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { formatPrice } from '@/lib/utils';
 import { Label } from '@/components/ui/label';
-import { ImageOff, Plus } from 'lucide-react';
+import { Plus } from 'lucide-react';
 import { createProduct } from '@/lib/actions/product.actions';
-import Image from 'next/image';
 import { Card } from '@/components/ui/card';
 import SelectCategoryComponent from '../categories/SelectCategoryComponent';
 import FileInputComponent from '@/components/file-upload/FileInputComponent';
@@ -22,7 +19,6 @@ const CreateProduct = () => {
   const [selectedCategories, setSelectedCategories] = React.useState<string[]>(
     []
   );
-  const [_image, setImage] = React.useState<File | null>(null);
 
   const [formState, action, isPending] = useActionState(
     createProduct.bind(null),
@@ -130,77 +126,21 @@ const CreateProduct = () => {
     if (file) {
       const imageUrl = URL.createObjectURL(file);
       setProductData((prev) => ({ ...prev, imagePath: imageUrl }));
-      setImage(file);
     }
   }, []);
 
   return (
-    <div className='flex h-screen w-fit '>
-      {/* Left side: Real-time product preview */}
-      <div className='w-full p-8 flex items-center justify-center'>
-        <div className='w-full max-w-2xl bg-background rounded-lg shadow-lg overflow-hidden'>
-          <div className='relative aspect-square w-full  overflow-hidden'>
-            <div className='absolute inset-0'>
-              {productData.imagePath ? (
-                <Image
-                  src={productData.imagePath}
-                  alt='Product Image'
-                  layout='fill'
-                  objectFit='cover' // This will make sure the image covers the entire container
-                />
-              ) : (
-                <div className='flex items-center justify-center w-full h-full text-foreground'>
-                  <ImageOff className='h-20 w-20' />
-                </div>
-              )}
-            </div>
-            <Badge className='absolute top-4 right-4 z-10' variant='secondary'>
-              Neu
-            </Badge>
-          </div>
-          <div className='p-6 space-y-4'>
-            <div className='flex gap-2 items-start flex-wrap'>
-              {productData.categories.map((categoryId) => (
-                <Badge key={categoryId} variant='secondary' className='text-xs'>
-                  {categoryId}
-                </Badge>
-              ))}
-            </div>
-            <h2 className='text-2xl font-bold line-clamp-1'>
-              {productData.name || 'Product Name'}
-            </h2>
-            <p className='text-gray-600 line-clamp-3'>
-              {productData.description || 'Product Description'}
-            </p>
-            <div className='flex items-center justify-between pt-2'>
-              <span className='text-3xl font-bold text-primary'>
-                {formatPrice(Number(productData.price))}
-              </span>
-              {productData.stock > 0 && productData.stock <= 5 ? (
-                <Badge variant='destructive'>{productData.stock} left</Badge>
-              ) : productData.stock === 0 ? (
-                <Badge variant='outline'>Nicht auf Lager</Badge>
-              ) : (
-                <Badge variant='secondary'>Auf Lager</Badge>
-              )}
-            </div>
-          </div>
+    <Card className='mx-auto my-4 w-full max-w-xl p-6'>
+      <form action={action} className='space-y-6'>
+        <h2 className='text-3xl font-bold mb-6 text-primary'>
+          Neues Produkt erstellen
+        </h2>
+        <div className='w-full flex items-center justify-center'>
+          <FileInputComponent
+            label='Produktbild'
+            onImageUpload={handleImageUpload}
+          />
         </div>
-      </div>
-
-      {/* Right side: Input form */}
-      <Card className='sticky p-4 top-4 h-fit mx-4 my-4'>
-        <div className='h-full overflow-y-auto'>
-          <form action={action} className='space-y-6'>
-            <h2 className='text-3xl font-bold mb-6 text-primary'>
-              Neues Produkt erstellen
-            </h2>
-            <div className='w-full h-full  flex items-center justify-center'>
-              <FileInputComponent
-                label='Produktbild'
-                onImageUpload={handleImageUpload}
-              />
-            </div>
             <div className='space-y-2'>
               <Label htmlFor='name'>Name</Label>
               <Input
@@ -286,10 +226,8 @@ const CreateProduct = () => {
                 </>
               )}
             </Button>
-          </form>
-        </div>
-      </Card>
-    </div>
+      </form>
+    </Card>
   );
 };
 

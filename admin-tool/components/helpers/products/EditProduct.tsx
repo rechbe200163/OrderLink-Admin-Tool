@@ -1,16 +1,13 @@
 'use client';
-import Image from 'next/image';
 import { toast } from 'sonner';
 import { useActionState } from 'react';
-import { formatPrice } from '@/lib/utils';
 import { useRouter } from 'next/navigation';
 import { Card } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
-import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
-import { ImageOff, Plus } from 'lucide-react';
+import { Plus } from 'lucide-react';
 import CustomeToast from '../toasts/CustomeErrorToast';
 import { ProductWithCategoryNames } from '@/lib/types';
 import { updateProduct } from '@/lib/actions/product.actions';
@@ -31,7 +28,6 @@ const EditProductPage = ({
     product.categories.map((c) => c.category.categoryId)
   );
 
-  const [_image, setImage] = useState<File | null>(null);
 
   const [formState, action, isPending] = useActionState(
     updateProduct.bind(null, product.productId, product),
@@ -130,63 +126,19 @@ const EditProductPage = ({
         setProductData((prev) => ({ ...prev, imagePath: base64Image }));
       };
       reader.readAsDataURL(file);
-      setImage(file);
     }
   }, []);
 
   return (
-    <div className='flex h-screen w-full  bg-background'>
-      {/* Left side: Product Preview */}
-      <div className='w-full p-8 flex items-center justify-center'>
-        <div className='w-full max-w-2xl  rounded-lg shadow-lg overflow-hidden'>
-          <div className='relative aspect-square w-full  overflow-hidden'>
-            {productData.imagePath ? (
-              <Image
-                src={productData.imagePath}
-                alt='Product Image'
-                fill
-                className='object-cover'
-              />
-            ) : (
-              <div className='flex items-center justify-center w-full h-full text-foreground '>
-                <ImageOff className='h-20 w-20' />
-              </div>
-            )}
-            <Badge className='absolute top-4 right-4 z-10' variant='secondary'>
-              Preview
-            </Badge>
-          </div>
-          <div className='p-6 space-y-4'>
-            <h2 className='text-2xl font-bold text-background'>
-              {productData.name || 'Product Name'}
-            </h2>
-            <p className='text-gray-600'>
-              {productData.description || 'Product Description'}
-            </p>
-            <div className='flex items-center justify-between pt-2'>
-              <span className='text-3xl font-bold text-primary'>
-                {formatPrice(Number(productData.price))}
-              </span>
-              {productData.stock > 0 ? (
-                <Badge variant='secondary'>{productData.stock} in stock</Badge>
-              ) : (
-                <Badge variant='outline'>Out of Stock</Badge>
-              )}
-            </div>
-          </div>
-        </div>
-      </div>
+    <Card className='mx-auto my-4 w-full max-w-xl p-6 bg-background'>
+      <form action={action} className='space-y-6'>
+        <h2 className='text-3xl font-bold mb-6 text-primary'>Produkt bearbeiten</h2>
 
-      {/* Right side: Input Form */}
-      <Card className='sticky p-4 top-4 h-fit mx-4 my-4 w-1/2 bg-background'>
-        <form action={action} className='space-y-6'>
-          <h2 className='text-3xl font-bold mb-6 text-primary'>Edit Product</h2>
-
-          <FileInputComponent
-            label='Product Image'
-            onImageUpload={handleImageUpload}
-            initialImage={productData.imagePath}
-          />
+        <FileInputComponent
+          label='Produktbild'
+          onImageUpload={handleImageUpload}
+          initialImage={productData.imagePath}
+        />
 
           <Label htmlFor='name'>Name</Label>
           <Input
@@ -238,12 +190,19 @@ const EditProductPage = ({
             value={selectedCategories}
           />
 
-          <Button type='submit' disabled={isPending}>
-            {isPending ? <Spinner /> : <Plus />} Edit Product
+          <Button type='submit' disabled={isPending} className='w-full'>
+            {isPending ? (
+              <>
+                <Spinner /> Speichern...
+              </>
+            ) : (
+              <>
+                <Plus className='mr-2 h-4 w-4' /> Produkt speichern
+              </>
+            )}
           </Button>
         </form>
       </Card>
-    </div>
   );
 };
 
