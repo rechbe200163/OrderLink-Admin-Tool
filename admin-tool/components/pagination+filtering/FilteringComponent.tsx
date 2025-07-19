@@ -1,7 +1,7 @@
 'use client';
 import { Label } from '@/components/ui/label';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import { useId } from 'react';
+import { useId, useState, useEffect } from 'react';
 import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover';
 import { Button } from '../ui/button';
 import { Checkbox } from '../ui/checkbox';
@@ -25,21 +25,64 @@ function StatusDot({ color }: { color: string }) {
 }
 
 interface FilteringComponentProps {
-  values: { label: string; value: string; color?: string }[];
+  values?: { label: string; value: string; color?: string }[];
   filterName: string; // This prop will indicate which filter is being applied (e.g., 'filter' or 'category')
   title: string;
+  /** Optional URL to fetch values with paging support */
+  fetchUrl?: string;
+  /** Optional function to fetch values with paging */
+  fetchItems?: (page: number, limit: number) => Promise<any>;
+  /** Limit per page when using fetchUrl or fetchItems */
+  limit?: number;
 }
 
 export default function FilteringComponent({
-  values,
+  values = [],
   filterName,
   title,
+  fetchUrl,
+  fetchItems,
+  limit = 10,
 }: FilteringComponentProps) {
   const id = useId();
   const t = useTranslations('FilterAndSearch');
+  const tPagination = useTranslations('Pagination');
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { replace } = useRouter();
+
+  const [items, setItems] = useState(values);
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+
+  useEffect(() => {
+    if (!fetchUrl && !fetchItems) return;
+    async function load() {
+      try {
+        let json: any;
+        if (fetchItems) {
+          json = await fetchItems(page, limit);
+        } else if (fetchUrl) {
+          const res = await fetch(`${fetchUrl}?page=${page}&limit=${limit}`);
+          json = await res.json();
+        }
+        if (!json) return;
+        const data = json.data || json.categories || [];
+        setItems(
+          data.map((item: any) => ({
+            label: item.label ?? item.name,
+            value: item.value ?? item.name,
+          }))
+        );
+        if (json.meta) {
+          setTotalPages(json.meta.pageCount);
+        }
+      } catch (e) {
+        console.error('Failed to load filter values', e);
+      }
+    }
+    load();
+  }, [fetchUrl, fetchItems, page, limit]);
 
   // Get the current filter parameter from the URL based on filterName (e.g., 'filter' or 'category')
   const currentFilter = searchParams.get(filterName) || '';
@@ -93,7 +136,7 @@ export default function FilteringComponent({
             {t('Filter.title')}
           </div>
           <div className='space-y-3'>
-            {values.map((value, i) => (
+            {items.map((value, i) => (
               <div key={value.value} className='flex items-center gap-2'>
                 <Checkbox
                   id={`${id}-${i}`}
@@ -124,6 +167,31 @@ export default function FilteringComponent({
                 </Label>
               </div>
             ))}
+            {(fetchUrl || fetchItems) && totalPages > 1 && (
+              <div className='flex items-center justify-between pt-2 border-t mt-2'>
+                <Button
+                  variant='ghost'
+                  size='sm'
+                  onClick={() => setPage((p) => Math.max(1, p - 1))}
+                  disabled={page === 1}
+                  aria-label={tPagination('goToPrev')}
+                >
+                  {tPagination('goToPrev')}
+                </Button>
+                <span className='text-xs text-muted-foreground'>
+                  {page} / {totalPages}
+                </span>
+                <Button
+                  variant='ghost'
+                  size='sm'
+                  onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+                  disabled={page === totalPages}
+                  aria-label={tPagination('goToNext')}
+                >
+                  {tPagination('goToNext')}
+                </Button>
+              </div>
+            )}
           </div>
         </div>
       </PopoverContent>
