@@ -28,7 +28,6 @@ const EditProductPage = ({
     product.categories.map((c) => c.category.categoryId)
   );
 
-
   const [formState, action, isPending] = useActionState(
     updateProduct.bind(null, product.productId, product),
     {
@@ -47,9 +46,6 @@ const EditProductPage = ({
           message='Product updated successfully'
         />
       ));
-      if (formState.data) {
-        router.push(`/products/${formState.data}/edit`);
-      }
     }
   }, [formState, router]);
 
@@ -132,7 +128,9 @@ const EditProductPage = ({
   return (
     <Card className='mx-auto my-4 w-full max-w-xl p-6 bg-background'>
       <form action={action} className='space-y-6'>
-        <h2 className='text-3xl font-bold mb-6 text-primary'>Produkt bearbeiten</h2>
+        <h2 className='text-3xl font-bold mb-6 text-primary'>
+          Produkt bearbeiten
+        </h2>
 
         <FileInputComponent
           label='Produktbild'
@@ -140,69 +138,69 @@ const EditProductPage = ({
           initialImage={productData.imagePath}
         />
 
-          <Label htmlFor='name'>Name</Label>
-          <Input
-            id='name'
-            name='name'
-            value={productData.name}
-            onChange={handleInputChange}
-            required
-          />
+        <Label htmlFor='name'>Name</Label>
+        <Input
+          id='name'
+          name='name'
+          value={productData.name}
+          onChange={handleInputChange}
+          required
+        />
 
-          <Label htmlFor='description'>Description</Label>
-          <Textarea
-            id='description'
-            name='description'
-            value={productData.description}
-            onChange={handleInputChange}
-            required
-          />
+        <Label htmlFor='description'>Description</Label>
+        <Textarea
+          id='description'
+          name='description'
+          value={productData.description}
+          onChange={handleInputChange}
+          required
+        />
 
-          <Label htmlFor='price'>Price (€)</Label>
-          <Input
-            id='price'
-            name='price'
-            type='text'
-            value={productData.price}
-            onChange={handlePriceChange}
-            required
-          />
+        <Label htmlFor='price'>Price (€)</Label>
+        <Input
+          id='price'
+          name='price'
+          type='text'
+          value={productData.price}
+          onChange={handlePriceChange}
+          required
+        />
 
-          <Label htmlFor='stock'>Stock</Label>
-          <Input
-            id='stock'
-            name='stock'
-            type='number'
-            value={productData.stock}
-            onChange={handleInputChange}
-            required
-          />
+        <Label htmlFor='stock'>Stock</Label>
+        <Input
+          id='stock'
+          name='stock'
+          type='number'
+          value={productData.stock}
+          onChange={handleInputChange}
+          required
+        />
 
-          <Label>Categories</Label>
-          <SelectCategoryComponent
-            defaultValues={selectedCategories}
-            onCategorySelect={handleCategoryChange}
-          />
-          <input
-            type='hidden'
-            id='categoryIds'
-            name='categoryIds'
-            value={selectedCategories}
-          />
+        <Label>Categories</Label>
+        <SelectCategoryComponent
+          defaultValues={selectedCategories}
+          onCategorySelect={handleCategoryChange}
+        />
+        <input
+          type='hidden'
+          id='categoryIds'
+          name='categoryIds'
+          value={selectedCategories}
+        />
 
-          <Button type='submit' disabled={isPending} className='w-full'>
-            {isPending ? (
-              <>
-                <Spinner /> Speichern...
-              </>
-            ) : (
-              <>
-                <Plus className='mr-2 h-4 w-4' /> Produkt speichern
-              </>
-            )}
-          </Button>
-        </form>
-      </Card>
+        <Button type='submit' disabled={isPending} className='w-full'>
+          {isPending ? (
+            <>
+              <Spinner /> Speichern...
+            </>
+          ) : (
+            <>
+              <Plus className='mr-2 h-4 w-4' /> Produkt speichern
+            </>
+          )}
+        </Button>
+      </form>
+    </Card>
   );
 };
 

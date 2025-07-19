@@ -27,7 +27,7 @@ function StatusDot({ color }: { color: string }) {
 }
 
 interface FilteringComponentProps {
-  values?: { label: string; value: string; color?: string }[];
+  values?: { label: string; value: string; id: string; color?: string }[];
   filterName: string; // This prop will indicate which filter is being applied (e.g., 'filter' or 'category')
   title: string;
   endpoint?: EndpointKey; // optional API endpoint for dynamic values
@@ -45,6 +45,13 @@ export default function FilteringComponent({
   const pathname = usePathname();
   const { replace } = useRouter();
 
+  const [open, setOpen] = useState(false);
+  const [page, setPage] = useState(1);
+  const [fetchedValues, setFetchedValues] = useState<
+    { label: string; value: string; color?: string }[]
+  >([]);
+  const [meta, setMeta] = useState<PagingMeta | null>(null);
+
   useEffect(() => {
     if (!endpoint || !open) return;
     const controller = new AbortController();
@@ -55,21 +62,24 @@ export default function FilteringComponent({
       .then((res) => res.json())
       .then((data) => {
         setFetchedValues(
-          data.data.map((item: any) => ({
-            label: item.name ?? item.label,
-            value: item.name ?? item.value,
-          }))
+          data.data.map((item: any) => {
+            const idKey = Object.keys(item).find(
+              (key) =>
+                key.toLowerCase().endsWith('id') ||
+                key.toLowerCase().endsWith('reference')
+            );
+            return {
+              label: item.name ?? item.label,
+              value:
+                (idKey ? item[idKey] : undefined) ?? item.value ?? item.name,
+            };
+          })
         );
         setMeta(data.meta as PagingMeta);
       })
       .catch(() => {});
     return () => controller.abort();
   }, [endpoint, open, page]);
-
-  const [open, setOpen] = useState(false);
-  const [page, setPage] = useState(1);
-  const [fetchedValues, setFetchedValues] = useState<{ label: string; value: string; color?: string }[]>([]);
-  const [meta, setMeta] = useState<PagingMeta | null>(null);
 
   const values = endpoint ? fetchedValues : propValues || [];
 
@@ -127,7 +137,10 @@ export default function FilteringComponent({
           </div>
           <div className='space-y-3'>
             {values.map((value, i) => (
-              <div key={`${value.value}-${i}`} className='flex items-center gap-2'>
+              <div
+                key={`${value.value}-${i}`}
+                className='flex items-center gap-2'
+              >
                 <Checkbox
                   id={`${id}-${i}`}
                   checked={selectedValues.includes(value.value)} // Check if this filter value is selected

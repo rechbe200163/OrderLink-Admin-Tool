@@ -16,7 +16,7 @@ export default async function ProductsPage(props: {
     page?: string;
     limit?: string;
     search?: string;
-    category?: BusinessSector;
+    categoryId?: BusinessSector;
   }>;
 }) {
   const session = await getSession();
@@ -26,15 +26,16 @@ export default async function ProductsPage(props: {
   const page = searchParams?.page ? parseInt(searchParams.page) : 1;
   const limit = searchParams?.limit ? parseInt(searchParams.limit) : 10;
   const search = searchParams?.search ? searchParams.search : '';
-  const category = searchParams?.category;
+  const categoryId = searchParams?.categoryId;
 
   const productData = await productApiService.getProductsPaging(
     page,
     limit,
     search,
-    category
+    categoryId
   );
   const products = productData.data;
+  console.log('products1', products);
   const { meta } = productData;
   const t = await getTranslations('Dashboard');
   const tFilter = await getTranslations('FilterAndSearch');
@@ -47,7 +48,7 @@ export default async function ProductsPage(props: {
             <SearchComponent placeholder={tFilter('Search.searchForOption1')} />
             <FilteringComponent
               title={t('Ressource.Categories.BreadCrumps.title')}
-              filterName='category'
+              filterName='categoryId'
               endpoint='CATEGORIES'
             />
           </div>

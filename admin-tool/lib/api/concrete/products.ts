@@ -31,15 +31,15 @@ export class ProductApiService extends BaseApiService {
     page: number,
     limit: number,
     search?: string,
-    filter?: string,
-    category?: string
+    categoryId?: string,
+    filter?: string
   ): Promise<PagingDto<Product>> {
     return this.get<PagingDto<Product>>('products', {
       page,
       limit,
       search,
+      categoryId,
       filter,
-      category,
     });
   }
 }
