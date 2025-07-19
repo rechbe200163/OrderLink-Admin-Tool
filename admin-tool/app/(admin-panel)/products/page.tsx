@@ -3,12 +3,12 @@ import React from 'react';
 import PaginationComponent from '@/components/pagination+filtering/PagingComponent';
 import SearchComponent from '@/components/pagination+filtering/SearchComponent';
 import FilteringComponent from '@/components/pagination+filtering/FilteringComponent';
-import { fetchCategoriesPaging } from '@/lib/fetchers';
 import { ProductTable } from '@/components/helpers/products/ProductsTabel';
 import { productApiService } from '@/lib/api/concrete/products';
+import { categoryApiService } from '@/lib/api/concrete/categories';
 import { ButtonLinkComponent } from '@/components/ButtonLinkComponent';
 import { getSession } from '@/lib/utlis/getSession';
-import { BusinessSector } from '@/lib/types';
+import { BusinessSector, Category } from '@/lib/types';
 import { getTranslations } from 'next-intl/server';
 
 export default async function ProductsPage(props: {
@@ -36,6 +36,7 @@ export default async function ProductsPage(props: {
   );
   const products = productData.data;
   const { meta } = productData;
+  const categories = await categoryApiService.getCategories();
   const t = await getTranslations('Dashboard');
   const tFilter = await getTranslations('FilterAndSearch');
   return (
@@ -48,8 +49,10 @@ export default async function ProductsPage(props: {
             <FilteringComponent
               title={t('Ressource.Categories.BreadCrumps.title')}
               filterName='category'
-              fetchItems={fetchCategoriesPaging}
-              limit={10}
+              values={categories.map((category: Category) => ({
+                label: category.name,
+                value: category.name,
+              }))}
             />
           </div>
 
