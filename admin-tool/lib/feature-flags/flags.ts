@@ -1,17 +1,8 @@
-import { growthbookAdapter } from '@flags-sdk/growthbook';
-import { flag } from 'flags/next';
-import { identify } from './indentify';
+import postHogClient from './posthog-clients';
 
-export const myFeatureFlag = flag<boolean>({
-  key: 'session-timer',
-  adapter: growthbookAdapter.feature<boolean>(),
-  defaultValue: false,
-  identify,
-});
+export const favoritesFeatureFlag =
+  (await postHogClient.isFeatureEnabled('favorites', 'admin-tool')) ?? false;
 
-export const favoritesFeatureFlag = flag<boolean>({
-  key: 'nav-favorites',
-  adapter: growthbookAdapter.feature<boolean>(),
-  defaultValue: false,
-  identify,
-});
+export const sessionTimerFeatureFlag =
+  (await postHogClient.isFeatureEnabled('session-timer', 'admin-tool')) ??
+  false;

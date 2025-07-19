@@ -43,7 +43,7 @@ import { useTranslations } from 'next-intl';
 interface NavMainProps {
   favoritesEnabled: boolean;
 }
-export function NavMain({ favoritesEnabled }: NavMainProps) {
+export function NavMainClient({ favoritesEnabled }: NavMainProps) {
   const pathname = usePathname();
   const tGroup = useTranslations('Navigation.Groups');
   const tItem = useTranslations('Navigation.Items');

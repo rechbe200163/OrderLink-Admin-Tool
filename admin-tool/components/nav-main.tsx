@@ -1,7 +1,6 @@
-import NavMainClient from './nav-main-client';
-import { favoritesFeatureFlag } from '@/lib/feature-flags/flags';
+import { NavMainClient } from './nav-main-client';
 
 export async function NavMain() {
-  const favoritesEnabled = await favoritesFeatureFlag();
+  const favoritesEnabled = false;
   return <NavMainClient favoritesEnabled={favoritesEnabled} />;
 }
