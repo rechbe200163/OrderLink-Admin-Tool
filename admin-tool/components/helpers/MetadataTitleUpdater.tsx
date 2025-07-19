@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 
-const resourceMap: Record<string, string> = {
+const resourceKeyMap: Record<string, string> = {
   addresses: 'addresses',
   categories: 'categories',
   customers: 'customers',
@@ -17,20 +17,29 @@ const resourceMap: Record<string, string> = {
   subscriptions: 'subscriptions',
 };
 
-export default function MetadataTitleUpdater() {
+export default function DynamicPageTitle() {
   const pathname = usePathname();
   const t = useTranslations('Navigation.Items');
 
   useEffect(() => {
+    const defaultTitle = 'OrderLink';
     const segments = pathname.split('/').filter(Boolean);
-    let title = 'OrderLink';
-    const key = resourceMap[segments[0]];
-    if (key) {
-      title = `OrderLink | ${t(key)}`;
+    if (segments.length === 0) {
+      document.title = defaultTitle;
+      return;
     }
-    if (typeof document !== 'undefined') {
-      document.title = title;
+
+    const key = segments[0];
+    const translationKey =
+      resourceKeyMap[key] || key.charAt(0).toUpperCase() + key.slice(1);
+    let resourceTitle: string;
+    try {
+      resourceTitle = t(`${translationKey}`);
+    } catch {
+      resourceTitle = translationKey;
     }
+
+    document.title = `${defaultTitle} | ${resourceTitle}`;
   }, [pathname, t]);
 
   return null;
