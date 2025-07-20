@@ -101,6 +101,10 @@ export interface Product {
   categoryId: string;
 }
 
+export interface ProductHistory extends Product {
+  historieId: string;
+}
+
 export interface Customer {
   customerId: string;
   customerReference: number;

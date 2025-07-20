@@ -23,6 +23,7 @@ export default function GenericInputMaskComponent({
   useEffect(() => {
     if (mask && inputRef.current) {
       // Masking is length-bound — don't use if onlyUppercase without length constraint is needed
+      // eslint-disable-next-line @typescript-eslint/no-require-imports
       const masked = require('use-mask-input').withMask(mask, {
         placeholder: '',
         showMaskOnHover: false,
