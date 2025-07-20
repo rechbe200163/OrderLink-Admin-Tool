@@ -384,6 +384,21 @@
           "description": "Bitte erst eine Rolle erstellen, bevor Berechtigungen verwaltet werden."
         }
       },
+      "Roles": {
+        "BreadCrumps": {
+          "title": "Rollen",
+          "add": "Rolle Hinzufügen"
+        },
+        "Attributes": {
+          "name": "Name",
+          "description": "Beschreibung"
+        },
+        "buttons": {
+          "add": "Rolle Hinzufügen",
+          "addLoading": "Rolle wird hinzugefügt..."
+        },
+        "add": "Rolle Hinzufügen"
+      },
       "Subscription": {
         "BreadCrumps": {
           "title": "Abonnement"
