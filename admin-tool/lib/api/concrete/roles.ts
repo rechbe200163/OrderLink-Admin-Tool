@@ -20,6 +20,10 @@ export class RoleApiService extends BaseApiService {
       role,
     });
   }
+
+  async createRole(data: { name: string; description?: string }): Promise<void> {
+    await this.post('roles', data);
+  }
 }
 
 export const roleApiService = RoleApiService.getInstance();

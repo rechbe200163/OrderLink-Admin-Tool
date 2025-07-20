@@ -384,6 +384,21 @@
           "description": "It seems there are no roles defined. Please create one before managing permissions."
         }
       },
+      "Roles": {
+        "BreadCrumps": {
+          "title": "Roles",
+          "add": "Add Role"
+        },
+        "Attributes": {
+          "name": "Name",
+          "description": "Description"
+        },
+        "buttons": {
+          "add": "Add Role",
+          "addLoading": "Adding Role..."
+        },
+        "add": "Add Role"
+      },
       "Subscription": {
         "BreadCrumps": {
           "title": "Abonnement"

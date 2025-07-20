@@ -384,6 +384,21 @@
           "description": "Er zijn geen rollen gedefinieerd. Maak er eerst een voordat je machtigingen beheert."
         }
       },
+      "Roles": {
+        "BreadCrumps": {
+          "title": "Rollen",
+          "add": "Rol Toevoegen"
+        },
+        "Attributes": {
+          "name": "Naam",
+          "description": "Beschrijving"
+        },
+        "buttons": {
+          "add": "Rol Toevoegen",
+          "addLoading": "Rol Toevoegen..."
+        },
+        "add": "Rol Toevoegen"
+      },
       "Subscription": {
         "BreadCrumps": {
           "title": "Abonnement"

@@ -22,6 +22,8 @@ export const ENDPOINTS = {
   SUBSCRIPTIONS: 'subscriptions',
   SUBSCRIPTION_PAUSE: (id: string | number) => `subscriptions/${id}/pause`,
   SUBSCRIPTION_CANCEL: (id: string | number) => `subscriptions/${id}/cancel`,
+  ROLES: 'roles',
+  ROLE: (id: string | number) => `roles/${id}`,
   ROLES_ROLE_NAMES: 'roles/roleNames',
   AUTH_LOGIN: 'auth/signIn',
   AUTH_RENEW_SESSION: 'auth/renewSession',

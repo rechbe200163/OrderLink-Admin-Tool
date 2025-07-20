@@ -384,6 +384,21 @@
           "description": "Aucun rôle n'est défini. Veuillez en créer un avant de gérer les autorisations."
         }
       },
+      "Roles": {
+        "BreadCrumps": {
+          "title": "Rôles",
+          "add": "Ajouter un rôle"
+        },
+        "Attributes": {
+          "name": "Nom",
+          "description": "Description"
+        },
+        "buttons": {
+          "add": "Ajouter un rôle",
+          "addLoading": "Ajout du rôle..."
+        },
+        "add": "Ajouter un rôle"
+      },
       "Subscription": {
         "BreadCrumps": {
           "title": "Abonnement"
