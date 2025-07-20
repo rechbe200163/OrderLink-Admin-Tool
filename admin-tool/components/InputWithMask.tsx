@@ -1,27 +1,50 @@
 'use client';
 
 import { Input } from '@/components/ui/input';
-import { useId } from 'react';
-import { withMask } from 'use-mask-input';
+import { useId, useRef } from 'react';
+import { useEffect } from 'react';
+
+type Props = {
+  placeholder: string;
+  mask?: string;
+  onlyUppercase?: boolean;
+  name?: string;
+};
 
 export default function GenericInputMaskComponent({
   placeholder,
   mask,
-}: {
-  placeholder: string;
-  mask: string;
-}) {
+  onlyUppercase = false,
+  name = 'maskInput',
+}: Props) {
   const id = useId();
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (mask && inputRef.current) {
+      // Masking is length-bound — don't use if onlyUppercase without length constraint is needed
+      const masked = require('use-mask-input').withMask(mask, {
+        placeholder: '',
+        showMaskOnHover: false,
+      });
+      masked(inputRef.current);
+    }
+  }, [mask]);
+
+  const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (onlyUppercase && !mask) {
+      e.target.value = e.target.value.replace(/[^A-Z]/g, '').toUpperCase();
+    }
+  };
+
   return (
     <Input
       id={id}
+      ref={inputRef}
       placeholder={placeholder}
       type='text'
-      name='maskInput'
-      ref={withMask(mask, {
-        placeholder: '',
-        showMaskOnHover: false,
-      })}
+      name={name}
+      onInput={handleInput}
       className='col-span-3 p-2 border rounded-lg'
     />
   );

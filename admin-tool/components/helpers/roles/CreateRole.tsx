@@ -10,6 +10,7 @@ import { createRole } from '@/lib/actions/role.actions';
 import { useTranslations } from 'next-intl';
 import { toast } from 'sonner';
 import CustomeToast from '../toasts/CustomeErrorToast';
+import GenericInputMaskComponent from '@/components/InputWithMask';
 
 export default function CreateRole() {
   const [formState, action, isPending] = useActionState(createRole, {
@@ -40,11 +41,19 @@ export default function CreateRole() {
         <h2 className='text-3xl font-bold tracking-tight mb-6'>{t('add')}</h2>
         <div>
           <Label htmlFor='name'>{t('Attributes.name')}</Label>
-          <Input id='name' name='name' placeholder={t('Attributes.name')} />
+          <GenericInputMaskComponent
+            name='name'
+            onlyUppercase
+            placeholder={t('Attributes.name')}
+          />
         </div>
         <div>
           <Label htmlFor='description'>{t('Attributes.description')}</Label>
-          <Input id='description' name='description' placeholder={t('Attributes.description')} />
+          <Input
+            id='description'
+            name='description'
+            placeholder={t('Attributes.description')}
+          />
         </div>
         <Button type='submit' disabled={isPending} className='mt-6'>
           {isPending ? (

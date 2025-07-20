@@ -41,9 +41,8 @@ export default async function OrdersPage(props: {
   const tFilter = await getTranslations('FilterAndSearch');
 
   return (
-    <div className='px-5'>
-      <div className='sticky top-0 bg-background z-10'>
-      </div>
+    <div className='p-5'>
+      <div className='sticky top-0 bg-background z-10'></div>
       <div className='container'>
         <div className='flex justify-between items-center mb-6'>
           <div className='flex justify-between items-center space-x-4'>

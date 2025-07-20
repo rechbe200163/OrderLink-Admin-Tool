@@ -1,14 +1,13 @@
-import { PlusCircle } from 'lucide-react';
 import React from 'react';
-import SearchComponent from '@/components/pagination+filtering/SearchComponent';
-import { permissionApiService } from '@/lib/api/concrete/permissions';
-import PermissionsGrid from '@/components/helpers/permissions/PermissionsGrid';
-import RoleSelect from '@/components/helpers/permissions/RoleSelect';
-
-import { ButtonLinkComponent } from '@/components/ButtonLinkComponent';
+import { PlusCircle } from 'lucide-react';
 import { getTranslations } from 'next-intl/server';
 import { getSession } from '@/lib/utlis/getSession';
 import { roleApiService } from '@/lib/api/concrete/roles';
+import RoleSelect from '@/components/helpers/permissions/RoleSelect';
+import { permissionApiService } from '@/lib/api/concrete/permissions';
+import { ButtonLinkComponent } from '@/components/ButtonLinkComponent';
+import SearchComponent from '@/components/pagination+filtering/SearchComponent';
+import PermissionsGrid from '@/components/helpers/permissions/PermissionsGrid';
 
 export default async function PermissionsPage(props: {
   searchParams?: Promise<{ page?: string; limit?: string; role?: string }>;
@@ -35,7 +34,7 @@ export default async function PermissionsPage(props: {
   const tFilter = await getTranslations('FilterAndSearch');
 
   return (
-    <div className='px-5'>
+    <div className='p-5'>
       <div className='sticky top-0 bg-background z-10'></div>
       <div className='container'>
         <div className='flex justify-between items-center mb-6'>
@@ -57,7 +56,7 @@ export default async function PermissionsPage(props: {
           </div>
         </div>
         <div className='bg-background rounded-lg shadow-md p-4'>
-          <PermissionsGrid permissions={permissions} role={selectedRole} />
+          <PermissionsGrid permissions={permissions} />
         </div>
       </div>
     </div>

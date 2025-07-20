@@ -43,9 +43,8 @@ export default async function EmployeesPage(props: {
 
   const tFilter = await getTranslations('FilterAndSearch');
   return (
-    <div className='px-5'>
-      <div className='sticky top-0 bg-background z-10'>
-      </div>
+    <div className='p-5'>
+      <div className='sticky top-0 bg-background z-10'></div>
       <div className='container'>
         <div className='flex justify-between items-center mb-6'>
           <div className='flex justify-between items-center space-x-4'>
@@ -98,11 +97,9 @@ export default async function EmployeesPage(props: {
     value: string;
     color?: string;
   }[] {
-    return ROLE_NAMES
-      .filter((role) => role !== 'CUSTOMER')
-      .map((role) => ({
-        label: tFilter(`Filter.Roles.options.${role.toLowerCase()}`),
-        value: role,
-      })) as { label: string; value: string }[];
+    return ROLE_NAMES.filter((role) => role !== 'CUSTOMER').map((role) => ({
+      label: tFilter(`Filter.Roles.options.${role.toLowerCase()}`),
+      value: role,
+    })) as { label: string; value: string }[];
   }
 }

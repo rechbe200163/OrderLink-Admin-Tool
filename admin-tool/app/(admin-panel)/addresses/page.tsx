@@ -42,7 +42,7 @@ export default async function AddressesPage(props: {
   const t = await getTranslations('Dashboard');
   const tFilter = await getTranslations('FilterAndSearch');
   return (
-    <div>
+    <div className='p-5'>
       <div className='sticky top-0 bg-background z-10 '></div>
       <div className='container '>
         <div className='flex justify-between items-center mb-6'>
