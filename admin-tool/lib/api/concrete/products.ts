@@ -1,7 +1,6 @@
 'server only';
-import { ProductWithCategoryNames } from '@/lib/types';
+import { ProductWithCategoryNames, ProductHistory, Product } from '@/lib/types';
 import { BaseApiService } from '../base';
-import { Product } from '@/lib/types';
 import { PagingDto } from '@/lib/dtos';
 
 export class ProductApiService extends BaseApiService {
@@ -25,6 +24,10 @@ export class ProductApiService extends BaseApiService {
 
   async getProductbyId(productId: string): Promise<ProductWithCategoryNames> {
     return await this.get<ProductWithCategoryNames>(`products/${productId}`);
+  }
+
+  async getProductHistory(productId: string): Promise<ProductHistory[]> {
+    return await this.get<ProductHistory[]>(`products/history/${productId}`);
   }
 
   async getProductsPaging(

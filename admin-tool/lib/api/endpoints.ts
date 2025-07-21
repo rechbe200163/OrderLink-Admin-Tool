@@ -13,6 +13,7 @@ export const ENDPOINTS = {
   ORDER: (id: string | number) => `orders/${id}`,
   PRODUCTS: 'products',
   PRODUCT: (id: string | number) => `products/${id}`,
+  PRODUCT_HISTORY: (id: string | number) => `products/history/${id}`,
   ROUTES: 'routes',
   ROUTE: (id: string | number) => `routes/${id}`,
   PERMISSIONS: 'permissions',
