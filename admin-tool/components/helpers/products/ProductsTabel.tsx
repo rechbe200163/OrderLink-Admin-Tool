@@ -1,3 +1,5 @@
+import Link from 'next/link';
+import { Suspense } from 'react';
 import {
   Table,
   TableBody,
@@ -6,13 +8,19 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import { Badge } from '@/components/ui/badge';
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+} from '@/components/ui/dropdown-menu';
 import type { Product } from '@/lib/types';
+import { MoreVertical } from 'lucide-react';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 import { formatDateTime, formatPrice } from '@/lib/utils';
-import ImageComponent from '@/components/images/ImageComponent';
-import { Suspense } from 'react';
 import ImageSkeleton from '@/components/images/ImageSkeleton';
-import Link from 'next/link';
+import ImageComponent from '@/components/images/ImageComponent';
 
 export function ProductTable({ products }: { products: Product[] }) {
   return (
@@ -28,6 +36,7 @@ export function ProductTable({ products }: { products: Product[] }) {
               <TableHead className='w-40 text-right'>Lager</TableHead>
               <TableHead className='w-40 text-right'>Erstellt am</TableHead>
               <TableHead className='w-40 text-right'>Status</TableHead>
+              <TableHead className='w-20 text-right'>Aktionen</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -110,6 +119,27 @@ export function ProductTable({ products }: { products: Product[] }) {
                         <Badge variant='success'>Aktiv</Badge>
                       )}
                     </Link>
+                  </TableCell>
+                  <TableCell className='w-20 text-right'>
+                    <DropdownMenu>
+                      <DropdownMenuTrigger asChild>
+                        <Button variant='ghost' size='icon'>
+                          <MoreVertical className='h-4 w-4' />
+                        </Button>
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent align='end'>
+                        <DropdownMenuItem asChild>
+                          <Link href={`/products/${product.productId}/edit`}>
+                            Bearbeiten
+                          </Link>
+                        </DropdownMenuItem>
+                        <DropdownMenuItem asChild>
+                          <Link href={`/products/${product.productId}/history`}>
+                            Historie
+                          </Link>
+                        </DropdownMenuItem>
+                      </DropdownMenuContent>
+                    </DropdownMenu>
                   </TableCell>
                 </TableRow>
               ))

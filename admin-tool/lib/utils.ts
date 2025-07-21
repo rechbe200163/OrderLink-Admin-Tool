@@ -41,6 +41,19 @@ export function formatDateTime(date: string | Date): string {
   return formattedDate;
 }
 
+export function formatDateTimeWithTime(date: string | Date): string {
+  const formattedDate = new Date(date).toLocaleDateString('de-DE', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
+  const formattedTime = new Date(date).toLocaleTimeString('de-DE', {
+    hour: '2-digit',
+    minute: '2-digit',
+  });
+  return `${formattedDate} ${formattedTime}`;
+}
+
 export function formatStatsChange(percentageChange: number): string {
   if (percentageChange === 0) {
     return 'Equal to last month';
@@ -84,7 +97,7 @@ export function formDataToPartial(formData: FormData) {
 
 export function getChangedFormData(
   current: Record<string, any>,
-  formData: FormData,
+  formData: FormData
 ) {
   const partial = formDataToPartial(formData);
   const changed: Record<string, any> = {};

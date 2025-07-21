@@ -102,7 +102,8 @@ export interface Product {
 }
 
 export interface ProductHistory extends Product {
-  historieId: string;
+  historyId: string;
+  version: number;
 }
 
 export interface Customer {

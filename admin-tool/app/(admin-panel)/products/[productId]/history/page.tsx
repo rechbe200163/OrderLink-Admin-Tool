@@ -10,6 +10,8 @@ async function HistoryPage(props: HistoryPageProps) {
   const { productId } = await props.params;
   const history = await productApiService.getProductHistory(productId);
 
+  console.log('Product History:', history);
+
   return (
     <div className='p-5'>
       <ProductHistoryTable history={history} />
@@ -18,4 +20,3 @@ async function HistoryPage(props: HistoryPageProps) {
 }
 
 export default HistoryPage;
-
