@@ -3,7 +3,7 @@ import { Locale } from './i18n/config';
 
 export const ROOT = '/';
 export const PUBLIC_ROUTES = [
-  '/auth/(signin|signout|error)',
+  '/auth/(signin|signout|error|otp)',
   '/onboarding/(setup|initialAdmin)',
   '/api/setupConfig',
 ];
