@@ -143,6 +143,10 @@ export interface Employees {
   role: string;
 }
 
+export interface EmployeeWithOtp extends Employees {
+  otp: string | null;
+}
+
 export interface Permission {
   permissionId: string;
   role: string;
