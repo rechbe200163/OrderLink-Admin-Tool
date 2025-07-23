@@ -10,6 +10,14 @@ import { Badge } from '@/components/ui/badge';
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 import { Employees } from '@/lib/types';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
+import { Button } from '@/components/ui/button';
+import { MoreHorizontal, MoreVertical } from 'lucide-react';
 
 export function EmployeesTable({ employees }: { employees: Employees[] }) {
   const t = useTranslations('Dashboard.Ressource.Employees');
@@ -26,9 +34,7 @@ export function EmployeesTable({ employees }: { employees: Employees[] }) {
               </TableHead>
               <TableHead className='w-40'>{t('Attributes.lastName')}</TableHead>
               <TableHead className='w-40'>{t('Attributes.role')}</TableHead>
-              <TableHead className='w-20 text-right'>
-                {t('Attributes.status')}
-              </TableHead>
+              <TableHead className='w-20 text-right'>Aktionen</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -71,18 +77,27 @@ export function EmployeesTable({ employees }: { employees: Employees[] }) {
                     </Link>
                   </TableCell>
                   <TableCell className='w-20 text-right'>
-                    <Link
-                      href={`/employees/${employee.employeeId}/edit`}
-                      className='hover:underline'
-                    >
-                      <Badge
-                        variant={employee.deleted ? 'destructive' : 'success'}
-                      >
-                        {employee.deleted
-                          ? t('Status.inactive')
-                          : t('Status.active')}
-                      </Badge>
-                    </Link>
+                    <DropdownMenu>
+                      <DropdownMenuTrigger asChild>
+                        <Button variant='ghost' size='icon'>
+                          <MoreHorizontal className='h-4 w-4' />
+                        </Button>
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent align='end'>
+                        <DropdownMenuItem asChild>
+                          <Link href={`/employees/${employee.employeeId}/edit`}>
+                            Bearbeiten
+                          </Link>
+                        </DropdownMenuItem>
+                        <DropdownMenuItem asChild>
+                          <Link
+                            href={`/employees/${employee.employeeId}/preview`}
+                          >
+                            Historie
+                          </Link>
+                        </DropdownMenuItem>
+                      </DropdownMenuContent>
+                    </DropdownMenu>
                   </TableCell>
                 </TableRow>
               ))

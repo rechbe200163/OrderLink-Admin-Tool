@@ -88,6 +88,15 @@ export interface Category {
   deleted: boolean;
 }
 
+export interface Otp {
+  id: string;
+  code: number;
+  employeeId: string;
+  expiresAt: Date;
+  used: boolean;
+  createdAt: Date;
+}
+
 export interface Product {
   productId: string;
   name: string;
