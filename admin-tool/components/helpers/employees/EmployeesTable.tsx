@@ -90,9 +90,7 @@ export function EmployeesTable({ employees }: { employees: Employees[] }) {
                           </Link>
                         </DropdownMenuItem>
                         <DropdownMenuItem asChild>
-                          <Link
-                            href={`/employees/${employee.employeeId}/details`}
-                          >
+                          <Link href={`/employees/${employee.employeeId}/edit`}>
                             Historie
                           </Link>
                         </DropdownMenuItem>

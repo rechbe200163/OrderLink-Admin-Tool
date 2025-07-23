@@ -1,6 +1,4 @@
-import EmployeeDetails from '@/components/helpers/employees/EmployeeDetails';
-import { employeesApiService } from '@/lib/api/concrete/employees';
-import { getSession } from '@/lib/utlis/getSession';
+import EmployeeProfile from '@/components/helpers/employees/EmployeeProfile';
 
 interface PageProps {
   params: Promise<{ employeeId: string }>;
@@ -8,12 +6,10 @@ interface PageProps {
 
 export default async function EmployeeDetailsPage({ params }: PageProps) {
   const { employeeId } = await params;
-  const employee = await employeesApiService.getEmployeeWithOtp(employeeId);
-  const session = await getSession().catch(() => null);
 
   return (
     <div className='p-5'>
-      <EmployeeDetails employee={employee} isLoggedIn={!!session} />
+      <EmployeeProfile employeeId={employeeId} />
     </div>
   );
 }
