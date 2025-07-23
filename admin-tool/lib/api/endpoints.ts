@@ -28,7 +28,9 @@ export const ENDPOINTS = {
   ROLES_ROLE_NAMES: 'roles/roleNames',
   AUTH_LOGIN: 'auth/signIn',
   AUTH_OTP: 'auth/otp',
+  OTP_RESEND: 'otp/resend',
   AUTH_RENEW_SESSION: 'auth/renewSession',
+  EMPLOYEE_WITH_OTP: (id: string | number) => `employees/${id}?includeOtp=true`,
   GET_ME: 'employees/me',
   UPDATE_ME: 'employees/me',
 } as const;

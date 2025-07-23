@@ -108,3 +108,12 @@ export async function renewSessionAction(
     return { success: false };
   }
 }
+
+export async function resendOtp(): Promise<FormState> {
+  try {
+    await apiPost(ENDPOINTS.OTP_RESEND);
+    return { success: true } as FormState;
+  } catch (err: any) {
+    return { success: false, errors: { title: [err.message] } } as FormState;
+  }
+}
