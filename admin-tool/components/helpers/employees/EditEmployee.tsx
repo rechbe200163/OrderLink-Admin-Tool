@@ -6,9 +6,8 @@ import { useTranslations } from 'next-intl';
 import router from 'next/router';
 
 import { updateEmployee } from '@/lib/actions/employee.actions';
-import { Employees, ROLE_NAMES } from '@/lib/types';
+import { type Employees, ROLE_NAMES } from '@/lib/types';
 
-import CustomeToast from '../toasts/CustomeErrorToast';
 import { Button } from '@/components/ui/button';
 import { MailIcon, PlusCircle } from 'lucide-react';
 import { Card } from '@/components/ui/card';
@@ -23,6 +22,7 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { Spinner } from '@/components/ui/kibo-ui/spinner';
+import CustomeToast from '../toasts/CustomeErrorToast';
 
 interface EditEmployeesProps {
   employee: Employees;
@@ -61,90 +61,92 @@ const EditEmployee = ({ employee }: EditEmployeesProps) => {
   }, [formState, t]);
 
   return (
-    <div>
-      <h2 className='text-3xl font-bold tracking-tight mb-6 bg-background'>
-        {t('headerUpdate')} {employee.firstName} {employee.lastName}
-      </h2>
-      <Card className='shadow-md p-6'>
-        <form action={action} className='space-y-6'>
-          <div className='space-y-4'>
-            <h3 className='text-xl font-semibold mb-4'>
-              {t('Details.employeeDetails')}
-            </h3>
-
-            <div>
-              <Label htmlFor='email'>{t('Attributes.email')}</Label>
-              <div className='relative'>
-                <Input
-                  id='email'
-                  name='email'
-                  className='peer pe-9'
-                  type='email'
-                  placeholder={t('Placeholder.email')}
-                  defaultValue={employee.email}
-                />
-                <div className='text-muted-foreground/80 pointer-events-none absolute inset-y-0 end-0 flex items-center justify-center pe-3 peer-disabled:opacity-50'>
-                  <MailIcon size={16} aria-hidden='true' />
-                </div>
+    <Card className='shadow-md p-6 bg-background'>
+      <form action={action} className='space-y-6'>
+        <div className='space-y-6'>
+          {' '}
+          {/* Adjusted spacing for consistency */}
+          <h3 className='text-xl font-semibold mb-4 text-foreground'>
+            {t('Details.employeeDetails')}
+          </h3>
+          <div>
+            <Label htmlFor='email'>{t('Attributes.email')}</Label>
+            <div className='relative mt-1'>
+              {' '}
+              {/* Added mt-1 for label-input spacing */}
+              <Input
+                id='email'
+                name='email'
+                className='peer pe-9'
+                type='email'
+                placeholder={t('Placeholder.email')}
+                defaultValue={employee.email}
+              />
+              <div className='text-muted-foreground/80 pointer-events-none absolute inset-y-0 end-0 flex items-center justify-center pe-3 peer-disabled:opacity-50'>
+                <MailIcon size={16} aria-hidden='true' />
               </div>
-            </div>
-
-            <div className='grid grid-cols-1 xl:grid-cols-2 gap-6'>
-              <div>
-                <Label htmlFor='firstName'>{t('Attributes.firstName')}</Label>
-                <Input
-                  id='firstName'
-                  name='firstName'
-                  placeholder={t('Placeholder.firstName')}
-                  defaultValue={employee.firstName}
-                />
-              </div>
-              <div>
-                <Label htmlFor='lastName'>{t('Attributes.lastName')}</Label>
-                <Input
-                  id='lastName'
-                  name='lastName'
-                  placeholder={t('Placeholder.lastName')}
-                  defaultValue={employee.lastName}
-                />
-              </div>
-            </div>
-
-            <div>
-              <Label htmlFor='role'>{t('Attributes.role')}</Label>
-              <Select name='role' defaultValue={employee.role}>
-                <SelectTrigger className='w-[180px]'>
-                  <SelectValue placeholder={t('Placeholder.selectRole')} />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectGroup>
-                    {ROLE_NAMES.map((role) => (
-                      <SelectItem key={role} value={role}>
-                        {tRoles(`options.${role.toLowerCase()}`)}
-                      </SelectItem>
-                    ))}
-                  </SelectGroup>
-                </SelectContent>
-              </Select>
             </div>
           </div>
+          <div className='grid grid-cols-1 xl:grid-cols-2 gap-6'>
+            <div>
+              <Label htmlFor='firstName'>{t('Attributes.firstName')}</Label>
+              <Input
+                id='firstName'
+                name='firstName'
+                placeholder={t('Placeholder.firstName')}
+                defaultValue={employee.firstName}
+                className='mt-1' // Added mt-1
+              />
+            </div>
+            <div>
+              <Label htmlFor='lastName'>{t('Attributes.lastName')}</Label>
+              <Input
+                id='lastName'
+                name='lastName'
+                placeholder={t('Placeholder.lastName')}
+                defaultValue={employee.lastName}
+                className='mt-1' // Added mt-1
+              />
+            </div>
+          </div>
+          <div>
+            <Label htmlFor='role'>{t('Attributes.role')}</Label>
+            <Select name='role' defaultValue={employee.role}>
+              <SelectTrigger className='w-full mt-1'>
+                {' '}
+                {/* Changed w-[180px] to w-full and added mt-1 */}
+                <SelectValue placeholder={t('Placeholder.selectRole')} />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup>
+                  {ROLE_NAMES.map((role) => (
+                    <SelectItem key={role} value={role}>
+                      {tRoles(`options.${role.toLowerCase()}`)}
+                    </SelectItem>
+                  ))}
+                </SelectGroup>
+              </SelectContent>
+            </Select>
+          </div>
+        </div>
 
-          <Button type='submit' disabled={isPending}>
-            {isPending ? (
-              <>
-                <Spinner />
-                {t('buttons.updateLoading')}
-              </>
-            ) : (
-              <>
-                <PlusCircle />
-                {t('buttons.update')}
-              </>
-            )}
-          </Button>
-        </form>
-      </Card>
-    </div>
+        <Button type='submit' disabled={isPending} className='w-full mt-8'>
+          {' '}
+          {/* Added w-full and mt-8 */}
+          {isPending ? (
+            <>
+              <Spinner className='mr-2' /> {/* Added margin to spinner */}
+              {t('buttons.updateLoading')}
+            </>
+          ) : (
+            <>
+              <PlusCircle className='mr-2' /> {/* Added margin to icon */}
+              {t('buttons.update')}
+            </>
+          )}
+        </Button>
+      </form>
+    </Card>
   );
 };
 

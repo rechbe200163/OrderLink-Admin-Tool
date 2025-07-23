@@ -144,7 +144,7 @@ export interface Employees {
 }
 
 export interface EmployeeWithOtp extends Employees {
-  otp: string | null;
+  otp: Otp | null;
 }
 
 export interface Permission {

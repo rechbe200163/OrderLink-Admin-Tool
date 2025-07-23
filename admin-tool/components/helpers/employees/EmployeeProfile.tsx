@@ -1,23 +1,33 @@
-import EmployeeDetails from '@/components/helpers/employees/EmployeeDetails';
-import EditEmployee from '@/components/helpers/employees/EditEmployee';
 import { employeesApiService } from '@/lib/api/concrete/employees';
-import { getSession } from '@/lib/utlis/getSession';
+import EditEmployee from './EditEmployee';
+import EmployeeDetails from './EmployeeDetails';
+
+interface EmployeeProfileProps {
+  employeeId: string;
+}
 
 export default async function EmployeeProfile({
   employeeId,
-}: {
-  employeeId: string;
-}) {
+}: EmployeeProfileProps) {
   const employee = await employeesApiService.getEmployeeWithOtp(employeeId);
-  const session = await getSession().catch(() => null);
+  const wasInitialLoginSuccessful = employee.otp?.used ?? false;
+
+  if (!employee) {
+    return (
+      <div className='flex items-center justify-center min-h-[calc(100vh-64px)] bg-background'>
+        <p className='text-lg text-muted-foreground'>Employee not found.</p>
+      </div>
+    );
+  }
 
   return (
-    <div className='flex flex-col md:flex-row gap-6'>
-      <div className='flex-1'>
+    <div className='min-h-screen bg-background p-6 md:p-8 lg:p-10'>
+      <h2 className='text-3xl font-bold tracking-tight mb-8 text-foreground'>
+        Edit Employee: {employee.firstName} {employee.lastName}
+      </h2>
+      <div className='grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8'>
         <EditEmployee employee={employee} />
-      </div>
-      <div className='md:w-1/3'>
-        <EmployeeDetails employee={employee} isLoggedIn={!!session} hidePersonalInfo />
+        <EmployeeDetails employee={employee} />
       </div>
     </div>
   );

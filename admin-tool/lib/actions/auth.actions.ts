@@ -57,7 +57,7 @@ export async function verifyOtp(
   _prev: FormState,
   formData: FormData
 ): Promise<FormState> {
-  const otp = formData.get('otp');
+  const otp = Number(formData.get('otp'));
 
   if (!otp) {
     return {
@@ -67,7 +67,7 @@ export async function verifyOtp(
   }
 
   try {
-    const resp = await apiPost<Session>(ENDPOINTS.AUTH_OTP, { otp });
+    const resp = await apiPost<Session>(ENDPOINTS.AUTH_OTP(otp));
     await setCookie('token', {
       accessToken: resp.token.accessToken,
       issuedAt: resp.token.issuedAt,
@@ -109,9 +109,9 @@ export async function renewSessionAction(
   }
 }
 
-export async function resendOtp(): Promise<FormState> {
+export async function resendOtp(employeeId: string): Promise<FormState> {
   try {
-    await apiPost(ENDPOINTS.OTP_RESEND);
+    await apiPost(ENDPOINTS.OTP_RESEND(employeeId));
     return { success: true } as FormState;
   } catch (err: any) {
     return { success: false, errors: { title: [err.message] } } as FormState;

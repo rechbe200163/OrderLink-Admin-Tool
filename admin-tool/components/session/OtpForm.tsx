@@ -54,6 +54,14 @@ export function OtpForm() {
                 <InputOTPSlot index={5} />
               </InputOTPGroup>
             </InputOTP>
+            {Array.isArray(_formState.errors?.title) &&
+              _formState.errors.title.length > 0 && (
+                <p className='text-red-500 text-sm'>
+                  {_formState.errors?.title?.[0]
+                    ? _formState.errors.title[0]
+                    : 'Ein Fehler ist aufgetreten. Bitte versuche es erneut.'}
+                </p>
+              )}
             <Button type='submit' className='w-full' disabled={isLoading}>
               {isLoading ? (
                 <>

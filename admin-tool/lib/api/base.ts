@@ -18,12 +18,19 @@ export class BaseApiService {
       body,
       headers,
     }: {
-      params?: Record<string, string | number | undefined>;
+      params?: Record<string, string | number | boolean | undefined>;
       body?: unknown;
       headers?: HeadersInit;
     } = {}
   ): Promise<T> {
     const url = new URL(`${this.baseUrl}/${endpoint}`);
+    console.log('BaseApiService request:', {
+      method,
+      endpoint,
+      params,
+      body,
+      url: url.toString(),
+    });
 
     console.log('method:', method, 'url:', url.toString());
 
@@ -81,7 +88,7 @@ export class BaseApiService {
 
   public get<T>(
     endpoint: string,
-    params?: Record<string, string | number | undefined>
+    params?: Record<string, string | number | boolean | undefined>
   ): Promise<T> {
     return this.request('GET', endpoint, { params });
   }
