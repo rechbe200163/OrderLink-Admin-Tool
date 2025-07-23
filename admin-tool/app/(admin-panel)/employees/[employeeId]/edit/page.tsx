@@ -1,6 +1,5 @@
-import EditEmployee from '@/components/helpers/employees/EditEmployee';
-import { employeesApiService } from '@/lib/api/concrete/employees';
 import React from 'react';
+import EmployeeProfile from '@/components/helpers/employees/EmployeeProfile';
 
 interface EditProductPageProps {
   params: Promise<{
@@ -10,10 +9,9 @@ interface EditProductPageProps {
 
 async function EditProductPage(props: EditProductPageProps) {
   const { employeeId } = await props.params;
-  const employee = await employeesApiService.getEmployeeById(employeeId);
   return (
-    <div className='sticky top-0 bg-background z-10 px-4 '>
-      <EditEmployee employee={employee} />
+    <div className='p-5'>
+      <EmployeeProfile employeeId={employeeId} />
     </div>
   );
 }
