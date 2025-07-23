@@ -1,25 +1,13 @@
 import React from 'react';
-import {
-  InputOTP,
-  InputOTPGroup,
-  InputOTPSeparator,
-  InputOTPSlot,
-} from '@/components/ui/input-otp';
+import { OtpForm } from '@/components/session/OtpForm';
+
 const OtpSignInPage = () => {
   return (
-    <InputOTP maxLength={6}>
-      <InputOTPGroup>
-        <InputOTPSlot index={0} />
-        <InputOTPSlot index={1} />
-        <InputOTPSlot index={2} />
-      </InputOTPGroup>
-      <InputOTPSeparator />
-      <InputOTPGroup>
-        <InputOTPSlot index={3} />
-        <InputOTPSlot index={4} />
-        <InputOTPSlot index={5} />
-      </InputOTPGroup>
-    </InputOTP>
+    <div className='flex min-h-svh items-center justify-center bg-muted p-6 md:p-10'>
+      <div className='w-full max-w-sm md:max-w-3xl'>
+        <OtpForm />
+      </div>
+    </div>
   );
 };
 

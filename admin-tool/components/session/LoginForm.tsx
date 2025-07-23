@@ -111,6 +111,15 @@ export function LoginForm({
                     </>
                   )}
                 </Button>
+                <p className='text-center text-sm text-muted-foreground'>
+                  Erstes Login?{' '}
+                  <a
+                    href='/auth/otp'
+                    className='font-medium underline underline-offset-4'
+                  >
+                    OTP eingeben
+                  </a>
+                </p>
               </div>
             </div>
           </form>
