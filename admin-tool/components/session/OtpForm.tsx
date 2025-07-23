@@ -1,0 +1,72 @@
+'use client';
+import { useActionState, useState } from 'react';
+import {
+  InputOTP,
+  InputOTPGroup,
+  InputOTPSlot,
+  InputOTPSeparator,
+} from '@/components/ui/input-otp';
+import { Button } from '@/components/ui/button';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
+import { verifyOtp } from '@/lib/actions/auth.actions';
+import { Spinner } from '@/components/ui/kibo-ui/spinner';
+
+export function OtpForm() {
+  const [code, setCode] = useState('');
+  const [_formState, action, isLoading] = useActionState(verifyOtp, {
+    success: false,
+    errors: { title: [] as string[] },
+  });
+
+  return (
+    <div className='flex flex-col gap-6'>
+      <Card>
+        <CardHeader className='text-center'>
+          <CardTitle className='text-xl'>OTP bestätigen</CardTitle>
+          <CardDescription>
+            Bitte gib den Code ein, den du per E-Mail erhalten hast.
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <form action={action} className='grid gap-6'>
+            <InputOTP
+              maxLength={6}
+              value={code}
+              onChange={setCode}
+              containerClassName='justify-center'
+              name='otp'
+            >
+              <InputOTPGroup>
+                <InputOTPSlot index={0} />
+                <InputOTPSlot index={1} />
+                <InputOTPSlot index={2} />
+              </InputOTPGroup>
+              <InputOTPSeparator />
+              <InputOTPGroup>
+                <InputOTPSlot index={3} />
+                <InputOTPSlot index={4} />
+                <InputOTPSlot index={5} />
+              </InputOTPGroup>
+            </InputOTP>
+            <Button type='submit' className='w-full' disabled={isLoading}>
+              {isLoading ? (
+                <>
+                  <Spinner className='mr-2 h-4 w-4 animate-spin' />
+                  Bestätigen...
+                </>
+              ) : (
+                'Bestätigen'
+              )}
+            </Button>
+          </form>
+        </CardContent>
+      </Card>
+    </div>
+  );
+}

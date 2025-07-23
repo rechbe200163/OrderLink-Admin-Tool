@@ -53,6 +53,34 @@ export async function logIn(
   redirect('/');
 }
 
+export async function verifyOtp(
+  _prev: FormState,
+  formData: FormData
+): Promise<FormState> {
+  const otp = formData.get('otp');
+
+  if (!otp) {
+    return {
+      success: false,
+      errors: { title: ['Missing OTP'] },
+    };
+  }
+
+  try {
+    const resp = await apiPost<Session>(ENDPOINTS.AUTH_OTP, { otp });
+    await setCookie('token', {
+      accessToken: resp.token.accessToken,
+      issuedAt: resp.token.issuedAt,
+      expiresAt: resp.token.expiresAt,
+    });
+    await setCookie('user', resp.user);
+  } catch (error: any) {
+    console.error('OTP verification error:', error);
+    return { success: false, errors: { title: [error.message] } };
+  }
+  redirect('/');
+}
+
 export async function renewSessionAction(
   _prevState: any,
   _formData: FormData

@@ -27,6 +27,7 @@ export const ENDPOINTS = {
   ROLE: (id: string | number) => `roles/${id}`,
   ROLES_ROLE_NAMES: 'roles/roleNames',
   AUTH_LOGIN: 'auth/signIn',
+  AUTH_OTP: 'auth/otp',
   AUTH_RENEW_SESSION: 'auth/renewSession',
   GET_ME: 'employees/me',
   UPDATE_ME: 'employees/me',
