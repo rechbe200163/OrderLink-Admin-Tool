@@ -522,6 +522,11 @@
     "Items": {
       "overview": "Resumen",
       "statistics": "Estadísticas",
+      "ordersStatistics": "Estadísticas de Pedidos",
+      "routesStatistics": "Estadísticas de Rutas",
+      "productsStatistics": "Estadísticas de Productos",
+      "categoriesStatistics": "Estadísticas de Categorías",
+      "customersStatistics": "Estadísticas de Clientes",
       "orders": "Pedidos",
       "routes": "Rutas",
       "addresses": "Direcciones",

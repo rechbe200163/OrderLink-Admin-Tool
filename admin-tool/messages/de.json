@@ -533,6 +533,11 @@
     "Items": {
       "overview": "Übersicht",
       "statistics": "Statistiken",
+      "ordersStatistics": "Bestellungen Statistiken",
+      "routesStatistics": "Routen Statistiken",
+      "productsStatistics": "Produktstatistiken",
+      "categoriesStatistics": "Kategorien Statistiken",
+      "customersStatistics": "Kunden Statistiken",
       "orders": "Bestellungen",
       "routes": "Routen",
       "addresses": "Adressen",

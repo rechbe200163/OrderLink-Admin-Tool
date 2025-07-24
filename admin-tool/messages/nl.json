@@ -522,6 +522,11 @@
     "Items": {
       "overview": "Overzicht",
       "statistics": "Statistieken",
+      "ordersStatistics": "Bestelstatistieken",
+      "routesStatistics": "Routestatistieken",
+      "productsStatistics": "Productstatistieken",
+      "categoriesStatistics": "Categorystatistieken",
+      "customersStatistics": "Klantstatistieken",
       "orders": "Bestellingen",
       "routes": "Routes",
       "addresses": "Adressen",

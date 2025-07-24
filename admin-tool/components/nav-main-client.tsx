@@ -80,10 +80,7 @@ export function NavMainClient({ favoritesEnabled }: NavMainProps) {
       {
         label: tGroup('overview'),
         icon: HomeIcon,
-        items: [
-          { title: tItem('overview'), url: '/', icon: HomeIcon },
-          { title: tItem('statistics'), url: '/statistics', icon: ChartLine },
-        ],
+        items: [{ title: tItem('overview'), url: '/', icon: HomeIcon }],
       },
       {
         label: tGroup('sales'),
@@ -92,6 +89,16 @@ export function NavMainClient({ favoritesEnabled }: NavMainProps) {
           { title: tItem('orders'), url: '/orders', icon: ShoppingCartIcon },
           { title: tItem('routes'), url: '/routes', icon: Route },
           { title: tItem('addresses'), url: '/addresses', icon: MapPin },
+          {
+            title: tItem('ordersStatistics'),
+            url: '/orders/statistics',
+            icon: ChartLine,
+          },
+          {
+            title: tItem('routesStatistics'),
+            url: '/routes/statistics',
+            icon: ChartLine,
+          },
         ],
       },
       {
@@ -100,6 +107,16 @@ export function NavMainClient({ favoritesEnabled }: NavMainProps) {
         items: [
           { title: tItem('products'), url: '/products', icon: Box },
           { title: tItem('categories'), url: '/categories', icon: Shapes },
+          {
+            title: tItem('productsStatistics'),
+            url: '/products/statistics',
+            icon: ChartLine,
+          },
+          {
+            title: tItem('categoriesStatistics'),
+            url: '/categories/statistics',
+            icon: ChartLine,
+          },
         ],
       },
       {
@@ -107,6 +124,11 @@ export function NavMainClient({ favoritesEnabled }: NavMainProps) {
         icon: UsersIcon,
         items: [
           { title: tItem('customers'), url: '/customers', icon: UsersIcon },
+          {
+            title: tItem('customersStatistics'),
+            url: '/customers/statistics',
+            icon: ChartLine,
+          },
         ],
       },
       {
@@ -168,10 +190,12 @@ export function NavMainClient({ favoritesEnabled }: NavMainProps) {
       );
   }, [query, navGroups]);
 
+  const isItemActive = (url: string) =>
+    pathname === url ||
+    (pathname.startsWith(url + '/') && !pathname.startsWith(`${url}/statistics`));
+
   const isGroupActive = (items: { url: string }[]) =>
-    items.some(
-      (item) => pathname === item.url || pathname.startsWith(item.url + '/')
-    );
+    items.some((item) => isItemActive(item.url));
 
   return (
     <>
@@ -216,8 +240,7 @@ export function NavMainClient({ favoritesEnabled }: NavMainProps) {
                             <SidebarMenuSubButton
                               asChild
                               className={
-                                pathname === item.url ||
-                                pathname.startsWith(item.url + '/')
+                                isItemActive(item.url)
                                   ? 'bg-primary text-primary-foreground'
                                   : ''
                               }
@@ -255,8 +278,7 @@ export function NavMainClient({ favoritesEnabled }: NavMainProps) {
                       asChild
                       tooltip={item.title}
                       className={
-                        pathname === item.url ||
-                        pathname.startsWith(item.url + '/')
+                        isItemActive(item.url)
                           ? 'bg-primary text-primary-foreground'
                           : ''
                       }
