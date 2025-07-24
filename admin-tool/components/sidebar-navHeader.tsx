@@ -3,21 +3,22 @@ import { ArrowUpCircleIcon } from 'lucide-react';
 import Link from 'next/link';
 import React from 'react';
 import { SidebarMenuButton } from './ui/sidebar';
+import { useTranslations, getTranslations } from 'next-intl';
 
 function ErrorComponent() {
+  const t = useTranslations('Components.SidebarHeader');
   return (
     <div className='flex h-full w-full items-center justify-center'>
       <div className='text-center'>
-        <h1 className='text-2xl font-bold'>Error</h1>
-        <p className='mt-2 text-gray-600'>
-          An error occurred while loading the sidebar header.
-        </p>
+        <h1 className='text-2xl font-bold'>{t('errorTitle')}</h1>
+        <p className='mt-2 text-gray-600'>{t('errorMessage')}</p>
       </div>
     </div>
   );
 }
 
 const SideBarHeader = async () => {
+  const t = await getTranslations('Components.SidebarHeader');
   const data = await siteConfigApiService.getSiteConfig();
 
   if (!data) {
@@ -38,7 +39,7 @@ const SideBarHeader = async () => {
       <Link href='/'>
         <ArrowUpCircleIcon className='h-5 w-5' />
         <span className='text-base font-semibold'>
-          {companyName || 'Admin Tool'}
+          {companyName || t('defaultName')}
         </span>
       </Link>
     </SidebarMenuButton>

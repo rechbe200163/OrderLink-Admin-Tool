@@ -30,6 +30,7 @@ export default function NavUser({ session }: { session: Session }) {
   // if user is null return generic user object
   const { isMobile } = useSidebar();
   const tItem = useTranslations('Navigation.Items');
+  const tUser = useTranslations('Components.NavUser');
   // const user: User = await getCookie('user');
   if (!session) return null;
   const user = session?.user || {
@@ -98,13 +99,13 @@ export default function NavUser({ session }: { session: Session }) {
               </DropdownMenuItem>
               <DropdownMenuItem>
                 <CreditCardIcon className='mr-2 h-4 w-4' />
-                Billing
+                {tUser('billing')}
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuItem onClick={logOut}>
               <LogOut className='mr-2 h-4 w-4' />
-              Log out
+              {tUser('logOut')}
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

@@ -1,5 +1,6 @@
 import { ChevronLeft, ChevronRight, MoreHorizontal } from 'lucide-react';
 import * as React from 'react';
+import { useTranslations } from 'next-intl';
 
 import { cn } from '@/lib/utils';
 import { ButtonProps, buttonVariants } from '@/components/ui/button';
@@ -95,16 +96,19 @@ PaginationNext.displayName = 'PaginationNext';
 const PaginationEllipsis = ({
   className,
   ...props
-}: React.ComponentProps<'span'>) => (
-  <span
-    aria-hidden
-    className={cn('flex h-9 w-9 items-center justify-center', className)}
-    {...props}
-  >
-    <MoreHorizontal size={16} strokeWidth={2} />
-    <span className='sr-only'>More pages</span>
-  </span>
-);
+}: React.ComponentProps<'span'>) => {
+  const t = useTranslations('Components.Pagination');
+  return (
+    <span
+      aria-hidden
+      className={cn('flex h-9 w-9 items-center justify-center', className)}
+      {...props}
+    >
+      <MoreHorizontal size={16} strokeWidth={2} />
+      <span className='sr-only'>{t('morePages')}</span>
+    </span>
+  );
+};
 PaginationEllipsis.displayName = 'PaginationEllipsis';
 
 export {

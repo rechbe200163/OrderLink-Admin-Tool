@@ -539,6 +539,46 @@
       "profileSettings": "Profile & Settings"
     }
   },
+  "Components": {
+    "BackButton": {
+      "goBack": "Go back"
+    },
+    "SidebarHeader": {
+      "errorTitle": "Error",
+      "errorMessage": "An error occurred while loading the sidebar header.",
+      "defaultName": "Admin Tool"
+    },
+    "NavMain": {
+      "favorites": "Favorites",
+      "favorite": "Favorite",
+      "searchPlaceholder": "Search items..."
+    },
+    "PhoneInput": {
+      "label": "Phone Number",
+      "placeholder": "Enter phone number",
+      "selectCountry": "Select country",
+      "selectCountryPlaceholder": "Select a country"
+    },
+    "SubscriptionDetails": {
+      "title": "Subscription Details",
+      "status": "Status",
+      "plan": "Plan",
+      "amount": "Amount",
+      "billingPeriod": "Billing Period",
+      "currentPeriodStart": "Current Period Start",
+      "currentPeriodEnd": "Current Period End"
+    },
+    "Pagination": {
+      "morePages": "More pages"
+    },
+    "NavUser": {
+      "billing": "Billing",
+      "logOut": "Log out"
+    },
+    "Sidebar": {
+      "toggle": "Toggle Sidebar"
+    }
+  },
   "PremiumWrapper": {
     "header": "Upgrade auf Premium",
     "subtitle": "Upgrade auf Premium, um diese Funktion freizuschalten",
