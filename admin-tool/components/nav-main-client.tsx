@@ -80,10 +80,7 @@ export function NavMainClient({ favoritesEnabled }: NavMainProps) {
       {
         label: tGroup('overview'),
         icon: HomeIcon,
-        items: [
-          { title: tItem('overview'), url: '/', icon: HomeIcon },
-          { title: tItem('statistics'), url: '/statistics', icon: ChartLine },
-        ],
+        items: [{ title: tItem('overview'), url: '/', icon: HomeIcon }],
       },
       {
         label: tGroup('sales'),
@@ -92,6 +89,16 @@ export function NavMainClient({ favoritesEnabled }: NavMainProps) {
           { title: tItem('orders'), url: '/orders', icon: ShoppingCartIcon },
           { title: tItem('routes'), url: '/routes', icon: Route },
           { title: tItem('addresses'), url: '/addresses', icon: MapPin },
+          {
+            title: tItem('statistics'),
+            url: '/orders/statistics',
+            icon: ChartLine,
+          },
+          {
+            title: tItem('statistics'),
+            url: '/routes/statistics',
+            icon: ChartLine,
+          },
         ],
       },
       {
@@ -100,6 +107,16 @@ export function NavMainClient({ favoritesEnabled }: NavMainProps) {
         items: [
           { title: tItem('products'), url: '/products', icon: Box },
           { title: tItem('categories'), url: '/categories', icon: Shapes },
+          {
+            title: tItem('statistics'),
+            url: '/products/statistics',
+            icon: ChartLine,
+          },
+          {
+            title: tItem('statistics'),
+            url: '/categories/statistics',
+            icon: ChartLine,
+          },
         ],
       },
       {
@@ -107,6 +124,11 @@ export function NavMainClient({ favoritesEnabled }: NavMainProps) {
         icon: UsersIcon,
         items: [
           { title: tItem('customers'), url: '/customers', icon: UsersIcon },
+          {
+            title: tItem('statistics'),
+            url: '/customers/statistics',
+            icon: ChartLine,
+          },
         ],
       },
       {
