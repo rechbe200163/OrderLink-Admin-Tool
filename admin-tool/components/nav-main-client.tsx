@@ -90,12 +90,12 @@ export function NavMainClient({ favoritesEnabled }: NavMainProps) {
           { title: tItem('routes'), url: '/routes', icon: Route },
           { title: tItem('addresses'), url: '/addresses', icon: MapPin },
           {
-            title: tItem('statistics'),
+            title: tItem('ordersStatistics'),
             url: '/orders/statistics',
             icon: ChartLine,
           },
           {
-            title: tItem('statistics'),
+            title: tItem('routesStatistics'),
             url: '/routes/statistics',
             icon: ChartLine,
           },
@@ -108,12 +108,12 @@ export function NavMainClient({ favoritesEnabled }: NavMainProps) {
           { title: tItem('products'), url: '/products', icon: Box },
           { title: tItem('categories'), url: '/categories', icon: Shapes },
           {
-            title: tItem('statistics'),
+            title: tItem('productsStatistics'),
             url: '/products/statistics',
             icon: ChartLine,
           },
           {
-            title: tItem('statistics'),
+            title: tItem('categoriesStatistics'),
             url: '/categories/statistics',
             icon: ChartLine,
           },
@@ -125,7 +125,7 @@ export function NavMainClient({ favoritesEnabled }: NavMainProps) {
         items: [
           { title: tItem('customers'), url: '/customers', icon: UsersIcon },
           {
-            title: tItem('statistics'),
+            title: tItem('customersStatistics'),
             url: '/customers/statistics',
             icon: ChartLine,
           },
@@ -190,10 +190,12 @@ export function NavMainClient({ favoritesEnabled }: NavMainProps) {
       );
   }, [query, navGroups]);
 
+  const isItemActive = (url: string) =>
+    pathname === url ||
+    (pathname.startsWith(url + '/') && !pathname.startsWith(`${url}/statistics`));
+
   const isGroupActive = (items: { url: string }[]) =>
-    items.some(
-      (item) => pathname === item.url || pathname.startsWith(item.url + '/')
-    );
+    items.some((item) => isItemActive(item.url));
 
   return (
     <>
@@ -238,8 +240,7 @@ export function NavMainClient({ favoritesEnabled }: NavMainProps) {
                             <SidebarMenuSubButton
                               asChild
                               className={
-                                pathname === item.url ||
-                                pathname.startsWith(item.url + '/')
+                                isItemActive(item.url)
                                   ? 'bg-primary text-primary-foreground'
                                   : ''
                               }
@@ -277,8 +278,7 @@ export function NavMainClient({ favoritesEnabled }: NavMainProps) {
                       asChild
                       tooltip={item.title}
                       className={
-                        pathname === item.url ||
-                        pathname.startsWith(item.url + '/')
+                        isItemActive(item.url)
                           ? 'bg-primary text-primary-foreground'
                           : ''
                       }

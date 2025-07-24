@@ -28,6 +28,7 @@ const resourceMap: Record<string, string> = {
 export default function PathBreadcrumbs() {
   const pathname = usePathname();
   const t = useTranslations('Dashboard');
+  const navT = useTranslations('Navigation.Items');
 
   const segments = pathname.split('/').filter(Boolean);
 
@@ -50,6 +51,9 @@ export default function PathBreadcrumbs() {
       breadcrumbs.push({
         label: t(`Ressource.${lastResourceKey}.BreadCrumps.${segment}`),
       });
+    } else if (segment === 'statistics') {
+      currentPath += `/${segment}`;
+      breadcrumbs.push({ label: navT('statistics') });
     } else {
       currentPath += `/${segment}`;
     }
