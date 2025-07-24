@@ -13,9 +13,10 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { Save } from 'lucide-react';
-import { Spinner } from '@/components/ui/kibo-ui/spinner';
+import LoadingIcon from '@/components/loading-states/loading-icon';
 import { updatePermission } from '@/lib/actions/permission.actions';
 import { Actions, Resources, ROLE_NAMES, Permission } from '@/lib/types';
+import { GenericLoading } from '@/components/loading-states/loading';
 
 export default function EditPermission({
   permission,
@@ -87,8 +88,8 @@ export default function EditPermission({
         <Button type='submit' disabled={isPending} className='mt-6'>
           {isPending ? (
             <>
-              <Spinner />
-              {t('buttons.updateLoading')}
+              <LoadingIcon />
+              <GenericLoading text={t('buttons.updateLoading')} />
             </>
           ) : (
             <>

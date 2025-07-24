@@ -32,23 +32,23 @@ import { PagingMeta } from '@/lib/dtos';
 
 export default function SelectCategoryComponent({
   onCategorySelect,
-  defaultValues = [],
+  defaultValue = '',
 }: {
-  onCategorySelect: (categoryIds: string[]) => void;
-  defaultValues?: string[];
+  onCategorySelect: (categoryId: string) => void;
+  defaultValue?: string;
 }) {
   const t = useTranslations('SelectComponents.Category');
   const id = useId();
-  const [open, setOpen] = useState<boolean>(false);
-  const [values, setValues] = useState<string[]>(defaultValues);
-  const [page, setPage] = useState<number>(1);
+  const [open, setOpen] = useState(false);
+  const [value, setValue] = useState<string | undefined>(defaultValue || '');
+  const [page, setPage] = useState(1);
   const [categories, setCategories] = useState<Category[]>([]);
   const [meta, setMeta] = useState<PagingMeta | null>(null);
-  const [search, setSearch] = useState<string>('');
+  const [search, setSearch] = useState('');
 
   useEffect(() => {
-    setValues(defaultValues);
-  }, [defaultValues]);
+    setValue(defaultValue);
+  }, [defaultValue]);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -67,16 +67,12 @@ export default function SelectCategoryComponent({
     return () => controller.abort();
   }, [page, search]);
 
-  const selectedCategories = categories.filter((category) =>
-    values.includes(category.categoryId)
-  );
+  const selectedCategory = categories.find((c) => c.categoryId === value);
 
   const handleSelect = (categoryId: string) => {
-    const newValues = values.includes(categoryId)
-      ? values.filter((id) => id !== categoryId)
-      : [...values, categoryId];
-    setValues(newValues);
-    onCategorySelect(newValues); // Update parent on selection
+    setValue(categoryId);
+    onCategorySelect(categoryId);
+    setOpen(false); // automatisch schließen
   };
 
   return (
@@ -94,12 +90,10 @@ export default function SelectCategoryComponent({
             <span
               className={cn(
                 'truncate',
-                values.length === 0 && 'text-muted-foreground'
+                !selectedCategory && 'text-muted-foreground'
               )}
             >
-              {selectedCategories.length > 0
-                ? selectedCategories.map((category) => category.name).join(', ')
-                : 'Select Categories'}
+              {selectedCategory?.name ?? 'Select Category'}
             </span>
             <ChevronDown
               size={16}
@@ -121,21 +115,18 @@ export default function SelectCategoryComponent({
             <CommandList className='max-h-[300px] overflow-y-auto'>
               <CommandEmpty>{t('noCategoryFound')}</CommandEmpty>
               <CommandGroup>
-                {categories.map((category) => {
-                  const label = `${category.name}`;
-                  return (
-                    <CommandItem
-                      key={category.categoryId}
-                      value={label}
-                      onSelect={() => handleSelect(category.categoryId)}
-                    >
-                      {label}
-                      {values.includes(category.categoryId) && (
-                        <Check size={16} strokeWidth={2} className='ml-auto' />
-                      )}
-                    </CommandItem>
-                  );
-                })}
+                {categories.map((category) => (
+                  <CommandItem
+                    key={category.categoryId}
+                    value={category.name}
+                    onSelect={() => handleSelect(category.categoryId)}
+                  >
+                    {category.name}
+                    {value === category.categoryId && (
+                      <Check size={16} strokeWidth={2} className='ml-auto' />
+                    )}
+                  </CommandItem>
+                ))}
               </CommandGroup>
               <CommandSeparator />
               <CommandGroup>

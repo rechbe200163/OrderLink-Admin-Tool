@@ -21,7 +21,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { Spinner } from '@/components/ui/kibo-ui/spinner';
+import LoadingIcon from '@/components/loading-states/loading-icon';
 import CustomeToast from '../toasts/CustomeErrorToast';
 
 interface EditEmployeesProps {

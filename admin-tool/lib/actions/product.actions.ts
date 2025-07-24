@@ -10,6 +10,7 @@ export async function createProduct(
   _prevState: FormState,
   formData: FormData
 ): Promise<FormState> {
+  console.log('Creating product with formData:', Object.fromEntries(formData));
   return (await guardAction(async () => {
     await apiPost(ENDPOINTS.PRODUCTS, Object.fromEntries(formData));
     return { success: true } as FormState;

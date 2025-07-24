@@ -19,7 +19,8 @@ import { toast } from 'sonner';
 import CustomeToast from '../toasts/CustomeErrorToast';
 import PhoneNumberInputComponent from '@/components/PhoneNumberInputComponent';
 import { useTranslations } from 'next-intl';
-import { Spinner } from '@/components/ui/kibo-ui/spinner';
+import LoadingIcon from '@/components/loading-states/loading-icon';
+import { GenericLoading } from '@/components/loading-states/loading';
 
 export default function EditCustomerForm({
   customer,
@@ -177,8 +178,8 @@ export default function EditCustomerForm({
           <Button type='submit' disabled={isPending}>
             {isPending ? (
               <>
-                <Spinner />
-                {t('buttons.addLoading')}
+                <LoadingIcon />
+                <GenericLoading text={t('buttons.updateLoading')} />
               </>
             ) : (
               <>

@@ -10,8 +10,7 @@ import CustomeToast from '../../helpers/toasts/CustomeErrorToast';
 import { createCategory } from '@/lib/actions/categories.actions';
 import { Card } from '@/components/ui/card';
 import { useTranslations } from 'next-intl';
-import { Spinner } from '@/components/ui/kibo-ui/spinner';
-
+import LoadingIcon from '@/components/loading-states/loading-icon';
 export default function CategoryForm() {
   const t = useTranslations('Dashboard.Ressource.Categories');
 

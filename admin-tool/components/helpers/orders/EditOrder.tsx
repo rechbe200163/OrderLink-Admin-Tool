@@ -15,8 +15,7 @@ import ProductSelectComponent from '@/components/helpers/ProductSelectCompoent';
 import { OrdersWithCustomerAndProducts, Product } from '@/lib/types';
 import { updateOrder } from '@/lib/actions/order.actions';
 import { useRouter } from 'next/navigation';
-import { Spinner } from '@/components/ui/kibo-ui/spinner';
-
+import LoadingIcon from '@/components/loading-states/loading-icon';
 interface EditOrderProps {
   products: Product[];
   order: OrdersWithCustomerAndProducts;

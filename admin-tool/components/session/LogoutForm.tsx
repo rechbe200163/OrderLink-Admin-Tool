@@ -6,6 +6,7 @@ import { useActionState } from 'react';
 import { DropdownMenuItem } from '@radix-ui/react-dropdown-menu';
 import { logOut } from '@/lib/actions/auth.actions';
 import { Spinner } from '../ui/kibo-ui/spinner';
+import { GenericLoading } from '../loading-states/loading';
 
 export function LogoutForm() {
   const [formState, action, isPending] = useActionState(logOut, {
@@ -31,7 +32,8 @@ export function LogoutForm() {
         <button type='submit' className='w-full' disabled={isPending}>
           {isPending ? (
             <>
-              <Spinner />
+              <LoadingIcon />
+              <GenericLoading text='Logging out...' />
             </>
           ) : (
             <>

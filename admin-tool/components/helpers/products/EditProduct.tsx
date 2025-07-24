@@ -9,23 +9,18 @@ import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { Plus } from 'lucide-react';
 import CustomeToast from '../toasts/CustomeErrorToast';
-import { ProductWithCategoryNames } from '@/lib/types';
+import { Product } from '@/lib/types';
 import { updateProduct } from '@/lib/actions/product.actions';
 import React, { useState, useCallback, useEffect } from 'react';
 import SelectCategoryComponent from '../categories/SelectCategoryComponent';
 import FileInputComponent from '@/components/file-upload/FileInputComponent';
-import { Spinner } from '@/components/ui/kibo-ui/spinner';
+import LoadingIcon from '@/components/loading-states/loading-icon';
+import { GenericLoading } from '@/components/loading-states/loading';
 
-const EditProductPage = ({
-  product,
-  signedImageUrl,
-}: {
-  product: ProductWithCategoryNames;
-  signedImageUrl: string; // Passed from server as pre-fetched signed URL
-}) => {
+const EditProductPage = ({ product }: { product: Product }) => {
   const router = useRouter();
-  const [selectedCategories, setSelectedCategories] = useState<string[]>(
-    product.categories.map((c) => c.category.categoryId)
+  const [selectedCategory, setSelectedCategory] = useState<string>(
+    product.categoryId || ''
   );
 
   const [formState, action, isPending] = useActionState(
@@ -68,7 +63,7 @@ const EditProductPage = ({
     description: product?.description || '',
     price: product?.price || 0,
     stock: product?.stock || 0,
-    imagePath: signedImageUrl || '',
+    imagePath: product?.imagePath || '',
     createdAt: product?.createdAt || new Date(),
   });
 
@@ -93,8 +88,8 @@ const EditProductPage = ({
     []
   );
 
-  const handleCategoryChange = useCallback((categoryIds: string[]) => {
-    setSelectedCategories(categoryIds);
+  const handleCategoryChange = useCallback((categoryId: string) => {
+    setSelectedCategory(categoryId);
   }, []);
 
   const handlePriceChange = useCallback(
@@ -176,22 +171,22 @@ const EditProductPage = ({
           required
         />
 
-        <Label>Categories</Label>
         <SelectCategoryComponent
-          defaultValues={selectedCategories}
+          defaultValue={selectedCategory}
           onCategorySelect={handleCategoryChange}
         />
         <input
           type='hidden'
-          id='categoryIds'
-          name='categoryIds'
-          value={selectedCategories}
+          id='categoryId'
+          name='categoryId'
+          value={selectedCategory}
         />
 
         <Button type='submit' disabled={isPending} className='w-full'>
           {isPending ? (
             <>
-              <Spinner /> Speichern...
+              <LoadingIcon />
+              <GenericLoading text='Saving product...' />
             </>
           ) : (
             <>

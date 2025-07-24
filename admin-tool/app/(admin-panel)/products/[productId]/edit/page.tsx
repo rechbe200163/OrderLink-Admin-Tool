@@ -12,15 +12,9 @@ interface EditProductPageProps {
 async function EditProductPage(props: EditProductPageProps) {
   const { productId } = await props.params;
   const product = await productApiService.getProductbyId(productId);
-  const singedProductImageUrl = await supabaseService.getSingedUrlSupabase(
-    product.imagePath!
-  );
   return (
     <div className='sticky top-0 z-10 px-4 '>
-      <EditProduct
-        product={product}
-        signedImageUrl={singedProductImageUrl!}
-      />
+      <EditProduct product={product} />
     </div>
   );
 }

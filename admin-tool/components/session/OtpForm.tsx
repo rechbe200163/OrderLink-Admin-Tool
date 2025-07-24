@@ -15,8 +15,7 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import { verifyOtp } from '@/lib/actions/auth.actions';
-import { Spinner } from '@/components/ui/kibo-ui/spinner';
-
+import LoadingIcon from '@/components/loading-states/loading-icon';
 export function OtpForm() {
   const [code, setCode] = useState('');
   const [_formState, action, isLoading] = useActionState(verifyOtp, {

@@ -13,7 +13,8 @@ import ProductSelectComponent from '../ProductSelectCompoent';
 import { Checkbox } from '@/components/ui/checkbox';
 import { createOrder } from '@/lib/actions/order.actions';
 import { Product } from '@/lib/types';
-import { Spinner } from '@/components/ui/kibo-ui/spinner';
+import LoadingIcon from '@/components/loading-states/loading-icon';
+import { GenericLoading } from '@/components/loading-states/loading';
 
 interface CreateOrderProps {
   products?: Product[];
@@ -121,7 +122,8 @@ const CreateOrder = ({ products = [] }: CreateOrderProps) => {
         <Button type='submit' disabled={isPending} className='mt-6'>
           {isPending ? (
             <>
-              <Spinner /> Adding Order
+              <LoadingIcon />
+              <GenericLoading text='Creating order...' />
             </>
           ) : (
             <>

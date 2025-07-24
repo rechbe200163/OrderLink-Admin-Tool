@@ -1,6 +1,7 @@
 'use client';
+import { GenericLoading } from '@/components/loading-states/loading';
 import { Button } from '@/components/ui/button';
-import { Spinner } from '@/components/ui/kibo-ui/spinner';
+import LoadingIcon from '@/components/loading-states/loading-icon';
 import { pauseSubscription } from '@/lib/actions/subscription.actions';
 import { PauseCircle } from 'lucide-react';
 
@@ -37,8 +38,8 @@ const PauseSubscriptionsForm = ({
       <Button type='submit' variant={'secondary'} disabled={isPending}>
         {isPending ? (
           <>
-            <Spinner />
-            Pausing...
+            <LoadingIcon />
+            <GenericLoading text='Pausing subscription...' />
           </>
         ) : (
           <>

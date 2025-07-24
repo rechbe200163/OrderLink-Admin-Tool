@@ -11,7 +11,8 @@ import { Input } from '@/components/ui/input';
 import OrderSelectComponent from '../OrderSelectComponent';
 import { createRoute } from '@/lib/actions/route.actions';
 import { useTranslations } from 'next-intl';
-import { Spinner } from '@/components/ui/kibo-ui/spinner';
+import LoadingIcon from '@/components/loading-states/loading-icon';
+import { GenericLoading } from '@/components/loading-states/loading';
 
 const CreateRoutes = () => {
   const t = useTranslations('Dashboard');
@@ -67,8 +68,8 @@ const CreateRoutes = () => {
         <Button type='submit' disabled={isPending} className='mt-6'>
           {isPending ? (
             <>
-              <Spinner />
-              {tSelect('addNewRoute')}...
+              <LoadingIcon />
+              <GenericLoading text={tSelect('addNewRouteLoading')} />
             </>
           ) : (
             <>

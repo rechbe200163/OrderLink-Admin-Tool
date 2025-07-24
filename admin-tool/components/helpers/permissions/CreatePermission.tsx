@@ -20,7 +20,8 @@ import { useTranslations } from 'next-intl';
 import { Resources } from '@/lib/types';
 import router from 'next/router';
 import { Checkbox } from '@/components/ui/checkbox';
-import { Spinner } from '@/components/ui/kibo-ui/spinner';
+import LoadingIcon from '@/components/loading-states/loading-icon';
+import { GenericLoading } from '@/components/loading-states/loading';
 
 export default function CreatePermission({ roles }: { roles: string[] }) {
   const [formState, action, isPending] = useActionState(createPermission, {
@@ -124,8 +125,8 @@ export default function CreatePermission({ roles }: { roles: string[] }) {
         <Button type='submit' disabled={isPending} className='mt-6'>
           {isPending ? (
             <>
-              <Spinner />
-              {t('buttons.addLoading')}
+              <LoadingIcon />
+              <GenericLoading text={t('buttons.addLoading')} />
             </>
           ) : (
             <>

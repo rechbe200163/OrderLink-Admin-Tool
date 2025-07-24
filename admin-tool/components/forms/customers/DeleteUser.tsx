@@ -1,6 +1,7 @@
 'use client';
+import { GenericLoading } from '@/components/loading-states/loading';
 import { Button } from '@/components/ui/button';
-import { Spinner } from '@/components/ui/kibo-ui/spinner';
+import LoadingIcon from '@/components/loading-states/loading-icon';
 import { deleteUser } from '@/lib/actions/user.actions';
 import { Trash2 } from 'lucide-react';
 import React, { useActionState } from 'react';
@@ -28,7 +29,8 @@ const DeleteUser = ({ customerReference }: { customerReference: number }) => {
       >
         {isPending ? (
           <>
-            <Spinner />
+            <LoadingIcon />
+            <GenericLoading text='Deleting user...' />
           </>
         ) : (
           <>

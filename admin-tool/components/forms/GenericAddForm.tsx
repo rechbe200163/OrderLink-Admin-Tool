@@ -20,6 +20,8 @@ import { useTranslations } from 'next-intl';
 import PhoneNumberInputComponent from '../PhoneNumberInputComponent';
 import { BusinessSector } from '@/lib/types';
 import { Spinner } from '../ui/kibo-ui/spinner';
+import { GenericLoading } from '../loading-states/loading';
+import LoadingIcon from '../loading-states/loading-icon';
 
 export default function GenericAddForm() {
   const [selectedAddress, setSelectedAddress] = React.useState<string>('');
@@ -170,8 +172,8 @@ export default function GenericAddForm() {
           <Button type='submit' disabled={isPending}>
             {isPending ? (
               <>
-                <Spinner />
-                {t('buttons.addLoading')}
+                <LoadingIcon />
+                <GenericLoading text={t('buttons.addLoading')} />
               </>
             ) : (
               <>

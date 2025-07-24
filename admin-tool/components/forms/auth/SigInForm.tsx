@@ -6,7 +6,8 @@ import { Label } from '@/components/ui/label';
 import { useSearchParams } from 'next/navigation';
 import { useActionState, useState } from 'react';
 import { logIn } from '@/lib/actions/auth.actions';
-import { Spinner } from '@/components/ui/kibo-ui/spinner';
+import { GenericLoading } from '@/components/loading-states/loading';
+import LoadingIcon from '@/components/loading-states/loading-icon';
 
 const SignInForm = () => {
   const searchParams = useSearchParams();
@@ -126,8 +127,8 @@ const SignInForm = () => {
           <Button type='submit' className='w-full ' disabled={isLoading}>
             {isLoading ? (
               <>
-                <Spinner />
-                &nbsp; Logging you in...
+                <LoadingIcon />
+                <GenericLoading text='Logging you in...' />
               </>
             ) : (
               'Sign In'

@@ -52,31 +52,17 @@ export default async function AdminPanelUsersPage(props: {
               filterName='filter'
               values={[
                 {
+                  id: 'active',
                   label: tFilter('Filter.Status.options.active'),
                   value: 'active',
                   color: 'green',
                 },
                 {
+                  id: 'inactive',
                   label: tFilter('Filter.Status.options.inactive'),
                   value: 'inactive',
                   color: 'red',
                 },
-              ]}
-            />
-            <FilteringComponent
-              title={tFilter('Filter.BusinessSectors.title')}
-              filterName='businessSector'
-              values={[
-                {
-                  label: tFilter('Filter.BusinessSectors.options.private'),
-                  value: 'private',
-                },
-                ...Object.values(BusinessSector).map((sector: string) => ({
-                  label: tFilter(
-                    `Filter.BusinessSectors.options.${sector.toLowerCase()}`
-                  ),
-                  value: sector,
-                })),
               ]}
             />
           </div>

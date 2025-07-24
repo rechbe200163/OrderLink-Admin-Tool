@@ -13,12 +13,11 @@ import SelectCategoryComponent from '../categories/SelectCategoryComponent';
 import FileInputComponent from '@/components/file-upload/FileInputComponent';
 import { toast } from 'sonner';
 import CustomeToast from '../toasts/CustomeErrorToast';
-import { Spinner } from '@/components/ui/kibo-ui/spinner';
+import LoadingIcon from '@/components/loading-states/loading-icon';
+import { GenericLoading } from '@/components/loading-states/loading';
 
 const CreateProduct = () => {
-  const [selectedCategories, setSelectedCategories] = React.useState<string[]>(
-    []
-  );
+  const [selectedCategory, setSelectedCategory] = React.useState<string>('');
 
   const [formState, action, isPending] = useActionState(
     createProduct.bind(null),
@@ -60,7 +59,7 @@ const CreateProduct = () => {
     description: '',
     price: 0,
     stock: 0,
-    imagePath: '',
+    productImage: '',
     categories: [] as string[],
     createdAt: new Date().toISOString(),
   });
@@ -73,12 +72,8 @@ const CreateProduct = () => {
     []
   );
 
-  const handleCategoryChange = useCallback((categoryIds: string[]) => {
-    setProductData((prev) => ({
-      ...prev,
-      categories: categoryIds,
-    }));
-    setSelectedCategories(categoryIds);
+  const handleCategoryChange = useCallback((categoryId: string) => {
+    setSelectedCategory(categoryId);
   }, []);
 
   const handlePriceChange = useCallback(
@@ -141,91 +136,91 @@ const CreateProduct = () => {
             onImageUpload={handleImageUpload}
           />
         </div>
-            <div className='space-y-2'>
-              <Label htmlFor='name'>Name</Label>
+        <div className='space-y-2'>
+          <Label htmlFor='name'>Name</Label>
+          <Input
+            id='name'
+            name='name'
+            value={productData.name}
+            onChange={handleInputChange}
+            required
+            className='transition-all duration-200 focus:ring-2 focus:ring-primary'
+          />
+        </div>
+        <div className='space-y-2'>
+          <Label htmlFor='description'>Beschreibung</Label>
+          <Textarea
+            id='description'
+            name='description'
+            value={productData.description}
+            onChange={handleInputChange}
+            required
+            className='transition-all duration-200 focus:ring-2 focus:ring-primary'
+          />
+        </div>
+        <div className='flex gap-4'>
+          <div className='space-y-2'>
+            <Label htmlFor={'price'}>Preis</Label>
+            <div className='relative flex rounded-lg shadow-xs shadow-black/5'>
+              <span className='pointer-events-none absolute inset-y-0 start-0 flex items-center justify-center ps-3 text-sm text-muted-foreground'>
+                €
+              </span>
               <Input
-                id='name'
-                name='name'
-                value={productData.name}
-                onChange={handleInputChange}
-                required
-                className='transition-all duration-200 focus:ring-2 focus:ring-primary'
+                id='price'
+                name='price'
+                className='-me-px rounded-e-none ps-6 shadow-none'
+                placeholder='0,00'
+                type='text'
+                value={productData.price}
+                onChange={handlePriceChange}
               />
+              <span className='-z-10 inline-flex items-center rounded-e-lg border border-input bg-background px-3 text-sm text-muted-foreground'>
+                EUR
+              </span>
             </div>
-            <div className='space-y-2'>
-              <Label htmlFor='description'>Beschreibung</Label>
-              <Textarea
-                id='description'
-                name='description'
-                value={productData.description}
-                onChange={handleInputChange}
-                required
-                className='transition-all duration-200 focus:ring-2 focus:ring-primary'
-              />
-            </div>
-            <div className='flex gap-4'>
-              <div className='space-y-2'>
-                <Label htmlFor={'price'}>Preis</Label>
-                <div className='relative flex rounded-lg shadow-xs shadow-black/5'>
-                  <span className='pointer-events-none absolute inset-y-0 start-0 flex items-center justify-center ps-3 text-sm text-muted-foreground'>
-                    €
-                  </span>
-                  <Input
-                    id='price'
-                    name='price'
-                    className='-me-px rounded-e-none ps-6 shadow-none'
-                    placeholder='0,00'
-                    type='text'
-                    value={productData.price}
-                    onChange={handlePriceChange}
-                  />
-                  <span className='-z-10 inline-flex items-center rounded-e-lg border border-input bg-background px-3 text-sm text-muted-foreground'>
-                    EUR
-                  </span>
-                </div>
-              </div>
-              <div className='space-y-2 w-1/2'>
-                <Label htmlFor='stock'>Lagerbestand</Label>
-                <Input
-                  id='stock'
-                  name='stock'
-                  type='number'
-                  value={productData.stock}
-                  onChange={handleInputChange}
-                  required
-                  className='transition-all duration-200 focus:ring-2 focus:ring-primary'
-                />
-              </div>
-            </div>
-            <div className='space-y-2'>
-              <SelectCategoryComponent
-                onCategorySelect={handleCategoryChange}
-                defaultValues={selectedCategories}
-              />
-              <input
-                id='categoryIds'
-                name='categoryIds'
-                type='hidden'
-                value={selectedCategories}
-              />
-            </div>
-            <Button
-              type='submit'
-              className='w-full transition-all duration-200 hover:bg-primary/90'
-              disabled={isPending}
-            >
-              {isPending ? (
-                <>
-                  <Spinner />
-                  Wird erstellt...
-                </>
-              ) : (
-                <>
-                  <Plus className='mr-2 h-4 w-4' />
-                  Produkt erstellen
-                </>
-              )}
-            </Button>
+          </div>
+          <div className='space-y-2 w-1/2'>
+            <Label htmlFor='stock'>Lagerbestand</Label>
+            <Input
+              id='stock'
+              name='stock'
+              type='number'
+              value={productData.stock}
+              onChange={handleInputChange}
+              required
+              className='transition-all duration-200 focus:ring-2 focus:ring-primary'
+            />
+          </div>
+        </div>
+        <div className='space-y-2'>
+          <SelectCategoryComponent
+            onCategorySelect={handleCategoryChange}
+            defaultValue={selectedCategory}
+          />
+          <input
+            id='categoryId'
+            name='categoryId'
+            type='hidden'
+            value={selectedCategory}
+          />
+        </div>
+        <Button
+          type='submit'
+          className='w-full transition-all duration-200 hover:bg-primary/90'
+          disabled={isPending}
+        >
+          {isPending ? (
+            <>
+              <LoadingIcon />
+              <GenericLoading text='Creating product...' />
+            </>
+          ) : (
+            <>
+              <Plus className='mr-2 h-4 w-4' />
+              Produkt erstellen
+            </>
+          )}
+        </Button>
       </form>
     </Card>
   );

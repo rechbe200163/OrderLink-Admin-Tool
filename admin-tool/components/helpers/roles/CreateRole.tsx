@@ -5,12 +5,13 @@ import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { PlusCircle } from 'lucide-react';
-import { Spinner } from '@/components/ui/kibo-ui/spinner';
+import LoadingIcon from '@/components/loading-states/loading-icon';
 import { createRole } from '@/lib/actions/role.actions';
 import { useTranslations } from 'next-intl';
 import { toast } from 'sonner';
 import CustomeToast from '../toasts/CustomeErrorToast';
 import GenericInputMaskComponent from '@/components/InputWithMask';
+import { GenericLoading } from '@/components/loading-states/loading';
 
 export default function CreateRole() {
   const [formState, action, isPending] = useActionState(createRole, {
@@ -58,7 +59,7 @@ export default function CreateRole() {
         <Button type='submit' disabled={isPending} className='mt-6'>
           {isPending ? (
             <>
-              <Spinner /> {t('buttons.addLoading')}
+              <LoadingIcon /> <GenericLoading text={t('buttons.addLoading')} />
             </>
           ) : (
             <>

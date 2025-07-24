@@ -12,8 +12,7 @@ import { useRouter } from 'next/navigation';
 import { Card } from '@/components/ui/card';
 import { useTranslations } from 'next-intl';
 import { Category } from '@/lib/types';
-import { Spinner } from '@/components/ui/kibo-ui/spinner';
-
+import LoadingIcon from '@/components/loading-states/loading-icon';
 export default function EditCategory({ category }: { category: Category }) {
   const t = useTranslations('Dashboard.Ressource.Categories');
   const router = useRouter();

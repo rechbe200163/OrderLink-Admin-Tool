@@ -23,7 +23,8 @@ import React from 'react';
 import CustomeToast from '../../helpers/toasts/CustomeErrorToast';
 import { Card } from '@/components/ui/card';
 import { useTranslations } from 'next-intl';
-import { Spinner } from '@/components/ui/kibo-ui/spinner';
+import { GenericLoading } from '@/components/loading-states/loading';
+import LoadingIcon from '@/components/loading-states/loading-icon';
 
 const formSchema = z.object({
   name_5020537749: z.tuple([z.string(), z.string().optional()]),
@@ -151,7 +152,8 @@ export default function AddressForm() {
           <Button type='submit'>
             {isPending ? (
               <>
-                <Spinner />; {t('buttons.addLoading')}
+                <LoadingIcon />;
+                <GenericLoading text={t('buttons.addLoading')} />
               </>
             ) : (
               <>

@@ -101,7 +101,7 @@ export function LoginForm({
                 <Button type='submit' className='w-full' disabled={isLoading}>
                   {isLoading ? (
                     <>
-                      <Spinner className='mr-2 h-4 w-4 animate-spin' />
+                      <Spinner variant='ellipsis' />
                       Anmelden...
                     </>
                   ) : (

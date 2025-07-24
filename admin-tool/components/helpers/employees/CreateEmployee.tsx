@@ -17,8 +17,9 @@ import { Button } from '@/components/ui/button';
 import { MailIcon, PlusCircle } from 'lucide-react';
 import React, { useActionState, useId } from 'react';
 import CustomeToast from '../toasts/CustomeErrorToast';
-import { Spinner } from '@/components/ui/kibo-ui/spinner';
+import LoadingIcon from '@/components/loading-states/loading-icon';
 import { createEmployee } from '@/lib/actions/employee.actions';
+import { GenericLoading } from '@/components/loading-states/loading';
 
 const CreateEmployees = ({ roles }: { roles: string[] }) => {
   const [formState, action, isPending] = useActionState(createEmployee, {
@@ -131,8 +132,8 @@ const CreateEmployees = ({ roles }: { roles: string[] }) => {
           <Button type='submit' disabled={isPending}>
             {isPending ? (
               <>
-                <Spinner />
-                {t('buttons.addLoading')}
+                <LoadingIcon />
+                <GenericLoading text={t('buttons.addLoading')} />
               </>
             ) : (
               <>

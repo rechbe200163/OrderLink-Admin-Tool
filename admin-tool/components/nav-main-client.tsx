@@ -17,6 +17,7 @@ import {
   ShieldCheck,
   Star,
   StarOff,
+  Search,
 } from 'lucide-react';
 
 import {
@@ -39,6 +40,7 @@ import {
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useTranslations } from 'next-intl';
+import { motion, AnimatePresence } from 'framer-motion';
 
 interface NavMainProps {
   favoritesEnabled: boolean;
@@ -201,116 +203,130 @@ export function NavMainClient({ favoritesEnabled }: NavMainProps) {
 
   return (
     <>
-      <div className='mt-4'>
+      <div className='mt-4 px-2 relative'>
+        {' '}
+        {/* Added px-2 for horizontal padding and relative for icon positioning */}
         <Input
           type='search'
           placeholder={tNav('searchPlaceholder')}
           value={query}
           onChange={(e) => setQuery(e.target.value)}
+          className='pl-8' // Add left padding for the icon
         />
+        <Search className='absolute left-4 top-1/2 -translate-y-1/2 size-4 text-muted-foreground' />{' '}
+        {/* Search icon */}
       </div>
       <SidebarGroup>
-        {filteredGroups.map((group) => (
-          <div key={group.label} className='mb-4 last:mb-0'>
-            <SidebarMenu>
-              {group.items.length > 1 ? (
-                <Collapsible
-                  asChild
-                  defaultOpen={isGroupActive(group.items)}
-                  className='group/collapsible'
-                >
-                  <SidebarMenuItem>
-                    <CollapsibleTrigger asChild>
-                      <SidebarMenuButton>
-                        <group.icon
-                          size={16}
-                          {...(group.label === 'Favorites'
-                            ? { fill: '#facc15', color: '#facc15' }
-                            : {})}
-                        />
-                        <span>{highlightMatch(group.label, query)}</span>
-                        <ChevronRight className='ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90' />
-                      </SidebarMenuButton>
-                    </CollapsibleTrigger>
-                    <CollapsibleContent>
-                      <SidebarMenuSub>
-                        {group.items.map((item) => (
-                          <SidebarMenuSubItem
-                            key={item.title}
-                            className='relative'
-                          >
-                            <SidebarMenuSubButton
-                              asChild
-                              className={
-                                isItemActive(item.url)
-                                  ? 'bg-primary text-primary-foreground'
-                                  : ''
-                              }
+        <AnimatePresence mode='popLayout'>
+          {filteredGroups.map((group) => (
+            <motion.div
+              key={group.label}
+              className='mb-4 last:mb-0'
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.2, ease: 'easeOut' }}
+            >
+              <SidebarMenu>
+                {group.items.length > 1 ? (
+                  <Collapsible
+                    asChild
+                    defaultOpen={isGroupActive(group.items)}
+                    className='group/collapsible'
+                  >
+                    <SidebarMenuItem>
+                      <CollapsibleTrigger asChild>
+                        <SidebarMenuButton>
+                          <group.icon
+                            size={16}
+                            {...(group.label === 'Favorites'
+                              ? { fill: '#facc15', color: '#facc15' }
+                              : {})}
+                          />
+                          <span>{highlightMatch(group.label, query)}</span>
+                          <ChevronRight className='ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90' />
+                        </SidebarMenuButton>
+                      </CollapsibleTrigger>
+                      <CollapsibleContent>
+                        <SidebarMenuSub>
+                          {group.items.map((item) => (
+                            <SidebarMenuSubItem
+                              key={item.title}
+                              className='relative'
                             >
-                              <Link href={item.url} className='flex-1'>
-                                <span className='flex items-center gap-2'>
-                                  {item.icon && <item.icon size={16} />}
-                                  {item.title}
-                                </span>
-                              </Link>
-                            </SidebarMenuSubButton>
-                            {favoritesEnabled && (
-                              <SidebarMenuAction
-                                onClick={() => toggleFavorite(item.url)}
-                                showOnHover
+                              <SidebarMenuSubButton
+                                asChild
+                                className={
+                                  isItemActive(item.url)
+                                    ? 'bg-primary text-primary-foreground'
+                                    : ''
+                                }
                               >
-                                {favorites.includes(item.url) ? (
-                                  <StarOff size={16} />
-                                ) : (
-                                  <Star size={16} />
-                                )}
-                                <span className='sr-only'>
-                                  {tNav('favorite')}
-                                </span>
-                              </SidebarMenuAction>
-                            )}
-                          </SidebarMenuSubItem>
-                        ))}
-                      </SidebarMenuSub>
-                    </CollapsibleContent>
-                  </SidebarMenuItem>
-                </Collapsible>
-              ) : (
-                group.items.map((item) => (
-                  <SidebarMenuItem key={item.title} className='relative'>
-                    <SidebarMenuButton
-                      asChild
-                      tooltip={item.title}
-                      className={
-                        isItemActive(item.url)
-                          ? 'bg-primary text-primary-foreground'
-                          : ''
-                      }
-                    >
-                      <Link href={item.url} className='flex-1'>
-                        {item.icon && <item.icon size={16} />}
-                        <span>{highlightMatch(item.title, query)}</span>
-                      </Link>
-                    </SidebarMenuButton>
-                    {favoritesEnabled && (
-                      <SidebarMenuAction
-                        onClick={() => toggleFavorite(item.url)}
-                        showOnHover
+                                <Link href={item.url} className='flex-1'>
+                                  <span className='flex items-center gap-2'>
+                                    {item.icon && <item.icon size={16} />}
+                                    {highlightMatch(item.title, query)}
+                                  </span>
+                                </Link>
+                              </SidebarMenuSubButton>
+                              {favoritesEnabled && (
+                                <SidebarMenuAction
+                                  onClick={() => toggleFavorite(item.url)}
+                                  showOnHover
+                                >
+                                  {favorites.includes(item.url) ? (
+                                    <StarOff size={16} />
+                                  ) : (
+                                    <Star size={16} />
+                                  )}
+                                  <span className='sr-only'>
+                                    {tNav('favorite')}
+                                  </span>
+                                </SidebarMenuAction>
+                              )}
+                            </SidebarMenuSubItem>
+                          ))}
+                        </SidebarMenuSub>
+                      </CollapsibleContent>
+                    </SidebarMenuItem>
+                  </Collapsible>
+                ) : (
+                  group.items.map((item) => (
+                    <SidebarMenuItem key={item.title} className='relative'>
+                      <SidebarMenuButton
+                        asChild
+                        tooltip={item.title}
+                        className={
+                          isItemActive(item.url)
+                            ? 'bg-primary text-primary-foreground'
+                            : ''
+                        }
                       >
-                        {favorites.includes(item.url) ? (
-                          <StarOff size={16} />
-                        ) : (
-                          <Star size={16} />
-                        )}
-                        <span className='sr-only'>{tNav('favorite')}</span>
-                      </SidebarMenuAction>
-                    )}
-                  </SidebarMenuItem>
-                ))
-              )}
-            </SidebarMenu>
-          </div>
-        ))}
+                        <Link href={item.url} className='flex-1'>
+                          {item.icon && <item.icon size={16} />}
+                          <span>{highlightMatch(item.title, query)}</span>
+                        </Link>
+                      </SidebarMenuButton>
+                      {favoritesEnabled && (
+                        <SidebarMenuAction
+                          onClick={() => toggleFavorite(item.url)}
+                          showOnHover
+                        >
+                          {favorites.includes(item.url) ? (
+                            <StarOff size={16} />
+                          ) : (
+                            <Star size={16} />
+                          )}
+                          <span className='sr-only'>{tNav('favorite')}</span>
+                        </SidebarMenuAction>
+                      )}
+                    </SidebarMenuItem>
+                  ))
+                )}
+              </SidebarMenu>
+            </motion.div>
+          ))}
+        </AnimatePresence>
       </SidebarGroup>
     </>
   );
@@ -324,9 +340,15 @@ function highlightMatch(text: string, query: string) {
 
   return parts.map((part, index) =>
     regex.test(part) ? (
-      <mark key={index} className='bg-transparent font-bold text-primary'>
+      <motion.mark
+        key={index}
+        initial={{ scale: 0.8, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{ duration: 0.2, ease: 'easeOut' }}
+        className='bg-transparent font-bold text-primary'
+      >
         {part}
-      </mark>
+      </motion.mark>
     ) : (
       <span key={index}>{part}</span>
     )

@@ -276,12 +276,6 @@ export interface RoutesWithOrders extends Route {
   order: Order[];
 }
 
-export interface ProductWithCategoryNames extends Product {
-  categories: {
-    category: Pick<Category, 'categoryId' | 'name'>;
-  }[];
-}
-
 export interface CustomerWithAddressId extends Customer {
   addressId: string;
 }

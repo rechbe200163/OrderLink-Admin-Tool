@@ -1,6 +1,7 @@
 'use client';
+import { GenericLoading } from '@/components/loading-states/loading';
 import { Button } from '@/components/ui/button';
-import { Spinner } from '@/components/ui/kibo-ui/spinner';
+import LoadingIcon from '@/components/loading-states/loading-icon';
 import { cancleSubscription } from '@/lib/actions/subscription.actions';
 import { CircleX } from 'lucide-react';
 
@@ -37,8 +38,8 @@ const CancleSubscriptionForm = ({
       <Button type='submit' variant={'destructive'} disabled={isPending}>
         {isPending ? (
           <>
-            <Spinner />
-            Canceling...
+            <LoadingIcon />
+            <GenericLoading text='Cancelling subscription' />
           </>
         ) : (
           <>

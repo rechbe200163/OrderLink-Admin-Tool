@@ -37,7 +37,7 @@ const SideBarHeader = async () => {
       className='data-[slot=sidebar-menu-button]:p-1.5!'
     >
       <Link href='/'>
-        <ArrowUpCircleIcon className='h-5 w-5' />
+        {/* <ArrowUpCircleIcon className='h-5 w-5' /> */}
         <span className='text-base font-semibold'>
           {companyName || t('defaultName')}
         </span>

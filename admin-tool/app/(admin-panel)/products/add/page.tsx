@@ -4,7 +4,6 @@ import React from 'react';
 async function CreateProductPage() {
   return (
     <div className='sticky top-0 z-10 px-4'>
-
       <CreateProductCard />
     </div>
   );
