@@ -193,7 +193,8 @@ export function NavMainClient({ favoritesEnabled }: NavMainProps) {
 
   const isItemActive = (url: string) =>
     pathname === url ||
-    (pathname.startsWith(url + '/') && !pathname.startsWith(`${url}/statistics`));
+    (pathname.startsWith(url + '/') &&
+      !pathname.startsWith(`${url}/statistics`));
 
   const isGroupActive = (items: { url: string }[]) =>
     items.some((item) => isItemActive(item.url));
@@ -227,7 +228,7 @@ export function NavMainClient({ favoritesEnabled }: NavMainProps) {
                             ? { fill: '#facc15', color: '#facc15' }
                             : {})}
                         />
-                        <span>{group.label}</span>
+                        <span>{highlightMatch(group.label, query)}</span>
                         <ChevronRight className='ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90' />
                       </SidebarMenuButton>
                     </CollapsibleTrigger>
@@ -263,7 +264,9 @@ export function NavMainClient({ favoritesEnabled }: NavMainProps) {
                                 ) : (
                                   <Star size={16} />
                                 )}
-                                <span className='sr-only'>{tNav('favorite')}</span>
+                                <span className='sr-only'>
+                                  {tNav('favorite')}
+                                </span>
                               </SidebarMenuAction>
                             )}
                           </SidebarMenuSubItem>
@@ -286,7 +289,7 @@ export function NavMainClient({ favoritesEnabled }: NavMainProps) {
                     >
                       <Link href={item.url} className='flex-1'>
                         {item.icon && <item.icon size={16} />}
-                        <span>{item.title}</span>
+                        <span>{highlightMatch(item.title, query)}</span>
                       </Link>
                     </SidebarMenuButton>
                     {favoritesEnabled && (
@@ -310,5 +313,22 @@ export function NavMainClient({ favoritesEnabled }: NavMainProps) {
         ))}
       </SidebarGroup>
     </>
+  );
+}
+
+function highlightMatch(text: string, query: string) {
+  if (!query) return text;
+
+  const regex = new RegExp(`(${query})`, 'ig');
+  const parts = text.split(regex);
+
+  return parts.map((part, index) =>
+    regex.test(part) ? (
+      <mark key={index} className='bg-transparent font-bold text-primary'>
+        {part}
+      </mark>
+    ) : (
+      <span key={index}>{part}</span>
+    )
   );
 }

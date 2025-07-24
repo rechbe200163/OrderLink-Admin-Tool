@@ -3,10 +3,10 @@ import { ArrowUpCircleIcon } from 'lucide-react';
 import Link from 'next/link';
 import React from 'react';
 import { SidebarMenuButton } from './ui/sidebar';
-import { useTranslations, getTranslations } from 'next-intl';
+import { getTranslations } from 'next-intl/server';
 
-function ErrorComponent() {
-  const t = useTranslations('Components.SidebarHeader');
+async function ErrorComponent() {
+  const t = await getTranslations('Components.SidebarHeader');
   return (
     <div className='flex h-full w-full items-center justify-center'>
       <div className='text-center'>
