@@ -539,6 +539,46 @@
       "profileSettings": "Profil & paramètres"
     }
   },
+  "Components": {
+    "BackButton": {
+      "goBack": "Retour"
+    },
+    "SidebarHeader": {
+      "errorTitle": "Erreur",
+      "errorMessage": "Une erreur est survenue lors du chargement de l'en-tête de la barre latérale.",
+      "defaultName": "Admin Tool"
+    },
+    "NavMain": {
+      "favorites": "Favoris",
+      "favorite": "Favori",
+      "searchPlaceholder": "Rechercher des éléments..."
+    },
+    "PhoneInput": {
+      "label": "Numéro de téléphone",
+      "placeholder": "Entrez le numéro de téléphone",
+      "selectCountry": "Sélectionner un pays",
+      "selectCountryPlaceholder": "Choisir un pays"
+    },
+    "SubscriptionDetails": {
+      "title": "Détails de l'abonnement",
+      "status": "Statut",
+      "plan": "Plan",
+      "amount": "Montant",
+      "billingPeriod": "Période de facturation",
+      "currentPeriodStart": "Début de la période en cours",
+      "currentPeriodEnd": "Fin de la période en cours"
+    },
+    "Pagination": {
+      "morePages": "Plus de pages"
+    },
+    "NavUser": {
+      "billing": "Facturation",
+      "logOut": "Se déconnecter"
+    },
+    "Sidebar": {
+      "toggle": "Basculer la barre latérale"
+    }
+  },
   "PremiumWrapper": {
     "header": "Passer à Premium",
     "subtitle": "Passez à Premium pour débloquer cette fonctionnalité",

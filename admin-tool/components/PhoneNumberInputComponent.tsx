@@ -5,6 +5,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { ChevronDownIcon, PhoneIcon } from 'lucide-react';
 import React, { useId, useState, useEffect } from 'react';
+import { useTranslations } from 'next-intl';
 import * as RPNInput from 'react-phone-number-input';
 import flags from 'react-phone-number-input/flags';
 import { parsePhoneNumber } from 'libphonenumber-js';
@@ -17,6 +18,7 @@ export default function PhoneNumberInputComponent({
   defaultValue = '',
 }: PhoneNumberInputProps) {
   const id = useId();
+  const t = useTranslations('Components.PhoneInput');
   const [value, setValue] = useState('');
   const [country, setCountry] = useState<RPNInput.Country>('US');
 
@@ -34,7 +36,7 @@ export default function PhoneNumberInputComponent({
 
   return (
     <div className='not-first:*:mt-2' dir='ltr'>
-      <Label htmlFor={id}>Telefon Nummer</Label>
+      <Label htmlFor={id}>{t('label')}</Label>
       <RPNInput.default
         className='flex rounded-md shadow-2xs'
         international
@@ -44,7 +46,7 @@ export default function PhoneNumberInputComponent({
         )}
         inputComponent={PhoneInput}
         id={id}
-        placeholder='Enter phone number'
+        placeholder={t('placeholder')}
         value={value}
         type='tel'
         name='phoneNumber'
@@ -100,10 +102,10 @@ const CountrySelect = ({
         value={value}
         onChange={handleSelect}
         className='absolute inset-0 text-sm opacity-0'
-        aria-label='Select country'
+        aria-label={t('selectCountry')}
       >
         <option key='default' value=''>
-          Select a country
+          {t('selectCountryPlaceholder')}
         </option>
         {options
           .filter((x) => x.value)

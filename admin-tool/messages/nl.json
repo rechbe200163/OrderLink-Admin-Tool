@@ -539,6 +539,46 @@
       "profileSettings": "Profiel & instellingen"
     }
   },
+  "Components": {
+    "BackButton": {
+      "goBack": "Terug"
+    },
+    "SidebarHeader": {
+      "errorTitle": "Fout",
+      "errorMessage": "Er is een fout opgetreden bij het laden van de zijbalkkop.",
+      "defaultName": "Admin Tool"
+    },
+    "NavMain": {
+      "favorites": "Favorieten",
+      "favorite": "Favoriet",
+      "searchPlaceholder": "Items zoeken..."
+    },
+    "PhoneInput": {
+      "label": "Telefoonnummer",
+      "placeholder": "Voer telefoonnummer in",
+      "selectCountry": "Land selecteren",
+      "selectCountryPlaceholder": "Selecteer een land"
+    },
+    "SubscriptionDetails": {
+      "title": "Abonnementsdetails",
+      "status": "Status",
+      "plan": "Plan",
+      "amount": "Bedrag",
+      "billingPeriod": "Factureringsperiode",
+      "currentPeriodStart": "Begin huidige periode",
+      "currentPeriodEnd": "Einde huidige periode"
+    },
+    "Pagination": {
+      "morePages": "Meer pagina's"
+    },
+    "NavUser": {
+      "billing": "Facturatie",
+      "logOut": "Uitloggen"
+    },
+    "Sidebar": {
+      "toggle": "Zijbalk wisselen"
+    }
+  },
   "PremiumWrapper": {
     "header": "Upgrade naar Premium",
     "subtitle": "Upgrade naar Premium om deze functie te ontgrendelen",

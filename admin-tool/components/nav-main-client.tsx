@@ -47,6 +47,7 @@ export function NavMainClient({ favoritesEnabled }: NavMainProps) {
   const pathname = usePathname();
   const tGroup = useTranslations('Navigation.Groups');
   const tItem = useTranslations('Navigation.Items');
+  const tNav = useTranslations('Components.NavMain');
   const [query, setQuery] = useState('');
   const [favorites, setFavorites] = useState<string[]>([]);
 
@@ -171,7 +172,7 @@ export function NavMainClient({ favoritesEnabled }: NavMainProps) {
 
     const favoritesGroup =
       favItems.length > 0
-        ? [{ label: 'Favorites', icon: Star, items: favItems }]
+        ? [{ label: tNav('favorites'), icon: Star, items: favItems }]
         : [];
 
     return [...favoritesGroup, ...base];
@@ -202,7 +203,7 @@ export function NavMainClient({ favoritesEnabled }: NavMainProps) {
       <div className='mt-4'>
         <Input
           type='search'
-          placeholder='Search items...'
+          placeholder={tNav('searchPlaceholder')}
           value={query}
           onChange={(e) => setQuery(e.target.value)}
         />
@@ -262,7 +263,7 @@ export function NavMainClient({ favoritesEnabled }: NavMainProps) {
                                 ) : (
                                   <Star size={16} />
                                 )}
-                                <span className='sr-only'>Favorite</span>
+                                <span className='sr-only'>{tNav('favorite')}</span>
                               </SidebarMenuAction>
                             )}
                           </SidebarMenuSubItem>
@@ -298,7 +299,7 @@ export function NavMainClient({ favoritesEnabled }: NavMainProps) {
                         ) : (
                           <Star size={16} />
                         )}
-                        <span className='sr-only'>Favorite</span>
+                        <span className='sr-only'>{tNav('favorite')}</span>
                       </SidebarMenuAction>
                     )}
                   </SidebarMenuItem>
