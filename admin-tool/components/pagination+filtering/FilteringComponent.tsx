@@ -27,7 +27,7 @@ function StatusDot({ color }: { color: string }) {
 }
 
 interface FilteringComponentProps {
-  values?: { label: string; value: string; id: string; color?: string }[];
+  values?: { label: string; value: string; id?: string; color?: string }[];
   filterName: string; // This prop will indicate which filter is being applied (e.g., 'filter' or 'category')
   title: string;
   endpoint?: EndpointKey; // optional API endpoint for dynamic values

@@ -3,7 +3,6 @@ import { SidebarTrigger } from '@/components/ui/sidebar';
 import { getSession } from '@/lib/utlis/getSession';
 import SessionTimer from './helpers/SessionTimer';
 import PathBreadcrumbs from './helpers/PathBreadcrumbs';
-import { sessionTimerFeatureFlag } from '@/lib/feature-flags/flags';
 
 export async function SiteHeader() {
   const session = await getSession();

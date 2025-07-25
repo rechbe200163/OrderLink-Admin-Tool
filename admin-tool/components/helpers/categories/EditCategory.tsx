@@ -72,7 +72,7 @@ export default function EditCategory({ category }: { category: Category }) {
         <Button type='submit'>
           {isPending ? (
             <>
-              <Spinner className='animate-spin' />
+              <LoadingIcon />
               {t('buttons.updateLoading')}
             </>
           ) : (

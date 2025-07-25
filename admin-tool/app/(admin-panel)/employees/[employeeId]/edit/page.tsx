@@ -1,9 +1,9 @@
 import EmployeeProfile from '@/components/helpers/employees/EmployeeProfile'; // Updated path
 
 interface EditProductPageProps {
-  params: {
+  params: Promise<{
     employeeId: string;
-  };
+  }>;
 }
 
 async function EditProductPage(props: EditProductPageProps) {

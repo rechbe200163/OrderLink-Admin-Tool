@@ -14,9 +14,7 @@ export default function SessionTimer({
   issuedAt,
   expiresAt,
 }: SessionTimerProps) {
-  const issuedAtMs = issuedAt;
   const expiresAtMs = expiresAt;
-  const initialDuration = expiresAtMs - issuedAtMs;
 
   const [expiry, setExpiry] = useState(expiresAtMs);
   const [remaining, setRemaining] = useState(expiry - Date.now());

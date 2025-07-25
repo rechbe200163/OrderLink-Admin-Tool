@@ -85,6 +85,8 @@ const CountrySelect = ({
   onChange,
   options,
 }: CountrySelectProps) => {
+  const t = useTranslations('Components.PhoneInput');
+
   const handleSelect = (event: React.ChangeEvent<HTMLSelectElement>) => {
     onChange(event.target.value as RPNInput.Country);
   };

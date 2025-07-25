@@ -1,5 +1,4 @@
 import { siteConfigApiService } from '@/lib/api/concrete/siteConfig';
-import { ArrowUpCircleIcon } from 'lucide-react';
 import Link from 'next/link';
 import React from 'react';
 import { SidebarMenuButton } from './ui/sidebar';

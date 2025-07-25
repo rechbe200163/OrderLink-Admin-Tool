@@ -5,10 +5,9 @@ import SearchComponent from '@/components/pagination+filtering/SearchComponent';
 import FilteringComponent from '@/components/pagination+filtering/FilteringComponent';
 import { ProductTable } from '@/components/helpers/products/ProductsTabel';
 import { productApiService } from '@/lib/api/concrete/products';
-import { ENDPOINTS } from '@/lib/api/endpoints';
 import { ButtonLinkComponent } from '@/components/ButtonLinkComponent';
 import { getSession } from '@/lib/utlis/getSession';
-import { BusinessSector, Category } from '@/lib/types';
+import { BusinessSector } from '@/lib/types';
 import { getTranslations } from 'next-intl/server';
 
 export default async function ProductsPage(props: {

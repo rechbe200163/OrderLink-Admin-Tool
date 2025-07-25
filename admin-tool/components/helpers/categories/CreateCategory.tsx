@@ -66,7 +66,7 @@ export default function CategoryForm() {
         <Button type='submit'>
           {isPending ? (
             <>
-              <Spinner className='animate-spin' />
+              <LoadingIcon />
               {t('buttons.addLoading')}
             </>
           ) : (

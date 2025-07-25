@@ -52,13 +52,11 @@ export default async function AdminPanelUsersPage(props: {
               filterName='filter'
               values={[
                 {
-                  id: 'active',
                   label: tFilter('Filter.Status.options.active'),
                   value: 'active',
                   color: 'green',
                 },
                 {
-                  id: 'inactive',
                   label: tFilter('Filter.Status.options.inactive'),
                   value: 'inactive',
                   color: 'red',

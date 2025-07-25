@@ -1,6 +1,5 @@
 import EditProduct from '@/components/helpers/products/EditProduct';
 import { productApiService } from '@/lib/api/concrete/products';
-import { supabaseService } from '@/lib/utlis/SupabaseStorageService';
 import React from 'react';
 
 interface EditProductPageProps {

@@ -6,7 +6,6 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import { Badge } from '@/components/ui/badge';
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 import { Employees } from '@/lib/types';
@@ -17,7 +16,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { Button } from '@/components/ui/button';
-import { MoreHorizontal, MoreVertical } from 'lucide-react';
+import { MoreHorizontal } from 'lucide-react';
 
 export function EmployeesTable({ employees }: { employees: Employees[] }) {
   const t = useTranslations('Dashboard.Ressource.Employees');

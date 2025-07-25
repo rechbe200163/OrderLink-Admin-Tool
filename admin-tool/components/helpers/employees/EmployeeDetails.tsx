@@ -4,7 +4,7 @@ import type { EmployeeWithOtp } from '@/lib/types';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { resendOtp } from '@/lib/actions/auth.actions';
-import { use, useActionState, useEffect } from 'react';
+import { useActionState, useEffect } from 'react';
 import { toast } from 'sonner';
 import CustomeToast from '../toasts/CustomeErrorToast';
 
@@ -17,7 +17,7 @@ export default function EmployeeDetails({
 }) {
   const isVerified = !!employee.otp?.used;
 
-  const [formState, action, isPending] = useActionState(
+  const [formState, action, _isPending] = useActionState(
     resendOtp.bind(null, employee.employeeId),
     {
       success: false,

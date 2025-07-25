@@ -135,12 +135,12 @@ const EditEmployee = ({ employee }: EditEmployeesProps) => {
           {/* Added w-full and mt-8 */}
           {isPending ? (
             <>
-              <Spinner className='mr-2' /> {/* Added margin to spinner */}
+              <LoadingIcon />
               {t('buttons.updateLoading')}
             </>
           ) : (
             <>
-              <PlusCircle className='mr-2' /> {/* Added margin to icon */}
+              <PlusCircle className='mr-2' />
               {t('buttons.update')}
             </>
           )}

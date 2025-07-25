@@ -19,7 +19,6 @@ import AddressSelectComponent from '@/components/helpers/AddressSelectComponent'
 import { useTranslations } from 'next-intl';
 import PhoneNumberInputComponent from '../PhoneNumberInputComponent';
 import { BusinessSector } from '@/lib/types';
-import { Spinner } from '../ui/kibo-ui/spinner';
 import { GenericLoading } from '../loading-states/loading';
 import LoadingIcon from '../loading-states/loading-icon';
 

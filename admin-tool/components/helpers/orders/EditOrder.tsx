@@ -141,7 +141,7 @@ const EditOrder = ({ products, order }: EditOrderProps) => {
         <Button type='submit' disabled={isPending} className='mt-6'>
           {isPending ? (
             <>
-              <Spinner className='animate-spin h-5 w-5' /> Updating Order
+              <LoadingIcon /> Updating Order
             </>
           ) : (
             <>

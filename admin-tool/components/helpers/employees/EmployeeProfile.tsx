@@ -10,7 +10,6 @@ export default async function EmployeeProfile({
   employeeId,
 }: EmployeeProfileProps) {
   const employee = await employeesApiService.getEmployeeWithOtp(employeeId);
-  const wasInitialLoginSuccessful = employee.otp?.used ?? false;
 
   if (!employee) {
     return (

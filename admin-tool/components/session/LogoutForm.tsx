@@ -5,8 +5,8 @@ import { AlertCircle, LogOutIcon } from 'lucide-react';
 import { useActionState } from 'react';
 import { DropdownMenuItem } from '@radix-ui/react-dropdown-menu';
 import { logOut } from '@/lib/actions/auth.actions';
-import { Spinner } from '../ui/kibo-ui/spinner';
 import { GenericLoading } from '../loading-states/loading';
+import LoadingIcon from '../loading-states/loading-icon';
 
 export function LogoutForm() {
   const [formState, action, isPending] = useActionState(logOut, {
