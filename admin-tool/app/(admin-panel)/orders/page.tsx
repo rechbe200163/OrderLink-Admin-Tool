@@ -43,29 +43,27 @@ export default async function OrdersPage(props: {
   return (
     <div className='p-5'>
       <div className='sticky top-0 bg-background z-10'></div>
-      <div className='container'>
-        <div className='flex justify-between items-center mb-6'>
-          <div className='flex justify-between items-center space-x-4'>
-            <SearchComponent placeholder={tFilter('Search.searchForOption2')} />
-            <DateRangeSelectCompoent />
-          </div>
+      <div className='flex justify-between items-center mb-6'>
+        <div className='flex justify-between items-center space-x-4'>
+          <SearchComponent placeholder={tFilter('Search.searchForOption2')} />
+          <DateRangeSelectCompoent />
+        </div>
 
-          <ButtonLinkComponent
-            href='/orders/add'
-            label={t('Ressource.Orders.add')}
-            icon={<PlusCircle />}
-          />
-        </div>
-        <div className='bg-white rounded-lg shadow-md'>
-          <OrderTable orders={orders} />
-        </div>
-        <div className='mt-4 mb-5'>
-          <PaginationComponent
-            currentPage={meta.currentPage}
-            totalPages={meta.pageCount}
-            totalValues={meta.totalCount}
-          />
-        </div>
+        <ButtonLinkComponent
+          href='/orders/add'
+          label={t('Ressource.Orders.add')}
+          icon={<PlusCircle />}
+        />
+      </div>
+      <div className='bg-white rounded-lg shadow-md'>
+        <OrderTable orders={orders} />
+      </div>
+      <div className='mt-4 mb-5'>
+        <PaginationComponent
+          currentPage={meta.currentPage}
+          totalPages={meta.pageCount}
+          totalValues={meta.totalCount}
+        />
       </div>
     </div>
   );
