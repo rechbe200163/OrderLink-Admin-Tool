@@ -38,40 +38,39 @@ export default async function CategoriesPage(props: {
   const tFilter = await getTranslations('FilterAndSearch');
 
   return (
-    <div className='p-5'>
-      <div className='sticky top-0 bg-background z-10'></div>
-      <div className='container'>
-        <div className='flex justify-between items-center mb-6'>
-          <div className='flex justify-between items-center space-x-4'>
-            <SearchComponent placeholder={tFilter('Search.searchForOption1')} />
-            <FilteringComponent
-              title={tFilter('Filter.Status.title')}
-              filterName='filter'
-              values={[
-                {
-                  label: tFilter('Filter.Status.options.active'),
-                  value: 'active',
-                  color: 'green',
-                },
-                {
-                  label: tFilter('Filter.Status.options.inactive'),
-                  value: 'inactive',
-                  color: 'red',
-                },
-              ]}
-            />
-          </div>
-
-          <ButtonLinkComponent
-            href='/categories/add'
-            label={t('Ressource.Categories.add')}
-            icon={<PlusCircle />}
+    <div className='px-5 pt-5'>
+      <div className='flex justify-between items-center mb-6'>
+        <div className='flex justify-between items-center space-x-4'>
+          <SearchComponent placeholder={tFilter('Search.searchForOption1')} />
+          <FilteringComponent
+            title={tFilter('Filter.Status.title')}
+            filterName='filter'
+            values={[
+              {
+                label: tFilter('Filter.Status.options.active'),
+                value: 'active',
+                color: 'green',
+              },
+              {
+                label: tFilter('Filter.Status.options.inactive'),
+                value: 'inactive',
+                color: 'red',
+              },
+            ]}
           />
         </div>
-        <div className='bg-white rounded-lg shadow-md'>
+
+        <ButtonLinkComponent
+          href='/categories/add'
+          label={t('Ressource.Categories.add')}
+          icon={<PlusCircle />}
+        />
+      </div>
+      <div className='flex-1 justify-between gap-1 flex flex-col'>
+        <div className='min-w-full max-h-[calc(100vh-15rem)] overflow-auto'>
           <CategoryTable categories={categories} />
         </div>
-        <div className='mt-4 mb-5'>
+        <div>
           <PaginationComponent
             currentPage={meta.currentPage}
             totalPages={meta.pageCount}

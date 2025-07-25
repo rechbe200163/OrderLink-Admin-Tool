@@ -41,8 +41,7 @@ export default async function OrdersPage(props: {
   const tFilter = await getTranslations('FilterAndSearch');
 
   return (
-    <div className='p-5'>
-      <div className='sticky top-0 bg-background z-10'></div>
+    <div className='px-5 pt-5'>
       <div className='flex justify-between items-center mb-6'>
         <div className='flex justify-between items-center space-x-4'>
           <SearchComponent placeholder={tFilter('Search.searchForOption2')} />
@@ -55,15 +54,17 @@ export default async function OrdersPage(props: {
           icon={<PlusCircle />}
         />
       </div>
-      <div className='bg-white rounded-lg shadow-md'>
-        <OrderTable orders={orders} />
-      </div>
-      <div className='mt-4 mb-5'>
-        <PaginationComponent
-          currentPage={meta.currentPage}
-          totalPages={meta.pageCount}
-          totalValues={meta.totalCount}
-        />
+      <div className='flex-1 justify-between gap-1 flex flex-col'>
+        <div className='min-w-full max-h-[calc(100vh-15rem)] overflow-auto'>
+          <OrderTable orders={orders} />
+        </div>
+        <div>
+          <PaginationComponent
+            currentPage={meta.currentPage}
+            totalPages={meta.pageCount}
+            totalValues={meta.totalCount}
+          />
+        </div>
       </div>
     </div>
   );

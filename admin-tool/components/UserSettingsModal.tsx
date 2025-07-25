@@ -1,7 +1,6 @@
 'use client';
 
 import type React from 'react';
-
 import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -19,9 +18,9 @@ import {
   requestPermissionAction,
 } from '@/lib/actions/profile.actions';
 import { useActionState } from 'react';
-import CustomeToast from '@/components/helpers/toasts/CustomeErrorToast'; // Assuming this component exists
+import CustomeToast from '@/components/helpers/toasts/CustomeErrorToast';
 import { toast } from 'sonner';
-import type { SanitizedEmployee } from '@/lib/utlis/getSession'; // Assuming these types exist
+import type { SanitizedEmployee } from '@/lib/utlis/getSession';
 
 export default function UserSettingsModal({
   children,
@@ -31,12 +30,33 @@ export default function UserSettingsModal({
   user: SanitizedEmployee;
 }) {
   const [showPassword, setShowPassword] = useState(false);
+  const [password, setpassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [passwordError, setPasswordError] = useState('');
+
   const [profileState, updateAction, updating] = useActionState(
-    updateProfile.bind(null, user),
+    async (prevState: any, formData: FormData) => {
+      if (showPassword && password !== confirmPassword) {
+        setPasswordError('Passwörter stimmen nicht überein.');
+        return {
+          success: false,
+          errors: { title: ['Passwörter stimmen nicht überein.'] },
+        };
+      }
+
+      // Inject password manually if field was added
+      if (showPassword && password) {
+        formData.set('password', password);
+      }
+
+      return await updateProfile(user, prevState, formData);
+    },
     {
-    success: false,
-    errors: { title: [] as string[] },
-  });
+      success: false,
+      errors: { title: [] as string[] },
+    }
+  );
+
   const [permState, permAction, requesting] = useActionState(
     requestPermissionAction,
     {
@@ -57,7 +77,10 @@ export default function UserSettingsModal({
       toast.custom(() => (
         <CustomeToast
           variant='error'
-          message={profileState.errors!.title.join(', ')}
+          message={
+            profileState.errors?.title.join(', ') ||
+            'Fehler beim Aktualisieren des Profils'
+          }
         />
       ));
     }
@@ -72,7 +95,10 @@ export default function UserSettingsModal({
       toast.custom(() => (
         <CustomeToast
           variant='error'
-          message={permState.errors!.title.join(', ')}
+          message={
+            permState.errors?.title.join(', ') ||
+            'Fehler beim Speichern der Anfrage'
+          }
         />
       ));
     }
@@ -85,6 +111,7 @@ export default function UserSettingsModal({
         <DialogTitle className='text-2xl font-bold text-foreground'>
           Profil & Einstellungen
         </DialogTitle>
+
         <Tabs defaultValue='profile' className='w-full'>
           <TabsList className='grid w-full grid-cols-2 h-10 rounded-md'>
             <TabsTrigger
@@ -100,6 +127,7 @@ export default function UserSettingsModal({
               Zugriff anfordern
             </TabsTrigger>
           </TabsList>
+
           <TabsContent value='profile' className='mt-4'>
             <form action={updateAction} className='space-y-4 pt-4'>
               <div className='grid gap-2'>
@@ -108,57 +136,65 @@ export default function UserSettingsModal({
                   id='firstName'
                   name='firstName'
                   required
-                  defaultValue={user.firstName || ''}
+                  defaultValue={user.firstName}
                 />
               </div>
+
               <div className='grid gap-2'>
                 <Label htmlFor='lastName'>Nachname</Label>
                 <Input
                   id='lastName'
                   name='lastName'
                   required
-                  defaultValue={user.lastName || ''}
+                  defaultValue={user.lastName}
                 />
               </div>
+
               <div className='grid gap-2'>
                 <Label htmlFor='email'>E-Mail-Adresse</Label>
                 <Input
                   id='email'
                   name='email'
                   type='email'
-                  defaultValue={user.email}
                   required
+                  defaultValue={user.email}
                 />
               </div>
+
               {showPassword ? (
                 <div className='space-y-2'>
                   <div className='grid gap-2'>
-                    <Label htmlFor='currentPassword'>Aktuelles Passwort</Label>
+                    <Label htmlFor='password'>Neues Passwort</Label>
                     <Input
-                      id='currentPassword'
-                      name='currentPassword'
+                      id='password'
+                      name='password'
                       type='password'
-                      defaultValue='********'
+                      value={password}
+                      onChange={(e) => {
+                        setpassword(e.target.value);
+                        setPasswordError('');
+                      }}
                     />
                   </div>
+
                   <div className='grid gap-2'>
-                    <Label htmlFor='newPassword'>Neues Passwort</Label>
-                    <Input
-                      id='newPassword'
-                      name='newPassword'
-                      type='password'
-                    />
-                  </div>
-                  <div className='grid gap-2'>
-                    <Label htmlFor='confirmPassword'>
-                      Neues Passwort bestätigen
-                    </Label>
+                    <Label htmlFor='confirmPassword'>Passwort bestätigen</Label>
                     <Input
                       id='confirmPassword'
-                      name='confirmPassword'
                       type='password'
+                      value={confirmPassword}
+                      onChange={(e) => {
+                        setConfirmPassword(e.target.value);
+                        setPasswordError('');
+                      }}
                     />
                   </div>
+
+                  {passwordError && (
+                    <div className='text-sm text-destructive'>
+                      {passwordError}
+                    </div>
+                  )}
                 </div>
               ) : (
                 <Button
@@ -170,6 +206,7 @@ export default function UserSettingsModal({
                   Passwort ändern
                 </Button>
               )}
+
               <Button
                 type='submit'
                 disabled={updating}
@@ -179,6 +216,7 @@ export default function UserSettingsModal({
               </Button>
             </form>
           </TabsContent>
+
           <TabsContent value='access' className='mt-4'>
             <form action={permAction} className='space-y-4 pt-4'>
               <div className='space-y-2'>
@@ -186,41 +224,39 @@ export default function UserSettingsModal({
                   Gewünschte Rechte
                 </Label>
                 <div className='space-y-2 ps-2'>
-                  <label
-                    htmlFor='products-checkbox'
-                    className='flex items-center gap-2 cursor-pointer'
-                  >
-                    <Checkbox
-                      id='products-checkbox'
-                      name='roles'
-                      value='PRODUCTS'
-                    />{' '}
-                    Produktverwaltung
-                  </label>
-                  <label
-                    htmlFor='statistics-checkbox'
-                    className='flex items-center gap-2 cursor-pointer'
-                  >
-                    <Checkbox
-                      id='statistics-checkbox'
-                      name='roles'
-                      value='STATISTICS'
-                    />{' '}
-                    Statistikzugriff
-                  </label>
-                  <label
-                    htmlFor='admin-checkbox'
-                    className='flex items-center gap-2 cursor-pointer'
-                  >
-                    <Checkbox id='admin-checkbox' name='roles' value='ADMIN' />{' '}
-                    Admin-Rechte
-                  </label>
+                  {[
+                    {
+                      id: 'products-checkbox',
+                      value: 'PRODUCTS',
+                      label: 'Produktverwaltung',
+                    },
+                    {
+                      id: 'statistics-checkbox',
+                      value: 'STATISTICS',
+                      label: 'Statistikzugriff',
+                    },
+                    {
+                      id: 'admin-checkbox',
+                      value: 'ADMIN',
+                      label: 'Admin-Rechte',
+                    },
+                  ].map(({ id, value, label }) => (
+                    <label
+                      key={id}
+                      htmlFor={id}
+                      className='flex items-center gap-2 cursor-pointer'
+                    >
+                      <Checkbox id={id} name='roles' value={value} /> {label}
+                    </label>
+                  ))}
                 </div>
               </div>
+
               <div className='grid gap-2'>
                 <Label htmlFor='comment'>Kommentar (optional)</Label>
                 <Input id='comment' name='comment' />
               </div>
+
               <Button
                 type='submit'
                 disabled={requesting}

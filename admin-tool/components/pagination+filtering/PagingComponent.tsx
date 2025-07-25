@@ -67,9 +67,9 @@ export default function PaginationComponent({
   }, [currentPage, limit, totalValues]);
 
   return (
-    <div className='flex items-center justify-between gap-8'>
+    <div className='flex items-center justify-between gap-8 mt-4 mb-5 bg-accent rounded-md shadow-sm p-2'>
       {/* Results per page */}
-      <div className='flex items-center gap-3'>
+      <div className='flex items-center gap-3 ml-3'>
         <Label htmlFor={id}>{t('rowsPerPage')}</Label>
         <Select
           defaultValue={limit.toString()}

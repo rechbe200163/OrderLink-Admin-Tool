@@ -9,6 +9,7 @@ import { ButtonLinkComponent } from '@/components/ButtonLinkComponent';
 import { getSession } from '@/lib/utlis/getSession';
 import { BusinessSector } from '@/lib/types';
 import { getTranslations } from 'next-intl/server';
+import { ENDPOINTS } from '@/lib/api/endpoints';
 
 export default async function ProductsPage(props: {
   searchParams?: Promise<{
@@ -39,29 +40,28 @@ export default async function ProductsPage(props: {
   const t = await getTranslations('Dashboard');
   const tFilter = await getTranslations('FilterAndSearch');
   return (
-    <div className='p-5'>
-      <div className='sticky top-0 bg-background z-1'></div>
-      <div className='container'>
-        <div className='flex justify-between items-center mb-6'>
-          <div className='flex justify-between items-center space-x-4'>
-            <SearchComponent placeholder={tFilter('Search.searchForOption1')} />
-            <FilteringComponent
-              title={t('Ressource.Categories.BreadCrumps.title')}
-              filterName='categoryId'
-              endpoint='CATEGORIES'
-            />
-          </div>
-
-          <ButtonLinkComponent
-            href='/products/add'
-            label={t('Ressource.Products.add')}
-            icon={<PlusCircle />}
+    <div className='px-5 pt-5'>
+      <div className='flex justify-between items-center mb-6'>
+        <div className='flex justify-between items-center space-x-4'>
+          <SearchComponent placeholder={tFilter('Search.searchForOption1')} />
+          <FilteringComponent
+            title={t('Ressource.Categories.BreadCrumps.title')}
+            filterName='categoryId'
+            endpoint='CATEGORIES'
           />
         </div>
-        <div className='bg-white rounded-lg shadow-md'>
+
+        <ButtonLinkComponent
+          href='/products/add'
+          label={t('Ressource.Products.add')}
+          icon={<PlusCircle />}
+        />
+      </div>
+      <div className='flex-1 justify-between gap-1 flex flex-col'>
+        <div className='min-w-full max-h-[calc(100vh-15rem)] overflow-auto'>
           <ProductTable products={products} />
         </div>
-        <div className='mt-4 mb-5'>
+        <div>
           <PaginationComponent
             currentPage={meta.currentPage}
             totalPages={meta.pageCount}
