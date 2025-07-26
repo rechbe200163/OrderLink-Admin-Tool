@@ -1,5 +1,5 @@
 'use client';
-import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from '@/components/ui/select';
+import { SelectNative } from '@/components/ui/select-native';
 import { useTranslations } from 'next-intl';
 import { useRouter, usePathname, useSearchParams } from 'next/navigation';
 import { capitalizeFirstLetter } from '@/lib/utils';
@@ -30,17 +30,16 @@ export default function RoleSelect({ roles, value }: { roles: string[]; value: s
   };
 
   return (
-    <Select onValueChange={handleChange} defaultValue={value}>
-      <SelectTrigger className='w-40'>
-        <SelectValue placeholder='Role' />
-      </SelectTrigger>
-      <SelectContent>
-        {roles.map((role) => (
-          <SelectItem key={role} value={role}>
-            {getRoleLabel(role)}
-          </SelectItem>
-        ))}
-      </SelectContent>
-    </Select>
+    <SelectNative
+      onChange={(e) => handleChange(e.target.value)}
+      defaultValue={value}
+      className='w-40 h-9 ps-3 pe-8'
+    >
+      {roles.map((role) => (
+        <option key={role} value={role}>
+          {getRoleLabel(role)}
+        </option>
+      ))}
+    </SelectNative>
   );
 }

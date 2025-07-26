@@ -13,14 +13,7 @@ import { MailIcon, PlusCircle } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
+import { SelectNative } from '@/components/ui/select-native';
 import LoadingIcon from '@/components/loading-states/loading-icon';
 import CustomeToast from '../toasts/CustomeErrorToast';
 
@@ -111,22 +104,17 @@ const EditEmployee = ({ employee }: EditEmployeesProps) => {
           </div>
           <div>
             <Label htmlFor='role'>{t('Attributes.role')}</Label>
-            <Select name='role' defaultValue={employee.role}>
-              <SelectTrigger className='w-full mt-1'>
-                {' '}
-                {/* Changed w-[180px] to w-full and added mt-1 */}
-                <SelectValue placeholder={t('Placeholder.selectRole')} />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectGroup>
-                  {ROLE_NAMES.map((role) => (
-                    <SelectItem key={role} value={role}>
-                      {tRoles(`options.${role.toLowerCase()}`)}
-                    </SelectItem>
-                  ))}
-                </SelectGroup>
-              </SelectContent>
-            </Select>
+            <SelectNative
+              name='role'
+              defaultValue={employee.role}
+              className='h-9 ps-3 pe-8 mt-1 w-full'
+            >
+              {ROLE_NAMES.map((role) => (
+                <option key={role} value={role}>
+                  {tRoles(`options.${role.toLowerCase()}`)}
+                </option>
+              ))}
+            </SelectNative>
           </div>
         </div>
 

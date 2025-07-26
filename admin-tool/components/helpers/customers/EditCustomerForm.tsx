@@ -3,13 +3,7 @@ import React, { useActionState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
+import { SelectNative } from '@/components/ui/select-native';
 import { Card } from '@/components/ui/card';
 import AddressSelectComponent from '@/components/helpers/AddressSelectComponent';
 import { PlusCircle } from 'lucide-react';
@@ -147,31 +141,23 @@ export default function EditCustomerForm({
                 <Label htmlFor='businessSector'>
                   {t('Attributes.businessSector')}
                 </Label>
-                <Select
+                <SelectNative
                   name='businessSector'
                   value={selectedBusinessSector}
-                  onValueChange={(value) => {
-                    setSelectedBusinessSector(value);
+                  onChange={(e) => {
+                    setSelectedBusinessSector(e.target.value);
                   }}
+                  className='h-9 ps-3 pe-8'
                 >
-                  <SelectTrigger>
-                    <SelectValue
-                      placeholder={t('Placeholder.selectBusinessSector')}
-                    />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem key='N/A' value={'N/A'}>
-                      N/A
-                    </SelectItem>
-                    {Object.keys(BusinessSector).map((businessSector) => (
-                      <SelectItem key={businessSector} value={businessSector}>
-                        {tFilter(
-                          `BusinessSectors.options.${businessSector.toLowerCase()}`
-                        )}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
+                  <option value='N/A'>N/A</option>
+                  {Object.keys(BusinessSector).map((businessSector) => (
+                    <option key={businessSector} value={businessSector}>
+                      {tFilter(
+                        `BusinessSectors.options.${businessSector.toLowerCase()}`
+                      )}
+                    </option>
+                  ))}
+                </SelectNative>
               </div>
             </div>
           </div>
