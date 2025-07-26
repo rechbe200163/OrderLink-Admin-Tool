@@ -28,10 +28,15 @@ const EditOrder = ({ products, order }: EditOrderProps) => {
   const [selectedProducts, setSelectedProducts] = React.useState<string[]>(
     order.products.map((product) => product.productId)
   );
+  const [quantities, setQuantities] = React.useState<Record<string, number>>(
+    Object.fromEntries(
+      order.products.map((p) => [p.productId, p.productAmount])
+    )
+  );
   const router = useRouter();
 
   const [formState, action, isPending] = useActionState(
-    updateOrder.bind(null, order.orderId, order),
+    updateOrder.bind(null, order.orderId),
     {
       success: false,
       errors: {
@@ -99,17 +104,29 @@ const EditOrder = ({ products, order }: EditOrderProps) => {
                 setSelectedProducts(
                   selectedProducts.filter((id) => id !== productId)
                 );
+                setQuantities((q) => {
+                  const copy = { ...q };
+                  delete copy[productId];
+                  return copy;
+                });
               } else {
                 setSelectedProducts([...selectedProducts, productId]);
+                setQuantities((q) => ({ ...q, [productId]: 1 }));
               }
             }}
             defaultValue={selectedProducts}
           />
           <input
-            id='productIds'
-            name='productIds'
+            id='products'
+            name='products'
             type='hidden'
-            value={selectedProducts.join(',')}
+            value={JSON.stringify(
+              selectedProducts.map((id) => ({
+                productId: id,
+                productAmount: quantities[id] ||
+                  order.products.find((p) => p.productId === id)?.productAmount || 1,
+              }))
+            )}
           />
         </div>
         <div className='space-y-2 min-w-full'>
@@ -121,7 +138,6 @@ const EditOrder = ({ products, order }: EditOrderProps) => {
                 </Label>
                 <Input
                   id={`quantity-${product.productId}`}
-                  name={`quantity-${product.productId}`}
                   type='number'
                   placeholder={`Maximum quantity: ${product.stock}`}
                   required
@@ -132,6 +148,12 @@ const EditOrder = ({ products, order }: EditOrderProps) => {
                       (orderProduct) =>
                         orderProduct.productId === product.productId
                     )?.productAmount
+                  }
+                  onChange={(e) =>
+                    setQuantities({
+                      ...quantities,
+                      [product.productId]: Number(e.target.value),
+                    })
                   }
                 />
               </div>

@@ -274,11 +274,16 @@ export const orderFormSchema = z.object({
   customerReference: z.string().min(1, {
     message: 'Customer Reference is required.',
   }),
-  productIds: z.string().min(1, {
-    message: 'At least one product ID is required.',
-  }),
-  quantity: z.record(z.string().min(1, { message: 'Quantity is required.' })),
+  products: z
+    .array(
+      z.object({
+        productId: z.string(),
+        productAmount: z.number().min(1),
+      })
+    )
+    .min(1, { message: 'At least one product is required.' }),
   selfCollect: z.boolean().optional().nullable(),
+  deliveryDate: z.string().optional().nullable(),
 });
 
 export const routeFormSchema = z.object({
@@ -320,3 +325,26 @@ export const InitialAdminFormSchema = z.object({
     message: 'Password must be at least 10 characters long.',
   }),
 });
+
+export function formDataToOrder(formData: FormData) {
+  const customerReference = Number(formData.get('customerReference'));
+  const selfCollectValue = formData.get('selfCollect');
+  const selfCollect =
+    typeof selfCollectValue === 'string'
+      ? selfCollectValue === 'on' || selfCollectValue === 'true'
+      : undefined;
+  const deliveryDate = formData.get('deliveryDate') as string | null;
+  const productsRaw = formData.get('products') as string | null;
+  let products: { productId: string; productAmount: number }[] = [];
+  try {
+    products = productsRaw ? JSON.parse(productsRaw) : [];
+  } catch {
+    products = [];
+  }
+  return {
+    customerReference,
+    ...(deliveryDate ? { deliveryDate } : {}),
+    ...(selfCollectValue !== null ? { selfCollect } : {}),
+    products,
+  };
+}
