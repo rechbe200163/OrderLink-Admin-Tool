@@ -1,6 +1,7 @@
 import EditPermission from '@/components/helpers/permissions/EditPermission';
 import { permissionApiService } from '@/lib/api/concrete/permissions';
 import React from 'react';
+import { fetchPermissions } from '@/dummyDataForStaticBuild';
 
 interface EditPermissionPageProps {
   params: Promise<{ permissionId: string }>;
@@ -14,4 +15,9 @@ export default async function EditPermissionPage(props: EditPermissionPageProps)
       <EditPermission permission={permission} />
     </div>
   );
+}
+
+export async function generateStaticParams() {
+  const permissions = await fetchPermissions();
+  return permissions.map((p) => ({ permissionId: p.id }));
 }

@@ -1,4 +1,5 @@
 import EmployeeProfile from '@/components/helpers/employees/EmployeeProfile'; // Updated path
+import { fetchEmployees } from '@/dummyDataForStaticBuild';
 
 interface EditProductPageProps {
   params: Promise<{
@@ -15,3 +16,8 @@ async function EditProductPage(props: EditProductPageProps) {
 }
 
 export default EditProductPage;
+
+export async function generateStaticParams() {
+  const employees = await fetchEmployees();
+  return employees.map((e) => ({ employeeId: e.id }));
+}

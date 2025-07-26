@@ -2,6 +2,7 @@ import EditOrder from '@/components/helpers/orders/EditOrder';
 import { orderApiService } from '@/lib/api/concrete/orders';
 import { productApiService } from '@/lib/api/concrete/products';
 import React from 'react';
+import { fetchOrders } from '@/dummyDataForStaticBuild';
 interface EditOrderPageProps {
   params: Promise<{
     orderId: string;
@@ -19,3 +20,8 @@ async function EditOrderPage(props: EditOrderPageProps) {
 }
 
 export default EditOrderPage;
+
+export async function generateStaticParams() {
+  const orders = await fetchOrders();
+  return orders.map((o) => ({ orderId: o.id }));
+}
