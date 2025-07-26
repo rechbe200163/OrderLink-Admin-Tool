@@ -24,15 +24,6 @@ export class BaseApiService {
     } = {}
   ): Promise<T> {
     const url = new URL(`${this.baseUrl}/${endpoint}`);
-    console.log('BaseApiService request:', {
-      method,
-      endpoint,
-      params,
-      body,
-      url: url.toString(),
-    });
-
-    console.log('method:', method, 'url:', url.toString());
 
     if (params) {
       Object.entries(params).forEach(([key, value]) => {

@@ -10,6 +10,7 @@ export async function createOrder(
   _prevState: FormState,
   formData: FormData
 ): Promise<FormState> {
+  console.log('Creating order with data:', Object.fromEntries(formData));
   return (await guardAction(async () => {
     await apiPost(ENDPOINTS.ORDERS, Object.fromEntries(formData));
     return { success: true } as FormState;
