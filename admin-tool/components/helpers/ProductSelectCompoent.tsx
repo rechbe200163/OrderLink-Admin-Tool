@@ -34,7 +34,7 @@ export default function ProductSelectComponent({
   onProductSelect,
   defaultValue = [],
 }: {
-  onProductSelect: (productId: string) => void;
+  onProductSelect: (product: Product, selected: boolean) => void;
   defaultValue?: string[];
 }) {
   const id = useId();
@@ -72,14 +72,16 @@ export default function ProductSelectComponent({
     return () => controller.abort();
   }, [page, search]);
 
-  const handleSelect = (productId: string) => {
-    if (selectedValues.includes(productId)) {
-      setSelectedValues(selectedValues.filter((id) => id !== productId));
-      onProductSelect(productId); // You can pass the updated value to the parent if needed
+  const handleSelect = (product: Product) => {
+    const willSelect = !selectedValues.includes(product.productId);
+    if (willSelect) {
+      setSelectedValues([...selectedValues, product.productId]);
     } else {
-      setSelectedValues([...selectedValues, productId]);
-      onProductSelect(productId); // You can pass the updated value to the parent if needed
+      setSelectedValues(
+        selectedValues.filter((id) => id !== product.productId)
+      );
     }
+    onProductSelect(product, willSelect);
   };
 
   const t = useTranslations('SelectComponents.Product');
@@ -140,7 +142,7 @@ export default function ProductSelectComponent({
                     <CommandItem
                       key={product.productId}
                       value={label}
-                      onSelect={() => handleSelect(product.productId)}
+                      onSelect={() => handleSelect(product)}
                     >
                       {label}
                       {selectedValues.includes(product.productId) && (

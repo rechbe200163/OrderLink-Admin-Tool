@@ -36,28 +36,26 @@ export default async function PermissionsPage(props: {
   return (
     <div className='p-5'>
       <div className='sticky top-0 bg-background z-10'></div>
-      <div className='container'>
-        <div className='flex justify-between items-center mb-6'>
-          <div className='flex justify-between items-center space-x-4'>
-            <SearchComponent placeholder={tFilter('Search.searchForOption2')} />
-            <RoleSelect roles={roles} value={selectedRole} />
-          </div>
-          <div className='flex space-x-2'>
-            <ButtonLinkComponent
-              href='/roles/add'
-              label={t('Ressource.Roles.buttons.add')}
-              icon={<PlusCircle />}
-            />
-            <ButtonLinkComponent
-              href='/permissions/add'
-              label={t('Ressource.Permissions.add')}
-              icon={<PlusCircle />}
-            />
-          </div>
+      <div className='flex justify-between items-center mb-6'>
+        <div className='flex justify-between items-center space-x-4'>
+          <SearchComponent placeholder={tFilter('Search.searchForOption2')} />
+          <RoleSelect roles={roles} value={selectedRole} />
+          <ButtonLinkComponent
+            href='/roles/add'
+            label={t('Ressource.Roles.buttons.add')}
+            icon={<PlusCircle />}
+          />
         </div>
-        <div className='bg-background rounded-lg shadow-md p-4'>
-          <PermissionsGrid permissions={permissions} />
+        <div className='flex space-x-2'>
+          <ButtonLinkComponent
+            href='/permissions/add'
+            label={t('Ressource.Permissions.add')}
+            icon={<PlusCircle />}
+          />
         </div>
+      </div>
+      <div className='bg-background rounded-lg shadow-md p-4'>
+        <PermissionsGrid permissions={permissions} />
       </div>
     </div>
   );

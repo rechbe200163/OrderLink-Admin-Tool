@@ -10,6 +10,7 @@ export async function updateProfile(
   _prevState: FormState,
   formData: FormData
 ): Promise<FormState> {
+  console.log('Updating profile with data:', formData);
   return (await guardAction(async () => {
     const data = getChangedFormData(current, formData) as Record<string, any>;
     await apiPatch(ENDPOINTS.UPDATE_ME, data);

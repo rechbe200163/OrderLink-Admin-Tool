@@ -94,13 +94,13 @@ const EditOrder = ({ products, order }: EditOrderProps) => {
         </div>
         <div className='space-y-2'>
           <ProductSelectComponent
-            onProductSelect={(productId) => {
-              if (selectedProducts.includes(productId)) {
+            onProductSelect={(product) => {
+              if (selectedProducts.includes(product.productId)) {
                 setSelectedProducts(
-                  selectedProducts.filter((id) => id !== productId)
+                  selectedProducts.filter((id) => id !== product.productId)
                 );
               } else {
-                setSelectedProducts([...selectedProducts, productId]);
+                setSelectedProducts([...selectedProducts, product.productId]);
               }
             }}
             defaultValue={selectedProducts}

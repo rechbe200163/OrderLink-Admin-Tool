@@ -8,6 +8,7 @@ import DateRangeSelectCompoent from '@/components/pagination+filtering/DateRange
 import { ButtonLinkComponent } from '@/components/ButtonLinkComponent';
 import { getTranslations } from 'next-intl/server';
 import { getSession } from '@/lib/utlis/getSession';
+import Component from '@/components/pagination+filtering/comp-42';
 
 export default async function OrdersPage(props: {
   searchParams?: Promise<{
@@ -41,25 +42,25 @@ export default async function OrdersPage(props: {
   const tFilter = await getTranslations('FilterAndSearch');
 
   return (
-    <div className='p-5'>
-      <div className='sticky top-0 bg-background z-10'></div>
-      <div className='container'>
-        <div className='flex justify-between items-center mb-6'>
-          <div className='flex justify-between items-center space-x-4'>
-            <SearchComponent placeholder={tFilter('Search.searchForOption2')} />
-            <DateRangeSelectCompoent />
-          </div>
-
-          <ButtonLinkComponent
-            href='/orders/add'
-            label={t('Ressource.Orders.add')}
-            icon={<PlusCircle />}
-          />
+    <div className='px-5 pt-5'>
+      <div className='flex justify-between items-center mb-6'>
+        <div className='flex justify-between items-center space-x-4'>
+          <SearchComponent placeholder={tFilter('Search.searchForOption2')} />
+          <DateRangeSelectCompoent />
+          <Component />
         </div>
-        <div className='bg-white rounded-lg shadow-md'>
+
+        <ButtonLinkComponent
+          href='/orders/add'
+          label={t('Ressource.Orders.add')}
+          icon={<PlusCircle />}
+        />
+      </div>
+      <div className='flex-1 justify-between gap-1 flex flex-col'>
+        <div className='min-w-full max-h-[calc(100vh-15rem)] overflow-auto'>
           <OrderTable orders={orders} />
         </div>
-        <div className='mt-4 mb-5'>
+        <div>
           <PaginationComponent
             currentPage={meta.currentPage}
             totalPages={meta.pageCount}

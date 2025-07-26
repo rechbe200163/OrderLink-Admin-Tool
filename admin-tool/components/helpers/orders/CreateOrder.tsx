@@ -16,13 +16,12 @@ import { Product } from '@/lib/types';
 import LoadingIcon from '@/components/loading-states/loading-icon';
 import { GenericLoading } from '@/components/loading-states/loading';
 
-interface CreateOrderProps {
-  products?: Product[];
-}
-
-const CreateOrder = ({ products = [] }: CreateOrderProps) => {
+const CreateOrder = () => {
   const [selectedCustomer, setSelectedCustomer] = React.useState<string>('');
   const [selectedProducts, setSelectedProducts] = React.useState<string[]>([]);
+  const [selectedProductObjects, setSelectedProductObjects] = React.useState<
+    Product[]
+  >([]);
   const [formState, action, isPending] = useActionState(createOrder, {
     success: false,
     errors: {
@@ -30,9 +29,9 @@ const CreateOrder = ({ products = [] }: CreateOrderProps) => {
     },
   });
 
-  const stockOfSelectedProducts = selectedProducts.map((productId) =>
-    products.find((product) => product.productId === productId)
-  );
+  const stockOfSelectedProducts = selectedProductObjects;
+
+  console.log('Selected Products:', stockOfSelectedProducts);
 
   React.useEffect(() => {
     if (formState.success) {
@@ -81,13 +80,17 @@ const CreateOrder = ({ products = [] }: CreateOrderProps) => {
         </div>
         <div className='space-y-2'>
           <ProductSelectComponent
-            onProductSelect={(productId) => {
-              if (selectedProducts.includes(productId)) {
-                setSelectedProducts(
-                  selectedProducts.filter((id) => id !== productId)
-                );
+            onProductSelect={(product, isSelected) => {
+              if (isSelected) {
+                setSelectedProducts((prev) => [...prev, product.productId]);
+                setSelectedProductObjects((prev) => [...prev, product]);
               } else {
-                setSelectedProducts([...selectedProducts, productId]);
+                setSelectedProducts((prev) =>
+                  prev.filter((id) => id !== product.productId)
+                );
+                setSelectedProductObjects((prev) =>
+                  prev.filter((p) => p.productId !== product.productId)
+                );
               }
             }}
             defaultValue={selectedProducts}

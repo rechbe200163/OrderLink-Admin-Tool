@@ -1,5 +1,3 @@
-'use client';
-
 import { Permission, Actions, Resources } from '@/lib/types';
 import { CheckIcon, XIcon } from 'lucide-react';
 import {
@@ -11,7 +9,7 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import { humanizeEnum, capitalizeFirstLetter } from '@/lib/utils';
-import { useTranslations } from 'next-intl';
+import { getTranslations } from 'next-intl/server';
 
 export default function PermissionsGrid({
   permissions,
@@ -19,7 +17,7 @@ export default function PermissionsGrid({
   permissions: Permission[];
 }) {
   const roles = Array.from(new Set(permissions.map((p) => p.role)));
-  const tRole = useTranslations('FilterAndSearch.Filter.Roles.options');
+  const tRole = getTranslations('FilterAndSearch.Filter.Roles.options');
 
   const allActions = [
     Actions.CREATE,
@@ -27,20 +25,7 @@ export default function PermissionsGrid({
     Actions.UPDATE,
     Actions.DELETE,
   ];
-  const allResources = Object.values(Resources); // Zeigt *alle* Ressourcen, unabhängig von Permissions
-
-  function getRoleLabel(r: string): string {
-    switch (r) {
-      case 'ADMIN':
-        return tRole('admin');
-      case 'EMPLOYEE':
-        return tRole('employee');
-      case 'SUPPLIER':
-        return tRole('supplier');
-      default:
-        return capitalizeFirstLetter(r);
-    }
-  }
+  const allResources = Object.values(Resources); // Zeigt *alle* Ressourcen, unabhängig von Permission
 
   function hasPermission(role: string, resource: Resources, action: Actions) {
     return permissions.some(
@@ -62,9 +47,7 @@ export default function PermissionsGrid({
               <TableHead key={`${resource}-${role}`} className='text-center'>
                 {humanizeEnum(resource)}
                 <br />
-                <span className='text-xs text-muted-foreground'>
-                  {getRoleLabel(role)}
-                </span>
+                <span className='text-xs text-muted-foreground'>{role}</span>
               </TableHead>
             ))
           )}
