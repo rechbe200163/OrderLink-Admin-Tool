@@ -1,6 +1,12 @@
 'use client';
 import { toast } from 'sonner';
-import { SelectNative } from '@/components/ui/select-native';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 import { Card } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
@@ -136,21 +142,29 @@ export default function GenericAddForm() {
                 <Label htmlFor='businessSector'>
                   {t('Attributes.businessSector')}
                 </Label>
-                <SelectNative
+                <Select
                   name='businessSector'
                   value={selectedBusinessSector}
-                  onChange={(e) => setSelectedBusinessSector(e.target.value)}
-                  className='h-9 ps-3 pe-8'
+                  onValueChange={(value) => setSelectedBusinessSector(value)}
                 >
-                  <option value='N/A'>N/A</option>
-                  {Object.keys(BusinessSector).map((businessSector) => (
-                    <option key={businessSector} value={businessSector}>
-                      {tFilter(
-                        `BusinessSectors.options.${businessSector.toLowerCase()}`
-                      )}
-                    </option>
-                  ))}
-                </SelectNative>
+                  <SelectTrigger>
+                    <SelectValue
+                      placeholder={t('Placeholder.selectBusinessSector')}
+                    />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem key='N/A' value={'N/A'}>
+                      N/A
+                    </SelectItem>
+                    {Object.keys(BusinessSector).map((businessSector) => (
+                      <SelectItem key={businessSector} value={businessSector}>
+                        {tFilter(
+                          `BusinessSectors.options.${businessSector.toLowerCase()}`
+                        )}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
               </div>
             </div>
           </div>

@@ -3,7 +3,14 @@ import { useActionState, useEffect, useState } from 'react';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
-import { SelectNative } from '@/components/ui/select-native';
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 import ActionsSelectComponent from './ActionsSelectComponent';
 import { Card } from '@/components/ui/card';
 import { PlusCircle } from 'lucide-react';
@@ -59,16 +66,20 @@ export default function CreatePermission({ roles }: { roles: string[] }) {
         <h2 className='text-3xl font-bold tracking-tight mb-6'>{t('add')}</h2>
         <div>
           <Label htmlFor='role'>{t('Attributes.role')}</Label>
-          <SelectNative name='role' className='h-9 ps-3 pe-8 w-[180px]'>
-            <option value='' disabled selected hidden>
-              {t('Attributes.role')}
-            </option>
-            {roles.map((role) => (
-              <option key={role} value={role}>
-                {tFilter(`Roles.options.${role.toLowerCase()}`)}
-              </option>
-            ))}
-          </SelectNative>
+          <Select name='role'>
+            <SelectTrigger className='w-[180px]'>
+              <SelectValue placeholder={t('Attributes.role')} />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectGroup>
+                {roles.map((role) => (
+                  <SelectItem key={role} value={role}>
+                    {tFilter(`Roles.options.${role.toLowerCase()}`)}
+                  </SelectItem>
+                ))}
+              </SelectGroup>
+            </SelectContent>
+          </Select>
         </div>
         <div>
           <ActionsSelectComponent
@@ -87,16 +98,20 @@ export default function CreatePermission({ roles }: { roles: string[] }) {
         </div>
         <div>
           <Label htmlFor='resource'>{t('Attributes.resource')}</Label>
-          <SelectNative name='resource' className='h-9 ps-3 pe-8 w-[180px]'>
-            <option value='' disabled selected hidden>
-              {t('Attributes.resource')}
-            </option>
-            {Object.values(Resources).map((res) => (
-              <option key={res} value={res}>
-                {res}
-              </option>
-            ))}
-          </SelectNative>
+          <Select name='resource'>
+            <SelectTrigger className='w-[180px]'>
+              <SelectValue placeholder={t('Attributes.resource')} />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectGroup>
+                {Object.values(Resources).map((res) => (
+                  <SelectItem key={res} value={res}>
+                    {res}
+                  </SelectItem>
+                ))}
+              </SelectGroup>
+            </SelectContent>
+          </Select>
         </div>
         <div>
           <Label htmlFor='allowed'>{t('Attributes.allowed')}</Label>

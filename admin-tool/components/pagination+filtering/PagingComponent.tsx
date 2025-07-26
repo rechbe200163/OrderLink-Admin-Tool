@@ -8,7 +8,13 @@ import {
   PaginationItem,
   PaginationLink,
 } from '@/components/ui/pagination';
-import { SelectNative } from '@/components/ui/select-native';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 import {
   ChevronFirst,
   ChevronLast,
@@ -65,25 +71,27 @@ export default function PaginationComponent({
       {/* Results per page */}
       <div className='flex items-center gap-3'>
         <Label htmlFor={id}>{t('rowsPerPage')}</Label>
-        <SelectNative
+        <Select
           defaultValue={limit.toString()}
-          onChange={(e) => {
-            const value = e.target.value;
+          onValueChange={(value) => {
             const newLimit = parseInt(value, 10);
             if (newLimit !== limit) {
               params.set('limit', value);
-              params.delete('page');
+              params.delete('page'); // Reset to first page when limit changes
               router.push(`${pathname}?${params.toString()}`);
             }
           }}
-          id={id}
-          className='w-fit whitespace-nowrap h-9 ps-3 pe-8'
         >
-          <option value='10'>10</option>
-          <option value='25'>25</option>
-          <option value='50'>50</option>
-          <option value='100'>100</option>
-        </SelectNative>
+          <SelectTrigger id={id} className='w-fit whitespace-nowrap'>
+            <SelectValue placeholder='Select number of results' />
+          </SelectTrigger>
+          <SelectContent className='[&_*[role=option]>span]:end-2 [&_*[role=option]>span]:start-auto [&_*[role=option]]:pe-8 [&_*[role=option]]:ps-2'>
+            <SelectItem value='10'>10</SelectItem>
+            <SelectItem value='25'>25</SelectItem>
+            <SelectItem value='50'>50</SelectItem>
+            <SelectItem value='100'>100</SelectItem>
+          </SelectContent>
+        </Select>
       </div>
 
       {/* Page number information */}

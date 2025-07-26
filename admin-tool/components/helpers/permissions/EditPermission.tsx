@@ -4,7 +4,14 @@ import { Card } from '@/components/ui/card';
 import { useTranslations } from 'next-intl';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
-import { SelectNative } from '@/components/ui/select-native';
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 import { Save } from 'lucide-react';
 import LoadingIcon from '@/components/loading-states/loading-icon';
 import { updatePermission } from '@/lib/actions/permission.actions';
@@ -29,45 +36,54 @@ export default function EditPermission({
       <form action={action} className='space-y-6'>
         <div>
           <Label htmlFor='role'>{t('Attributes.role')}</Label>
-          <SelectNative
-            name='role'
-            defaultValue={permission.role}
-            className='h-9 ps-3 pe-8 w-[180px]'
-          >
-            {ROLE_NAMES.map((role) => (
-              <option key={role} value={role}>
-                {tFilter(`Roles.options.${role.toLowerCase()}`)}
-              </option>
-            ))}
-          </SelectNative>
+          <Select name='role' defaultValue={permission.role}>
+            <SelectTrigger className='w-[180px]'>
+              <SelectValue placeholder={t('Attributes.role')} />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectGroup>
+                {ROLE_NAMES.map((role) => (
+                  <SelectItem key={role} value={role}>
+                    {tFilter(`Roles.options.${role.toLowerCase()}`)}
+                  </SelectItem>
+                ))}
+              </SelectGroup>
+            </SelectContent>
+          </Select>
         </div>
         <div>
           <Label htmlFor='action'>{t('Attributes.action')}</Label>
-          <SelectNative
-            name='action'
-            defaultValue={permission.action}
-            className='h-9 ps-3 pe-8 w-[180px]'
-          >
-            {Object.values(Actions).map((action) => (
-              <option key={action} value={action}>
-                {action}
-              </option>
-            ))}
-          </SelectNative>
+          <Select name='action' defaultValue={permission.action}>
+            <SelectTrigger className='w-[180px]'>
+              <SelectValue placeholder={t('Attributes.action')} />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectGroup>
+                {Object.values(Actions).map((action) => (
+                  <SelectItem key={action} value={action}>
+                    {action}
+                  </SelectItem>
+                ))}
+              </SelectGroup>
+            </SelectContent>
+          </Select>
         </div>
         <div>
           <Label htmlFor='resource'>{t('Attributes.resource')}</Label>
-          <SelectNative
-            name='resource'
-            defaultValue={permission.resource}
-            className='h-9 ps-3 pe-8 w-[180px]'
-          >
-            {Object.values(Resources).map((res) => (
-              <option key={res} value={res}>
-                {res}
-              </option>
-            ))}
-          </SelectNative>
+          <Select name='resource' defaultValue={permission.resource}>
+            <SelectTrigger className='w-[180px]'>
+              <SelectValue placeholder={t('Attributes.resource')} />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectGroup>
+                {Object.values(Resources).map((res) => (
+                  <SelectItem key={res} value={res}>
+                    {res}
+                  </SelectItem>
+                ))}
+              </SelectGroup>
+            </SelectContent>
+          </Select>
         </div>
         <Button type='submit' disabled={isPending} className='mt-6'>
           {isPending ? (

@@ -5,7 +5,14 @@ import { useTranslations } from 'next-intl';
 import { Card } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
-import { SelectNative } from '@/components/ui/select-native';
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 import { Button } from '@/components/ui/button';
 import { MailIcon, PlusCircle } from 'lucide-react';
 import React, { useActionState, useId } from 'react';
@@ -106,16 +113,20 @@ const CreateEmployees = ({ roles }: { roles: string[] }) => {
             </div>
             <div>
               <Label htmlFor='role'>{t('Attributes.role')}</Label>
-              <SelectNative name='role' className='h-9 ps-3 pe-8'>
-                <option value='' disabled selected hidden>
-                  {t('Placeholder.selectRole')}
-                </option>
-                {roles.map((role) => (
-                  <option key={role} value={role}>
-                    {tFilter(`Roles.options.${role.toLowerCase()}`)}
-                  </option>
-                ))}
-              </SelectNative>
+              <Select name='role'>
+                <SelectTrigger className='w-[180px]'>
+                  <SelectValue placeholder={t('Placeholder.selectRole')} />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectGroup>
+                    {roles.map((role) => (
+                      <SelectItem key={role} value={role}>
+                        {tFilter(`Roles.options.${role.toLowerCase()}`)}
+                      </SelectItem>
+                    ))}
+                  </SelectGroup>
+                </SelectContent>
+              </Select>
             </div>
           </div>
           <Button type='submit' disabled={isPending}>
