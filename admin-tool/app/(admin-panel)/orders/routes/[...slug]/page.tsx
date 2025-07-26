@@ -2,6 +2,7 @@ import GoBackButtonComponent from '@/components/BackButtonComponent';
 import { OrderTable } from '@/components/helpers/orders/OrdersTabel';
 import { orderApiService } from '@/lib/api/concrete/orders';
 import React from 'react';
+import { fetchRoutes } from '@/dummyDataForStaticBuild';
 
 interface OrderPerRoutePageProps {
   params: Promise<{
@@ -31,3 +32,8 @@ async function EditProductPage(props: OrderPerRoutePageProps) {
 }
 
 export default EditProductPage;
+
+export async function generateStaticParams() {
+  const routes = await fetchRoutes();
+  return routes.map((r) => ({ slug: [r.id, r.name] }));
+}

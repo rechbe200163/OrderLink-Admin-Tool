@@ -1,5 +1,6 @@
 import EditCustomerForm from '@/components/helpers/customers/EditCustomerForm';
 import { customerApiService } from '@/lib/api/concrete/customers';
+import { fetchCustomers } from '@/dummyDataForStaticBuild';
 
 interface EditCustomerPageProps {
   params: Promise<{
@@ -22,3 +23,8 @@ async function EditCustomerPage(props: EditCustomerPageProps) {
 }
 
 export default EditCustomerPage;
+
+export async function generateStaticParams() {
+  const customers = await fetchCustomers();
+  return customers.map((c) => ({ customerReference: c.reference }));
+}

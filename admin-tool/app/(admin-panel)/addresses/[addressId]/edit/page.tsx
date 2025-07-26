@@ -1,5 +1,6 @@
 import EditAddressForm from '@/components/forms/address/EditAddressForm';
 import { addressApiService } from '@/lib/api/concrete/address';
+import { fetchAddresses } from '@/dummyDataForStaticBuild';
 
 interface EditAddressPageProps {
   params: Promise<{
@@ -18,3 +19,8 @@ async function EditAddressPage(props: EditAddressPageProps) {
 }
 
 export default EditAddressPage;
+
+export async function generateStaticParams() {
+  const addresses = await fetchAddresses();
+  return addresses.map((a) => ({ addressId: a.id }));
+}

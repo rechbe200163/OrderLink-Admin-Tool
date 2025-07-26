@@ -1,6 +1,7 @@
 import EditCategory from '@/components/helpers/categories/EditCategory';
 import { categoryApiService } from '@/lib/api/concrete/categories';
 import React from 'react';
+import { fetchCategories } from '@/dummyDataForStaticBuild';
 
 interface EditCategoryPageProps {
   params: Promise<{
@@ -20,3 +21,8 @@ const EditCategoryPage = async (props: EditCategoryPageProps) => {
 };
 
 export default EditCategoryPage;
+
+export async function generateStaticParams() {
+  const categories = await fetchCategories();
+  return categories.map((c) => ({ categoryId: c.id }));
+}

@@ -1,6 +1,7 @@
 import { productApiService } from '@/lib/api/concrete/products';
 import { ProductHistoryTable } from '@/components/helpers/products/ProductHistoryTable';
 import React from 'react';
+import { fetchProducts } from '@/dummyDataForStaticBuild';
 
 interface HistoryPageProps {
   params: Promise<{ productId: string }>;
@@ -20,3 +21,8 @@ async function HistoryPage(props: HistoryPageProps) {
 }
 
 export default HistoryPage;
+
+export async function generateStaticParams() {
+  const products = await fetchProducts();
+  return products.map((p) => ({ productId: p.id }));
+}

@@ -1,6 +1,7 @@
 import EditRoute from '@/components/helpers/routes/EditRoute';
 import { routeApiService } from '@/lib/api/concrete/route';
 import React from 'react';
+import { fetchRoutes } from '@/dummyDataForStaticBuild';
 
 interface EditOrderPageProps {
   params: Promise<{
@@ -19,3 +20,8 @@ async function EditRoutesPage(props: EditOrderPageProps) {
 }
 
 export default EditRoutesPage;
+
+export async function generateStaticParams() {
+  const routes = await fetchRoutes();
+  return routes.map((r) => ({ routeId: r.id }));
+}

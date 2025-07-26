@@ -1,6 +1,7 @@
 import EditProduct from '@/components/helpers/products/EditProduct';
 import { productApiService } from '@/lib/api/concrete/products';
 import React from 'react';
+import { fetchProducts } from '@/dummyDataForStaticBuild';
 
 interface EditProductPageProps {
   params: Promise<{
@@ -19,3 +20,8 @@ async function EditProductPage(props: EditProductPageProps) {
 }
 
 export default EditProductPage;
+
+export async function generateStaticParams() {
+  const products = await fetchProducts();
+  return products.map((p) => ({ productId: p.id }));
+}
