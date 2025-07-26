@@ -23,6 +23,7 @@ interface CreateOrderProps {
 const CreateOrder = ({ products = [] }: CreateOrderProps) => {
   const [selectedCustomer, setSelectedCustomer] = React.useState<string>('');
   const [selectedProducts, setSelectedProducts] = React.useState<string[]>([]);
+  const [quantities, setQuantities] = React.useState<Record<string, number>>({});
   const [formState, action, isPending] = useActionState(createOrder, {
     success: false,
     errors: {
@@ -86,17 +87,28 @@ const CreateOrder = ({ products = [] }: CreateOrderProps) => {
                 setSelectedProducts(
                   selectedProducts.filter((id) => id !== productId)
                 );
+                setQuantities((q) => {
+                  const copy = { ...q };
+                  delete copy[productId];
+                  return copy;
+                });
               } else {
                 setSelectedProducts([...selectedProducts, productId]);
+                setQuantities((q) => ({ ...q, [productId]: 1 }));
               }
             }}
             defaultValue={selectedProducts}
           />
           <input
-            id='productIds'
-            name='productIds'
+            id='products'
+            name='products'
             type='hidden'
-            value={selectedProducts.join(',')}
+            value={JSON.stringify(
+              selectedProducts.map((id) => ({
+                productId: id,
+                productAmount: quantities[id] || 1,
+              }))
+            )}
           />
         </div>
         <div className='space-y-2 min-w-full'>
@@ -108,12 +120,17 @@ const CreateOrder = ({ products = [] }: CreateOrderProps) => {
                 </Label>
                 <Input
                   id={`quantity-${product.productId}`}
-                  name={`quantity-${product.productId}`}
                   type='number'
                   placeholder={`Maximum quantity: ${product.stock}`}
                   required
                   min='1'
                   max={product.stock}
+                  onChange={(e) =>
+                    setQuantities({
+                      ...quantities,
+                      [product.productId]: Number(e.target.value),
+                    })
+                  }
                 />
               </div>
             ) : null
