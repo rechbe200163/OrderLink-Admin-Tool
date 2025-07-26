@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useActionState, useEffect, useState } from 'react';
 import { Clock } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { SlidingNumber } from '../ui/sliding-number';
@@ -12,19 +12,22 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog';
+import { renewSessionAction } from '@/lib/actions/auth.actions';
 
 interface SessionTimerProps {
   issuedAt: number;
   expiresAt: number;
-  onRenewSession?: () => void; // optionaler Callback für Verlängerung
 }
 
 export default function SessionTimer({
   issuedAt,
   expiresAt,
-  onRenewSession,
 }: SessionTimerProps) {
   const [remaining, setRemaining] = useState(expiresAt - Date.now());
+  const [formState, action, isPending] = useActionState(
+    renewSessionAction,
+    undefined
+  );
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -51,11 +54,6 @@ export default function SessionTimer({
       setModalOpen(true);
     }
   }, [isLowTime, isExpired]);
-
-  const handleRenew = () => {
-    setModalOpen(false);
-    onRenewSession?.();
-  };
 
   return (
     <>
@@ -133,7 +131,9 @@ export default function SessionTimer({
             <Button variant='outline' onClick={() => setModalOpen(false)}>
               Schließen
             </Button>
-            <Button onClick={handleRenew}>Session verlängern</Button>
+            <form action={action} className='flex items-center gap-2'>
+              <Button type='submit'>Session verlängern</Button>
+            </form>
           </div>
         </DialogContent>
       </Dialog>

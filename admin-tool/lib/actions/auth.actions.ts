@@ -81,10 +81,7 @@ export async function verifyOtp(
   redirect('/');
 }
 
-export async function renewSessionAction(
-  _prevState: any,
-  _formData: FormData
-): Promise<{ success: boolean }> {
+export async function renewSessionAction(): Promise<{ success: boolean }> {
   const session = await getSession();
 
   if (!session) {
@@ -92,9 +89,7 @@ export async function renewSessionAction(
   }
 
   try {
-    const resp = await apiPost<Session>(ENDPOINTS.AUTH_RENEW_SESSION, {
-      token: session.token.accessToken,
-    });
+    const resp = await apiPost<Session>(ENDPOINTS.AUTH_RENEW_SESSION);
 
     if (resp?.token) {
       await setCookie('token', resp.token);
