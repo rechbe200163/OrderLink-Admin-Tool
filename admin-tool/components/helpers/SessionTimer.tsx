@@ -4,93 +4,139 @@ import { useEffect, useState } from 'react';
 import { Clock } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { SlidingNumber } from '../ui/sliding-number';
+import { Button } from '../ui/button';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog';
 
 interface SessionTimerProps {
   issuedAt: number;
   expiresAt: number;
+  onRenewSession?: () => void; // optionaler Callback für Verlängerung
 }
 
 export default function SessionTimer({
   issuedAt,
   expiresAt,
+  onRenewSession,
 }: SessionTimerProps) {
-  const expiresAtMs = expiresAt;
+  const [remaining, setRemaining] = useState(expiresAt - Date.now());
 
-  const [expiry, setExpiry] = useState(expiresAtMs);
-  const [remaining, setRemaining] = useState(expiry - Date.now());
-
-  // ⏱ Timer-Tick alle 1 Sekunde
   useEffect(() => {
     const interval = setInterval(() => {
-      setRemaining(expiry - Date.now());
+      const newRemaining = expiresAt - Date.now();
+      setRemaining(newRemaining);
     }, 1000);
     return () => clearInterval(interval);
-  }, [expiry]);
+  }, [expiresAt]);
 
   const totalSeconds = Math.floor(remaining / 1000);
-  // Less than 5 minutes
   const isLowTime = totalSeconds < 300;
-  // Check if remaining time is critical (less than 1 minute)
   const isCriticalTime = totalSeconds < 60;
-
   const isExpired = totalSeconds <= 0;
 
-  // Parse remaining time into hours, minutes, seconds
   const remHrs = Math.floor(Math.max(0, totalSeconds) / 3600);
   const remMins = Math.floor((Math.max(0, totalSeconds) % 3600) / 60);
   const remSecs = Math.max(0, totalSeconds) % 60;
 
+  const [modalOpen, setModalOpen] = useState(false);
+
+  // Öffne Modal bei kritischem oder abgelaufenem Zustand
+  useEffect(() => {
+    if (isLowTime || isExpired) {
+      setModalOpen(true);
+    }
+  }, [isLowTime, isExpired]);
+
+  const handleRenew = () => {
+    setModalOpen(false);
+    onRenewSession?.();
+  };
+
   return (
-    <div className='relative group w-[130px]'>
+    <>
       {/* Timer-Anzeige */}
-      <div
-        className={cn(
-          'flex items-center gap-2 px-3 py-1.5 rounded-lg border transition-all duration-200',
-          'bg-background/50 backdrop-blur-sm group-hover:bg-background/80',
-          isExpired && 'border-destructive bg-destructive/10',
-          isCriticalTime &&
-            !isExpired &&
-            'border-destructive bg-destructive/5 animate-pulse',
-          isLowTime &&
-            !isCriticalTime &&
-            !isExpired &&
-            'border-orange-500 bg-orange-50 dark:bg-orange-950/20'
-        )}
-      >
-        <Clock
+      <div className='relative group w-[130px]'>
+        <div
           className={cn(
-            'h-3.5 w-3.5 transition-colors',
-            isExpired && 'text-destructive',
-            isCriticalTime && !isExpired && 'text-destructive',
-            isLowTime && !isCriticalTime && !isExpired && 'text-orange-500',
-            !isLowTime && 'text-muted-foreground'
-          )}
-        />
-        <span
-          className={cn(
-            'font-mono text-sm font-medium transition-colors',
-            isExpired && 'text-destructive',
-            isCriticalTime && !isExpired && 'text-destructive',
+            'flex items-center gap-2 px-3 py-1.5 rounded-lg border transition-all duration-200',
+            'bg-background/50 backdrop-blur-sm group-hover:bg-background/80',
+            isExpired && 'border-destructive bg-destructive/10',
+            isCriticalTime &&
+              !isExpired &&
+              'border-destructive bg-destructive/5 animate-pulse',
             isLowTime &&
               !isCriticalTime &&
               !isExpired &&
-              'text-orange-600 dark:text-orange-400',
-            !isLowTime && 'text-foreground'
+              'border-orange-500 bg-orange-50 dark:bg-orange-950/20'
           )}
         >
-          {isExpired ? (
-            'EXPIRED'
-          ) : (
-            <div className='flex items-center gap-0.5 font-mono'>
-              <SlidingNumber value={remHrs} padStart={true} />
-              <span className='text-zinc-500'>:</span>
-              <SlidingNumber value={remMins} padStart={true} />
-              <span className='text-zinc-500'>:</span>
-              <SlidingNumber value={remSecs} padStart={true} />
-            </div>
-          )}
-        </span>
+          <Clock
+            className={cn(
+              'h-3.5 w-3.5 transition-colors',
+              isExpired && 'text-destructive',
+              isCriticalTime && !isExpired && 'text-destructive',
+              isLowTime && !isCriticalTime && !isExpired && 'text-orange-500',
+              !isLowTime && 'text-muted-foreground'
+            )}
+          />
+          <span
+            className={cn(
+              'font-mono text-sm font-medium transition-colors',
+              isExpired && 'text-destructive',
+              isCriticalTime && !isExpired && 'text-destructive',
+              isLowTime &&
+                !isCriticalTime &&
+                !isExpired &&
+                'text-orange-600 dark:text-orange-400',
+              !isLowTime && 'text-foreground'
+            )}
+          >
+            {isExpired ? (
+              'EXPIRED'
+            ) : (
+              <div className='flex items-center gap-0.5 font-mono'>
+                <SlidingNumber value={remHrs} padStart={true} />
+                <span className='text-zinc-500'>:</span>
+                <SlidingNumber value={remMins} padStart={true} />
+                <span className='text-zinc-500'>:</span>
+                <SlidingNumber value={remSecs} padStart={true} />
+              </div>
+            )}
+          </span>
+        </div>
       </div>
-    </div>
+
+      {/* ⚠️ Kritisches Modal */}
+      <Dialog open={modalOpen} onOpenChange={(open) => setModalOpen(open)}>
+        <DialogContent
+          className='sm:max-w-[425px]'
+          onInteractOutside={(e) => e.preventDefault()}
+          onEscapeKeyDown={(e) => e.preventDefault()}
+        >
+          <DialogHeader>
+            <DialogTitle>
+              {isExpired ? 'Session abgelaufen' : 'Session läuft bald ab'}
+            </DialogTitle>
+            <DialogDescription>
+              {isExpired
+                ? 'Deine Sitzung ist abgelaufen. Bitte erneuere sie, um fortzufahren.'
+                : 'Deine Sitzung läuft in Kürze ab. Bitte verlängere sie, um Datenverlust zu vermeiden.'}
+            </DialogDescription>
+          </DialogHeader>
+
+          <div className='flex justify-end gap-2 pt-4'>
+            <Button variant='outline' onClick={() => setModalOpen(false)}>
+              Schließen
+            </Button>
+            <Button onClick={handleRenew}>Session verlängern</Button>
+          </div>
+        </DialogContent>
+      </Dialog>
+    </>
   );
 }
