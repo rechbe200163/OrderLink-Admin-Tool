@@ -19,6 +19,9 @@ import { GenericLoading } from '@/components/loading-states/loading';
 const CreateOrder = () => {
   const [selectedCustomer, setSelectedCustomer] = React.useState<string>('');
   const [selectedProducts, setSelectedProducts] = React.useState<string[]>([]);
+  const [quantities, setQuantities] = React.useState<Record<string, number>>(
+    {}
+  );
   const [selectedProductObjects, setSelectedProductObjects] = React.useState<
     Product[]
   >([]);
@@ -85,21 +88,22 @@ const CreateOrder = () => {
                 setSelectedProducts((prev) => [...prev, product.productId]);
                 setSelectedProductObjects((prev) => [...prev, product]);
               } else {
-                setSelectedProducts((prev) =>
-                  prev.filter((id) => id !== product.productId)
-                );
-                setSelectedProductObjects((prev) =>
-                  prev.filter((p) => p.productId !== product.productId)
-                );
+                setSelectedProducts([...selectedProducts, product.productId]);
+                setQuantities((q) => ({ ...q, [product.productId]: 1 }));
               }
             }}
             defaultValue={selectedProducts}
           />
           <input
-            id='productIds'
-            name='productIds'
+            id='products'
+            name='products'
             type='hidden'
-            value={selectedProducts.join(',')}
+            value={JSON.stringify(
+              selectedProducts.map((id) => ({
+                productId: id,
+                productAmount: quantities[id] || 1,
+              }))
+            )}
           />
         </div>
         <div className='space-y-2 min-w-full'>
@@ -111,12 +115,17 @@ const CreateOrder = () => {
                 </Label>
                 <Input
                   id={`quantity-${product.productId}`}
-                  name={`quantity-${product.productId}`}
                   type='number'
                   placeholder={`Maximum quantity: ${product.stock}`}
                   required
                   min='1'
                   max={product.stock}
+                  onChange={(e) =>
+                    setQuantities({
+                      ...quantities,
+                      [product.productId]: Number(e.target.value),
+                    })
+                  }
                 />
               </div>
             ) : null
