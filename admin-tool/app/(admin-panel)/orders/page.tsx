@@ -8,6 +8,7 @@ import DateRangeSelectCompoent from '@/components/pagination+filtering/DateRange
 import { ButtonLinkComponent } from '@/components/ButtonLinkComponent';
 import { getTranslations } from 'next-intl/server';
 import { getSession } from '@/lib/utlis/getSession';
+import Component from '@/components/pagination+filtering/comp-42';
 
 export default async function OrdersPage(props: {
   searchParams?: Promise<{
@@ -46,6 +47,7 @@ export default async function OrdersPage(props: {
         <div className='flex justify-between items-center space-x-4'>
           <SearchComponent placeholder={tFilter('Search.searchForOption2')} />
           <DateRangeSelectCompoent />
+          <Component />
         </div>
 
         <ButtonLinkComponent
