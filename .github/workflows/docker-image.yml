@@ -25,7 +25,7 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
         with:
-          context: .
-          file: ../admin-tool/Dockerfile
+          context: ./admin-tool
+          file: ./admin-tool/Dockerfile
           push: true
           tags: rechbe200163/orderlink-admintool:latest
