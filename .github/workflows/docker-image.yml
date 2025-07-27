@@ -26,23 +26,6 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: .
-          file: ./Dockerfile
+          file: ./admintool/Dockerfile
           push: true
-          tags: yourdockerhubuser/orderlink-admin:latest
-
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
-
-    steps:
-      - name: Deploy via SSH and Docker Compose
-        uses: appleboy/ssh-action@v1.0.3
-        with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USER }}
-          key: ${{ secrets.SSH_KEY }}
-          script: |
-            cd /path/to/project
-            docker compose pull
-            docker compose up -d
+          tags: rechbe200163/orderlink-admintool:latest
