@@ -26,6 +26,6 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: .
-          file: ./admintool/Dockerfile
+          file: ../admin-tool/Dockerfile
           push: true
           tags: rechbe200163/orderlink-admintool:latest
