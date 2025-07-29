@@ -1,8 +1,12 @@
 import { SectionCards } from '@/components/section-cards';
-
 import QuickStats from '@/components/helpers/charts/QuickStats';
+import { redirect } from 'next/navigation';
+import { isModuleEnabled } from '@/lib/modules';
 
-export default function Page() {
+export default async function Page() {
+  if (!(await isModuleEnabled('STATISTICS'))) {
+    redirect('/upgrade?module=STATISTICS');
+  }
   return (
     <div className='flex flex-1 flex-col'>
       <div className='@container/main w-full max-w-none'>

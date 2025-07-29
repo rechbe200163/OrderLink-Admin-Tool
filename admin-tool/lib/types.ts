@@ -27,6 +27,9 @@ export const ROLE_NAMES = [
 ] as const;
 export type RoleName = (typeof ROLE_NAMES)[number];
 
+export const MODULE_NAMES = ['STATISTICS', 'NAVIGATION'] as const;
+export type ModuleName = (typeof MODULE_NAMES)[number];
+
 export enum Resources {
   PRODUCT = 'PRODUCT',
   ORDER = 'ORDER',
@@ -197,7 +200,7 @@ export interface SiteConfig {
 }
 
 export interface EnabledModule {
-  moduleName: string;
+  moduleName: ModuleName;
 }
 
 export interface Tenant {

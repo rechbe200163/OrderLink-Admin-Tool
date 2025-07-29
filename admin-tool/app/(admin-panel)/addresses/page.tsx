@@ -8,6 +8,8 @@ import { addressApiService } from '@/lib/api/concrete/address';
 import { getSession } from '@/lib/utlis/getSession';
 import { PlusCircle } from 'lucide-react';
 import { getTranslations } from 'next-intl/server';
+import { redirect } from 'next/navigation';
+import { isModuleEnabled } from '@/lib/modules';
 
 export default async function AddressesPage(props: {
   searchParams?: Promise<{
@@ -18,6 +20,8 @@ export default async function AddressesPage(props: {
     tag?: string;
   }>;
 }) {
+  if (!(await isModuleEnabled('NAVIGATION')))
+    redirect('/upgrade?module=NAVIGATION');
   const session = await getSession();
   if (!session) return null;
 

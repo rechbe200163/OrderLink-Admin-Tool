@@ -1,4 +1,6 @@
+
 'use client';
+import React from 'react';
 
 import {
   HomeIcon,
@@ -41,6 +43,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { motion, AnimatePresence } from 'framer-motion';
+import type { ModuleName } from '@/lib/types';
 
 interface NavMainProps {
   favoritesEnabled: boolean;
@@ -49,8 +52,16 @@ interface NavMainProps {
   } | null;
 }
 
+interface NavItem {
+  title: string;
+  url: string;
+  icon: React.ElementType;
+  module?: ModuleName;
+}
+
 export function NavMainClient({ favoritesEnabled, tenant }: NavMainProps) {
   const pathname = usePathname();
+  const enabledModules = tenant?.enabledModules ?? [];
   const tGroup = useTranslations('Navigation.Groups');
   const tItem = useTranslations('Navigation.Items');
   const tNav = useTranslations('Components.NavMain');
@@ -87,24 +98,28 @@ export function NavMainClient({ favoritesEnabled, tenant }: NavMainProps) {
       {
         label: tGroup('overview'),
         icon: HomeIcon,
-        items: [{ title: tItem('overview'), url: '/', icon: HomeIcon }],
+        items: [
+          { title: tItem('overview'), url: '/', icon: HomeIcon, module: 'STATISTICS' },
+        ],
       },
       {
         label: tGroup('sales'),
         icon: ShoppingCartIcon,
         items: [
           { title: tItem('orders'), url: '/orders', icon: ShoppingCartIcon },
-          { title: tItem('routes'), url: '/routes', icon: Route },
-          { title: tItem('addresses'), url: '/addresses', icon: MapPin },
+          { title: tItem('routes'), url: '/routes', icon: Route, module: 'NAVIGATION' },
+          { title: tItem('addresses'), url: '/addresses', icon: MapPin, module: 'NAVIGATION' },
           {
             title: tItem('ordersStatistics'),
             url: '/orders/statistics',
             icon: ChartLine,
+            module: 'STATISTICS',
           },
           {
             title: tItem('routesStatistics'),
             url: '/routes/statistics',
             icon: ChartLine,
+            module: 'STATISTICS',
           },
         ],
       },
@@ -118,11 +133,13 @@ export function NavMainClient({ favoritesEnabled, tenant }: NavMainProps) {
             title: tItem('productsStatistics'),
             url: '/products/statistics',
             icon: ChartLine,
+            module: 'STATISTICS',
           },
           {
             title: tItem('categoriesStatistics'),
             url: '/categories/statistics',
             icon: ChartLine,
+            module: 'STATISTICS',
           },
         ],
       },
@@ -135,6 +152,7 @@ export function NavMainClient({ favoritesEnabled, tenant }: NavMainProps) {
             title: tItem('customersStatistics'),
             url: '/customers/statistics',
             icon: ChartLine,
+            module: 'STATISTICS',
           },
         ],
       },
@@ -253,7 +271,12 @@ export function NavMainClient({ favoritesEnabled, tenant }: NavMainProps) {
                       </CollapsibleTrigger>
                       <CollapsibleContent>
                         <SidebarMenuSub>
-                          {group.items.map((item) => (
+                          {group.items.map((item) => {
+                            const url =
+                              item.module && !enabledModules.includes(item.module)
+                                ? `/upgrade?module=${item.module}`
+                                : item.url;
+                            return (
                             <SidebarMenuSubItem
                               key={item.title}
                               className='relative'
@@ -266,7 +289,7 @@ export function NavMainClient({ favoritesEnabled, tenant }: NavMainProps) {
                                     : ''
                                 }
                               >
-                                <Link href={item.url} className='flex-1'>
+                                <Link href={url} className='flex-1'>
                                   <span className='flex items-center gap-2'>
                                     {item.icon && <item.icon size={16} />}
                                     {highlightMatch(item.title, query)}
@@ -289,13 +312,19 @@ export function NavMainClient({ favoritesEnabled, tenant }: NavMainProps) {
                                 </SidebarMenuAction>
                               )}
                             </SidebarMenuSubItem>
-                          ))}
+                          );
+                          })}
                         </SidebarMenuSub>
                       </CollapsibleContent>
                     </SidebarMenuItem>
                   </Collapsible>
                 ) : (
-                  group.items.map((item) => (
+                  group.items.map((item) => {
+                    const url =
+                      item.module && !enabledModules.includes(item.module)
+                        ? `/upgrade?module=${item.module}`
+                        : item.url;
+                    return (
                     <SidebarMenuItem key={item.title} className='relative'>
                       <SidebarMenuButton
                         asChild
@@ -306,7 +335,7 @@ export function NavMainClient({ favoritesEnabled, tenant }: NavMainProps) {
                             : ''
                         }
                       >
-                        <Link href={item.url} className='flex-1'>
+                        <Link href={url} className='flex-1'>
                           {item.icon && <item.icon size={16} />}
                           <span>{highlightMatch(item.title, query)}</span>
                         </Link>
@@ -325,7 +354,8 @@ export function NavMainClient({ favoritesEnabled, tenant }: NavMainProps) {
                         </SidebarMenuAction>
                       )}
                     </SidebarMenuItem>
-                  ))
+                  );
+                })
                 )}
               </SidebarMenu>
             </motion.div>
