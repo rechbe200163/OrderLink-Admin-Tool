@@ -8,5 +8,10 @@ export async function NavMain() {
   const enabledModules =
     tenant?.enabledModules.flatMap((module) => module.moduleName) || [];
   console.log('Enabled Modules:', enabledModules);
-  return <NavMainClient favoritesEnabled={favoritesEnabled} />;
+  return (
+    <NavMainClient
+      favoritesEnabled={favoritesEnabled}
+      tenant={{ enabledModules }}
+    />
+  );
 }
