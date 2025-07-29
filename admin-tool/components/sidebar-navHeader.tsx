@@ -1,4 +1,3 @@
-import { siteConfigApiService } from '@/lib/api/concrete/siteConfig';
 import Link from 'next/link';
 import React from 'react';
 import { SidebarMenuButton } from './ui/sidebar';
@@ -16,15 +15,14 @@ async function ErrorComponent() {
   );
 }
 
-const SideBarHeader = async () => {
+interface SideBarHeaderProps {
+  companyName?: string;
+}
+
+const SideBarHeader = async ({
+  companyName = 'OrderLink',
+}: SideBarHeaderProps) => {
   const t = await getTranslations('Components.SidebarHeader');
-  const data = await siteConfigApiService.getSiteConfig();
-
-  if (!data) {
-    return <ErrorComponent />;
-  }
-
-  const { companyName } = data;
 
   if (!companyName) {
     return <ErrorComponent />;

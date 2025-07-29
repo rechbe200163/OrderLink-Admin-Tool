@@ -44,8 +44,12 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 interface NavMainProps {
   favoritesEnabled: boolean;
+  tenant?: {
+    enabledModules: string[];
+  } | null;
 }
-export function NavMainClient({ favoritesEnabled }: NavMainProps) {
+
+export function NavMainClient({ favoritesEnabled, tenant }: NavMainProps) {
   const pathname = usePathname();
   const tGroup = useTranslations('Navigation.Groups');
   const tItem = useTranslations('Navigation.Items');

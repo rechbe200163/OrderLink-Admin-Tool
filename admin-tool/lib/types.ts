@@ -68,6 +68,12 @@ export enum BusinessSector {
   TRANSPORTATION = 'TRANSPORTATION',
 }
 
+enum TenantStatus {
+  TRIAL = 'TRIAL',
+  ACTIVE = 'ACTIVE',
+  SUSPENDED = 'SUSPENDED',
+  CANCELLED = 'CANCELLED',
+}
 // Basic model interfaces extracted from the Prisma schema
 export interface Address {
   addressId: string;
@@ -189,6 +195,31 @@ export interface SiteConfig {
   stripeAccountId: string | null;
   stripeConfigured: boolean;
 }
+
+export interface EnabledModule {
+  moduleName: string;
+}
+
+export interface Tenant {
+  tenantId: string;
+  companyName: string;
+  slug: string;
+  backendUrl?: string | null;
+  status: TenantStatus;
+  trialStartedAt: Date;
+  trialEndsAt: Date;
+  maxUsers: number;
+  enabledModules: EnabledModule[];
+  billingCustomerId?: string | null;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+export interface SiteConfigWithTenantDto {
+  siteConfig: SiteConfig;
+  tenant: Tenant;
+}
+
 export type AIVStats = {
   currentMonthAIV: number;
   lastMonthAIV: number;
