@@ -10,7 +10,7 @@ import {
 } from 'lucide-react';
 
 import { Label } from '@/components/ui/label';
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
 import { Package } from '@/lib/types';
 
 export default function GroupComponent() {
@@ -23,23 +23,25 @@ export default function GroupComponent() {
   ];
 
   return (
-    <RadioGroup className='grid-cols-2' defaultValue='1'>
+    <ToggleGroup
+      type='multiple'
+      variant='outline'
+      className='grid grid-cols-2 gap-2'
+      aria-label='Packages'
+    >
       {items.map((item) => (
-        <div
+        <ToggleGroupItem
           key={`${id}-${item.value}`}
-          className='border-input has-data-[state=checked]:border-primary/50 relative flex flex-col gap-4 rounded-md border p-4 shadow-xs outline-none'
+          value={item.value}
+          className='flex flex-col items-start gap-4 p-4'
         >
-          <div className='flex justify-between gap-2'>
-            <RadioGroupItem
-              id={`${id}-${item.value}`}
-              value={item.value}
-              className='order-1 after:absolute after:inset-0'
-            />
+          <div className='flex w-full justify-between gap-2'>
+            <span className='sr-only'>{item.label}</span>
             <item.Icon className='opacity-60' size={16} aria-hidden='true' />
           </div>
-          <Label htmlFor={`${id}-${item.value}`}>{item.label}</Label>
-        </div>
+          <Label>{item.label}</Label>
+        </ToggleGroupItem>
       ))}
-    </RadioGroup>
+    </ToggleGroup>
   );
 }
