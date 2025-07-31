@@ -8,7 +8,6 @@ import {
   Scissors,
   SwatchBook,
 } from 'lucide-react';
-
 import { Label } from '@/components/ui/label';
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
 import { Package } from '@/lib/types';
@@ -18,12 +17,28 @@ export default function GroupComponent() {
   const [packages, setPackages] = useState<string[]>([]);
 
   const items = [
-    { value: Package.CUSTOM_ROLES, label: Package.CUSTOM_ROLES, Icon: Key },
-    { value: Package.NAVIGATION, label: Package.NAVIGATION, Icon: Route },
-    { value: Package.STATISTICS, label: Package.STATISTICS, Icon: ChartArea },
+    {
+      value: Package.CUSTOM_ROLES,
+      label: Package.CUSTOM_ROLES,
+      Icon: Key,
+      description: 'Manage user permissions',
+    },
+    {
+      value: Package.NAVIGATION,
+      label: Package.NAVIGATION,
+      Icon: Route,
+      description: 'Configure app routing',
+    },
+    {
+      value: Package.STATISTICS,
+      label: Package.STATISTICS,
+      Icon: ChartArea,
+      description: 'View analytics data',
+    },
   ];
 
   return (
+
     <>
       <ToggleGroup
         type='multiple'
