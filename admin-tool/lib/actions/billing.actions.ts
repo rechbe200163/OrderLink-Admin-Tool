@@ -7,7 +7,10 @@ export async function billingAction(
   formData: FormData
 ): Promise<FormState> {
   try {
-    console.log('Billing action with formData:', formData.get('userTier'));
+    console.log('Billing action with formData:', {
+      userTier: formData.get('userTier'),
+      packages: formData.getAll('packages'),
+    });
     return {
       ..._prevState,
       success: true,
