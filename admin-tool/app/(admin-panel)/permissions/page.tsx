@@ -8,10 +8,16 @@ import { permissionApiService } from '@/lib/api/concrete/permissions';
 import { ButtonLinkComponent } from '@/components/ButtonLinkComponent';
 import SearchComponent from '@/components/pagination+filtering/SearchComponent';
 import PermissionsGrid from '@/components/helpers/permissions/PermissionsGrid';
+import { isModuleEnabled } from '@/lib/modules';
+import { MODULE_NAME } from '@/lib/types';
 
 export default async function PermissionsPage(props: {
   searchParams?: Promise<{ page?: string; limit?: string; role?: string }>;
 }) {
+  if (!(await isModuleEnabled(MODULE_NAME.CUSTOM_ROLES))) {
+    // redirect('/upgrade?module=STATISTICS');
+    return <NoRolesError />;
+  }
   const session = await getSession();
   if (!session) return null;
 

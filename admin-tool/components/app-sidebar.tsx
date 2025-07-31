@@ -12,13 +12,13 @@ import NavUser from './nav-user';
 import SideBarHeader from './sidebar-navHeader';
 import { getSession } from '@/lib/utlis/getSession';
 import { getCookie } from '@/lib/cookies/cookie-managment';
-import { SiteConfig } from '@/lib/types';
+import { SiteConfigDto } from '@/lib/types';
 
 export async function AppSidebar({
   ...props
 }: React.ComponentProps<typeof Sidebar>) {
   const session = await getSession();
-  const siteConfig = await getCookie<SiteConfig>('siteConfig');
+  const siteConfig = await getCookie<SiteConfigDto>('siteConfig');
 
   if (!session) {
     return null; // or handle unauthenticated state

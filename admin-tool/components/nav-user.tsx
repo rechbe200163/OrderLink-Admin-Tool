@@ -26,6 +26,7 @@ import { logOut } from '@/lib/actions/auth.actions';
 import type { Session } from '@/lib/utlis/getSession';
 import { useTranslations } from 'next-intl';
 import { Tenant } from '@/lib/types';
+import Link from 'next/link';
 
 interface NavUserProps {
   session: Session;
@@ -104,8 +105,10 @@ export default function NavUser({ session, tenant }: NavUserProps) {
                 </UserSettingsModal>
               </DropdownMenuItem>
               <DropdownMenuItem>
-                <CreditCardIcon className='mr-2 h-4 w-4' />
-                {tUser('billing')}
+                <Link href={`/billing`}>
+                  <CreditCardIcon className='mr-2 h-4 w-4' />
+                  {tUser('billing')}
+                </Link>
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />

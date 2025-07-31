@@ -55,6 +55,12 @@ export default function SessionTimer({
     }
   }, [isLowTime, isExpired]);
 
+  useEffect(() => {
+    if (formState?.success) {
+      setModalOpen(false);
+    }
+  }, [formState?.success]);
+
   return (
     <>
       {/* Timer-Anzeige */}

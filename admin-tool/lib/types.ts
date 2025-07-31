@@ -9,6 +9,48 @@ export enum Actions {
   CREATE = 'CREATE',
 }
 
+export enum ModulePackageName {
+  INSIGHT = 'INSIGHT', // Statistiken
+  FLOW = 'FLOW', // Navigation
+  ACCESS = 'ACCESS', // Custom Roles
+}
+
+export enum UserTier {
+  CORE = 'CORE',
+  TEAM = 'TEAM',
+  PRO = 'PRO',
+  ENTERPRISE = 'ENTERPRISE',
+}
+
+// Map ModuleName to ModulePackageName
+export const Package: Record<ModuleName, ModulePackageName> = {
+  STATISTICS: ModulePackageName.INSIGHT,
+  NAVIGATION: ModulePackageName.FLOW,
+  CUSTOM_ROLES: ModulePackageName.ACCESS,
+};
+
+// Pricing for each package
+export const PackagePricing: Record<ModulePackageName, number> = {
+  [ModulePackageName.INSIGHT]: 10,
+  [ModulePackageName.FLOW]: 15,
+  [ModulePackageName.ACCESS]: 5,
+};
+
+// Map user count to UserTier
+export const USER_TIER_BY_COUNT: Record<number, UserTier> = {
+  3: UserTier.CORE,
+  5: UserTier.TEAM,
+  7: UserTier.PRO,
+};
+
+// Pricing for each user tier
+export const UserTierPricing: Record<UserTier, number> = {
+  [UserTier.CORE]: 0, // up to 3 users
+  [UserTier.TEAM]: 5, // up to 5 users
+  [UserTier.PRO]: 10, // up to 7 users
+  [UserTier.ENTERPRISE]: 0, // custom pricing
+};
+
 // Role is now a model in the Prisma schema. The enum has been removed and
 // replaced with an interface that mirrors the table structure.
 export interface Role {
@@ -27,8 +69,19 @@ export const ROLE_NAMES = [
 ] as const;
 export type RoleName = (typeof ROLE_NAMES)[number];
 
-export const MODULE_NAMES = ['STATISTICS', 'NAVIGATION'] as const;
+export const MODULE_NAMES = [
+  'STATISTICS',
+  'NAVIGATION',
+  'CUSTOM_ROLES',
+] as const;
 export type ModuleName = (typeof MODULE_NAMES)[number];
+
+// Add an enum for easier access via MODULE_NAME.STATISTICS, etc.
+export enum MODULE_NAME {
+  STATISTICS = 'STATISTICS',
+  NAVIGATION = 'NAVIGATION',
+  CUSTOM_ROLES = 'CUSTOM_ROLES',
+}
 
 export enum Resources {
   PRODUCT = 'PRODUCT',
@@ -182,23 +235,6 @@ export interface Order {
   selfCollect: boolean;
 }
 
-export interface SiteConfig {
-  siteConfigId: string;
-  companyName: string;
-  logoPath: string;
-  email: string;
-  phoneNumber: string;
-  iban: string;
-  companyNumber: string;
-  addressId: string;
-  modifiedAt: Date | null;
-  isPremium: boolean;
-  deleted: boolean;
-  stripeCustomerId: string | null;
-  stripeAccountId: string | null;
-  stripeConfigured: boolean;
-}
-
 export interface EnabledModule {
   moduleName: ModuleName;
 }
@@ -219,7 +255,7 @@ export interface Tenant {
 }
 
 export interface SiteConfigWithTenantDto {
-  siteConfig: SiteConfig;
+  siteConfig: SiteConfigDto;
   tenant: Tenant;
 }
 
@@ -280,6 +316,7 @@ export type EmployeesPagingDto = PagingDto<Employees>;
 export type RoutesPagingDto = PagingDto<RoutesWithCount>;
 export type CategoriesPagingDto = PagingDto<Category>;
 export type PermissionsPagingDto = PagingDto<Permission>;
+
 export type SiteConfigDto = {
   siteConfigId: string;
   companyName: string;
@@ -333,10 +370,6 @@ export interface OrdersWithCustomer extends Order {
 }
 
 export interface OrdersWithCustomerAndProducts extends OrdersWithCustomer {}
-
-export interface SiteConfigWithAddress extends SiteConfig {
-  address: Address;
-}
 
 export interface OrdersWithAddressOfCustomer extends Order {
   customer: {

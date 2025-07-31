@@ -5,7 +5,7 @@ import { Separator } from '@/components/ui/separator';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { useActionState } from 'react';
+import { useActionState, useMemo } from 'react';
 import { updateSiteConfig } from '@/lib/actions/siteConfig.actions';
 import React from 'react';
 import CustomeToast from '@/components/helpers/toasts/CustomeErrorToast';
@@ -13,12 +13,19 @@ import { toast } from 'sonner';
 import AddressSelectComponent from '@/components/helpers/AddressSelectComponent';
 import GenericInputMaskComponent from '@/components/InputWithMask';
 import { useRouter } from 'next/navigation';
-import { SiteConfigDto } from '@/lib/types';
+import {
+  ModuleName,
+  ModulePackageName,
+  SiteConfigDto,
+  Tenant,
+} from '@/lib/types';
 
 export default function SiteConfigCard({
   siteConfig,
+  tenant,
 }: {
   siteConfig: SiteConfigDto;
+  tenant: Tenant;
 }) {
   const router = useRouter();
   const [selectedAddress, setSelectedAddress] = React.useState<string>(
@@ -62,11 +69,13 @@ export default function SiteConfigCard({
     }
   }, [formState.errors]);
 
+  const enabledModules = tenant.enabledModules.map((m) => m.moduleName);
+
   return (
     <Card className='w-full max-w-2xl mx-auto p-6 shadow-lg rounded-2xl'>
       <CardHeader>
         <CardTitle className='text-2xl font-bold flex justify-between items-center'>
-          {siteConfig.companyName}
+          {siteConfig.companyName} - {showEnabledModules(enabledModules)}
           <div className='flex items-center gap-3'>
             {siteConfig.isPremium && <Badge variant='success'>Premium</Badge>}
           </div>
@@ -162,4 +171,8 @@ export default function SiteConfigCard({
       </CardContent>
     </Card>
   );
+}
+
+function showEnabledModules(enabledModules: ModuleName[]) {
+  return enabledModules.map((module) => ModulePackageName[module]).join(' • ');
 }

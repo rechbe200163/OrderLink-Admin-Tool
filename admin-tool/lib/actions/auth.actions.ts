@@ -85,8 +85,9 @@ export async function verifyOtp(
   redirect('/');
 }
 
-export async function renewSessionAction(): Promise<{ success: boolean }> {
+export async function renewSessionAction(): Promise<FormState> {
   const session = await getSession();
+  console.log('Renewing session:', session);
 
   if (!session) {
     return { success: false }; // ❌ redirect NICHT hier aufrufen

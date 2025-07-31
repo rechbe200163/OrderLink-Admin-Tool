@@ -4,5 +4,6 @@ import { Tenant, ModuleName } from '@/lib/types';
 export async function isModuleEnabled(module: ModuleName): Promise<boolean> {
   const tenant = await getCookie<Tenant>('tenant');
   const enabled = tenant?.enabledModules.map((m) => m.moduleName) || [];
+  console.log(enabled);
   return enabled.includes(module);
 }
