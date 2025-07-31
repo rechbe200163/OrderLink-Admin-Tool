@@ -1,13 +1,15 @@
 'use server';
 
 import { FormState } from '../form.types';
+import { formDataToPartial } from '../utils';
 
 export async function billingAction(
   _prevState: FormState,
   formData: FormData
 ): Promise<FormState> {
   try {
-    console.log('Billing action with formData:', formData.get('userTier'));
+    const data = formDataToPartial(formData);
+    console.log('Billing action with formData:', data);
     return {
       ..._prevState,
       success: true,
