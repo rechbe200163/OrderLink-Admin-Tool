@@ -19,21 +19,21 @@ export default function GroupComponent() {
   const items = [
     {
       value: Package.CUSTOM_ROLES,
-      label: Package.CUSTOM_ROLES,
+      label: Package.CUSTOM_ROLES.toLocaleUpperCase(),
       Icon: Key,
-      description: 'Manage user permissions',
+      description: 'Flexible Rollen & Berechtigungen für dein Team',
     },
     {
       value: Package.NAVIGATION,
-      label: Package.NAVIGATION,
+      label: Package.NAVIGATION.toLocaleUpperCase(),
       Icon: Route,
-      description: 'Configure app routing',
+      description: 'Liefer­routen einfach planen und zuweisen',
     },
     {
       value: Package.STATISTICS,
-      label: Package.STATISTICS,
+      label: Package.STATISTICS.toLocaleUpperCase(),
       Icon: ChartArea,
-      description: 'View analytics data',
+      description: 'Kennzahlen visualisieren und Leistung verfolgen',
     },
   ];
 
@@ -74,7 +74,7 @@ export default function GroupComponent() {
                 <div className='w-2 h-2 rounded-full bg-primary' />
               </div>
             </div>
-            <div className='flex flex-col gap-1'>
+            <div className='flex items-start flex-col gap-1 w-full'>
               <Label className='text-base font-medium text-foreground group-hover:text-foreground group-data-[state=on]:text-foreground transition-colors duration-200 cursor-pointer'>
                 {item.label}
               </Label>

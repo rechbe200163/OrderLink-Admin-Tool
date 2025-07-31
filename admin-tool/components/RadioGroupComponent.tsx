@@ -13,21 +13,25 @@ export default function RadioGroupComponentUserTiers() {
     {
       value: UserTier.CORE,
       label: UserTier.CORE.toLocaleUpperCase(),
+      description: 'Grundlegende Funktionen für Einzelanwender',
       price: `€${UserTierPricing.CORE}/month`,
     },
     {
       value: UserTier.TEAM,
       label: UserTier.TEAM.toLocaleUpperCase(),
+      description: 'Ideal für kleine Teams und Startups',
       price: `  €${UserTierPricing.TEAM}/month`,
     },
     {
       value: UserTier.PRO,
       label: UserTier.PRO.toLocaleUpperCase(),
+      description: 'Erweiterte Funktionen für wachsende Teams',
       price: `€${UserTierPricing.PRO}/month`,
     },
     {
       value: UserTier.ENTERPRISE,
       label: UserTier.ENTERPRISE.toLocaleUpperCase(),
+      description: 'Für große Teams und Unternehmen',
       price: `€${UserTierPricing.ENTERPRISE}/month`,
     },
   ];
@@ -60,15 +64,20 @@ export default function RadioGroupComponentUserTiers() {
                   className='after:absolute after:inset-0'
                   aria-describedby={`${`${id}-${item.value}`}-price`}
                 />
-                <Label
-                  className='inline-flex items-start text-base font-medium'
-                  htmlFor={`${id}-${item.value}`}
-                >
-                  {item.label}
-                  {item.value === UserTier.TEAM && (
-                    <Badge className='ms-2 -mt-1'>Beliebt</Badge>
-                  )}
-                </Label>
+                <div className='flex flex-col gap-1'>
+                  <Label
+                    className='inline-flex items-start text-base font-medium'
+                    htmlFor={`${id}-${item.value}`}
+                  >
+                    {item.label}
+                    {item.value === UserTier.TEAM && (
+                      <Badge className='ms-2 -mt-1'>Beliebt</Badge>
+                    )}
+                  </Label>
+                  <p className='text-xs text-muted-foreground'>
+                    {item.description}
+                  </p>
+                </div>
               </div>
               <div
                 id={`${`${id}-${item.value}`}-price`}
