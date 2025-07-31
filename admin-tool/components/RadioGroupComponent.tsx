@@ -34,9 +34,14 @@ export default function RadioGroupComponentUserTiers() {
 
   return (
     <fieldset className='space-y-4'>
-      <legend className='text-foreground text-sm leading-none font-medium'>
-        Choose plan
-      </legend>
+      <div className='mb-2'>
+        <h2 className='text-lg font-semibold text-foreground'>
+          Teamgröße wählen
+        </h2>
+        <p className='text-sm text-muted-foreground'>
+          Wähle, wie viele Nutzer deine OrderLink-Instanz nutzen sollen.
+        </p>
+      </div>
       <RadioGroup
         className='gap-0 -space-y-px rounded-md shadow-xs'
         defaultValue={UserTier.TEAM}
@@ -56,18 +61,18 @@ export default function RadioGroupComponentUserTiers() {
                   aria-describedby={`${`${id}-${item.value}`}-price`}
                 />
                 <Label
-                  className='inline-flex items-start'
+                  className='inline-flex items-start text-base font-medium'
                   htmlFor={`${id}-${item.value}`}
                 >
                   {item.label}
                   {item.value === UserTier.TEAM && (
-                    <Badge className='ms-2 -mt-1'>Popular</Badge>
+                    <Badge className='ms-2 -mt-1'>Beliebt</Badge>
                   )}
                 </Label>
               </div>
               <div
                 id={`${`${id}-${item.value}`}-price`}
-                className='text-muted-foreground text-xs leading-[inherit]'
+                className='text-sm text-muted-foreground leading-[inherit]'
               >
                 {item.price}
               </div>
