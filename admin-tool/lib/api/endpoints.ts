@@ -33,6 +33,7 @@ export const ENDPOINTS = {
   EMPLOYEE_WITH_OTP: (id: string | number) => `employees/${id}?includeOtp=true`,
   GET_ME: 'employees/me',
   UPDATE_ME: 'employees/me',
+  CHECK_OUT: 'billing/checkout',
 } as const;
 
 export type EndpointKey = keyof typeof ENDPOINTS;

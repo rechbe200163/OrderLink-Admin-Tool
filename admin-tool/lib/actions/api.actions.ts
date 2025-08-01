@@ -1,6 +1,7 @@
 'use server';
 
 import { baseApiService } from '../api/base';
+import { baseTenantApiService } from '../api/baseTenant';
 
 export async function apiGet<T>(
   endpoint: string,
@@ -38,4 +39,12 @@ export async function apiDelete<T>(
   params?: Record<string, string | number | undefined>
 ): Promise<T> {
   return baseApiService.delete<T>(endpoint, params);
+}
+
+export async function apiUpgradeLicense<T>(
+  endpoint: string,
+  body?: unknown,
+  params?: Record<string, string | number | undefined>
+): Promise<T> {
+  return baseTenantApiService.postTenant<T>(endpoint, body, params);
 }

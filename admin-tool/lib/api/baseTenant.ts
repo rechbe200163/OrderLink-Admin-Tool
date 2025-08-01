@@ -3,10 +3,10 @@ import { getCookie } from '../cookies/cookie-managment';
 import { ApiError } from './ApiError';
 import { forbidden } from 'next/navigation';
 
-export class BaseApiService {
+export class BaseTenantApiService {
   public baseUrl: string;
 
-  constructor(baseUrl: string = process.env.NEXT_PUBLIC_API_URL || '') {
+  constructor(baseUrl: string = process.env.NEXT_PUBLIC_TENANT_SERVICE || '') {
     this.baseUrl = baseUrl;
   }
 
@@ -23,13 +23,7 @@ export class BaseApiService {
       headers?: HeadersInit;
     } = {}
   ): Promise<T> {
-    console.log('BaseApiService initialized with baseUrl:', this.baseUrl);
     const url = new URL(`${this.baseUrl}/${endpoint}`);
-    console.log('API Request:', {
-      method,
-      url: url.toString(),
-      body,
-    });
 
     if (params) {
       Object.entries(params).forEach(([key, value]) => {
@@ -60,6 +54,14 @@ export class BaseApiService {
     if (!response.ok) {
       const errorData = await response.json().catch(() => ({}));
 
+      console.error('API Error:', {
+        status: response.status,
+        statusText: response.statusText,
+        url: url.toString(),
+        body,
+        errorData,
+      });
+
       if (response.status === 401 || response.status === 403) {
         forbidden();
       }
@@ -75,43 +77,20 @@ export class BaseApiService {
     return response.json();
   }
 
-  public get<T>(
+  public getTenant<T>(
     endpoint: string,
     params?: Record<string, string | number | boolean | undefined>
   ): Promise<T> {
     return this.request('GET', endpoint, { params });
   }
 
-  public post<T>(
+  public postTenant<T>(
     endpoint: string,
     body?: unknown,
     params?: Record<string, string | number | undefined>
   ): Promise<T> {
     return this.request('POST', endpoint, { body, params });
   }
-
-  public put<T>(
-    endpoint: string,
-    body?: unknown,
-    params?: Record<string, string | number | undefined>
-  ): Promise<T> {
-    return this.request('PUT', endpoint, { body, params });
-  }
-
-  public patch<T>(
-    endpoint: string,
-    body?: unknown,
-    params?: Record<string, string | number | undefined>
-  ): Promise<T> {
-    return this.request('PATCH', endpoint, { body, params });
-  }
-
-  public delete<T>(
-    endpoint: string,
-    params?: Record<string, string | number | undefined>
-  ): Promise<T> {
-    return this.request('DELETE', endpoint, { params });
-  }
 }
 
-export const baseApiService = new BaseApiService();
+export const baseTenantApiService = new BaseTenantApiService();

@@ -14,7 +14,7 @@ import { Package } from '@/lib/types';
 
 export default function GroupComponent() {
   const id = useId();
-  const [packages, setPackages] = useState<string[]>([]);
+  const [modules, setModules] = useState<string[]>([]);
 
   const items = [
     {
@@ -53,8 +53,8 @@ export default function GroupComponent() {
         type='multiple'
         variant='outline'
         className='grid grid-cols-1 sm:grid-cols-2 gap-4'
-        aria-label='Packages'
-        onValueChange={(value) => setPackages(value as string[])}
+        aria-label='Modules'
+        onValueChange={(value) => setModules(value as string[])}
       >
         {items.map((item) => (
           <ToggleGroupItem
@@ -86,13 +86,8 @@ export default function GroupComponent() {
           </ToggleGroupItem>
         ))}
       </ToggleGroup>
-      {packages.map((pkg) => (
-        <input
-          key={`${id}-hidden-${pkg}`}
-          type='hidden'
-          name='packages'
-          value={pkg}
-        />
+      {modules.map((modul, i) => (
+        <input key={i} type='hidden' name='modules' value={modul} />
       ))}
 
       <div className='mt-6 text-center'>

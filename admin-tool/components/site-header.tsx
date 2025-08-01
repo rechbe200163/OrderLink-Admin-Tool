@@ -3,6 +3,7 @@ import { SidebarTrigger } from '@/components/ui/sidebar';
 import { getSession } from '@/lib/utlis/getSession';
 import SessionTimer from './helpers/SessionTimer';
 import PathBreadcrumbs from './helpers/PathBreadcrumbs';
+import ThemeToggle from './dark-mode/Toggle';
 
 export async function SiteHeader() {
   const session = await getSession();
@@ -21,11 +22,12 @@ export async function SiteHeader() {
           />
           <PathBreadcrumbs />
         </div>
-        <div className='flex items-center gap-2 m-5'>
+        <div className='flex items-center gap-2 m-5 justify-between'>
           <SessionTimer
             issuedAt={session.token.issuedAt}
             expiresAt={session.token.expiresAt}
           />
+          <ThemeToggle />
         </div>
       </div>
     </header>

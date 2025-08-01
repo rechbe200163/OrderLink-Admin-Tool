@@ -27,6 +27,7 @@ import type { Session } from '@/lib/utlis/getSession';
 import { useTranslations } from 'next-intl';
 import { Tenant } from '@/lib/types';
 import Link from 'next/link';
+import ThemeToggle from './dark-mode/Toggle';
 
 interface NavUserProps {
   session: Session;
@@ -104,12 +105,12 @@ export default function NavUser({ session, tenant }: NavUserProps) {
                   </div>
                 </UserSettingsModal>
               </DropdownMenuItem>
-              <DropdownMenuItem>
-                <Link href={`/billing`}>
+              <Link href={`/billing`}>
+                <DropdownMenuItem>
                   <CreditCardIcon className='mr-2 h-4 w-4' />
                   {tUser('billing')}
-                </Link>
-              </DropdownMenuItem>
+                </DropdownMenuItem>
+              </Link>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuItem onClick={logOut}>

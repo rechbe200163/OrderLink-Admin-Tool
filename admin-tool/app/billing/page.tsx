@@ -5,17 +5,30 @@ import RadioGroupComponentUserTiers from '@/components/RadioGroupComponent';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { billingAction } from '@/lib/actions/billing.actions';
-import { useActionState } from 'react';
+import { useActionState, useEffect } from 'react';
 import { useTranslations } from 'next-intl';
+import { useRouter } from 'next/navigation';
 
 const BillingPage = () => {
-  const t = useTranslations('Components.NavUser');
+  const router = useRouter();
   const [formState, action, isPending] = useActionState(billingAction, {
     success: false,
     errors: {
       title: [],
     },
   });
+
+  useEffect(() => {
+    if (formState.data?.url && formState.success) {
+      router.push(formState.data.url);
+    }
+  }, [formState, router]);
+
+  // useEffect(() => {
+  //   if (formState.data && formState.success) {
+  //     router.push(formState.data + '');
+  //   }
+  // }, [formState, router]);
 
   return (
     <div className='flex min-h-svh items-center justify-center bg-muted p-6 md:p-10'>
@@ -55,5 +68,4 @@ const BillingPage = () => {
     </div>
   );
 };
-
 export default BillingPage;

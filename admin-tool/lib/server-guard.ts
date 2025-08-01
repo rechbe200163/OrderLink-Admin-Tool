@@ -25,7 +25,11 @@ export async function guardAction<Args extends any[], R = unknown>(
 
   try {
     // eslint-disable-next-line @typescript-eslint/return-await
-    return await callback(session, ...([] as unknown as Args));
+    const result = await callback(session, ...([] as unknown as Args));
+    return {
+      success: true,
+      data: result as any,
+    };
   } catch (e) {
     console.error(e);
     let message = errorMessage;
