@@ -26,15 +26,24 @@ export async function guardAction<Args extends any[], R = unknown>(
   try {
     // eslint-disable-next-line @typescript-eslint/return-await
     const result = await callback(session, ...([] as unknown as Args));
+    const message =
+      result && typeof result === 'object' && 'message' in result
+        ? (result as any).message
+        : undefined;
     return {
       success: true,
       data: result as any,
+      ...(message ? { message } : {}),
     };
   } catch (e) {
     console.error(e);
     let message = errorMessage;
+    let status: number | undefined;
+    let data: unknown;
     if (e instanceof ApiError) {
       message = e.message;
+      status = e.status;
+      data = e.data;
     } else if (e && typeof e === 'object' && 'message' in e) {
       message = (e as Error).message;
     }
@@ -42,6 +51,8 @@ export async function guardAction<Args extends any[], R = unknown>(
       success: false,
       errors: { title: [message] },
       message,
+      ...(status ? { status } : {}),
+      ...(data ? { data } : {}),
     } satisfies FormState as FormState;
   }
 }
