@@ -1,4 +1,3 @@
-
 'use client';
 import React from 'react';
 
@@ -47,9 +46,6 @@ import type { ModuleName } from '@/lib/types';
 
 interface NavMainProps {
   favoritesEnabled: boolean;
-  tenant?: {
-    enabledModules: string[];
-  } | null;
 }
 
 interface NavItem {
@@ -59,9 +55,8 @@ interface NavItem {
   module?: ModuleName;
 }
 
-export function NavMainClient({ favoritesEnabled, tenant }: NavMainProps) {
+export function NavMainClient({ favoritesEnabled }: NavMainProps) {
   const pathname = usePathname();
-  const enabledModules = tenant?.enabledModules ?? [];
   const tGroup = useTranslations('Navigation.Groups');
   const tItem = useTranslations('Navigation.Items');
   const tNav = useTranslations('Components.NavMain');
@@ -99,7 +94,11 @@ export function NavMainClient({ favoritesEnabled, tenant }: NavMainProps) {
         label: tGroup('overview'),
         icon: HomeIcon,
         items: [
-          { title: tItem('overview'), url: '/', icon: HomeIcon, module: 'STATISTICS' },
+          {
+            title: tItem('overview'),
+            url: '/',
+            icon: HomeIcon,
+          },
         ],
       },
       {
@@ -107,19 +106,25 @@ export function NavMainClient({ favoritesEnabled, tenant }: NavMainProps) {
         icon: ShoppingCartIcon,
         items: [
           { title: tItem('orders'), url: '/orders', icon: ShoppingCartIcon },
-          { title: tItem('routes'), url: '/routes', icon: Route, module: 'NAVIGATION' },
-          { title: tItem('addresses'), url: '/addresses', icon: MapPin, module: 'NAVIGATION' },
+          {
+            title: tItem('routes'),
+            url: '/routes',
+            icon: Route,
+          },
+          {
+            title: tItem('addresses'),
+            url: '/addresses',
+            icon: MapPin,
+          },
           {
             title: tItem('ordersStatistics'),
             url: '/orders/statistics',
             icon: ChartLine,
-            module: 'STATISTICS',
           },
           {
             title: tItem('routesStatistics'),
             url: '/routes/statistics',
             icon: ChartLine,
-            module: 'STATISTICS',
           },
         ],
       },
@@ -133,13 +138,11 @@ export function NavMainClient({ favoritesEnabled, tenant }: NavMainProps) {
             title: tItem('productsStatistics'),
             url: '/products/statistics',
             icon: ChartLine,
-            module: 'STATISTICS',
           },
           {
             title: tItem('categoriesStatistics'),
             url: '/categories/statistics',
             icon: ChartLine,
-            module: 'STATISTICS',
           },
         ],
       },
@@ -152,7 +155,6 @@ export function NavMainClient({ favoritesEnabled, tenant }: NavMainProps) {
             title: tItem('customersStatistics'),
             url: '/customers/statistics',
             icon: ChartLine,
-            module: 'STATISTICS',
           },
         ],
       },
@@ -272,47 +274,44 @@ export function NavMainClient({ favoritesEnabled, tenant }: NavMainProps) {
                       <CollapsibleContent>
                         <SidebarMenuSub>
                           {group.items.map((item) => {
-                            const url =
-                              item.module && !enabledModules.includes(item.module)
-                                ? `/upgrade?module=${item.module}`
-                                : item.url;
+                            const url = item.url;
                             return (
-                            <SidebarMenuSubItem
-                              key={item.title}
-                              className='relative'
-                            >
-                              <SidebarMenuSubButton
-                                asChild
-                                className={
-                                  isItemActive(item.url)
-                                    ? 'bg-primary text-primary-foreground'
-                                    : ''
-                                }
+                              <SidebarMenuSubItem
+                                key={item.title}
+                                className='relative'
                               >
-                                <Link href={url} className='flex-1'>
-                                  <span className='flex items-center gap-2'>
-                                    {item.icon && <item.icon size={16} />}
-                                    {highlightMatch(item.title, query)}
-                                  </span>
-                                </Link>
-                              </SidebarMenuSubButton>
-                              {favoritesEnabled && (
-                                <SidebarMenuAction
-                                  onClick={() => toggleFavorite(item.url)}
-                                  showOnHover
+                                <SidebarMenuSubButton
+                                  asChild
+                                  className={
+                                    isItemActive(item.url)
+                                      ? 'bg-primary text-primary-foreground'
+                                      : ''
+                                  }
                                 >
-                                  {favorites.includes(item.url) ? (
-                                    <StarOff size={16} />
-                                  ) : (
-                                    <Star size={16} />
-                                  )}
-                                  <span className='sr-only'>
-                                    {tNav('favorite')}
-                                  </span>
-                                </SidebarMenuAction>
-                              )}
-                            </SidebarMenuSubItem>
-                          );
+                                  <Link href={url} className='flex-1'>
+                                    <span className='flex items-center gap-2'>
+                                      {item.icon && <item.icon size={16} />}
+                                      {highlightMatch(item.title, query)}
+                                    </span>
+                                  </Link>
+                                </SidebarMenuSubButton>
+                                {favoritesEnabled && (
+                                  <SidebarMenuAction
+                                    onClick={() => toggleFavorite(item.url)}
+                                    showOnHover
+                                  >
+                                    {favorites.includes(item.url) ? (
+                                      <StarOff size={16} />
+                                    ) : (
+                                      <Star size={16} />
+                                    )}
+                                    <span className='sr-only'>
+                                      {tNav('favorite')}
+                                    </span>
+                                  </SidebarMenuAction>
+                                )}
+                              </SidebarMenuSubItem>
+                            );
                           })}
                         </SidebarMenuSub>
                       </CollapsibleContent>
@@ -320,42 +319,39 @@ export function NavMainClient({ favoritesEnabled, tenant }: NavMainProps) {
                   </Collapsible>
                 ) : (
                   group.items.map((item) => {
-                    const url =
-                      item.module && !enabledModules.includes(item.module)
-                        ? `/upgrade?module=${item.module}`
-                        : item.url;
+                    const url = item.url;
                     return (
-                    <SidebarMenuItem key={item.title} className='relative'>
-                      <SidebarMenuButton
-                        asChild
-                        tooltip={item.title}
-                        className={
-                          isItemActive(item.url)
-                            ? 'bg-primary text-primary-foreground'
-                            : ''
-                        }
-                      >
-                        <Link href={url} className='flex-1'>
-                          {item.icon && <item.icon size={16} />}
-                          <span>{highlightMatch(item.title, query)}</span>
-                        </Link>
-                      </SidebarMenuButton>
-                      {favoritesEnabled && (
-                        <SidebarMenuAction
-                          onClick={() => toggleFavorite(item.url)}
-                          showOnHover
+                      <SidebarMenuItem key={item.title} className='relative'>
+                        <SidebarMenuButton
+                          asChild
+                          tooltip={item.title}
+                          className={
+                            isItemActive(item.url)
+                              ? 'bg-primary text-primary-foreground'
+                              : ''
+                          }
                         >
-                          {favorites.includes(item.url) ? (
-                            <StarOff size={16} />
-                          ) : (
-                            <Star size={16} />
-                          )}
-                          <span className='sr-only'>{tNav('favorite')}</span>
-                        </SidebarMenuAction>
-                      )}
-                    </SidebarMenuItem>
-                  );
-                })
+                          <Link href={url} className='flex-1'>
+                            {item.icon && <item.icon size={16} />}
+                            <span>{highlightMatch(item.title, query)}</span>
+                          </Link>
+                        </SidebarMenuButton>
+                        {favoritesEnabled && (
+                          <SidebarMenuAction
+                            onClick={() => toggleFavorite(item.url)}
+                            showOnHover
+                          >
+                            {favorites.includes(item.url) ? (
+                              <StarOff size={16} />
+                            ) : (
+                              <Star size={16} />
+                            )}
+                            <span className='sr-only'>{tNav('favorite')}</span>
+                          </SidebarMenuAction>
+                        )}
+                      </SidebarMenuItem>
+                    );
+                  })
                 )}
               </SidebarMenu>
             </motion.div>

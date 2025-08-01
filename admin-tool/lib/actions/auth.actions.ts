@@ -11,6 +11,8 @@ export async function logOut(): Promise<FormState> {
   try {
     await deleteCookie('token');
     await deleteCookie('user');
+    await deleteCookie('tenant');
+    await deleteCookie('siteConfig');
     return Promise.resolve({ success: true, message: 'Logout successful' });
   } catch (error: any) {
     return {
@@ -47,9 +49,6 @@ export async function logIn(
       expiresAt: resp.token.expiresAt,
     });
     await setCookie('user', resp.user);
-    const { siteConfig, tenant } = await siteConfigApiService.getSiteConfig();
-    await setCookie('siteConfig', siteConfig);
-    await setCookie('tenant', tenant);
   } catch (error: any) {
     console.error('Login error:', error);
     return { success: false, errors: { title: [error.message] } };
