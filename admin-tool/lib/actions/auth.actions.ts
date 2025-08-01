@@ -95,6 +95,8 @@ export async function renewSessionAction(): Promise<FormState> {
   try {
     const resp = await apiPost<Session>(ENDPOINTS.AUTH_RENEW_SESSION);
 
+    console.log('Renewed session response:', resp);
+
     if (resp?.token) {
       await setCookie('token', resp.token);
       await setCookie('user', resp.user);

@@ -12,7 +12,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog';
-import { renewSessionAction } from '@/lib/actions/auth.actions';
+import { logOut, renewSessionAction } from '@/lib/actions/auth.actions';
 
 interface SessionTimerProps {
   issuedAt: number;
@@ -24,10 +24,6 @@ export default function SessionTimer({
   expiresAt,
 }: SessionTimerProps) {
   const [remaining, setRemaining] = useState(expiresAt - Date.now());
-  const [formState, action, isPending] = useActionState(
-    renewSessionAction,
-    undefined
-  );
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -46,6 +42,10 @@ export default function SessionTimer({
   const remMins = Math.floor((Math.max(0, totalSeconds) % 3600) / 60);
   const remSecs = Math.max(0, totalSeconds) % 60;
 
+  const [formState, action, isPending] = useActionState(
+    isExpired ? renewSessionAction : logOut,
+    undefined
+  );
   const [modalOpen, setModalOpen] = useState(false);
 
   // Öffne Modal bei kritischem oder abgelaufenem Zustand
@@ -137,9 +137,19 @@ export default function SessionTimer({
             <Button variant='outline' onClick={() => setModalOpen(false)}>
               Schließen
             </Button>
-            <form action={action} className='flex items-center gap-2'>
-              <Button type='submit'>Session verlängern</Button>
-            </form>
+            {isExpired ? (
+              <form action={action} className='flex items-center gap-2'>
+                <Button type='submit' disabled={isExpired}>
+                  Session verlängern
+                </Button>
+              </form>
+            ) : (
+              <form action={action} className='flex items-center gap-2'>
+                <Button type='submit' disabled={isPending}>
+                  {isPending ? 'Verlängern...' : 'Jetzt verlängern'}
+                </Button>
+              </form>
+            )}
           </div>
         </DialogContent>
       </Dialog>

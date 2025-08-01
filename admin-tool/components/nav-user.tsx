@@ -27,7 +27,6 @@ import type { Session } from '@/lib/utlis/getSession';
 import { useTranslations } from 'next-intl';
 import { Tenant } from '@/lib/types';
 import Link from 'next/link';
-import ThemeToggle from './dark-mode/Toggle';
 
 interface NavUserProps {
   session: Session;
