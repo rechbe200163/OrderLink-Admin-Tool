@@ -57,22 +57,22 @@ export class BaseApiService {
 
     const response = await fetch(url.toString(), options);
 
-    if (!response.ok) {
-      const errorData = await response.json().catch(() => ({}));
+    const responseData = await response.json().catch(() => ({}));
 
+    if (!response.ok) {
       if (response.status === 401 || response.status === 403) {
         forbidden();
       }
-
       throw new ApiError(
-        errorData.message ||
-          errorData.error ||
+        responseData.message ||
+          responseData.error ||
           `Request failed with status ${response.status}`,
-        response.status
+        response.status,
+        responseData
       );
     }
 
-    return response.json();
+    return responseData as T;
   }
 
   public get<T>(
