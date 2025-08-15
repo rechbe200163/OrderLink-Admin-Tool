@@ -9,6 +9,7 @@ import { BusinessSector } from '@/lib/types';
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
+
 export function formatPrice(price: number, currency?: string): string {
   return new Intl.NumberFormat('de-AT', {
     style: 'currency',

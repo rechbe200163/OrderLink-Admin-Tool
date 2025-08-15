@@ -20,14 +20,34 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { formatDateTime, formatPrice } from '@/lib/utils';
 import ImageSkeleton from '@/components/images/ImageSkeleton';
-import ImageComponent from '@/components/images/ImageComponent';
+import Image from 'next/image';
 
 export function ProductTable({ products }: { products: Product[] }) {
+  // const [headers, setHeaders] = useState<string[]>([]);
+  if (products.length === 0) {
+    return (
+      <div className='bg-background text-foreground p-4 rounded-lg shadow-xs'>
+        <p className='text-center'>Keine Produkte gefunden</p>
+      </div>
+    );
+  }
+
+  // useEffect(() => {
+  //   if (products.length > 0) {
+  //     setHeaders(Object.keys(products[0]));
+  //   }
+  // }, [products]);
+
   return (
     <div className='bg-background text-foreground p-4 rounded-lg shadow-xs'>
       <Table className='border-separate border-spacing-0 [&_td]:border-border [&_tfoot_td]:border-t [&_th]:border-b [&_th]:border-border [&_tr:not(:last-child)_td]:border-b [&_tr]:border-none'>
         <TableHeader className='sticky top-0 z-10 bg-background/90 backdrop-blur-xs'>
           <TableRow className='hover:bg-muted'>
+            {/* {headers.map((header, idx) => (
+              <TableHead key={idx} className='w-20'>
+                {header}
+              </TableHead>
+            ))} */}
             <TableHead className='w-20'>Bild</TableHead>
             <TableHead className='w-40'>Name</TableHead>
             <TableHead className='w-40'>Preis</TableHead>
@@ -50,11 +70,11 @@ export function ProductTable({ products }: { products: Product[] }) {
                     <Suspense fallback={<ImageSkeleton />}>
                       <div className='relative w-16 h-16 overflow-hidden rounded-md'>
                         {product.imagePath ? (
-                          <ImageComponent
-                            imagePath={product.imagePath}
-                            alt={product.name}
-                            width={64}
-                            height={64}
+                          <Image
+                            src={product.imagePath}
+                            width={20}
+                            height={20}
+                            alt=''
                           />
                         ) : (
                           <div className='w-full h-full bg-muted flex items-center justify-center'>

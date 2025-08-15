@@ -59,6 +59,7 @@ export class BaseApiService {
 
     if (!response.ok) {
       const errorData = await response.json().catch(() => ({}));
+      console.error(errorData);
 
       if (response.status === 401 || response.status === 403) {
         forbidden();

@@ -126,7 +126,7 @@ export default function CreatePermission({ roles }: { roles: string[] }) {
           {isPending ? (
             <>
               <LoadingIcon />
-              <GenericLoading text={t('buttons.addLoading')} />
+              {t('buttons.add')}
             </>
           ) : (
             <>

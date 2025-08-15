@@ -193,7 +193,15 @@ export interface Customer {
   addressId: string;
   businessSector: BusinessSector | null;
 }
-
+export interface CreateCustomer {
+  email: string;
+  phoneNumber: string;
+  firstName: string | null;
+  lastName: string;
+  companyNumber: string | null;
+  addressId: string;
+  businessSector: BusinessSector | null;
+}
 export interface Employees {
   employeeId: string;
   email: string;

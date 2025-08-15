@@ -24,12 +24,6 @@ const BillingPage = () => {
     }
   }, [formState, router]);
 
-  // useEffect(() => {
-  //   if (formState.data && formState.success) {
-  //     router.push(formState.data + '');
-  //   }
-  // }, [formState, router]);
-
   return (
     <div className='flex min-h-svh items-center justify-center bg-muted p-6 md:p-10'>
       <Card className='w-full max-w-3xl space-y-8 p-8 shadow-lg border border-border bg-background'>

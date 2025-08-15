@@ -67,7 +67,7 @@ export default function CategoryForm() {
           {isPending ? (
             <>
               <LoadingIcon />
-              {t('buttons.addLoading')}
+              {t('buttons.add')}
             </>
           ) : (
             <>

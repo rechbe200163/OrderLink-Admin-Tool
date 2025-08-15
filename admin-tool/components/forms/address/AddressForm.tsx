@@ -152,8 +152,7 @@ export default function AddressForm() {
           <Button type='submit'>
             {isPending ? (
               <>
-                <LoadingIcon />;
-                <GenericLoading text={t('buttons.addLoading')} />
+                <LoadingIcon />;{t('buttons.add')}
               </>
             ) : (
               <>

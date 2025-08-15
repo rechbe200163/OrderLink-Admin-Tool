@@ -10,7 +10,7 @@ import {
 import { Card } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
-import React, { useActionState } from 'react';
+import React, { useActionState, useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { PlusCircle } from 'lucide-react';
 import { addCustomer } from '@/lib/actions/user.actions';
@@ -21,11 +21,13 @@ import PhoneNumberInputComponent from '../PhoneNumberInputComponent';
 import { BusinessSector } from '@/lib/types';
 import { GenericLoading } from '../loading-states/loading';
 import LoadingIcon from '../loading-states/loading-icon';
+import { useCustomerStore } from '@/lib/stores/useCustomerStore';
+import { Value } from '@radix-ui/react-select';
 
 export default function GenericAddForm() {
-  const [selectedAddress, setSelectedAddress] = React.useState<string>('');
+  const [selectedAddress, setSelectedAddress] = useState<string>('');
   const [selectedBusinessSector, setSelectedBusinessSector] =
-    React.useState<string>('N/A');
+    useState<string>('N/A');
   const [formState, action, isPending] = useActionState(addCustomer, {
     success: false,
     errors: {
@@ -33,8 +35,33 @@ export default function GenericAddForm() {
     },
   });
 
+  const setFirstName = useCustomerStore((state) => state.setFirstName);
+  const setLastName = useCustomerStore((state) => state.setLastName);
+  const setEmail = useCustomerStore((state) => state.setEmail);
+  const setCompanyNumber = useCustomerStore((state) => state.setCompanyNumber);
+  const setAddressId = useCustomerStore((state) => state.setAddressId);
+  const setBusinessSector = useCustomerStore(
+    (state) => state.setBusinessSector
+  );
+
+  const firstName = useCustomerStore((state) => state.customer.firstName);
+  const lastName = useCustomerStore((state) => state.customer.lastName);
+  const email = useCustomerStore((state) => state.customer.email);
+  const phoneNumber = useCustomerStore((state) => state.customer.phoneNumber);
+  const companyNumber = useCustomerStore(
+    (state) => state.customer.companyNumber
+  );
+  const addressId = useCustomerStore((state) => state.customer.addressId);
+  const businessSector = useCustomerStore(
+    (state) => state.customer.businessSector
+  );
+
+  const customer = useCustomerStore((state) => state.customer);
+
+  console.log('Customer State:', customer);
+
   // Handle form submission feedback
-  React.useEffect(() => {
+  useEffect(() => {
     if (formState.success) {
       toast.custom(() => (
         <CustomeToast variant='success' message='User created successfully' />
@@ -68,7 +95,12 @@ export default function GenericAddForm() {
                   <Input
                     id='firstName'
                     name='firstName'
+                    required
                     placeholder={t('Placeholder.firstName')}
+                    onChange={(e) => {
+                      setFirstName(e.target.value);
+                    }}
+                    defaultValue={firstName || ''}
                   />
                 </div>
                 <div>
@@ -78,6 +110,10 @@ export default function GenericAddForm() {
                     name='lastName'
                     placeholder={t('Placeholder.lastName')}
                     required
+                    onChange={(e) => {
+                      setLastName(e.target.value);
+                    }}
+                    defaultValue={lastName || ''}
                   />
                 </div>
               </div>
@@ -89,6 +125,10 @@ export default function GenericAddForm() {
                   type='email'
                   placeholder={t('Placeholder.email')}
                   required
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                  }}
+                  defaultValue={email || ''}
                 />
               </div>
               <div>
@@ -109,12 +149,15 @@ export default function GenericAddForm() {
                 </span>
               </div>
               <div>
-                <AddressSelectComponent onAddressSelect={setSelectedAddress} />
+                <AddressSelectComponent onAddressSelect={setAddressId} />
                 <input
                   id='addressId'
                   name='addressId'
                   type='hidden'
-                  value={selectedAddress}
+                  value={addressId}
+                  onChange={(e) => {
+                    setAddressId(e.target.value);
+                  }}
                 />
               </div>
             </div>
@@ -133,6 +176,10 @@ export default function GenericAddForm() {
                     name='companyNumber'
                     placeholder={t('Placeholder.companyNumber')}
                     required
+                    onChange={(e) => {
+                      setCompanyNumber(e.target.value);
+                    }}
+                    defaultValue={companyNumber || ''}
                   />
                 </div>
               ) : (
@@ -144,8 +191,11 @@ export default function GenericAddForm() {
                 </Label>
                 <Select
                   name='businessSector'
-                  value={selectedBusinessSector}
-                  onValueChange={(value) => setSelectedBusinessSector(value)}
+                  value={businessSector || ''}
+                  onValueChange={(value) =>
+                    setBusinessSector(value as BusinessSector)
+                  }
+                  defaultValue={businessSector || ''}
                 >
                   <SelectTrigger>
                     <SelectValue
@@ -172,7 +222,6 @@ export default function GenericAddForm() {
             {isPending ? (
               <>
                 <LoadingIcon />
-                <GenericLoading text={t('buttons.addLoading')} />
               </>
             ) : (
               <>

@@ -59,7 +59,7 @@ export default function CreateRole() {
         <Button type='submit' disabled={isPending} className='mt-6'>
           {isPending ? (
             <>
-              <LoadingIcon /> <GenericLoading text={t('buttons.addLoading')} />
+              <LoadingIcon /> {t('buttons.add')}
             </>
           ) : (
             <>

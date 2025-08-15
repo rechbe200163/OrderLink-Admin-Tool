@@ -6,6 +6,7 @@ import { ENDPOINTS } from '../api/endpoints';
 import { setCookie, deleteCookie } from '../cookies/cookie-managment';
 import { getSession, Session } from '../utlis/getSession';
 import { siteConfigApiService } from '../api/concrete/siteConfig';
+import { baseApiService } from '../api/base';
 
 export async function logOut(): Promise<FormState> {
   try {
@@ -49,6 +50,8 @@ export async function logIn(
       expiresAt: resp.token.expiresAt,
     });
     await setCookie('user', resp.user);
+    const { tenant } = await siteConfigApiService.getSiteConfig();
+    await setCookie('tenant', tenant);
   } catch (error: any) {
     console.error('Login error:', error);
     return { success: false, errors: { title: [error.message] } };
