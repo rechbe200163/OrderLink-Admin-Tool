@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { useState, useCallback, useActionState } from 'react';
+import { useCallback, useActionState } from 'react';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
@@ -15,10 +15,9 @@ import { toast } from 'sonner';
 import CustomeToast from '../toasts/CustomeErrorToast';
 import LoadingIcon from '@/components/loading-states/loading-icon';
 import { GenericLoading } from '@/components/loading-states/loading';
+import { useProductStore } from '@/lib/stores/useProductStore';
 
 const CreateProduct = () => {
-  const [selectedCategory, setSelectedCategory] = React.useState<string>('');
-
   const [formState, action, isPending] = useActionState(
     createProduct.bind(null),
     {
@@ -36,8 +35,9 @@ const CreateProduct = () => {
           message='Product created successfully'
         />
       ));
+      reset();
     }
-  }, [formState.success]);
+  }, [formState.success, reset]);
 
   React.useEffect(() => {
     if (
@@ -54,75 +54,64 @@ const CreateProduct = () => {
     }
   }, [formState.errors]);
 
-  const [productData, setProductData] = useState({
-    name: '',
-    description: '',
-    price: 0,
-    stock: 0,
-    productImage: '',
-    categories: [] as string[],
-    createdAt: new Date().toISOString(),
-  });
+  const name = useProductStore((s) => s.product.name);
+  const description = useProductStore((s) => s.product.description);
+  const price = useProductStore((s) => s.product.price);
+  const stock = useProductStore((s) => s.product.stock);
+  const categoryId = useProductStore((s) => s.product.categoryId);
+
+  const setName = useProductStore((s) => s.setName);
+  const setDescription = useProductStore((s) => s.setDescription);
+  const setPrice = useProductStore((s) => s.setPrice);
+  const setStock = useProductStore((s) => s.setStock);
+  const setImagePath = useProductStore((s) => s.setImagePath);
+  const setCategoryId = useProductStore((s) => s.setCategoryId);
+  const reset = useProductStore((s) => s.reset);
 
   const handleInputChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
       const { name, value } = e.target;
-      setProductData((prev) => ({ ...prev, [name]: value }));
+      if (name === 'name') setName(value);
+      if (name === 'description') setDescription(value);
+      if (name === 'stock') setStock(Number(value));
     },
-    []
+    [setName, setDescription, setStock]
   );
 
-  const handleCategoryChange = useCallback((categoryId: string) => {
-    setSelectedCategory(categoryId);
-  }, []);
+  const handleCategoryChange = useCallback((id: string) => {
+    setCategoryId(id);
+  }, [setCategoryId]);
 
   const handlePriceChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       let value = e.target.value;
-
-      // trim value from everything except numbers
       value = value.replace(/[^\d.,]/g, '');
       value = value.replace(',', '.');
-
-      // check if value is a valid number
       if (!isNaN(Number(value))) {
-        setProductData((prev) => ({ ...prev, price: Number(value) }));
+        setPrice(Number(value));
       }
-
-      // if value is empty, set it to 0
-      if (!value) {
-        setProductData((prev) => ({ ...prev, price: 0 }));
+      if (!value || Number(value) < 0) {
+        setPrice(0);
       }
-
-      // if value is negative, set it to 0
-      if (Number(value) < 0) {
-        setProductData((prev) => ({ ...prev, price: 0 }));
-      }
-
-      // if value has more than 2 decimal places, round it to 2
       if (value.split('.')[1]?.length > 2) {
-        setProductData((prev) => ({
-          ...prev,
-          price: parseFloat(Number(value).toFixed(2)),
-        }));
+        setPrice(parseFloat(Number(value).toFixed(2)));
       }
-
-      // if value has more than 1 decimal separator, remove the last one
       if (value.split('.').length > 2) {
-        setProductData((prev) => ({
-          ...prev,
-          price: parseFloat(value.slice(0, -1)),
-        }));
+        setPrice(parseFloat(value.slice(0, -1)));
       }
     },
-    []
+    [setPrice]
   );
-  const handleImageUpload = useCallback((file: File | null) => {
-    if (file) {
-      const imageUrl = URL.createObjectURL(file);
-      setProductData((prev) => ({ ...prev, imagePath: imageUrl }));
-    }
-  }, []);
+
+  const handleImageUpload = useCallback(
+    (file: File | null) => {
+      if (file) {
+        const imageUrl = URL.createObjectURL(file);
+        setImagePath(imageUrl);
+      }
+    },
+    [setImagePath]
+  );
 
   return (
     <Card className='mx-auto my-4 w-full max-w-xl p-6'>
@@ -141,7 +130,7 @@ const CreateProduct = () => {
           <Input
             id='name'
             name='name'
-            value={productData.name}
+            value={name}
             onChange={handleInputChange}
             required
             className='transition-all duration-200 focus:ring-2 focus:ring-primary'
@@ -152,7 +141,7 @@ const CreateProduct = () => {
           <Textarea
             id='description'
             name='description'
-            value={productData.description}
+            value={description}
             onChange={handleInputChange}
             required
             className='transition-all duration-200 focus:ring-2 focus:ring-primary'
@@ -171,7 +160,7 @@ const CreateProduct = () => {
                 className='-me-px rounded-e-none ps-6 shadow-none'
                 placeholder='0,00'
                 type='text'
-                value={productData.price}
+                value={price}
                 onChange={handlePriceChange}
               />
               <span className='-z-10 inline-flex items-center rounded-e-lg border border-input bg-background px-3 text-sm text-muted-foreground'>
@@ -185,7 +174,7 @@ const CreateProduct = () => {
               id='stock'
               name='stock'
               type='number'
-              value={productData.stock}
+               value={stock}
               onChange={handleInputChange}
               required
               className='transition-all duration-200 focus:ring-2 focus:ring-primary'
@@ -195,13 +184,13 @@ const CreateProduct = () => {
         <div className='space-y-2'>
           <SelectCategoryComponent
             onCategorySelect={handleCategoryChange}
-            defaultValue={selectedCategory}
+            defaultValue={categoryId}
           />
           <input
             id='categoryId'
             name='categoryId'
             type='hidden'
-            value={selectedCategory}
+            value={categoryId}
           />
         </div>
         <Button

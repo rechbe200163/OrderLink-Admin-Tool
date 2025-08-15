@@ -9,6 +9,7 @@ import { useTranslations } from 'next-intl';
 import * as RPNInput from 'react-phone-number-input';
 import flags from 'react-phone-number-input/flags';
 import { parsePhoneNumber } from 'libphonenumber-js';
+import { useCustomerStore } from '@/lib/stores/useCustomerStore';
 
 interface PhoneNumberInputProps {
   defaultValue?: string;
@@ -19,20 +20,27 @@ export default function PhoneNumberInputComponent({
 }: PhoneNumberInputProps) {
   const id = useId();
   const t = useTranslations('Components.PhoneInput');
-  const [value, setValue] = useState('');
+  const setPhoneNumber = useCustomerStore((s) => s.setPhoneNumber);
+  const storeNumber = useCustomerStore((s) => s.customer.phoneNumber);
+  const [value, setValue] = useState(storeNumber || '');
   const [country, setCountry] = useState<RPNInput.Country>('US');
 
   useEffect(() => {
-    if (defaultValue) {
-      const parsedNumber = parsePhoneNumber(defaultValue);
+    const number = storeNumber || defaultValue;
+    if (number) {
+      const parsedNumber = parsePhoneNumber(number);
       if (parsedNumber) {
         setValue(parsedNumber.format('E.164'));
         setCountry(parsedNumber.country as RPNInput.Country);
       } else {
-        setValue(defaultValue.replace(/\s+/g, ''));
+        setValue(number.replace(/\s+/g, ''));
       }
     }
-  }, [defaultValue]);
+  }, [defaultValue, storeNumber]);
+
+  useEffect(() => {
+    setPhoneNumber(value);
+  }, [value, setPhoneNumber]);
 
   return (
     <div className='not-first:*:mt-2' dir='ltr'>
