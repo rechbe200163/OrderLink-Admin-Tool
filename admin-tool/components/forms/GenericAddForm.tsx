@@ -10,7 +10,7 @@ import {
 import { Card } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
-import React, { useActionState, useEffect, useState } from 'react';
+import React, { useActionState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { PlusCircle } from 'lucide-react';
 import { addCustomer } from '@/lib/actions/user.actions';
@@ -22,12 +22,8 @@ import { BusinessSector } from '@/lib/types';
 import { GenericLoading } from '../loading-states/loading';
 import LoadingIcon from '../loading-states/loading-icon';
 import { useCustomerStore } from '@/lib/stores/useCustomerStore';
-import { Value } from '@radix-ui/react-select';
 
 export default function GenericAddForm() {
-  const [selectedAddress, setSelectedAddress] = useState<string>('');
-  const [selectedBusinessSector, setSelectedBusinessSector] =
-    useState<string>('N/A');
   const [formState, action, isPending] = useActionState(addCustomer, {
     success: false,
     errors: {
@@ -47,7 +43,6 @@ export default function GenericAddForm() {
   const firstName = useCustomerStore((state) => state.customer.firstName);
   const lastName = useCustomerStore((state) => state.customer.lastName);
   const email = useCustomerStore((state) => state.customer.email);
-  const phoneNumber = useCustomerStore((state) => state.customer.phoneNumber);
   const companyNumber = useCustomerStore(
     (state) => state.customer.companyNumber
   );
@@ -55,10 +50,8 @@ export default function GenericAddForm() {
   const businessSector = useCustomerStore(
     (state) => state.customer.businessSector
   );
+  const reset = useCustomerStore((state) => state.reset);
 
-  const customer = useCustomerStore((state) => state.customer);
-
-  console.log('Customer State:', customer);
 
   // Handle form submission feedback
   useEffect(() => {
@@ -71,7 +64,10 @@ export default function GenericAddForm() {
         <CustomeToast variant='error' message='User created successfully' />
       ));
     }
-  }, [formState]);
+    if (formState.success) {
+      reset();
+    }
+  }, [formState, reset]);
 
   const t = useTranslations('Dashboard.Ressource.Customers');
   const tFilter = useTranslations('FilterAndSearch.Filter');
@@ -149,15 +145,15 @@ export default function GenericAddForm() {
                 </span>
               </div>
               <div>
-                <AddressSelectComponent onAddressSelect={setAddressId} />
+                <AddressSelectComponent
+                  onAddressSelect={setAddressId}
+                  defaultValue={addressId}
+                />
                 <input
                   id='addressId'
                   name='addressId'
                   type='hidden'
                   value={addressId}
-                  onChange={(e) => {
-                    setAddressId(e.target.value);
-                  }}
                 />
               </div>
             </div>
@@ -166,7 +162,7 @@ export default function GenericAddForm() {
               <h3 className='text-xl font-semibold mb-4'>
                 {t('Details.businessCustomerDetails')}
               </h3>
-              {selectedBusinessSector !== 'N/A' ? (
+              {businessSector ? (
                 <div>
                   <Label htmlFor='companyNumber'>
                     {t('Attributes.companyNumber')}
@@ -191,11 +187,11 @@ export default function GenericAddForm() {
                 </Label>
                 <Select
                   name='businessSector'
-                  value={businessSector || ''}
-                  onValueChange={(value) =>
-                    setBusinessSector(value as BusinessSector)
-                  }
-                  defaultValue={businessSector || ''}
+                  value={businessSector ? businessSector : 'N/A'}
+                  onValueChange={(value) => {
+                    if (value === 'N/A') setBusinessSector(null);
+                    else setBusinessSector(value as BusinessSector);
+                  }}
                 >
                   <SelectTrigger>
                     <SelectValue
@@ -206,10 +202,10 @@ export default function GenericAddForm() {
                     <SelectItem key='N/A' value={'N/A'}>
                       N/A
                     </SelectItem>
-                    {Object.keys(BusinessSector).map((businessSector) => (
-                      <SelectItem key={businessSector} value={businessSector}>
+                    {Object.keys(BusinessSector).map((sector) => (
+                      <SelectItem key={sector} value={sector}>
                         {tFilter(
-                          `BusinessSectors.options.${businessSector.toLowerCase()}`
+                          `BusinessSectors.options.${sector.toLowerCase()}`
                         )}
                       </SelectItem>
                     ))}

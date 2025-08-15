@@ -202,6 +202,32 @@ export interface CreateCustomer {
   addressId: string;
   businessSector: BusinessSector | null;
 }
+
+export interface CreateAddress {
+  country: string;
+  state: string;
+  city: string;
+  postCode: string;
+  streetName: string;
+  streetNumber: string;
+}
+
+export interface CreateOrder {
+  customerReference: string;
+  selfCollect: boolean;
+  selectedProducts: string[];
+  quantities: Record<string, number>;
+  selectedProductObjects: Product[];
+}
+
+export interface CreateProduct {
+  name: string;
+  description: string;
+  price: number;
+  stock: number;
+  imagePath: string;
+  categoryId: string;
+}
 export interface Employees {
   employeeId: string;
   email: string;

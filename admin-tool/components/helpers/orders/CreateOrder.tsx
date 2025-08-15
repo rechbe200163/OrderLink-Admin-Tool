@@ -15,16 +15,25 @@ import { createOrder } from '@/lib/actions/order.actions';
 import { Product } from '@/lib/types';
 import LoadingIcon from '@/components/loading-states/loading-icon';
 import { GenericLoading } from '@/components/loading-states/loading';
+import { useOrderStore } from '@/lib/stores/useOrderStore';
 
 const CreateOrder = () => {
-  const [selectedCustomer, setSelectedCustomer] = React.useState<string>('');
-  const [selectedProducts, setSelectedProducts] = React.useState<string[]>([]);
-  const [quantities, setQuantities] = React.useState<Record<string, number>>(
-    {}
+  const selectedCustomer = useOrderStore(
+    (s) => s.order.customerReference
   );
-  const [selectedProductObjects, setSelectedProductObjects] = React.useState<
-    Product[]
-  >([]);
+  const selectedProducts = useOrderStore((s) => s.order.selectedProducts);
+  const selectedProductObjects = useOrderStore(
+    (s) => s.order.selectedProductObjects
+  );
+  const quantities = useOrderStore((s) => s.order.quantities);
+  const selfCollect = useOrderStore((s) => s.order.selfCollect);
+
+  const setCustomer = useOrderStore((s) => s.setCustomerReference);
+  const addProduct = useOrderStore((s) => s.addProduct);
+  const removeProduct = useOrderStore((s) => s.removeProduct);
+  const setQuantity = useOrderStore((s) => s.setQuantity);
+  const setSelfCollect = useOrderStore((s) => s.setSelfCollect);
+  const reset = useOrderStore((s) => s.reset);
   const [formState, action, isPending] = useActionState(createOrder, {
     success: false,
     errors: {
@@ -34,13 +43,12 @@ const CreateOrder = () => {
 
   const stockOfSelectedProducts = selectedProductObjects;
 
-  console.log('Selected Products:', stockOfSelectedProducts);
-
   React.useEffect(() => {
     if (formState.success) {
       toast.custom(() => (
         <CustomeToast variant='success' message='Order created successfully!' />
       ));
+      reset();
     } else if (formState.errors?.title[0]) {
       toast.custom(() => (
         <CustomeToast
@@ -51,7 +59,7 @@ const CreateOrder = () => {
         />
       ));
     }
-  }, [formState]);
+  }, [formState, reset]);
 
   const id = useId();
   return (
@@ -65,13 +73,14 @@ const CreateOrder = () => {
           <Checkbox
             id={id}
             name='selfCollect'
-            defaultChecked={false}
+            checked={selfCollect}
+            onCheckedChange={(v) => setSelfCollect(Boolean(v))}
             className='h-5 w-5'
           />
         </div>
         <div className='space-y-2'>
           <CustomerSelectComponent
-            onCustomerSelect={setSelectedCustomer}
+            onCustomerSelect={setCustomer}
             defaultValue={selectedCustomer}
           />
           <input
@@ -83,13 +92,11 @@ const CreateOrder = () => {
         </div>
         <div className='space-y-2'>
           <ProductSelectComponent
-            onProductSelect={(product, isSelected) => {
+            onProductSelect={(product: Product, isSelected: boolean) => {
               if (isSelected) {
-                setSelectedProducts((prev) => [...prev, product.productId]);
-                setSelectedProductObjects((prev) => [...prev, product]);
+                addProduct(product);
               } else {
-                setSelectedProducts([...selectedProducts, product.productId]);
-                setQuantities((q) => ({ ...q, [product.productId]: 1 }));
+                removeProduct(product.productId);
               }
             }}
             defaultValue={selectedProducts}
@@ -121,10 +128,7 @@ const CreateOrder = () => {
                   min='1'
                   max={product.stock}
                   onChange={(e) =>
-                    setQuantities({
-                      ...quantities,
-                      [product.productId]: Number(e.target.value),
-                    })
+                    setQuantity(product.productId, Number(e.target.value))
                   }
                 />
               </div>

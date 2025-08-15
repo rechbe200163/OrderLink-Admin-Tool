@@ -25,6 +25,7 @@ import { Card } from '@/components/ui/card';
 import { useTranslations } from 'next-intl';
 import { GenericLoading } from '@/components/loading-states/loading';
 import LoadingIcon from '@/components/loading-states/loading-icon';
+import { useAddressStore } from '@/lib/stores/useAddressStore';
 
 const formSchema = z.object({
   name_5020537749: z.tuple([z.string(), z.string().optional()]),
@@ -40,8 +41,23 @@ export default function AddressForm() {
     },
   });
 
-  const [_countryName, setCountryName] = useState<string>('');
-  const [stateName, setStateName] = useState<string>('');
+  const setCountry = useAddressStore((s) => s.setCountry);
+  const setStateStore = useAddressStore((s) => s.setState);
+  const setCity = useAddressStore((s) => s.setCity);
+  const setPostCode = useAddressStore((s) => s.setPostCode);
+  const setStreetName = useAddressStore((s) => s.setStreetName);
+  const setStreetNumber = useAddressStore((s) => s.setStreetNumber);
+  const reset = useAddressStore((s) => s.reset);
+
+  const country = useAddressStore((s) => s.address.country);
+  const stateStore = useAddressStore((s) => s.address.state);
+  const city = useAddressStore((s) => s.address.city);
+  const postCode = useAddressStore((s) => s.address.postCode);
+  const streetName = useAddressStore((s) => s.address.streetName);
+  const streetNumber = useAddressStore((s) => s.address.streetNumber);
+
+  const [_countryName, setCountryName] = useState<string>(country);
+  const [stateName, setStateName] = useState<string>(stateStore);
 
   React.useEffect(() => {
     if (formState.success) {
@@ -51,8 +67,9 @@ export default function AddressForm() {
           message='Address created successfully'
         />
       ));
+      reset();
     }
-  }, [formState.success]);
+  }, [formState.success, reset]);
 
   React.useEffect(() => {
     if (
@@ -86,19 +103,22 @@ export default function AddressForm() {
                 <FormControl>
                   <LocationSelector
                     onCountryChange={(country) => {
-                      setCountryName(country?.name || '');
-                      form.setValue(field.name, [
-                        country?.name || '',
-                        stateName || '',
-                      ]);
+                      const name = country?.name || '';
+                      setCountryName(name);
+                      setCountry(name);
+                      form.setValue(field.name, [name, stateName || '']);
                     }}
                     onStateChange={(state) => {
-                      setStateName(state?.name || '');
+                      const name = state?.name || '';
+                      setStateName(name);
+                      setStateStore(name);
                       form.setValue(field.name, [
                         form.getValues(field.name)[0] || '',
-                        state?.name || '',
+                        name,
                       ]);
                     }}
+                    defaultCountry={country}
+                    defaultState={stateStore}
                   />
                 </FormControl>
                 <FormMessage />
@@ -110,7 +130,14 @@ export default function AddressForm() {
               {t('Attributes.city')}
               <span className='text-red-500'>*</span>
             </Label>
-            <Input id='city' name='city' placeholder='Stubenberg' required />
+            <Input
+              id='city'
+              name='city'
+              placeholder='Stubenberg'
+              required
+              defaultValue={city}
+              onChange={(e) => setCity(e.target.value)}
+            />
           </div>
 
           <div>
@@ -118,7 +145,14 @@ export default function AddressForm() {
               {t('Attributes.postCode')}
               <span className='text-red-500'>*</span>
             </Label>
-            <Input id='postCode' name='postCode' placeholder='8223' required />
+            <Input
+              id='postCode'
+              name='postCode'
+              placeholder='8223'
+              required
+              defaultValue={postCode}
+              onChange={(e) => setPostCode(e.target.value)}
+            />
           </div>
           <div>
             <Label htmlFor='streetName'>
@@ -130,6 +164,8 @@ export default function AddressForm() {
               name='streetName'
               placeholder='Hauptstraße'
               required
+              defaultValue={streetName}
+              onChange={(e) => setStreetName(e.target.value)}
             />
           </div>
           <div>
@@ -146,13 +182,16 @@ export default function AddressForm() {
                 showMaskOnHover: false,
               })}
               required
+              defaultValue={streetNumber}
+              onChange={(e) => setStreetNumber(e.target.value)}
             />
           </div>
 
           <Button type='submit'>
             {isPending ? (
               <>
-                <LoadingIcon />;{t('buttons.add')}
+                <LoadingIcon />
+                {t('buttons.add')}
               </>
             ) : (
               <>
