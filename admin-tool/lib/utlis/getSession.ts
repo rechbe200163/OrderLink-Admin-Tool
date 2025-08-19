@@ -1,5 +1,6 @@
-import { RoleName } from '@/lib/types';
+import { ModuleName, RoleName } from '@/lib/types';
 import { getCookie } from '../cookies/cookie-managment';
+import Module from 'module';
 
 export interface Token {
   accessToken: string;
@@ -21,7 +22,7 @@ export interface Session {
     trialEndsAt: string;
     trialStartedAt: string;
     status: string;
-    enabledModules: { moduleName: string }[];
+    enabledModules: ModuleName[];
   };
 }
 

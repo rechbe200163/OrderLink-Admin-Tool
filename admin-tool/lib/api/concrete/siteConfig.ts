@@ -1,6 +1,6 @@
 ('server only');
 import { BaseApiService } from '../base';
-import { SiteConfigDto, SiteConfigWithTenantDto } from '@/lib/types';
+import { SiteConfigDto } from '@/lib/types';
 
 class SiteConfigApiService extends BaseApiService {
   private static instance: SiteConfigApiService;
@@ -17,8 +17,8 @@ class SiteConfigApiService extends BaseApiService {
     super(process.env.NEXT_PUBLIC_API_URL || '');
   }
 
-  async getSiteConfig(): Promise<SiteConfigWithTenantDto> {
-    const response = await this.get<SiteConfigWithTenantDto>('site-config');
+  async getSiteConfig(): Promise<SiteConfigDto> {
+    const response = await this.get<SiteConfigDto>('site-config');
     return response;
   }
 

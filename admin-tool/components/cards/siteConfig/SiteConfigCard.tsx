@@ -26,7 +26,7 @@ export default function SiteConfigCard({
   enabledModules,
 }: {
   siteConfig: SiteConfigDto;
-  enabledModules: { moduleName: string }[];
+  enabledModules: ModuleName[] | undefined;
 }) {
   const router = useRouter();
   const [selectedAddress, setSelectedAddress] = React.useState<string>(
@@ -178,11 +178,12 @@ export default function SiteConfigCard({
   );
 }
 
-function showEnabledModules(enabledModules: { moduleName: string }[]) {
-  return enabledModules
-    .map(
-      (module) =>
-        ModulePackageName[module.moduleName as keyof typeof ModulePackageName]
-    )
-    .join(' • ');
+function showEnabledModules(enabledModules: ModuleName[] | undefined) {
+  return (
+    enabledModules
+      ?.map(
+        (module) => ModulePackageName[module as keyof typeof ModulePackageName]
+      )
+      .join(' • ') ?? 'No Modules Enabled'
+  );
 }

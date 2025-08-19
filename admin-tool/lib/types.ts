@@ -288,11 +288,6 @@ export interface Tenant {
   updatedAt: Date;
 }
 
-export interface SiteConfigWithTenantDto {
-  siteConfig: SiteConfigDto;
-  tenant: Tenant;
-}
-
 export type AIVStats = {
   currentMonthAIV: number;
   lastMonthAIV: number;
