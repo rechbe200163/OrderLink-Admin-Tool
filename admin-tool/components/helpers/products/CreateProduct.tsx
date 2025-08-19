@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useCallback, useActionState } from 'react';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -18,42 +18,6 @@ import { GenericLoading } from '@/components/loading-states/loading';
 import { useProductStore } from '@/lib/stores/useProductStore';
 
 const CreateProduct = () => {
-  const [formState, action, isPending] = useActionState(
-    createProduct.bind(null),
-    {
-      success: false,
-      errors: {
-        title: [],
-      },
-    }
-  );
-  React.useEffect(() => {
-    if (formState.success) {
-      toast.custom(() => (
-        <CustomeToast
-          variant='success'
-          message='Product created successfully'
-        />
-      ));
-      reset();
-    }
-  }, [formState.success, reset]);
-
-  React.useEffect(() => {
-    if (
-      formState.errors &&
-      Object.keys(formState.errors).length > 0 &&
-      formState.errors.title.length > 0
-    ) {
-      toast.custom(() => (
-        <CustomeToast
-          variant='error'
-          message={`An error occurred ${formState.errors?.title}`}
-        />
-      ));
-    }
-  }, [formState.errors]);
-
   const name = useProductStore((s) => s.product.name);
   const description = useProductStore((s) => s.product.description);
   const price = useProductStore((s) => s.product.price);
@@ -68,6 +32,43 @@ const CreateProduct = () => {
   const setCategoryId = useProductStore((s) => s.setCategoryId);
   const reset = useProductStore((s) => s.reset);
 
+  const [formState, action, isPending] = useActionState(
+    createProduct.bind(null),
+    {
+      success: false,
+      errors: {
+        title: [],
+      },
+    }
+  );
+
+  useEffect(() => {
+    if (formState.success) {
+      toast.custom(() => (
+        <CustomeToast
+          variant='success'
+          message='Product created successfully'
+        />
+      ));
+      reset();
+    }
+  }, [formState.success, reset]);
+
+  useEffect(() => {
+    if (
+      formState.errors &&
+      Object.keys(formState.errors).length > 0 &&
+      formState.errors.title.length > 0
+    ) {
+      toast.custom(() => (
+        <CustomeToast
+          variant='error'
+          message={`An error occurred ${formState.errors?.title}`}
+        />
+      ));
+    }
+  }, [formState.errors]);
+
   const handleInputChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
       const { name, value } = e.target;
@@ -78,9 +79,12 @@ const CreateProduct = () => {
     [setName, setDescription, setStock]
   );
 
-  const handleCategoryChange = useCallback((id: string) => {
-    setCategoryId(id);
-  }, [setCategoryId]);
+  const handleCategoryChange = useCallback(
+    (id: string) => {
+      setCategoryId(id);
+    },
+    [setCategoryId]
+  );
 
   const handlePriceChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -174,7 +178,7 @@ const CreateProduct = () => {
               id='stock'
               name='stock'
               type='number'
-               value={stock}
+              value={stock}
               onChange={handleInputChange}
               required
               className='transition-all duration-200 focus:ring-2 focus:ring-primary'

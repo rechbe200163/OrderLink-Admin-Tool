@@ -19,13 +19,14 @@ import {
   SiteConfigDto,
   Tenant,
 } from '@/lib/types';
+import LoadingIcon from '@/components/loading-states/loading-icon';
 
 export default function SiteConfigCard({
   siteConfig,
-  tenant,
+  enabledModules,
 }: {
   siteConfig: SiteConfigDto;
-  tenant: Tenant;
+  enabledModules: { moduleName: string }[];
 }) {
   const router = useRouter();
   const [selectedAddress, setSelectedAddress] = React.useState<string>(
@@ -68,8 +69,6 @@ export default function SiteConfigCard({
       ));
     }
   }, [formState.errors]);
-
-  const enabledModules = tenant.enabledModules.map((m) => m.moduleName);
 
   return (
     <Card className='w-full max-w-2xl mx-auto p-6 shadow-lg rounded-2xl'>
@@ -164,7 +163,13 @@ export default function SiteConfigCard({
               disabled={isPending}
               className='px-6 py-2 rounded-lg'
             >
-              {isPending ? 'Saving...' : 'Save Changes'}
+              {isPending ? (
+                <>
+                  <LoadingIcon />
+                </>
+              ) : (
+                'Save Changes'
+              )}
             </Button>
           </div>
         </form>
@@ -173,6 +178,11 @@ export default function SiteConfigCard({
   );
 }
 
-function showEnabledModules(enabledModules: ModuleName[]) {
-  return enabledModules.map((module) => ModulePackageName[module]).join(' • ');
+function showEnabledModules(enabledModules: { moduleName: string }[]) {
+  return enabledModules
+    .map(
+      (module) =>
+        ModulePackageName[module.moduleName as keyof typeof ModulePackageName]
+    )
+    .join(' • ');
 }

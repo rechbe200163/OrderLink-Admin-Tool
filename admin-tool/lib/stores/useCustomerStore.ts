@@ -10,7 +10,7 @@ type CustomerState = {
   setPhoneNumber: (v: string) => void;
   setCompanyNumber: (v: string) => void;
   setAddressId: (v: string) => void;
-  setBusinessSector: (v: BusinessSector) => void;
+  setBusinessSector: (v: BusinessSector | null) => void;
   reset: () => void;
 };
 
@@ -39,7 +39,7 @@ export const useCustomerStore = create<CustomerState>()(
         set((s) => ({ customer: { ...s.customer, companyNumber: v } })),
       setAddressId: (v: string) =>
         set((s) => ({ customer: { ...s.customer, addressId: v } })),
-      setBusinessSector: (v: BusinessSector) =>
+      setBusinessSector: (v: BusinessSector | null) =>
         set((s) => ({ customer: { ...s.customer, businessSector: v } })),
       reset: () => set({ customer: initial }),
     }),

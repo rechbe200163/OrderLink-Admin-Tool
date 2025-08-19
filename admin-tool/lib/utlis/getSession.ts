@@ -16,6 +16,13 @@ export interface Session {
     lastName?: string;
     role?: RoleName;
   };
+  tenantInfo?: {
+    maxEmployees: number;
+    trialEndsAt: string;
+    trialStartedAt: string;
+    status: string;
+    enabledModules: { moduleName: string }[];
+  };
 }
 
 export interface SanitizedEmployee {

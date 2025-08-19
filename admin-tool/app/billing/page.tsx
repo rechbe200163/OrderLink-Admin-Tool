@@ -8,6 +8,7 @@ import { billingAction } from '@/lib/actions/billing.actions';
 import { useActionState, useEffect } from 'react';
 import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
+import { FormState } from '@/lib/form.types';
 
 const BillingPage = () => {
   const router = useRouter();
@@ -19,7 +20,8 @@ const BillingPage = () => {
   });
 
   useEffect(() => {
-    if (formState.data?.url && formState.success) {
+    if (formState.success && formState.data) {
+      // @ts-expect-error: formState.data.url type is assumed to be string for now
       router.push(formState.data.url);
     }
   }, [formState, router]);

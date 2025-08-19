@@ -50,8 +50,7 @@ export async function logIn(
       expiresAt: resp.token.expiresAt,
     });
     await setCookie('user', resp.user);
-    const { tenant } = await siteConfigApiService.getSiteConfig();
-    await setCookie('tenant', tenant);
+    await setCookie('tenant', resp.tenantInfo);
   } catch (error: any) {
     console.error('Login error:', error);
     return { success: false, errors: { title: [error.message] } };
