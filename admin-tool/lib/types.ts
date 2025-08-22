@@ -269,10 +269,6 @@ export interface Order {
   selfCollect: boolean;
 }
 
-export interface EnabledModule {
-  moduleName: ModuleName;
-}
-
 export interface Tenant {
   tenantId: string;
   companyName: string;
@@ -282,7 +278,7 @@ export interface Tenant {
   trialStartedAt: Date;
   trialEndsAt: Date;
   maxUsers: number;
-  enabledModules: EnabledModule[];
+  enabledModules: string[];
   billingCustomerId?: string | null;
   createdAt: Date;
   updatedAt: Date;
