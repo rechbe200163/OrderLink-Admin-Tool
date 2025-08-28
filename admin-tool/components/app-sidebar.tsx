@@ -18,7 +18,7 @@ export async function AppSidebar({
 }: React.ComponentProps<typeof Sidebar>) {
   const session = await getSession();
 
-  const { siteConfig } = await siteConfigApiService.getSiteConfig();
+  const siteConfig = await siteConfigApiService.getSiteConfig();
 
   if (!session) {
     return null; // or handle unauthenticated state
