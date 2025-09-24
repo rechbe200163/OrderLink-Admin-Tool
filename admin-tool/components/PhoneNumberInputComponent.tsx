@@ -8,7 +8,7 @@ import React, { useId, useState, useEffect } from 'react';
 import { useTranslations } from 'next-intl';
 import * as RPNInput from 'react-phone-number-input';
 import flags from 'react-phone-number-input/flags';
-import { parsePhoneNumber } from 'libphonenumber-js';
+import { parsePhoneNumberWithError } from 'libphonenumber-js';
 import { useCustomerStore } from '@/lib/stores/useCustomerStore';
 
 interface PhoneNumberInputProps {
@@ -28,7 +28,7 @@ export default function PhoneNumberInputComponent({
   useEffect(() => {
     const number = storeNumber || defaultValue;
     if (number) {
-      const parsedNumber = parsePhoneNumber(number);
+      const parsedNumber = parsePhoneNumberWithError(number);
       if (parsedNumber) {
         setValue(parsedNumber.format('E.164'));
         setCountry(parsedNumber.country as RPNInput.Country);

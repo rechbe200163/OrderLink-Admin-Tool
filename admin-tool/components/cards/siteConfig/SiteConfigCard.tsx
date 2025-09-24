@@ -5,7 +5,7 @@ import { Separator } from '@/components/ui/separator';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { useActionState, useMemo } from 'react';
+import { useActionState } from 'react';
 import { updateSiteConfig } from '@/lib/actions/siteConfig.actions';
 import React from 'react';
 import CustomeToast from '@/components/helpers/toasts/CustomeErrorToast';
@@ -13,12 +13,7 @@ import { toast } from 'sonner';
 import AddressSelectComponent from '@/components/helpers/AddressSelectComponent';
 import GenericInputMaskComponent from '@/components/InputWithMask';
 import { useRouter } from 'next/navigation';
-import {
-  ModuleName,
-  ModulePackageName,
-  SiteConfigDto,
-  Tenant,
-} from '@/lib/types';
+import { ModuleName, ModulePackageName, SiteConfigDto } from '@/lib/types';
 import LoadingIcon from '@/components/loading-states/loading-icon';
 
 export default function SiteConfigCard({

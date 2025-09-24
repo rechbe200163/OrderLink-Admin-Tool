@@ -55,7 +55,7 @@ export function ProductHistoryTable({
                     <TableCell className='p-2 flex items-center justify-center'>
                       <Suspense fallback={<ImageSkeleton />}>
                         <div className='relative w-16 h-16 overflow-hidden rounded-md'>
-                          {item.imagePath ? (
+                          {/* {item.imagePath ? (
                             <ImageComponent
                               imagePath={item.imagePath}
                               alt={item.name}
@@ -68,7 +68,13 @@ export function ProductHistoryTable({
                                 Kein Bild
                               </span>
                             </div>
-                          )}
+                          )} */}
+                          <ImageComponent
+                            imagePath={item.imagePath}
+                            alt={item.name}
+                            width={64}
+                            height={64}
+                          />
                         </div>
                       </Suspense>
                     </TableCell>

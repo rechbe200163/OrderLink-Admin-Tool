@@ -7,10 +7,9 @@ export default async function UserAvatarComponent({
 }: {
   avatarPath: string;
 }) {
-  const imageURL = await supabaseService.getSingedUrlSupabase(avatarPath);
   return (
     <Avatar>
-      <AvatarImage src={imageURL!} className='w-10 h-10 rounded-full' />
+      <AvatarImage src={avatarPath!} className='w-10 h-10 rounded-full' />
       <AvatarFallback>
         <User2Icon />
       </AvatarFallback>
