@@ -10,20 +10,14 @@ export interface Token {
 
 export interface Session {
   token: Token;
-  user: {
-    employeeId: string;
-    email: string;
-    firstName?: string;
-    lastName?: string;
-    role?: RoleName;
-  };
-  tenantInfo?: {
-    maxEmployees: number;
-    trialEndsAt: string;
-    trialStartedAt: string;
-    status: string;
-    enabledModules: ModuleName[];
-  };
+  user: SanitizedEmployee;
+  tenantInfo: TenantInfo;
+}
+
+export interface TenantInfo {
+  trialEndsAt: string;
+  trialStartedAt: string;
+  status: string;
 }
 
 export interface SanitizedEmployee {
@@ -31,20 +25,21 @@ export interface SanitizedEmployee {
   email: string;
   firstName?: string;
   lastName?: string;
-  role?: RoleName;
+  roleName?: RoleName;
   superAdmin?: boolean;
 }
 
 export async function getSession(): Promise<Session> {
   const user = await getCookie<SanitizedEmployee>('user');
   const token = await getCookie<Token>('token');
+  const tenantInfo = await getCookie<TenantInfo>('tenant');
 
-  if (!user || !token) {
+  if (!user || !token || !tenantInfo) {
     throw new Error('No session found');
   }
 
   try {
-    return { token, user };
+    return { token, user, tenantInfo };
   } catch (e) {
     console.error('Session parsing error:', e);
     throw new Error('Session parsing failed');

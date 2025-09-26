@@ -6,6 +6,7 @@ export const PUBLIC_ROUTES = [
   '/auth/(signin|signout|error|otp)',
   '/onboarding/(setup|initialAdmin)',
   '/api/setupConfig',
+  '/*',
 ];
 export const DEFAULT_REDIRECT = '/auth/signin';
 export const defaultLocale = 'de';

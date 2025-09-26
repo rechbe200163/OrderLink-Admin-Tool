@@ -55,10 +55,11 @@ export async function logIn(
     console.error('Login error:', error);
     return { success: false, errors: { title: [error.message] } };
   }
-  redirect('/');
+  redirect(`/`);
 }
 
 export async function verifyOtp(
+  tenantSlug: string,
   _prev: FormState,
   formData: FormData
 ): Promise<FormState> {
@@ -72,18 +73,19 @@ export async function verifyOtp(
   }
 
   try {
-    const resp = await apiPost<Session>(ENDPOINTS.AUTH_OTP(otp));
+    const resp = await apiPost<Session>(ENDPOINTS.AUTH_OTP(tenantSlug, otp));
     await setCookie('token', {
       accessToken: resp.token.accessToken,
       issuedAt: resp.token.issuedAt,
       expiresAt: resp.token.expiresAt,
     });
     await setCookie('user', resp.user);
+    await setCookie('tenant', resp.tenantInfo);
   } catch (error: any) {
     console.error('OTP verification error:', error);
     return { success: false, errors: { title: [error.message] } };
   }
-  redirect('/');
+  redirect(`/`);
 }
 
 export async function renewSessionAction(): Promise<FormState> {

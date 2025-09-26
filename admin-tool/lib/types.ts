@@ -236,7 +236,7 @@ export interface Employees {
   lastName: string;
   deleted: boolean;
   superAdmin: boolean;
-  role: string;
+  roleName: string;
 }
 
 export interface EmployeeWithOtp extends Employees {
@@ -245,7 +245,7 @@ export interface EmployeeWithOtp extends Employees {
 
 export interface Permission {
   permissionId: string;
-  role: string;
+  roleName: string;
   resource: Resources;
   action: Actions;
   allowed: boolean;

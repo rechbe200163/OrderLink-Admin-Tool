@@ -69,7 +69,7 @@ export function EmployeesTable({ employees }: { employees: Employees[] }) {
                     href={`/employees/${employee.employeeId}/edit`}
                     className='hover:underline'
                   >
-                    {employee.role}
+                    {employee.roleName}
                   </Link>
                 </TableCell>
                 <TableCell className='w-20 text-right'>

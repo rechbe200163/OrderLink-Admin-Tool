@@ -3,7 +3,11 @@ import QuickStats from '@/components/helpers/charts/QuickStats';
 import { isModuleEnabled } from '@/lib/modules';
 import { MODULE_NAME } from '@/lib/types';
 
-export default async function Page() {
+export default async function Page({
+  params,
+}: {
+  params: Promise<{ tenantSlug: string }>;
+}) {
   const isStatisticsEnabled = await isModuleEnabled(MODULE_NAME.STATISTICS);
   return (
     <div className='flex flex-1 flex-col'>

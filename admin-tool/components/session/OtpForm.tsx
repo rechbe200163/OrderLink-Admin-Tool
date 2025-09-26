@@ -16,12 +16,16 @@ import {
 } from '@/components/ui/card';
 import { verifyOtp } from '@/lib/actions/auth.actions';
 import LoadingIcon from '@/components/loading-states/loading-icon';
-export function OtpForm() {
+
+export function OtpForm({ tenantSlug }: { tenantSlug: string }) {
   const [code, setCode] = useState('');
-  const [_formState, action, isLoading] = useActionState(verifyOtp, {
-    success: false,
-    errors: { title: [] as string[] },
-  });
+  const [_formState, action, isLoading] = useActionState(
+    verifyOtp.bind(null, tenantSlug),
+    {
+      success: false,
+      errors: { title: [] as string[] },
+    }
+  );
 
   return (
     <div className='flex flex-col gap-6'>
