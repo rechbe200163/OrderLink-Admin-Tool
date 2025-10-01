@@ -1,6 +1,7 @@
 import { ModuleName, RoleName } from '@/lib/types';
 import { getCookie } from '../cookies/cookie-managment';
 import Module from 'module';
+import { forbidden, unauthorized } from 'next/navigation';
 
 export interface Token {
   accessToken: string;
@@ -36,20 +37,19 @@ export async function getSession(): Promise<Session> {
   const tenantInfo = await getCookie<TenantInfo>('tenant');
 
   if (!user || !token || !tenantInfo) {
-    throw new Error('No session found');
+    unauthorized();
   }
 
   try {
     return { token, user, tenantInfo };
   } catch (e) {
-    console.error('Session parsing error:', e);
-    throw new Error('Session parsing failed');
+    unauthorized();
   }
 }
 
 export async function authenticated(): Promise<void> {
   const session = await getSession();
   if (!session) {
-    throw new Error('Not authenticated');
+    unauthorized();
   }
 }

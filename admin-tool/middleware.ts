@@ -2,12 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { Locale } from './i18n/config';
 
 export const ROOT = '/';
-export const PUBLIC_ROUTES = [
-  '/auth/(signin|signout|error|otp)',
-  '/onboarding/(setup|initialAdmin)',
-  '/api/setupConfig',
-  '/*',
-];
+export const PUBLIC_ROUTES = ['/auth/(signin|signout|error|otp)'];
 export const DEFAULT_REDIRECT = '/auth/signin';
 export const defaultLocale = 'de';
 export const locales = ['en', 'de', 'fr', 'it', 'es'];
@@ -21,12 +16,16 @@ const COOKIE_NAME = 'NEXT_LOCALE';
 export default async function middleware(request: NextRequest) {
   const userCookie = request.cookies.get('user');
   const tokenCookie = request.cookies.get('token');
+  const tenantCookie = request.cookies.get('tenant');
+
+  console.log('in middleware');
 
   let session: any = null;
-  if (userCookie && tokenCookie) {
+  if (userCookie && tokenCookie && tenantCookie) {
     try {
       const user = JSON.parse(userCookie.value);
       const token = JSON.parse(tokenCookie.value);
+      const tenant = JSON.parse(tenantCookie.value);
 
       const now = Date.now();
       const expiresAt = token.expiresAt;
@@ -45,7 +44,13 @@ export default async function middleware(request: NextRequest) {
     }
   }
 
-  const isAuthenticated = !!(session?.user && session?.token);
+  const isAuthenticated = !!(
+    session?.user &&
+    session?.token &&
+    session?.token.accessToken
+  );
+
+  console.log('Is Authenticated:', isAuthenticated);
 
   const { origin, pathname } = request.nextUrl;
 

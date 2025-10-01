@@ -12,6 +12,7 @@ import NavUser from './nav-user';
 import SideBarHeader from './sidebar-navHeader';
 import { getSession } from '@/lib/utlis/getSession';
 import { siteConfigApiService } from '@/lib/api/concrete/siteConfig';
+import { unauthorized } from 'next/navigation';
 
 export async function AppSidebar({
   ...props
@@ -21,7 +22,7 @@ export async function AppSidebar({
   const siteConfig = await siteConfigApiService.getSiteConfig();
 
   if (!session) {
-    return null; // or handle unauthenticated state
+    unauthorized(); // or handle unauthenticated state
   }
 
   return (
