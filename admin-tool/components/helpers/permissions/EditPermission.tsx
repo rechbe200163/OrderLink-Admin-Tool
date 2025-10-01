@@ -36,7 +36,7 @@ export default function EditPermission({
       <form action={action} className='space-y-6'>
         <div>
           <Label htmlFor='role'>{t('Attributes.role')}</Label>
-          <Select name='role' defaultValue={permission.role}>
+          <Select name='role' defaultValue={permission.roleName}>
             <SelectTrigger className='w-[180px]'>
               <SelectValue placeholder={t('Attributes.role')} />
             </SelectTrigger>

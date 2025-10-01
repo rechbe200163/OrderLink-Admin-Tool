@@ -34,7 +34,7 @@ export default async function PermissionsPage(props: {
 
   const selectedRole =
     roleParam && roles.includes(roleParam) ? roleParam : roles[0];
-  const permissions = allPermissions.filter((p) => p.role === selectedRole);
+  const permissions = allPermissions.filter((p) => p.roleName === selectedRole);
 
   const t = await getTranslations('Dashboard');
   const tFilter = await getTranslations('FilterAndSearch');

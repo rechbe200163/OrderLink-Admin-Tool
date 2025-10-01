@@ -111,7 +111,7 @@ const EditEmployee = ({ employee }: EditEmployeesProps) => {
           </div>
           <div>
             <Label htmlFor='role'>{t('Attributes.role')}</Label>
-            <Select name='role' defaultValue={employee.role}>
+            <Select name='role' defaultValue={employee.roleName}>
               <SelectTrigger className='w-full mt-1'>
                 {' '}
                 {/* Changed w-[180px] to w-full and added mt-1 */}

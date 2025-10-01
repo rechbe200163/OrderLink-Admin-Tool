@@ -18,6 +18,7 @@ export interface TenantInfo {
   trialEndsAt: string;
   trialStartedAt: string;
   status: string;
+  enabledModules: ModuleName[];
 }
 
 export interface SanitizedEmployee {

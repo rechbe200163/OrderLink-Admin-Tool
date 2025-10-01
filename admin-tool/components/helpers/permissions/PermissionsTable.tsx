@@ -60,7 +60,7 @@ export function PermissionsTable({
                       href={`/permissions/${permission.permissionId}/edit`}
                       className='hover:underline'
                     >
-                      {getRoleLabel(permission.role)}
+                      {getRoleLabel(permission.roleName)}
                     </Link>
                   </TableCell>
                   <TableCell className='w-40 font-medium'>

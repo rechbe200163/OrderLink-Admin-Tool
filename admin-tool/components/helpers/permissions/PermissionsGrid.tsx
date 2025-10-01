@@ -16,7 +16,7 @@ export default function PermissionsGrid({
 }: {
   permissions: Permission[];
 }) {
-  const roles = Array.from(new Set(permissions.map((p) => p.role)));
+  const roles = Array.from(new Set(permissions.map((p) => p.roleName)));
   const tRole = getTranslations('FilterAndSearch.Filter.Roles.options');
 
   const allActions = [
@@ -30,7 +30,7 @@ export default function PermissionsGrid({
   function hasPermission(role: string, resource: Resources, action: Actions) {
     return permissions.some(
       (p) =>
-        p.role === role &&
+        p.roleName === role &&
         p.resource === resource &&
         p.action === action &&
         p.allowed

@@ -1,5 +1,6 @@
 import React from 'react';
 import { OtpForm } from '@/components/session/OtpForm';
+import { fetchTenantSlug } from '@/dummyDataForStaticBuild';
 
 const OtpSignInPage = async ({
   params,
@@ -17,3 +18,8 @@ const OtpSignInPage = async ({
 };
 
 export default OtpSignInPage;
+
+export async function generateStaticParams() {
+  const tenantSlug = await fetchTenantSlug();
+  return [{ tenantSlug }];
+}

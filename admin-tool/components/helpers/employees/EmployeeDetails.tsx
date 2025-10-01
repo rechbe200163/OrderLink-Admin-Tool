@@ -72,7 +72,7 @@ export default function EmployeeDetails({
             <p className='text-muted-foreground'>
               Role:{' '}
               <span className='font-medium text-foreground'>
-                {employee.role}
+                {employee.roleName}
               </span>
             </p>
           </>
