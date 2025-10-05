@@ -3,8 +3,7 @@
 import { ENDPOINTS } from '../api/endpoints';
 import { FormState } from '../form.types';
 import { guardAction } from '../server-guard';
-import { formDataToPartial } from '../utils';
-import { apiPost, apiUpgradeLicense } from './api.actions';
+import { apiPost } from './api.actions';
 
 export async function billingAction(
   _prevState: FormState,
@@ -18,7 +17,7 @@ export async function billingAction(
       if (modules.length) {
         data.modules = modules;
       }
-      return await apiUpgradeLicense(ENDPOINTS.CHECK_OUT, data);
+      return await apiPost(ENDPOINTS.CHECK_OUT, data);
     }, 'Failed to create address')) as FormState;
   } catch (error) {
     console.error('Error occurred during billing action:', error);
