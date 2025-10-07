@@ -10,11 +10,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
-    env:
-      # Nimm VARS für „öffentliche“ Werte oder SECRETS, wenn du vorsichtig sein willst
-      NEXT_PUBLIC_EXTERNAL_API: ${{ vars.NEXT_PUBLIC_EXTERNAL_API }}
-
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
