@@ -2,14 +2,10 @@ import { ApiError } from './ApiError';
 import { redirect } from 'next/navigation';
 
 export class ExternalApiService {
-  protected baseUrl: string;
+  public baseUrl: string;
 
-  constructor() {
-    const externalApiUrl = process.env.NEXT_PUBLIC_EXTERNAL_API || '';
-    if (!externalApiUrl) {
-      throw new Error('NEXT_PUBLIC_EXTERNAL_API is not defined');
-    }
-    this.baseUrl = externalApiUrl;
+  constructor(baseUrl: string = process.env.NEXT_PUBLIC_API_URL || '') {
+    this.baseUrl = baseUrl;
   }
 
   protected async fetchFromExternalApi<T>(

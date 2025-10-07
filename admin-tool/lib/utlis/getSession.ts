@@ -1,7 +1,6 @@
 import { ModuleName, RoleName } from '@/lib/types';
 import { getCookie } from '../cookies/cookie-managment';
-import Module from 'module';
-import { forbidden, unauthorized } from 'next/navigation';
+import { unauthorized } from 'next/navigation';
 
 export interface Token {
   accessToken: string;
