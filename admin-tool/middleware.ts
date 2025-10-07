@@ -1,8 +1,12 @@
+import { SanitizedEmployee, Token } from './lib/utlis/getSession';
 import { NextRequest, NextResponse } from 'next/server';
 import { Locale } from './i18n/config';
 
 export const ROOT = '/';
-export const PUBLIC_ROUTES = ['/auth/(signin|signout|error|otp)'];
+export const PUBLIC_ROUTES = [
+  '/auth/(signin|signout|error|.*)',
+  '/auth/[^/]+/otp',
+];
 export const DEFAULT_REDIRECT = '/auth/signin';
 export const defaultLocale = 'de';
 export const locales = ['en', 'de', 'fr', 'it', 'es'];
@@ -18,14 +22,11 @@ export default async function middleware(request: NextRequest) {
   const tokenCookie = request.cookies.get('token');
   const tenantCookie = request.cookies.get('tenant');
 
-  console.log('in middleware');
-
   let session: any = null;
   if (userCookie && tokenCookie && tenantCookie) {
     try {
-      const user = JSON.parse(userCookie.value);
-      const token = JSON.parse(tokenCookie.value);
-      const tenant = JSON.parse(tenantCookie.value);
+      const user: SanitizedEmployee = JSON.parse(userCookie.value);
+      const token: Token = JSON.parse(tokenCookie.value);
 
       const now = Date.now();
       const expiresAt = token.expiresAt;
@@ -33,8 +34,6 @@ export default async function middleware(request: NextRequest) {
 
       const isTokenValid =
         issuedAt && expiresAt && now >= issuedAt && now <= expiresAt;
-
-      console.log('Token Valid:', isTokenValid);
 
       if (isTokenValid) {
         session = { user, token };
@@ -49,8 +48,6 @@ export default async function middleware(request: NextRequest) {
     session?.token &&
     session?.token.accessToken
   );
-
-  console.log('Is Authenticated:', isAuthenticated);
 
   const { origin, pathname } = request.nextUrl;
 

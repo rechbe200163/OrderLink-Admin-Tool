@@ -112,6 +112,16 @@ export default function UserSettingsModal({
           Profil & Einstellungen
         </DialogTitle>
 
+        <div className='text-sm text-muted-foreground mb-2'>
+          Änderungen an Name und Email werden erst nach erneutem Aus- und
+          Einloggen wirksam.
+        </div>
+
+        {/* <div className='mb-4 p-3 rounded-md bg-yellow-100 text-yellow-800 text-sm border border-yellow-300'>
+          Falls Sie sich zum Erstenmal angemeldet haben empfehlen wir Ihnen
+          dringend Ihr Passwort zu ändern.
+        </div> */}
+
         <Tabs defaultValue='profile' className='w-full'>
           <TabsList className='grid w-full grid-cols-2 h-10 rounded-md'>
             <TabsTrigger
