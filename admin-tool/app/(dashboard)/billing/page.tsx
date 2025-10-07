@@ -6,9 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { billingAction } from '@/lib/actions/billing.actions';
 import { useActionState, useEffect } from 'react';
-import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
-import { FormState } from '@/lib/form.types';
 
 const BillingPage = () => {
   const router = useRouter();

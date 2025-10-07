@@ -8,8 +8,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import { humanizeEnum, capitalizeFirstLetter } from '@/lib/utils';
-import { getTranslations } from 'next-intl/server';
+import { humanizeEnum } from '@/lib/utils';
 
 export default function PermissionsGrid({
   permissions,
@@ -17,7 +16,6 @@ export default function PermissionsGrid({
   permissions: Permission[];
 }) {
   const roles = Array.from(new Set(permissions.map((p) => p.roleName)));
-  const tRole = getTranslations('FilterAndSearch.Filter.Roles.options');
 
   const allActions = [
     Actions.CREATE,

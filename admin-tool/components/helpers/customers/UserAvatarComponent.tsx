@@ -1,5 +1,4 @@
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { supabaseService } from '@/lib/utlis/SupabaseStorageService';
 import { User2Icon } from 'lucide-react';
 
 export default async function UserAvatarComponent({

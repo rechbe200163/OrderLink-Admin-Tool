@@ -1,4 +1,4 @@
-('server only');
+'server only';
 import { BaseApiService } from '../base';
 import { SiteConfigDto } from '@/lib/types';
 

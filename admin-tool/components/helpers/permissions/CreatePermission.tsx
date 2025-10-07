@@ -21,7 +21,6 @@ import { Resources } from '@/lib/types';
 import router from 'next/router';
 import { Checkbox } from '@/components/ui/checkbox';
 import LoadingIcon from '@/components/loading-states/loading-icon';
-import { GenericLoading } from '@/components/loading-states/loading';
 
 export default function CreatePermission({ roles }: { roles: string[] }) {
   const [formState, action, isPending] = useActionState(createPermission, {

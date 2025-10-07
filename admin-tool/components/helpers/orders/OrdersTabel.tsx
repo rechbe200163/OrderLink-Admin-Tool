@@ -11,7 +11,6 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button'; // Import Button for the expand/collapse trigger
 import type { OrdersWithCustomerAndProducts, Product } from '@/lib/types';
 import { formatDateTime, formatPrice } from '@/lib/utils';

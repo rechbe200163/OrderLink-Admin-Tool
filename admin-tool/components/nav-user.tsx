@@ -25,15 +25,13 @@ import UserSettingsModal from './UserSettingsModal';
 import { logOut } from '@/lib/actions/auth.actions';
 import type { Session } from '@/lib/utlis/getSession';
 import { useTranslations } from 'next-intl';
-import { Tenant } from '@/lib/types';
 import Link from 'next/link';
 
 interface NavUserProps {
   session: Session;
-  tenant?: Tenant;
 }
 
-export default function NavUser({ session, tenant }: NavUserProps) {
+export default function NavUser({ session }: NavUserProps) {
   // if user is null return generic user object
   const { isMobile } = useSidebar();
   const tItem = useTranslations('Navigation.Items');

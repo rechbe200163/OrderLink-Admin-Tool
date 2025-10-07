@@ -5,8 +5,6 @@ import { apiPost } from './api.actions';
 import { ENDPOINTS } from '../api/endpoints';
 import { setCookie, deleteCookie } from '../cookies/cookie-managment';
 import { getSession, Session } from '../utlis/getSession';
-import { siteConfigApiService } from '../api/concrete/siteConfig';
-import { baseApiService } from '../api/base';
 
 export async function logOut(): Promise<FormState> {
   try {

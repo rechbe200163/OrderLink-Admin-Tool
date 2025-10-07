@@ -1,6 +1,6 @@
 'use client';
-import React from 'react';
 
+import React from 'react';
 import {
   HomeIcon,
   ShoppingCartIcon,
@@ -42,17 +42,9 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { motion, AnimatePresence } from 'framer-motion';
-import type { ModuleName } from '@/lib/types';
 
 interface NavMainProps {
   favoritesEnabled: boolean;
-}
-
-interface NavItem {
-  title: string;
-  url: string;
-  icon: React.ElementType;
-  module?: ModuleName;
 }
 
 export function NavMainClient({ favoritesEnabled }: NavMainProps) {
@@ -202,7 +194,7 @@ export function NavMainClient({ favoritesEnabled }: NavMainProps) {
         : [];
 
     return [...favoritesGroup, ...base];
-  }, [baseGroups, favoritesEnabled, favorites]);
+  }, [baseGroups, favoritesEnabled, favorites, tNav]);
 
   const filteredGroups = useMemo(() => {
     if (!query) return navGroups;

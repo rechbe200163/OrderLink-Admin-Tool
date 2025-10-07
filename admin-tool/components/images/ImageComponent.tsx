@@ -1,7 +1,6 @@
 import type React from 'react';
 import Image from 'next/image';
 import { ImageOff } from 'lucide-react';
-import { supabaseService } from '@/lib/utlis/SupabaseStorageService';
 
 interface ImagesComponentProps {
   imagePath: string | null;

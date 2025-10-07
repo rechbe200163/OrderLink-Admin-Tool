@@ -19,7 +19,6 @@ import AddressSelectComponent from '@/components/helpers/AddressSelectComponent'
 import { useTranslations } from 'next-intl';
 import PhoneNumberInputComponent from '../PhoneNumberInputComponent';
 import { BusinessSector } from '@/lib/types';
-import { GenericLoading } from '../loading-states/loading';
 import LoadingIcon from '../loading-states/loading-icon';
 import { useCustomerStore } from '@/lib/stores/useCustomerStore';
 
@@ -51,7 +50,6 @@ export default function GenericAddForm() {
     (state) => state.customer.businessSector
   );
   const reset = useCustomerStore((state) => state.reset);
-
 
   // Handle form submission feedback
   useEffect(() => {

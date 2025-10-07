@@ -9,7 +9,6 @@ import { ButtonLinkComponent } from '@/components/ButtonLinkComponent';
 import { getSession } from '@/lib/utlis/getSession';
 import { BusinessSector } from '@/lib/types';
 import { getTranslations } from 'next-intl/server';
-import { ENDPOINTS } from '@/lib/api/endpoints';
 
 export default async function ProductsPage(props: {
   searchParams?: Promise<{

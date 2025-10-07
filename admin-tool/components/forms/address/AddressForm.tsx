@@ -23,7 +23,6 @@ import React from 'react';
 import CustomeToast from '../../helpers/toasts/CustomeErrorToast';
 import { Card } from '@/components/ui/card';
 import { useTranslations } from 'next-intl';
-import { GenericLoading } from '@/components/loading-states/loading';
 import LoadingIcon from '@/components/loading-states/loading-icon';
 import { useAddressStore } from '@/lib/stores/useAddressStore';
 

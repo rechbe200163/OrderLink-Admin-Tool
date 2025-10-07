@@ -19,10 +19,7 @@ interface SessionTimerProps {
   expiresAt: number;
 }
 
-export default function SessionTimer({
-  issuedAt,
-  expiresAt,
-}: SessionTimerProps) {
+export default function SessionTimer({ expiresAt }: SessionTimerProps) {
   const [remaining, setRemaining] = useState(expiresAt - Date.now());
 
   useEffect(() => {

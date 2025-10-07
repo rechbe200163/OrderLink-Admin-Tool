@@ -1,13 +1,5 @@
 import { useId, useState } from 'react';
-import {
-  Brush,
-  ChartArea,
-  Eraser,
-  Key,
-  Route,
-  Scissors,
-  SwatchBook,
-} from 'lucide-react';
+import { ChartArea, Key, Route } from 'lucide-react';
 import { Label } from '@/components/ui/label';
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
 import { Package } from '@/lib/types';

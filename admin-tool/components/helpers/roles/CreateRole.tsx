@@ -11,7 +11,6 @@ import { useTranslations } from 'next-intl';
 import { toast } from 'sonner';
 import CustomeToast from '../toasts/CustomeErrorToast';
 import GenericInputMaskComponent from '@/components/InputWithMask';
-import { GenericLoading } from '@/components/loading-states/loading';
 
 export default function CreateRole() {
   const [formState, action, isPending] = useActionState(createRole, {

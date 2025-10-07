@@ -2,7 +2,7 @@
 
 import { useControllableState } from '@radix-ui/react-use-controllable-state';
 import { Monitor, Moon, Sun } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { cn } from '@/lib/utils';
 
@@ -63,8 +63,6 @@ export const ThemeSwitcher = ({
   }, []);
 
   if (!mounted) return null;
-
-  const activeTheme = themes.find((t) => t.key === theme)!;
 
   return (
     <motion.div
