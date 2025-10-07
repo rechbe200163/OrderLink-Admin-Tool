@@ -7,8 +7,6 @@ import ThemeToggle from './dark-mode/Toggle';
 
 export async function SiteHeader() {
   const session = await getSession();
-  // const enabled = sessionTimerFeatureFlag;
-  // console.log('Feature Flag Enabled:', enabled);
   if (!session) return <NoSessionError />;
 
   return (
