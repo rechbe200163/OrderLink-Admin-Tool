@@ -20,8 +20,6 @@ export default async function AddressesPage(props: {
     tag?: string;
   }>;
 }) {
-  if (!(await isModuleEnabled('NAVIGATION')))
-    redirect('/upgrade?module=NAVIGATION');
   const session = await getSession();
   if (!session) return null;
 
