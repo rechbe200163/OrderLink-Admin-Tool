@@ -1,13 +1,20 @@
-import { useId, useState } from 'react';
+import { useId } from 'react';
 
 import { Badge } from '@/components/ui/badge';
 import { Label } from '@/components/ui/label';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { UserTier, UserTierPricing } from '@/lib/types';
 
-export default function RadioGroupComponentUserTiers() {
+type RadioGroupComponentUserTiersProps = {
+  userTier: UserTier;
+  onChange: (userTier: UserTier) => void;
+};
+
+export default function RadioGroupComponentUserTiers({
+  userTier,
+  onChange,
+}: RadioGroupComponentUserTiersProps) {
   const id = useId();
-  const [userTier, setUserTier] = useState(UserTier.TEAM);
 
   const items = [
     {
@@ -48,8 +55,8 @@ export default function RadioGroupComponentUserTiers() {
       </div>
       <RadioGroup
         className='gap-0 -space-y-px rounded-md shadow-xs'
-        defaultValue={UserTier.TEAM}
-        onValueChange={(value) => setUserTier(value as UserTier)}
+        value={userTier}
+        onValueChange={(value) => onChange(value as UserTier)}
       >
         {items.map((item) => (
           <div

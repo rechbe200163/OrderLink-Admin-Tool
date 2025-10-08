@@ -1,12 +1,19 @@
-import { useId, useState } from 'react';
+import { useId } from 'react';
 import { ChartArea, Key, Route } from 'lucide-react';
 import { Label } from '@/components/ui/label';
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
-import { Package } from '@/lib/types';
+import { ModulePackageName, Package } from '@/lib/types';
 
-export default function GroupComponent() {
+type GroupComponentProps = {
+  modules: ModulePackageName[];
+  onChange: (modules: ModulePackageName[]) => void;
+};
+
+export default function GroupComponent({
+  modules,
+  onChange,
+}: GroupComponentProps) {
   const id = useId();
-  const [modules, setModules] = useState<string[]>([]);
 
   const items = [
     {
@@ -19,7 +26,7 @@ export default function GroupComponent() {
       value: Package.NAVIGATION,
       label: Package.NAVIGATION.toLocaleUpperCase(),
       Icon: Route,
-      description: 'Liefer­routen einfach planen und zuweisen',
+      description: 'Lieferrouten einfach planen und zuweisen',
     },
     {
       value: Package.STATISTICS,
@@ -46,7 +53,8 @@ export default function GroupComponent() {
         variant='outline'
         className='grid grid-cols-1 sm:grid-cols-2 gap-4'
         aria-label='Modules'
-        onValueChange={(value) => setModules(value as string[])}
+        value={modules}
+        onValueChange={(value) => onChange(value as ModulePackageName[])}
       >
         {items.map((item) => (
           <ToggleGroupItem

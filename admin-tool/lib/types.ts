@@ -31,23 +31,23 @@ export const Package: Record<ModuleName, ModulePackageName> = {
 
 // Pricing for each package
 export const PackagePricing: Record<ModulePackageName, number> = {
-  [ModulePackageName.INSIGHT]: 10,
-  [ModulePackageName.FLOW]: 15,
-  [ModulePackageName.ACCESS]: 5,
+  [ModulePackageName.INSIGHT]: 39,
+  [ModulePackageName.FLOW]: 29,
+  [ModulePackageName.ACCESS]: 9,
 };
 
 // Map user count to UserTier
 export const USER_TIER_BY_COUNT: Record<number, UserTier> = {
-  3: UserTier.CORE,
-  5: UserTier.TEAM,
-  7: UserTier.PRO,
+  2: UserTier.CORE,
+  6: UserTier.TEAM,
+  10: UserTier.PRO,
 };
 
 // Pricing for each user tier
 export const UserTierPricing: Record<UserTier, number> = {
-  [UserTier.CORE]: 0, // up to 3 users
-  [UserTier.TEAM]: 5, // up to 5 users
-  [UserTier.PRO]: 10, // up to 7 users
+  [UserTier.CORE]: 0, // up to 2 users
+  [UserTier.TEAM]: 5, // up to 6 users
+  [UserTier.PRO]: 10, // up to 10 users
   [UserTier.ENTERPRISE]: 0, // custom pricing
 };
 
