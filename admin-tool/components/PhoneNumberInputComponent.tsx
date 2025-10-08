@@ -8,7 +8,7 @@ import React, { useId, useState, useEffect } from 'react';
 import { useTranslations } from 'next-intl';
 import * as RPNInput from 'react-phone-number-input';
 import flags from 'react-phone-number-input/flags';
-import { parsePhoneNumberWithError } from 'libphonenumber-js';
+import { parsePhoneNumber } from 'libphonenumber-js';
 import { useCustomerStore } from '@/lib/stores/useCustomerStore';
 
 interface PhoneNumberInputProps {
@@ -22,44 +22,62 @@ export default function PhoneNumberInputComponent({
   const t = useTranslations('Components.PhoneInput');
   const setPhoneNumber = useCustomerStore((s) => s.setPhoneNumber);
   const storeNumber = useCustomerStore((s) => s.customer.phoneNumber);
-  const [value, setValue] = useState(storeNumber || '');
+
+  // WICHTIG: undefined statt '' verwenden
+  const [value, setValue] = useState<string | undefined>(
+    storeNumber || defaultValue || undefined
+  );
   const [country, setCountry] = useState<RPNInput.Country>('US');
 
+  // Initiales Normalisieren ohne Throw
   useEffect(() => {
-    const number = storeNumber || defaultValue;
-    if (number) {
-      const parsedNumber = parsePhoneNumberWithError(number);
-      if (parsedNumber) {
-        setValue(parsedNumber.format('E.164'));
-        setCountry(parsedNumber.country as RPNInput.Country);
-      } else {
-        setValue(number.replace(/\s+/g, ''));
+    const initial = storeNumber ?? defaultValue ?? '';
+    if (!initial) return;
+
+    try {
+      const parsed = parsePhoneNumber(initial);
+      if (parsed) {
+        setValue(parsed.number); // E.164
+        if (parsed.country) setCountry(parsed.country as RPNInput.Country);
+        return;
       }
+    } catch {
+      // still fallback – keine Exception werfen
     }
+    // Fallback: Whitespace entfernen
+    setValue(initial.replace(/\s+/g, '') || undefined);
   }, [defaultValue, storeNumber]);
 
+  // In Store spiegeln
   useEffect(() => {
-    setPhoneNumber(value);
+    setPhoneNumber(value ?? '');
   }, [value, setPhoneNumber]);
+
+  // Props für defaultCountry nur geben, wenn kein Wert gesetzt
+  const defaultCountryProp = value
+    ? {}
+    : ({ defaultCountry: country } as { defaultCountry: RPNInput.Country });
 
   return (
     <div className='not-first:*:mt-2' dir='ltr'>
       <Label htmlFor={id}>{t('label')}</Label>
+
       <RPNInput.default
+        id={id}
+        name='phoneNumber'
+        placeholder={t('placeholder')}
         className='flex rounded-md shadow-2xs'
         international
+        // Wichtig: eigenes Input, aber kein type erzwingen – lib setzt selbst
+        inputComponent={PhoneInput}
         flagComponent={FlagComponent}
         countrySelectComponent={(props) => (
           <CountrySelect {...props} value={country} onChange={setCountry} />
         )}
-        inputComponent={PhoneInput}
-        id={id}
-        placeholder={t('placeholder')}
+        // value als string | undefined, niemals ''
         value={value}
-        type='tel'
-        name='phoneNumber'
-        onChange={(newValue) => setValue(newValue ?? '')}
-        defaultCountry={country}
+        onChange={(v) => setValue(v ?? undefined)}
+        {...defaultCountryProp}
       />
     </div>
   );
@@ -69,6 +87,7 @@ const PhoneInput = ({ className, ...props }: React.ComponentProps<'input'>) => {
   return (
     <Input
       data-slot='phone-input'
+      // kein type='tel' erzwingen; manche Autofill-Skripte buggen dann weniger
       className={cn(
         '-ms-px rounded-s-none shadow-none focus-visible:z-10',
         className
@@ -77,7 +96,6 @@ const PhoneInput = ({ className, ...props }: React.ComponentProps<'input'>) => {
     />
   );
 };
-
 PhoneInput.displayName = 'PhoneInput';
 
 type CountrySelectProps = {
@@ -133,7 +151,6 @@ const CountrySelect = ({
 
 const FlagComponent = ({ country, countryName }: RPNInput.FlagProps) => {
   const Flag = flags[country];
-
   return (
     <span className='w-5 overflow-hidden rounded-sm'>
       {Flag ? (
