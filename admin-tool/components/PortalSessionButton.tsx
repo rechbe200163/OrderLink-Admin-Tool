@@ -1,8 +1,11 @@
-import React, { useActionState } from 'react';
+'use client';
+import React, { useActionState, useEffect } from 'react';
 import { Button } from './ui/button';
 import { createCheckoutPortalSession } from '@/lib/actions/subscription.actions';
+import { useRouter } from 'next/navigation';
 
 function PortalSessionButton() {
+  const router = useRouter();
   const [formState, action, isPending] = useActionState(
     createCheckoutPortalSession,
     {
@@ -12,6 +15,13 @@ function PortalSessionButton() {
       },
     }
   );
+
+  useEffect(() => {
+    if (formState.success) {
+      // Redirect to the billing portal
+      router.push(formState.data.url);
+    }
+  }, [formState]);
 
   return (
     <form action={action}>

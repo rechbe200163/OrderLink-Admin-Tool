@@ -96,7 +96,6 @@ const BillingPage = () => {
 
   useEffect(() => {
     if (formState.success && formState.data) {
-      // @ts-expect-error: formState.data.url type is assumed to be string for now
       router.push(formState.data.url);
     }
   }, [formState, router]);
@@ -207,7 +206,8 @@ const BillingPage = () => {
               <div className='flex items-center justify-between'>
                 <span>Nutzerpaket</span>
                 <span>
-                  {userTier} ({currencyFormatter.format(UserTierPricing[userTier] ?? 0)})
+                  {userTier} (
+                  {currencyFormatter.format(UserTierPricing[userTier] ?? 0)})
                 </span>
               </div>
               <div className='flex flex-col gap-1'>
