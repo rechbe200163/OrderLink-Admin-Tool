@@ -29,4 +29,5 @@ jobs:
           context: ./admin-tool
           file: ./admin-tool/Dockerfile
           push: true
+          platforms: linux/arm64
           tags: rechbe200163/orderlink-admintool:latest
