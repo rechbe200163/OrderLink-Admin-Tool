@@ -27,12 +27,12 @@ export default async function RevenueInfoCard() {
   };
 
   function renderComparison(current: number, percentageChange: number | null) {
-    if (percentageChange == null) return 'Keine Daten für letzten Monat';
+    if (percentageChange == null) return t('noDataLastMonth');
 
     if (percentageChange > 0) {
       return (
         <>
-          Mehr als letzten Monat <TrendingUpIcon className='size-4' />
+          {t('moreThanLastMonth')} <TrendingUpIcon className='size-4' />
         </>
       );
     }
@@ -40,12 +40,12 @@ export default async function RevenueInfoCard() {
     if (percentageChange < 0) {
       return (
         <>
-          Weniger als letzten Monat <TrendingDownIcon className='size-4' />{' '}
+          {t('lessThanLastMonth')} <TrendingDownIcon className='size-4' />{' '}
         </>
       );
     }
 
-    return 'Gleich wie letzten Monat';
+    return t('sameAsLastMonth');
   }
 
   function convertCentsToEuros(currentMonthRevenue: number): number {
@@ -55,7 +55,7 @@ export default async function RevenueInfoCard() {
   return (
     <Card className='@container/card'>
       <CardHeader className='relative'>
-        <CardDescription>Monatlicher Umsatz</CardDescription>
+        <CardDescription>{t('subtitle')}</CardDescription>
         <CardTitle className='@[250px]/card:text-3xl text-2xl font-semibold tabular-nums'>
           <AnimatedCounter
             value={convertCentsToEuros(currentMonthRevenue)}

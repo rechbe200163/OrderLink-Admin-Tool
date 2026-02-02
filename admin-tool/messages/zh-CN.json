@@ -1,0 +1,752 @@
+{
+  "Onboarding": {
+    "Buttons": {
+      "continue": "继续",
+      "back": "返回",
+      "complete": "完成",
+      "loading": "加载中..."
+    },
+    "Steps": {
+      "stepOne": "欢迎",
+      "stepTwo": "公司详情",
+      "stepThree": "初始管理员用户设置"
+    },
+    "Welcome": {
+      "title1": "欢迎使用",
+      "title2": "公司设置",
+      "informationNeeded": "您需要提供的信息",
+      "description": "我们很高兴您的加入。让我们设置您的公司档案！",
+      "information": "请填写以下字段以完成您的公司档案。",
+      "information2": "请准备好这些信息以确保流程顺利进行。",
+      "companyInformationDesc": {
+        "Logo": {
+          "title": "公司标志",
+          "desc": "JPG、PNG 或 SVG 格式的标志"
+        },
+        "Email": {
+          "title": "电子邮件地址",
+          "desc": "商务电子邮件地址"
+        },
+        "Phone": {
+          "title": "电话号码",
+          "desc": "商务电话号码"
+        },
+        "IBAN": {
+          "title": "IBAN",
+          "desc": "商务 IBAN"
+        },
+        "Company": {
+          "Number": {
+            "title": "公司编号",
+            "desc": "公司编号"
+          },
+          "Name": {
+            "title": "公司名称",
+            "desc": "公司名称"
+          }
+        }
+      }
+    },
+    "CompanyDetails": {
+      "headerPart1": "公司",
+      "headerPart2": "详情",
+      "enterCompanyDetails": "输入您的公司详情",
+      "fillAllRequiredFields": "请填写所有必填字段",
+      "Form": {
+        "Logo": {
+          "title": "公司标志",
+          "lable": "上传您的公司标志",
+          "acceptedTypes": "接受的文件类型：jpg、jpeg、png"
+        },
+        "Location": {
+          "title": "位置信息",
+          "lable": "选择国家",
+          "description": "如果您的国家有州/省，选择国家后将显示",
+          "city": "城市",
+          "postCode": "邮政编码",
+          "streetName": "街道名称",
+          "streetNumber": "街道号码"
+        },
+        "Company": {
+          "title": "公司信息",
+          "companyName": "公司名称",
+          "companyNumber": "公司编号",
+          "email": "电子邮件地址",
+          "phoneNumber": "电话号码",
+          "iban": "IBAN"
+        }
+      }
+    }
+  },
+  "Dashboard": {
+    "header": {
+      "monthlyStats": "月度统计"
+    },
+    "InfoCards": {
+      "currency": "USD",
+      "revenue": {
+        "title": "收入",
+        "subtitle": "月度收入",
+        "timeframe": "自上月",
+        "noDataLastMonth": "上月无数据",
+        "moreThanLastMonth": "高于上月",
+        "lessThanLastMonth": "低于上月",
+        "sameAsLastMonth": "与上月相同"
+      },
+      "customer": {
+        "title": "客户",
+        "subtitle": "客户数量",
+        "timeframe": "自上月",
+        "noDataLastMonth": "上月无数据",
+        "moreThanLastMonth": "高于上月",
+        "lessThanLastMonth": "低于上月",
+        "sameAsLastMonth": "与上月相同",
+        "monthlyRegistrations": "月度注册"
+      },
+      "monthlySales": {
+        "title": "月度销售",
+        "subtitle": "销售数量",
+        "timeframe": "自上月",
+        "noDataLastMonth": "上月无数据",
+        "moreThanLastMonth": "高于上月",
+        "lessThanLastMonth": "低于上月",
+        "sameAsLastMonth": "与上月相同",
+        "monthlySalesCount": "月度销售"
+      },
+      "avarageOrderValue": {
+        "title": "平均订单价值",
+        "subtitle": "平均订单价值",
+        "timeframe": "自上月",
+        "noDataLastMonth": "上月无数据",
+        "moreThanLastMonth": "高于上月",
+        "lessThanLastMonth": "低于上月",
+        "sameAsLastMonth": "与上月相同",
+        "averageValue": "平均订单价值"
+      }
+    },
+    "Charts": {
+      "OrderStateDistribution": {
+        "title": "按状态分类的订单",
+        "description": "按状态分类的订单概览。",
+        "orders": "订单"
+      },
+      "CustomerBusinessTypeDistribution": {
+        "title": "按行业分类的客户分布",
+        "description": "此图表显示按业务行业分类的客户分布。",
+        "customers": "客户"
+      }
+    },
+    "Ressource": {
+      "BreadCrumps": {
+        "title": "仪表板"
+      },
+      "Address": {
+        "BreadCrumps": {
+          "title": "地址",
+          "add": "添加新地址",
+          "edit": "编辑地址"
+        },
+        "Attributes": {
+          "state": "州/省",
+          "country": "国家",
+          "city": "城市",
+          "postCode": "邮政编码",
+          "streetName": "街道名称",
+          "streetNumber": "街道号码",
+          "status": "状态",
+          "actions": "操作",
+          "notFound": "未找到地址"
+        },
+        "add": "添加新地址",
+        "edit": "编辑地址",
+        "buttons": {
+          "delete": "删除地址",
+          "deleteLoading": "正在删除地址...",
+          "create": "创建地址",
+          "createLoading": "正在创建地址...",
+          "update": "更新地址",
+          "updateLoading": "正在更新地址...",
+          "add": "添加地址",
+          "addLoading": "正在添加地址...",
+          "editButton": "编辑"
+        },
+        "Status": {
+          "active": "活跃",
+          "inactive": "非活跃"
+        },
+        "EmptyState": {
+          "title": "未找到地址",
+          "subtitle": "暂无地址",
+          "description": "系统中还没有地址。创建您的第一个地址以开始使用。"
+        },
+        "Placeholder": {
+          "city": "Stubenberg",
+          "postCode": "8223",
+          "streetName": "Main Street",
+          "streetNumber": "123"
+        },
+        "Toast": {
+          "success": "地址创建成功",
+          "error": "发生错误"
+        },
+        "dialogDescription": "在系统中创建新地址"
+      },
+      "Products": {
+        "BreadCrumps": {
+          "title": "产品",
+          "add": "添加新产品",
+          "edit": "编辑产品"
+        },
+        "Attributes": {
+          "image": "图片",
+          "name": "名称",
+          "description": "描述",
+          "price": "价格",
+          "status": "状态",
+          "actions": "操作",
+          "stock": "库存",
+          "createdAt": "创建时间",
+          "notFound": "未找到产品",
+          "noImage": "无图片",
+          "noDescription": "无描述",
+          "deleted": "已删除"
+        },
+        "buttons": {
+          "delete": "删除产品",
+          "deleteLoading": "正在删除产品...",
+          "create": "创建产品",
+          "createLoading": "正在创建产品...",
+          "update": "更新产品",
+          "updateLoading": "正在更新产品...",
+          "add": "添加产品",
+          "addLoading": "正在添加产品...",
+          "editButton": "编辑"
+        },
+        "add": "添加新产品",
+        "edit": "编辑产品",
+        "Status": {
+          "active": "活跃",
+          "inactive": "非活跃"
+        },
+        "EmptyState": {
+          "title": "未找到产品",
+          "subtitle": "暂无产品",
+          "description": "系统中还没有产品。创建您的第一个产品以开始使用。",
+          "createFirst": "创建第一个产品"
+        },
+        "dialogDescription": "在系统中创建新产品"
+      },
+      "Categories": {
+        "BreadCrumps": {
+          "title": "类别",
+          "add": "添加新类别",
+          "edit": "编辑类别"
+        },
+        "Attributes": {
+          "name": "名称",
+          "status": "状态",
+          "actions": "操作",
+          "notFound": "未找到类别"
+        },
+        "buttons": {
+          "delete": "删除类别",
+          "deleteLoading": "正在删除类别...",
+          "create": "创建类别",
+          "createLoading": "正在创建类别...",
+          "update": "更新类别",
+          "updateLoading": "正在更新类别...",
+          "add": "添加类别",
+          "addLoading": "正在添加类别...",
+          "editButton": "编辑"
+        },
+        "add": "添加新类别",
+        "edit": "编辑类别",
+        "Status": {
+          "active": "活跃",
+          "inactive": "非活跃"
+        },
+        "EmptyState": {
+          "title": "未找到类别",
+          "subtitle": "暂无类别",
+          "description": "系统中还没有类别。创建您的第一个类别以开始使用。"
+        },
+        "Toast": {
+          "success": "类别创建成功",
+          "error": "发生错误"
+        },
+        "dialogDescription": "在系统中创建新类别"
+      },
+      "Routes": {
+        "BreadCrumps": {
+          "title": "路线",
+          "add": "添加新路线",
+          "edit": "编辑路线"
+        },
+        "add": "添加新路线",
+        "edit": "编辑路线",
+        "name": "路线名称",
+        "dialogDescription": "使用选定的订单创建新路线",
+        "Attributes": {
+          "name": "名称",
+          "orders": "订单",
+          "status": "状态",
+          "actions": "操作",
+          "clickForOrderDetails": "点击查看订单详情"
+        },
+        "buttons": {
+          "editButton": "编辑"
+        },
+        "Status": {
+          "active": "活跃",
+          "inactive": "非活跃"
+        },
+        "EmptyState": {
+          "title": "未找到路线",
+          "subtitle": "暂无路线",
+          "description": "系统中还没有路线。创建您的第一条配送路线以组织订单。"
+        }
+      },
+      "Orders": {
+        "BreadCrumps": {
+          "title": "订单",
+          "add": "添加新订单",
+          "edit": "编辑订单"
+        },
+        "Attributes": {
+          "customer": "客户",
+          "orderDate": "订单日期",
+          "deliveryDate": "配送日期",
+          "orderState": "订单状态",
+          "selfCollectYes": "自提",
+          "selfCollectNo": "配送",
+          "deliveryMethode": "配送方式",
+          "actions": "操作",
+          "Products": {
+            "Product": {
+              "title": "产品",
+              "image": "图片",
+              "quantity": "数量",
+              "price": "价格",
+              "total": "总计",
+              "noProductsInOrder": "订单中无产品"
+            },
+            "title": "产品",
+            "name": "名称",
+            "quantity": "数量",
+            "price": "价格",
+            "total": "总计",
+            "orderTotal": "订单总计："
+          },
+          "notFound": "未找到订单",
+          "notDeliveredYet": "尚未配送"
+        },
+        "buttons": {
+          "delete": "删除订单",
+          "deleteLoading": "正在删除订单...",
+          "create": "创建订单",
+          "createLoading": "正在创建订单...",
+          "update": "更新订单",
+          "updateLoading": "正在更新订单...",
+          "add": "添加订单",
+          "addLoading": "正在添加订单...",
+          "editButton": "编辑",
+          "collapse": "折叠",
+          "expand": "展开"
+        },
+        "add": "添加新订单",
+        "edit": "编辑订单",
+        "EmptyState": {
+          "title": "未找到订单",
+          "subtitle": "暂无订单",
+          "description": "系统中还没有订单。创建您的第一个订单以开始使用。"
+        },
+        "dialogDescription": "在系统中创建新订单"
+      },
+      "Customers": {
+        "header": "添加新客户",
+        "headerUpdate": "编辑客户",
+        "Details": {
+          "customerDetails": "客户详情",
+          "businessCustomerDetails": "企业客户详情"
+        },
+        "BreadCrumps": {
+          "title": "客户",
+          "add": "添加新客户",
+          "edit": "编辑客户"
+        },
+        "Attributes": {
+          "avatar": "头像",
+          "name": "姓名",
+          "firstName": "名",
+          "lastName": "姓",
+          "password": "密码",
+          "email": "电子邮件",
+          "phone": "电话",
+          "customerReference": "客户参考号",
+          "businessSector": "业务行业",
+          "companyNumber": "公司编号",
+          "status": "状态",
+          "notFound": "未找到客户"
+        },
+        "buttons": {
+          "delete": "删除客户",
+          "deleteLoading": "正在删除客户...",
+          "create": "创建客户",
+          "createLoading": "正在创建客户...",
+          "update": "更新客户",
+          "updateLoading": "正在更新客户...",
+          "add": "添加客户",
+          "addLoading": "正在添加客户..."
+        },
+        "add": "添加新客户",
+        "edit": "编辑客户",
+        "Placeholder": {
+          "selectBusinessSector": "选择业务行业",
+          "firstName": "输入名",
+          "lastName": "输入姓",
+          "email": "输入电子邮件",
+          "companyNumber": "输入公司编号",
+          "password": "将自动生成",
+          "passwordInfo": "密码将自动生成并发送给客户"
+        },
+        "Status": {
+          "active": "活跃",
+          "inactive": "非活跃"
+        },
+        "Toast": {
+          "success": "客户更新成功",
+          "error": "更新客户失败"
+        },
+        "EmptyState": {
+          "title": "未找到客户",
+          "subtitle": "暂无客户",
+          "description": "系统中还没有客户。创建您的第一个客户以开始使用。"
+        },
+        "dialogDescription": "在系统中创建新客户"
+      },
+      "Settings": {
+        "BreadCrumps": {
+          "title": "设置"
+        },
+        "edit": "编辑设置"
+      },
+      "Employees": {
+        "header": "添加新员工",
+        "headerUpdate": "编辑员工",
+        "BreadCrumps": {
+          "title": "员工",
+          "add": "添加新员工",
+          "edit": "编辑员工"
+        },
+        "CreateEmployee": {
+          "header": "添加新员工"
+        },
+        "Details": {
+          "employeeDetails": "员工详情"
+        },
+        "Attributes": {
+          "email": "电子邮件",
+          "firstName": "名",
+          "lastName": "姓",
+          "status": "状态",
+          "role": "角色",
+          "notFound": "未找到员工"
+        },
+        "buttons": {
+          "delete": "删除员工",
+          "deleteLoading": "正在删除员工...",
+          "create": "创建员工",
+          "createLoading": "正在创建员工...",
+          "update": "更新员工",
+          "updateLoading": "正在更新员工...",
+          "add": "添加员工",
+          "addLoading": "正在添加员工..."
+        },
+        "add": "添加新员工",
+        "edit": "编辑员工",
+        "Placeholder": {
+          "firstName": "输入名",
+          "lastName": "输入姓",
+          "email": "输入电子邮件",
+          "password": "输入密码",
+          "selectRole": "选择角色"
+        },
+        "Status": {
+          "active": "活跃",
+          "inactive": "非活跃"
+        },
+        "Toast": {
+          "success": "员工更新成功",
+          "error": "更新员工失败"
+        },
+        "EmptyState": {
+          "title": "未找到员工",
+          "subtitle": "暂无员工",
+          "description": "系统中还没有员工。添加您的第一个员工以开始使用。"
+        },
+        "dialogDescription": "在系统中创建新员工"
+      },
+      "Permissions": {
+        "BreadCrumps": {
+          "title": "权限",
+          "add": "添加新权限",
+          "edit": "编辑权限"
+        },
+        "Attributes": {
+          "role": "角色",
+          "action": "操作",
+          "actions": "操作",
+          "resource": "资源",
+          "status": "状态",
+          "allowed": "允许",
+          "notFound": "未找到权限"
+        },
+        "buttons": {
+          "delete": "删除权限",
+          "deleteLoading": "正在删除权限...",
+          "create": "创建权限",
+          "createLoading": "正在创建权限...",
+          "update": "更新权限",
+          "updateLoading": "正在更新权限...",
+          "add": "添加权限",
+          "addLoading": "正在添加权限..."
+        },
+        "add": "添加新权限",
+        "edit": "编辑权限",
+        "Status": {
+          "active": "活跃",
+          "inactive": "非活跃"
+        },
+        "NoRoles": {
+          "title": "无可用角色",
+          "description": "似乎没有定义角色。请在管理权限之前创建一个。"
+        },
+        "EmptyState": {
+          "title": "未找到权限",
+          "subtitle": "暂无权限",
+          "description": "系统中还没有权限。创建您的第一个权限以开始使用。"
+        },
+        "dialogDescription": "在系统中创建新权限"
+      },
+      "Roles": {
+        "BreadCrumps": {
+          "title": "角色",
+          "add": "添加角色"
+        },
+        "Attributes": {
+          "name": "名称",
+          "description": "描述"
+        },
+        "buttons": {
+          "add": "添加角色",
+          "addLoading": "正在添加角色..."
+        },
+        "add": "添加角色",
+        "dialogDescription": "在系统中创建新角色"
+      },
+      "Subscription": {
+        "BreadCrumps": {
+          "title": "订阅"
+        },
+        "add": "添加新订阅",
+        "edit": "编辑订阅"
+      }
+    }
+  },
+  "FilterAndSearch": {
+    "Filter": {
+      "title": "筛选",
+      "Status": {
+        "title": "状态",
+        "options": {
+          "active": "活跃",
+          "inactive": "非活跃"
+        }
+      },
+      "BusinessSectors": {
+        "title": "业务行业",
+        "options": {
+          "agriculture": "农业",
+          "construction": "建筑",
+          "education": "教育",
+          "finance": "金融",
+          "health": "医疗",
+          "hospitality": "酒店餐饮",
+          "it": "信息技术",
+          "manufacturing": "制造业",
+          "other": "其他",
+          "retail": "零售",
+          "technology": "科技",
+          "tourism": "旅游",
+          "transportation": "运输",
+          "private": "私人"
+        }
+      },
+      "OrderState": {
+        "title": "订单状态",
+        "options": {
+          "order_placed": "已下单",
+          "in_progress": "进行中",
+          "dispatched": "已发货",
+          "delivered": "已送达",
+          "order_collected": "已自提"
+        }
+      },
+      "Roles": {
+        "title": "角色",
+        "options": {
+          "admin": "管理员",
+          "employee": "员工",
+          "supplier": "供应商"
+        }
+      }
+    },
+    "Search": {
+      "title": "搜索",
+      "searchForOption1": "按名称搜索",
+      "searchForOption2": "按名称或电子邮件搜索",
+      "searchForOption3": "按邮政编码搜索"
+    }
+  },
+  "Pagination": {
+    "rowsPerPage": "每页行数",
+    "goToPrev": "转到上一页",
+    "goToNext": "转到下一页",
+    "goToFist": "转到第一页",
+    "goToLast": "转到最后一页",
+    "of": "共",
+    "selectNumberResults": "选择结果数量"
+  },
+  "SelectComponents": {
+    "Address": {
+      "selectAddress": "选择地址",
+      "noAddressFound": "未找到地址",
+      "addNewAddress": "添加新地址",
+      "findAddress": "查找地址"
+    },
+    "Category": {
+      "selectCategory": "选择类别",
+      "noCategoryFound": "未找到类别",
+      "addNewCategory": "添加新类别",
+      "findCategory": "查找类别"
+    },
+    "Customer": {
+      "selectCustomer": "选择客户",
+      "noCustomerFound": "未找到客户",
+      "addNewCustomer": "添加新客户",
+      "findCustomer": "查找客户"
+    },
+    "Product": {
+      "selectProduct": "选择产品",
+      "selectProducts": "选择产品",
+      "noProductFound": "未找到产品",
+      "addNewProduct": "添加新产品",
+      "findProduct": "查找产品"
+    },
+    "Route": {
+      "selectRoute": "选择路线",
+      "noRouteFound": "未找到路线",
+      "addNewRoute": "添加新路线",
+      "addNewRouteLoading": "正在添加新路线...",
+      "findRoute": "查找路线",
+      "selectedOrders": "选定的订单"
+    },
+    "Order": {
+      "selectOrder": "选择订单",
+      "selectOrders": "选择订单",
+      "noOrderFound": "未找到订单",
+      "addNewOrder": "添加新订单",
+      "findOrder": "查找订单",
+      "ordersSelected": "已选择订单"
+    },
+    "Actions": {
+      "selectActions": "选择操作",
+      "noActionFound": "未找到操作",
+      "findAction": "查找操作"
+    }
+  },
+  "Messages": {
+    "Route": {
+      "created": "路线创建成功"
+    }
+  },
+  "Navigation": {
+    "Groups": {
+      "overview": "概览",
+      "sales": "销售",
+      "products": "产品",
+      "customers": "客户",
+      "employees": "员工",
+      "settings": "设置",
+      "permissions": "权限"
+    },
+    "Items": {
+      "overview": "概览",
+      "statistics": "统计",
+      "ordersStatistics": "订单统计",
+      "routesStatistics": "路线统计",
+      "productsStatistics": "产品统计",
+      "categoriesStatistics": "类别统计",
+      "customersStatistics": "客户统计",
+      "orders": "订单",
+      "routes": "路线",
+      "addresses": "地址",
+      "products": "产品",
+      "categories": "类别",
+      "customers": "客户",
+      "employees": "员工",
+      "settings": "设置",
+      "permissions": "权限",
+      "profileSettings": "个人资料和设置"
+    }
+  },
+  "Components": {
+    "BackButton": {
+      "goBack": "返回"
+    },
+    "SidebarHeader": {
+      "errorTitle": "错误",
+      "errorMessage": "加载侧边栏标题时发生错误。",
+      "defaultName": "管理工具"
+    },
+    "NavMain": {
+      "favorites": "收藏",
+      "favorite": "收藏",
+      "searchPlaceholder": "搜索项目..."
+    },
+    "PhoneInput": {
+      "label": "电话号码",
+      "placeholder": "输入电话号码",
+      "selectCountry": "选择国家",
+      "selectCountryPlaceholder": "选择一个国家"
+    },
+    "SubscriptionDetails": {
+      "title": "订阅详情",
+      "status": "状态",
+      "plan": "计划",
+      "amount": "金额",
+      "billingPeriod": "计费周期",
+      "currentPeriodStart": "当前周期开始",
+      "currentPeriodEnd": "当前周期结束"
+    },
+    "Pagination": {
+      "morePages": "更多页面"
+    },
+    "NavUser": {
+      "billing": "账单",
+      "logOut": "退出登录"
+    },
+    "Sidebar": {
+      "toggle": "切换侧边栏"
+    }
+  },
+  "PremiumWrapper": {
+    "header": "升级至高级版",
+    "subtitle": "升级至高级版以解锁此功能",
+    "button": "立即升级"
+  },
+  "Common": {
+    "copiedToClipboard": "已复制到剪贴板",
+    "role": "角色"
+  }
+}

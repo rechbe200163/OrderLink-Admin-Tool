@@ -48,10 +48,11 @@ export function CustomerBusinessTypeDistrubution({
   data: CustomerByBranch;
 }) {
   const tFilter = useTranslations('FilterAndSearch.Filter.BusinessSectors');
+  const t = useTranslations('Dashboard.Charts.CustomerBusinessTypeDistribution');
 
   const chartConfig = {
     customers: {
-      label: 'Kunden',
+      label: t('customers'),
     },
     ...businessSectors.reduce(
       (acc, sector) => {
@@ -80,9 +81,9 @@ export function CustomerBusinessTypeDistrubution({
   return (
     <Card className='flex flex-col'>
       <CardHeader className='items-center pb-0'>
-        <CardTitle>Kundenverteilung nach Branche</CardTitle>
+        <CardTitle>{t('title')}</CardTitle>
         <CardDescription>
-          Diese Grafik zeigt die Verteilung der Kunden nach Branche.
+          {t('description')}
         </CardDescription>
       </CardHeader>
       <CardContent className='flex-1 pb-0'>
@@ -124,7 +125,7 @@ export function CustomerBusinessTypeDistrubution({
                           y={(viewBox.cy || 0) + 24}
                           className='fill-muted-foreground'
                         >
-                          Kunden
+                          {t('customers')}
                         </tspan>
                       </text>
                     );

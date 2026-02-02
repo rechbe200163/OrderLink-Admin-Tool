@@ -48,6 +48,7 @@ export const useCustomerStore = create<CustomerState>()(
       storage: createJSONStorage(() => localStorage),
       partialize: (state) => ({ customer: state.customer }),
       version: 1,
+      skipHydration: true,
     }
   )
 );

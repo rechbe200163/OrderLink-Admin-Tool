@@ -15,6 +15,7 @@ import { Category } from '@/lib/types';
 import LoadingIcon from '@/components/loading-states/loading-icon';
 export default function EditCategory({ category }: { category: Category }) {
   const t = useTranslations('Dashboard.Ressource.Categories');
+  const tToast = useTranslations('Dashboard.Ressource.Categories.Toast');
   const router = useRouter();
   const [formState, action, isPending] = useActionState(
     updateCategory.bind(null, category.categoryId, category),
@@ -31,14 +32,14 @@ export default function EditCategory({ category }: { category: Category }) {
       toast.custom(() => (
         <CustomeToast
           variant='success'
-          message='Category created successfully'
+          message={tToast('success')}
         />
       ));
       if (formState.data) {
         router.push(`/categories/${formState.data}/edit`);
       }
     }
-  }, [formState, router]);
+  }, [formState, router, tToast]);
 
   React.useEffect(() => {
     if (
@@ -49,11 +50,11 @@ export default function EditCategory({ category }: { category: Category }) {
       toast.custom(() => (
         <CustomeToast
           variant='error'
-          message={`An error occurred ${formState.errors?.title}`}
+          message={`${tToast('error')} ${formState.errors?.title}`}
         />
       ));
     }
-  }, [formState.errors]);
+  }, [formState.errors, tToast]);
 
   return (
     <Card className='shadow-md p-6 min-w-full'>

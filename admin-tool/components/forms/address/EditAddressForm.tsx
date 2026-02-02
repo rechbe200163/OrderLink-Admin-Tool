@@ -34,6 +34,8 @@ const formSchema = z.object({
 
 export default function EditAddressForm({ address }: { address: Address }) {
   const t = useTranslations('Dashboard.Ressource.Address');
+  const tPlaceholder = useTranslations('Dashboard.Ressource.Address.Placeholder');
+  const tToast = useTranslations('Dashboard.Ressource.Address.Toast');
 
   const router = useRouter();
 
@@ -55,14 +57,14 @@ export default function EditAddressForm({ address }: { address: Address }) {
       toast.custom(() => (
         <CustomeToast
           variant='success'
-          message='Address created successfully'
+          message={tToast('success')}
         />
       ));
       if (formState.data) {
         router.push(`/addresses/${formState.data}/edit`);
       }
     }
-  }, [formState, router]);
+  }, [formState, router, tToast]);
 
   React.useEffect(() => {
     if (
@@ -73,11 +75,11 @@ export default function EditAddressForm({ address }: { address: Address }) {
       toast.custom(() => (
         <CustomeToast
           variant='error'
-          message={`An error occurred ${formState.errors?.title}`}
+          message={`${tToast('error')} ${formState.errors?.title}`}
         />
       ));
     }
-  }, [formState.errors]);
+  }, [formState.errors, tToast]);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -122,7 +124,7 @@ export default function EditAddressForm({ address }: { address: Address }) {
             <Input
               id='city'
               name='city'
-              placeholder='Stubenberg'
+              placeholder={tPlaceholder('city')}
               required
               defaultValue={address.city}
             />
@@ -133,7 +135,7 @@ export default function EditAddressForm({ address }: { address: Address }) {
             <Input
               id='postCode'
               name='postCode'
-              placeholder='8223'
+              placeholder={tPlaceholder('postCode')}
               required
               defaultValue={address.postCode}
             />
@@ -143,7 +145,7 @@ export default function EditAddressForm({ address }: { address: Address }) {
             <Input
               id='streetName'
               name='streetName'
-              placeholder='Hauptstraße'
+              placeholder={tPlaceholder('streetName')}
               required
               defaultValue={address.streetName}
             />
@@ -153,9 +155,9 @@ export default function EditAddressForm({ address }: { address: Address }) {
             <Input
               id='streetNumber'
               name='streetNumber'
-              placeholder=''
+              placeholder={tPlaceholder('streetNumber')}
               ref={withMask('99999', {
-                placeholder: '',
+                placeholder: tPlaceholder('streetNumber'),
                 showMaskOnHover: false,
               })}
               required

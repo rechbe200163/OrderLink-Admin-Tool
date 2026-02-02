@@ -1,14 +1,11 @@
-import { ButtonLinkComponent } from '@/components/ButtonLinkComponent';
 import { RoutesTable } from '@/components/helpers/routes/RouteTable';
 import PaginationComponent from '@/components/pagination+filtering/PagingComponent';
 import SearchComponent from '@/components/pagination+filtering/SearchComponent';
 import { routeApiService } from '@/lib/api/concrete/route';
 import { getSession } from '@/lib/utlis/getSession';
-import { PlusCircle } from 'lucide-react';
 import React from 'react';
 import { getTranslations } from 'next-intl/server';
-import { redirect } from 'next/navigation';
-import { isModuleEnabled } from '@/lib/modules';
+import AddRouteDialog from '@/components/helpers/routes/AddRouteDialog';
 
 async function RoutesPage(props: {
   searchParams?: Promise<{
@@ -17,8 +14,6 @@ async function RoutesPage(props: {
     query?: string;
   }>;
 }) {
-  if (!(await isModuleEnabled('NAVIGATION')))
-    redirect('/upgrade?module=NAVIGATION');
   const session = await getSession();
   if (!session) return null;
 
@@ -43,15 +38,11 @@ async function RoutesPage(props: {
           <SearchComponent placeholder={tFilter('Search.searchForOption1')} />
         </div>
 
-        <ButtonLinkComponent
-          href='/routes/add'
-          label={t('Ressource.Routes.add')}
-          icon={<PlusCircle />}
-        />
+        <AddRouteDialog />
       </div>
       <div className='flex-1 justify-between gap-1 flex flex-col'>
         <div className='min-w-full max-h-[calc(100vh-15rem)] overflow-auto'>
-          <RoutesTable routes={routes} />
+          <RoutesTable routes={routes} searchQuery={query} />
         </div>
         <div>
           <PaginationComponent

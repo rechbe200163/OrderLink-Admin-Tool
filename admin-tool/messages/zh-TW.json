@@ -1,0 +1,752 @@
+{
+  "Onboarding": {
+    "Buttons": {
+      "continue": "繼續",
+      "back": "返回",
+      "complete": "完成",
+      "loading": "載入中..."
+    },
+    "Steps": {
+      "stepOne": "歡迎",
+      "stepTwo": "公司詳情",
+      "stepThree": "初始管理員用戶設定"
+    },
+    "Welcome": {
+      "title1": "歡迎使用",
+      "title2": "公司設定",
+      "informationNeeded": "您需要提供的資訊",
+      "description": "我們很高興您的加入。讓我們設定您的公司檔案！",
+      "information": "請填寫以下欄位以完成您的公司檔案。",
+      "information2": "請準備好這些資訊以確保流程順利進行。",
+      "companyInformationDesc": {
+        "Logo": {
+          "title": "公司標誌",
+          "desc": "JPG、PNG 或 SVG 格式的標誌"
+        },
+        "Email": {
+          "title": "電子郵件地址",
+          "desc": "商務電子郵件地址"
+        },
+        "Phone": {
+          "title": "電話號碼",
+          "desc": "商務電話號碼"
+        },
+        "IBAN": {
+          "title": "IBAN",
+          "desc": "商務 IBAN"
+        },
+        "Company": {
+          "Number": {
+            "title": "公司編號",
+            "desc": "公司編號"
+          },
+          "Name": {
+            "title": "公司名稱",
+            "desc": "公司名稱"
+          }
+        }
+      }
+    },
+    "CompanyDetails": {
+      "headerPart1": "公司",
+      "headerPart2": "詳情",
+      "enterCompanyDetails": "輸入您的公司詳情",
+      "fillAllRequiredFields": "請填寫所有必填欄位",
+      "Form": {
+        "Logo": {
+          "title": "公司標誌",
+          "lable": "上傳您的公司標誌",
+          "acceptedTypes": "接受的檔案類型：jpg、jpeg、png"
+        },
+        "Location": {
+          "title": "位置資訊",
+          "lable": "選擇國家",
+          "description": "如果您的國家有州/省，選擇國家後將顯示",
+          "city": "城市",
+          "postCode": "郵遞區號",
+          "streetName": "街道名稱",
+          "streetNumber": "街道號碼"
+        },
+        "Company": {
+          "title": "公司資訊",
+          "companyName": "公司名稱",
+          "companyNumber": "公司編號",
+          "email": "電子郵件地址",
+          "phoneNumber": "電話號碼",
+          "iban": "IBAN"
+        }
+      }
+    }
+  },
+  "Dashboard": {
+    "header": {
+      "monthlyStats": "月度統計"
+    },
+    "InfoCards": {
+      "currency": "USD",
+      "revenue": {
+        "title": "收入",
+        "subtitle": "月度收入",
+        "timeframe": "自上月",
+        "noDataLastMonth": "上月無資料",
+        "moreThanLastMonth": "高於上月",
+        "lessThanLastMonth": "低於上月",
+        "sameAsLastMonth": "與上月相同"
+      },
+      "customer": {
+        "title": "客戶",
+        "subtitle": "客戶數量",
+        "timeframe": "自上月",
+        "noDataLastMonth": "上月無資料",
+        "moreThanLastMonth": "高於上月",
+        "lessThanLastMonth": "低於上月",
+        "sameAsLastMonth": "與上月相同",
+        "monthlyRegistrations": "月度註冊"
+      },
+      "monthlySales": {
+        "title": "月度銷售",
+        "subtitle": "銷售數量",
+        "timeframe": "自上月",
+        "noDataLastMonth": "上月無資料",
+        "moreThanLastMonth": "高於上月",
+        "lessThanLastMonth": "低於上月",
+        "sameAsLastMonth": "與上月相同",
+        "monthlySalesCount": "月度銷售"
+      },
+      "avarageOrderValue": {
+        "title": "平均訂單價值",
+        "subtitle": "平均訂單價值",
+        "timeframe": "自上月",
+        "noDataLastMonth": "上月無資料",
+        "moreThanLastMonth": "高於上月",
+        "lessThanLastMonth": "低於上月",
+        "sameAsLastMonth": "與上月相同",
+        "averageValue": "平均訂單價值"
+      }
+    },
+    "Charts": {
+      "OrderStateDistribution": {
+        "title": "按狀態分類的訂單",
+        "description": "按狀態分類的訂單概覽。",
+        "orders": "訂單"
+      },
+      "CustomerBusinessTypeDistribution": {
+        "title": "按行業分類的客戶分布",
+        "description": "此圖表顯示按業務行業分類的客戶分布。",
+        "customers": "客戶"
+      }
+    },
+    "Ressource": {
+      "BreadCrumps": {
+        "title": "儀表板"
+      },
+      "Address": {
+        "BreadCrumps": {
+          "title": "地址",
+          "add": "新增地址",
+          "edit": "編輯地址"
+        },
+        "Attributes": {
+          "state": "州/省",
+          "country": "國家",
+          "city": "城市",
+          "postCode": "郵遞區號",
+          "streetName": "街道名稱",
+          "streetNumber": "街道號碼",
+          "status": "狀態",
+          "actions": "操作",
+          "notFound": "找不到地址"
+        },
+        "add": "新增地址",
+        "edit": "編輯地址",
+        "buttons": {
+          "delete": "刪除地址",
+          "deleteLoading": "正在刪除地址...",
+          "create": "建立地址",
+          "createLoading": "正在建立地址...",
+          "update": "更新地址",
+          "updateLoading": "正在更新地址...",
+          "add": "新增地址",
+          "addLoading": "正在新增地址...",
+          "editButton": "編輯"
+        },
+        "Status": {
+          "active": "啟用",
+          "inactive": "停用"
+        },
+        "EmptyState": {
+          "title": "找不到地址",
+          "subtitle": "尚無地址",
+          "description": "系統中還沒有地址。建立您的第一個地址以開始使用。"
+        },
+        "Placeholder": {
+          "city": "Stubenberg",
+          "postCode": "8223",
+          "streetName": "Main Street",
+          "streetNumber": "123"
+        },
+        "Toast": {
+          "success": "地址建立成功",
+          "error": "發生錯誤"
+        },
+        "dialogDescription": "在系統中建立新地址"
+      },
+      "Products": {
+        "BreadCrumps": {
+          "title": "產品",
+          "add": "新增產品",
+          "edit": "編輯產品"
+        },
+        "Attributes": {
+          "image": "圖片",
+          "name": "名稱",
+          "description": "描述",
+          "price": "價格",
+          "status": "狀態",
+          "actions": "操作",
+          "stock": "庫存",
+          "createdAt": "建立時間",
+          "notFound": "找不到產品",
+          "noImage": "無圖片",
+          "noDescription": "無描述",
+          "deleted": "已刪除"
+        },
+        "buttons": {
+          "delete": "刪除產品",
+          "deleteLoading": "正在刪除產品...",
+          "create": "建立產品",
+          "createLoading": "正在建立產品...",
+          "update": "更新產品",
+          "updateLoading": "正在更新產品...",
+          "add": "新增產品",
+          "addLoading": "正在新增產品...",
+          "editButton": "編輯"
+        },
+        "add": "新增產品",
+        "edit": "編輯產品",
+        "Status": {
+          "active": "啟用",
+          "inactive": "停用"
+        },
+        "EmptyState": {
+          "title": "找不到產品",
+          "subtitle": "尚無產品",
+          "description": "系統中還沒有產品。建立您的第一個產品以開始使用。",
+          "createFirst": "建立第一個產品"
+        },
+        "dialogDescription": "在系統中建立新產品"
+      },
+      "Categories": {
+        "BreadCrumps": {
+          "title": "類別",
+          "add": "新增類別",
+          "edit": "編輯類別"
+        },
+        "Attributes": {
+          "name": "名稱",
+          "status": "狀態",
+          "actions": "操作",
+          "notFound": "找不到類別"
+        },
+        "buttons": {
+          "delete": "刪除類別",
+          "deleteLoading": "正在刪除類別...",
+          "create": "建立類別",
+          "createLoading": "正在建立類別...",
+          "update": "更新類別",
+          "updateLoading": "正在更新類別...",
+          "add": "新增類別",
+          "addLoading": "正在新增類別...",
+          "editButton": "編輯"
+        },
+        "add": "新增類別",
+        "edit": "編輯類別",
+        "Status": {
+          "active": "啟用",
+          "inactive": "停用"
+        },
+        "EmptyState": {
+          "title": "找不到類別",
+          "subtitle": "尚無類別",
+          "description": "系統中還沒有類別。建立您的第一個類別以開始使用。"
+        },
+        "Toast": {
+          "success": "類別建立成功",
+          "error": "發生錯誤"
+        },
+        "dialogDescription": "在系統中建立新類別"
+      },
+      "Routes": {
+        "BreadCrumps": {
+          "title": "路線",
+          "add": "新增路線",
+          "edit": "編輯路線"
+        },
+        "add": "新增路線",
+        "edit": "編輯路線",
+        "name": "路線名稱",
+        "dialogDescription": "使用選定的訂單建立新路線",
+        "Attributes": {
+          "name": "名稱",
+          "orders": "訂單",
+          "status": "狀態",
+          "actions": "操作",
+          "clickForOrderDetails": "點擊查看訂單詳情"
+        },
+        "buttons": {
+          "editButton": "編輯"
+        },
+        "Status": {
+          "active": "啟用",
+          "inactive": "停用"
+        },
+        "EmptyState": {
+          "title": "找不到路線",
+          "subtitle": "尚無路線",
+          "description": "系統中還沒有路線。建立您的第一條配送路線以組織訂單。"
+        }
+      },
+      "Orders": {
+        "BreadCrumps": {
+          "title": "訂單",
+          "add": "新增訂單",
+          "edit": "編輯訂單"
+        },
+        "Attributes": {
+          "customer": "客戶",
+          "orderDate": "訂單日期",
+          "deliveryDate": "配送日期",
+          "orderState": "訂單狀態",
+          "selfCollectYes": "自取",
+          "selfCollectNo": "配送",
+          "deliveryMethode": "配送方式",
+          "actions": "操作",
+          "Products": {
+            "Product": {
+              "title": "產品",
+              "image": "圖片",
+              "quantity": "數量",
+              "price": "價格",
+              "total": "總計",
+              "noProductsInOrder": "訂單中無產品"
+            },
+            "title": "產品",
+            "name": "名稱",
+            "quantity": "數量",
+            "price": "價格",
+            "total": "總計",
+            "orderTotal": "訂單總計："
+          },
+          "notFound": "找不到訂單",
+          "notDeliveredYet": "尚未配送"
+        },
+        "buttons": {
+          "delete": "刪除訂單",
+          "deleteLoading": "正在刪除訂單...",
+          "create": "建立訂單",
+          "createLoading": "正在建立訂單...",
+          "update": "更新訂單",
+          "updateLoading": "正在更新訂單...",
+          "add": "新增訂單",
+          "addLoading": "正在新增訂單...",
+          "editButton": "編輯",
+          "collapse": "摺疊",
+          "expand": "展開"
+        },
+        "add": "新增訂單",
+        "edit": "編輯訂單",
+        "EmptyState": {
+          "title": "找不到訂單",
+          "subtitle": "尚無訂單",
+          "description": "系統中還沒有訂單。建立您的第一個訂單以開始使用。"
+        },
+        "dialogDescription": "在系統中建立新訂單"
+      },
+      "Customers": {
+        "header": "新增客戶",
+        "headerUpdate": "編輯客戶",
+        "Details": {
+          "customerDetails": "客戶詳情",
+          "businessCustomerDetails": "企業客戶詳情"
+        },
+        "BreadCrumps": {
+          "title": "客戶",
+          "add": "新增客戶",
+          "edit": "編輯客戶"
+        },
+        "Attributes": {
+          "avatar": "頭像",
+          "name": "姓名",
+          "firstName": "名",
+          "lastName": "姓",
+          "password": "密碼",
+          "email": "電子郵件",
+          "phone": "電話",
+          "customerReference": "客戶參考號",
+          "businessSector": "業務行業",
+          "companyNumber": "公司編號",
+          "status": "狀態",
+          "notFound": "找不到客戶"
+        },
+        "buttons": {
+          "delete": "刪除客戶",
+          "deleteLoading": "正在刪除客戶...",
+          "create": "建立客戶",
+          "createLoading": "正在建立客戶...",
+          "update": "更新客戶",
+          "updateLoading": "正在更新客戶...",
+          "add": "新增客戶",
+          "addLoading": "正在新增客戶..."
+        },
+        "add": "新增客戶",
+        "edit": "編輯客戶",
+        "Placeholder": {
+          "selectBusinessSector": "選擇業務行業",
+          "firstName": "輸入名",
+          "lastName": "輸入姓",
+          "email": "輸入電子郵件",
+          "companyNumber": "輸入公司編號",
+          "password": "將自動產生",
+          "passwordInfo": "密碼將自動產生並發送給客戶"
+        },
+        "Status": {
+          "active": "啟用",
+          "inactive": "停用"
+        },
+        "Toast": {
+          "success": "客戶更新成功",
+          "error": "更新客戶失敗"
+        },
+        "EmptyState": {
+          "title": "找不到客戶",
+          "subtitle": "尚無客戶",
+          "description": "系統中還沒有客戶。建立您的第一個客戶以開始使用。"
+        },
+        "dialogDescription": "在系統中建立新客戶"
+      },
+      "Settings": {
+        "BreadCrumps": {
+          "title": "設定"
+        },
+        "edit": "編輯設定"
+      },
+      "Employees": {
+        "header": "新增員工",
+        "headerUpdate": "編輯員工",
+        "BreadCrumps": {
+          "title": "員工",
+          "add": "新增員工",
+          "edit": "編輯員工"
+        },
+        "CreateEmployee": {
+          "header": "新增員工"
+        },
+        "Details": {
+          "employeeDetails": "員工詳情"
+        },
+        "Attributes": {
+          "email": "電子郵件",
+          "firstName": "名",
+          "lastName": "姓",
+          "status": "狀態",
+          "role": "角色",
+          "notFound": "找不到員工"
+        },
+        "buttons": {
+          "delete": "刪除員工",
+          "deleteLoading": "正在刪除員工...",
+          "create": "建立員工",
+          "createLoading": "正在建立員工...",
+          "update": "更新員工",
+          "updateLoading": "正在更新員工...",
+          "add": "新增員工",
+          "addLoading": "正在新增員工..."
+        },
+        "add": "新增員工",
+        "edit": "編輯員工",
+        "Placeholder": {
+          "firstName": "輸入名",
+          "lastName": "輸入姓",
+          "email": "輸入電子郵件",
+          "password": "輸入密碼",
+          "selectRole": "選擇角色"
+        },
+        "Status": {
+          "active": "啟用",
+          "inactive": "停用"
+        },
+        "Toast": {
+          "success": "員工更新成功",
+          "error": "更新員工失敗"
+        },
+        "EmptyState": {
+          "title": "找不到員工",
+          "subtitle": "尚無員工",
+          "description": "系統中還沒有員工。新增您的第一個員工以開始使用。"
+        },
+        "dialogDescription": "在系統中建立新員工"
+      },
+      "Permissions": {
+        "BreadCrumps": {
+          "title": "權限",
+          "add": "新增權限",
+          "edit": "編輯權限"
+        },
+        "Attributes": {
+          "role": "角色",
+          "action": "操作",
+          "actions": "操作",
+          "resource": "資源",
+          "status": "狀態",
+          "allowed": "允許",
+          "notFound": "找不到權限"
+        },
+        "buttons": {
+          "delete": "刪除權限",
+          "deleteLoading": "正在刪除權限...",
+          "create": "建立權限",
+          "createLoading": "正在建立權限...",
+          "update": "更新權限",
+          "updateLoading": "正在更新權限...",
+          "add": "新增權限",
+          "addLoading": "正在新增權限..."
+        },
+        "add": "新增權限",
+        "edit": "編輯權限",
+        "Status": {
+          "active": "啟用",
+          "inactive": "停用"
+        },
+        "NoRoles": {
+          "title": "無可用角色",
+          "description": "似乎沒有定義角色。請在管理權限之前建立一個。"
+        },
+        "EmptyState": {
+          "title": "找不到權限",
+          "subtitle": "尚無權限",
+          "description": "系統中還沒有權限。建立您的第一個權限以開始使用。"
+        },
+        "dialogDescription": "在系統中建立新權限"
+      },
+      "Roles": {
+        "BreadCrumps": {
+          "title": "角色",
+          "add": "新增角色"
+        },
+        "Attributes": {
+          "name": "名稱",
+          "description": "描述"
+        },
+        "buttons": {
+          "add": "新增角色",
+          "addLoading": "正在新增角色..."
+        },
+        "add": "新增角色",
+        "dialogDescription": "在系統中建立新角色"
+      },
+      "Subscription": {
+        "BreadCrumps": {
+          "title": "訂閱"
+        },
+        "add": "新增訂閱",
+        "edit": "編輯訂閱"
+      }
+    }
+  },
+  "FilterAndSearch": {
+    "Filter": {
+      "title": "篩選",
+      "Status": {
+        "title": "狀態",
+        "options": {
+          "active": "啟用",
+          "inactive": "停用"
+        }
+      },
+      "BusinessSectors": {
+        "title": "業務行業",
+        "options": {
+          "agriculture": "農業",
+          "construction": "建築",
+          "education": "教育",
+          "finance": "金融",
+          "health": "醫療",
+          "hospitality": "酒店餐飲",
+          "it": "資訊科技",
+          "manufacturing": "製造業",
+          "other": "其他",
+          "retail": "零售",
+          "technology": "科技",
+          "tourism": "旅遊",
+          "transportation": "運輸",
+          "private": "私人"
+        }
+      },
+      "OrderState": {
+        "title": "訂單狀態",
+        "options": {
+          "order_placed": "已下單",
+          "in_progress": "進行中",
+          "dispatched": "已出貨",
+          "delivered": "已送達",
+          "order_collected": "已自取"
+        }
+      },
+      "Roles": {
+        "title": "角色",
+        "options": {
+          "admin": "管理員",
+          "employee": "員工",
+          "supplier": "供應商"
+        }
+      }
+    },
+    "Search": {
+      "title": "搜尋",
+      "searchForOption1": "按名稱搜尋",
+      "searchForOption2": "按名稱或電子郵件搜尋",
+      "searchForOption3": "按郵遞區號搜尋"
+    }
+  },
+  "Pagination": {
+    "rowsPerPage": "每頁行數",
+    "goToPrev": "前往上一頁",
+    "goToNext": "前往下一頁",
+    "goToFist": "前往第一頁",
+    "goToLast": "前往最後一頁",
+    "of": "共",
+    "selectNumberResults": "選擇結果數量"
+  },
+  "SelectComponents": {
+    "Address": {
+      "selectAddress": "選擇地址",
+      "noAddressFound": "找不到地址",
+      "addNewAddress": "新增地址",
+      "findAddress": "尋找地址"
+    },
+    "Category": {
+      "selectCategory": "選擇類別",
+      "noCategoryFound": "找不到類別",
+      "addNewCategory": "新增類別",
+      "findCategory": "尋找類別"
+    },
+    "Customer": {
+      "selectCustomer": "選擇客戶",
+      "noCustomerFound": "找不到客戶",
+      "addNewCustomer": "新增客戶",
+      "findCustomer": "尋找客戶"
+    },
+    "Product": {
+      "selectProduct": "選擇產品",
+      "selectProducts": "選擇產品",
+      "noProductFound": "找不到產品",
+      "addNewProduct": "新增產品",
+      "findProduct": "尋找產品"
+    },
+    "Route": {
+      "selectRoute": "選擇路線",
+      "noRouteFound": "找不到路線",
+      "addNewRoute": "新增路線",
+      "addNewRouteLoading": "正在新增路線...",
+      "findRoute": "尋找路線",
+      "selectedOrders": "選定的訂單"
+    },
+    "Order": {
+      "selectOrder": "選擇訂單",
+      "selectOrders": "選擇訂單",
+      "noOrderFound": "找不到訂單",
+      "addNewOrder": "新增訂單",
+      "findOrder": "尋找訂單",
+      "ordersSelected": "已選擇訂單"
+    },
+    "Actions": {
+      "selectActions": "選擇操作",
+      "noActionFound": "找不到操作",
+      "findAction": "尋找操作"
+    }
+  },
+  "Messages": {
+    "Route": {
+      "created": "路線建立成功"
+    }
+  },
+  "Navigation": {
+    "Groups": {
+      "overview": "概覽",
+      "sales": "銷售",
+      "products": "產品",
+      "customers": "客戶",
+      "employees": "員工",
+      "settings": "設定",
+      "permissions": "權限"
+    },
+    "Items": {
+      "overview": "概覽",
+      "statistics": "統計",
+      "ordersStatistics": "訂單統計",
+      "routesStatistics": "路線統計",
+      "productsStatistics": "產品統計",
+      "categoriesStatistics": "類別統計",
+      "customersStatistics": "客戶統計",
+      "orders": "訂單",
+      "routes": "路線",
+      "addresses": "地址",
+      "products": "產品",
+      "categories": "類別",
+      "customers": "客戶",
+      "employees": "員工",
+      "settings": "設定",
+      "permissions": "權限",
+      "profileSettings": "個人資料與設定"
+    }
+  },
+  "Components": {
+    "BackButton": {
+      "goBack": "返回"
+    },
+    "SidebarHeader": {
+      "errorTitle": "錯誤",
+      "errorMessage": "載入側邊欄標題時發生錯誤。",
+      "defaultName": "管理工具"
+    },
+    "NavMain": {
+      "favorites": "我的最愛",
+      "favorite": "我的最愛",
+      "searchPlaceholder": "搜尋項目..."
+    },
+    "PhoneInput": {
+      "label": "電話號碼",
+      "placeholder": "輸入電話號碼",
+      "selectCountry": "選擇國家",
+      "selectCountryPlaceholder": "選擇一個國家"
+    },
+    "SubscriptionDetails": {
+      "title": "訂閱詳情",
+      "status": "狀態",
+      "plan": "方案",
+      "amount": "金額",
+      "billingPeriod": "計費週期",
+      "currentPeriodStart": "目前週期開始",
+      "currentPeriodEnd": "目前週期結束"
+    },
+    "Pagination": {
+      "morePages": "更多頁面"
+    },
+    "NavUser": {
+      "billing": "帳單",
+      "logOut": "登出"
+    },
+    "Sidebar": {
+      "toggle": "切換側邊欄"
+    }
+  },
+  "PremiumWrapper": {
+    "header": "升級至進階版",
+    "subtitle": "升級至進階版以解鎖此功能",
+    "button": "立即升級"
+  },
+  "Common": {
+    "copiedToClipboard": "已複製到剪貼簿",
+    "role": "角色"
+  }
+}

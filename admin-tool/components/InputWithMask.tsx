@@ -9,6 +9,7 @@ type Props = {
   mask?: string;
   onlyUppercase?: boolean;
   name?: string;
+  disabled?: boolean;
 };
 
 export default function GenericInputMaskComponent({
@@ -16,6 +17,7 @@ export default function GenericInputMaskComponent({
   mask,
   onlyUppercase = false,
   name = 'maskInput',
+  disabled = false,
 }: Props) {
   const id = useId();
   const inputRef = useRef<HTMLInputElement>(null);
@@ -45,7 +47,8 @@ export default function GenericInputMaskComponent({
       placeholder={placeholder}
       type='text'
       name={name}
-      onInput={handleInput}
+      disabled={disabled}
+      onChange={handleInput}
       className='col-span-3 p-2 border rounded-lg'
     />
   );

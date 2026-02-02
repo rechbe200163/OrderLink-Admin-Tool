@@ -80,7 +80,7 @@ export default function OrderSelectComponent({
 
   return (
     <div className=''>
-      <Label htmlFor={id}>{t('selectedOrders')}</Label>
+      <Label htmlFor={id}>{t('selectOrders')}</Label>
       <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
           <Button
@@ -97,8 +97,8 @@ export default function OrderSelectComponent({
               )}
             >
               {selectedValues.length > 0
-                ? `${selectedValues.length} order(s) selected`
-                : 'Select orders'}
+                ? `${selectedValues.length} ${t('ordersSelected')}`
+                : t('selectOrders')}
             </span>
             <ChevronDown
               size={16}

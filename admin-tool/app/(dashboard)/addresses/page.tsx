@@ -1,4 +1,3 @@
-import { ButtonLinkComponent } from '@/components/ButtonLinkComponent';
 import { AddressTable } from '@/components/helpers/addresses/AddressTable';
 import FilteringComponent from '@/components/pagination+filtering/FilteringComponent';
 import PaginationComponent from '@/components/pagination+filtering/PagingComponent';
@@ -6,8 +5,9 @@ import SearchComponent from '@/components/pagination+filtering/SearchComponent';
 import TagsInput from '@/components/TagInput';
 import { addressApiService } from '@/lib/api/concrete/address';
 import { getSession } from '@/lib/utlis/getSession';
-import { PlusCircle } from 'lucide-react';
 import { getTranslations } from 'next-intl/server';
+import AddAddressDialog from '@/components/helpers/addresses/AddAddressDialog';
+import { redirect } from 'next/navigation';
 
 export default async function AddressesPage(props: {
   searchParams?: Promise<{
@@ -65,15 +65,11 @@ export default async function AddressesPage(props: {
           />
         </div>
 
-        <ButtonLinkComponent
-          href='/addresses/add'
-          label={t('Ressource.Address.add')}
-          icon={<PlusCircle size={24} />}
-        />
+        <AddAddressDialog />
       </div>
       <div className='flex-1 justify-between gap-1 flex flex-col'>
         <div className='min-w-full max-h-[calc(100vh-15rem)] overflow-auto'>
-          <AddressTable addresses={addresses} />
+          <AddressTable addresses={addresses} searchQuery={query} />
         </div>
         <div>
           <PaginationComponent

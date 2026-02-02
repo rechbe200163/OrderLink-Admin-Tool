@@ -13,27 +13,52 @@ import UserAvatarComponent from './UserAvatarComponent';
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 import { Customer } from '@/lib/types';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
+import { Button } from '@/components/ui/button';
+import { MoreVertical, UserCircle } from 'lucide-react';
+import { EmptyState, TableEmptyState } from '@/components/ui/empty-state';
 
-export function CustomerTable({ customers }: { customers: Customer[] }) {
-  const t = useTranslations('Dashboard.Ressource.Customers');
+interface CustomerTableProps {
+  customers: Customer[];
+  searchQuery?: string;
+  businessSectorFilter?: string;
+}
+
+export function CustomerTable({
+  customers,
+  searchQuery,
+  businessSectorFilter,
+}: CustomerTableProps) {
+  const t = useTranslations('Dashboard.Ressource.Customers.Attributes');
+  const tButtons = useTranslations('Dashboard.Ressource.Customers.buttons');
+  const tStatus = useTranslations('Dashboard.Ressource.Customers.Status');
+  const tEmptyState = useTranslations('Dashboard.Ressource.Customers.EmptyState');
+  const isFiltered = !!(searchQuery || businessSectorFilter);
+  
   return (
     <div className='bg-background text-foreground p-4 rounded-lg shadow-xs'>
       <Table className='border-separate border-spacing-0 [&_td]:border-border [&_tfoot_td]:border-t [&_th]:border-b [&_th]:border-border [&_tr:not(:last-child)_td]:border-b [&_tr]:border-none'>
         <TableHeader className='sticky top-0 z-10 bg-background/90 backdrop-blur-xs'>
           <TableRow className='hover:bg-muted'>
-            <TableHead className='w-20'>{t('Attributes.avatar')}</TableHead>
-            <TableHead className='w-40'>{t('Attributes.name')}</TableHead>
-            <TableHead className='w-60'>{t('Attributes.email')}</TableHead>
-            <TableHead className='w-40'>{t('Attributes.phone')}</TableHead>
+            <TableHead className='w-20'>{t('avatar')}</TableHead>
+            <TableHead className='w-40'>{t('name')}</TableHead>
+            <TableHead className='w-60'>{t('email')}</TableHead>
+            <TableHead className='w-40'>{t('phone')}</TableHead>
             <TableHead className='w-60'>
-              {t('Attributes.customerReference')}
+              {t('customerReference')}
             </TableHead>
             <TableHead className='w-40 text-right'>
-              {t('Attributes.businessSector')}
+              {t('businessSector')}
             </TableHead>
             <TableHead className='w-40 text-right'>
-              {t('Attributes.status')}
+              {t('status')}
             </TableHead>
+            <TableHead className='w-20 text-right'>{t('actions')}</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -96,21 +121,54 @@ export function CustomerTable({ customers }: { customers: Customer[] }) {
                   >
                     {customer.deleted ? (
                       <Badge variant={'destructive'}>
-                        {t('Status.inactive')}
+                        {tStatus('inactive')}
                       </Badge>
                     ) : (
-                      <Badge variant={'success'}>{t('Status.active')}</Badge>
+                      <Badge variant={'success'}>{tStatus('active')}</Badge>
                     )}
                   </Link>
+                </TableCell>
+                <TableCell className='w-20 text-right'>
+                  <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                      <Button variant='ghost' size='icon'>
+                        <MoreVertical className='h-4 w-4' />
+                      </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent align='end'>
+                      <DropdownMenuItem asChild>
+                        <Link
+                          href={`/customers/${customer.customerReference}/edit`}
+                        >
+                          {tButtons('editButton')}
+                        </Link>
+                      </DropdownMenuItem>
+                      {/* <DropdownMenuItem disabled>
+                        Löschen
+                      </DropdownMenuItem> */}
+                    </DropdownMenuContent>
+                  </DropdownMenu>
                 </TableCell>
               </TableRow>
             ))
           ) : (
-            <TableRow>
-              <TableCell colSpan={7} className='text-center'>
-                {t('Attributes.notFound')}
-              </TableCell>
-            </TableRow>
+            <TableEmptyState colSpan={8}>
+              <EmptyState
+                icon={UserCircle}
+                title={
+                  isFiltered
+                    ? tEmptyState('title')
+                    : tEmptyState('subtitle')
+                }
+                description={tEmptyState('description')}
+                isFiltered={isFiltered}
+                filterMessage={
+                  searchQuery || businessSectorFilter
+                    ? `${searchQuery ? `Suche: "${searchQuery}"` : ''}${businessSectorFilter ? ` | Branche: ${businessSectorFilter}` : ''}`
+                    : undefined
+                }
+              />
+            </TableEmptyState>
           )}
         </TableBody>
       </Table>

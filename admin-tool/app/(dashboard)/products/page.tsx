@@ -1,14 +1,13 @@
-import { PlusCircle } from 'lucide-react';
 import React from 'react';
 import PaginationComponent from '@/components/pagination+filtering/PagingComponent';
 import SearchComponent from '@/components/pagination+filtering/SearchComponent';
 import FilteringComponent from '@/components/pagination+filtering/FilteringComponent';
 import { ProductTable } from '@/components/helpers/products/ProductsTabel';
 import { productApiService } from '@/lib/api/concrete/products';
-import { ButtonLinkComponent } from '@/components/ButtonLinkComponent';
 import { getSession } from '@/lib/utlis/getSession';
 import { BusinessSector } from '@/lib/types';
 import { getTranslations } from 'next-intl/server';
+import AddProductDialog from '@/components/helpers/products/AddProductDialog';
 
 export default async function ProductsPage(props: {
   searchParams?: Promise<{
@@ -50,15 +49,15 @@ export default async function ProductsPage(props: {
           />
         </div>
 
-        <ButtonLinkComponent
-          href='/products/add'
-          label={t('Ressource.Products.add')}
-          icon={<PlusCircle />}
-        />
+        <AddProductDialog />
       </div>
       <div className='flex-1 justify-between gap-1 flex flex-col'>
         <div className='min-w-full max-h-[calc(100vh-15rem)] overflow-auto'>
-          <ProductTable products={products} />
+          <ProductTable
+            products={products}
+            searchQuery={search}
+            categoryFilter={categoryId}
+          />
         </div>
         <div>
           <PaginationComponent

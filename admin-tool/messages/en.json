@@ -87,22 +87,53 @@
       "revenue": {
         "title": "Revenue",
         "subtitle": "Monthly Revenue",
-        "timeframe": "since last month"
+        "timeframe": "since last month",
+        "noDataLastMonth": "No data for last month",
+        "moreThanLastMonth": "More than last month",
+        "lessThanLastMonth": "Less than last month",
+        "sameAsLastMonth": "Same as last month"
       },
       "customer": {
         "title": "Customers",
         "subtitle": "Number of Customers",
-        "timeframe": "since last month"
+        "timeframe": "since last month",
+        "noDataLastMonth": "No data for last month",
+        "moreThanLastMonth": "More than last month",
+        "lessThanLastMonth": "Less than last month",
+        "sameAsLastMonth": "Same as last month",
+        "monthlyRegistrations": "Monthly Registrations"
       },
       "monthlySales": {
         "title": "Monthly Sales",
         "subtitle": "Number of Sales",
-        "timeframe": "since last month"
+        "timeframe": "since last month",
+        "noDataLastMonth": "No data for last month",
+        "moreThanLastMonth": "More than last month",
+        "lessThanLastMonth": "Less than last month",
+        "sameAsLastMonth": "Same as last month",
+        "monthlySalesCount": "Monthly Sales"
       },
       "avarageOrderValue": {
         "title": "Average Order Value",
         "subtitle": "Average Order Value",
-        "timeframe": "since last month"
+        "timeframe": "since last month",
+        "noDataLastMonth": "No data for last month",
+        "moreThanLastMonth": "More than last month",
+        "lessThanLastMonth": "Less than last month",
+        "sameAsLastMonth": "Same as last month",
+        "averageValue": "Average Order Value"
+      }
+    },
+    "Charts": {
+      "OrderStateDistribution": {
+        "title": "Orders by Status",
+        "description": "Overview of orders by status.",
+        "orders": "Orders"
+      },
+      "CustomerBusinessTypeDistribution": {
+        "title": "Customer Distribution by Sector",
+        "description": "This chart shows the distribution of customers by business sector.",
+        "customers": "Customers"
       }
     },
     "Ressource": {
@@ -123,6 +154,7 @@
           "streetName": "Street Name",
           "streetNumber": "Street Number",
           "status": "Status",
+          "actions": "Actions",
           "notFound": "No addresses found"
         },
         "add": "Add New Address",
@@ -135,8 +167,29 @@
           "update": "Update Address",
           "updateLoading": "Updating Address...",
           "add": "Add Address",
-          "addLoading": "Adding Address..."
-        }
+          "addLoading": "Adding Address...",
+          "editButton": "Edit"
+        },
+        "Status": {
+          "active": "Active",
+          "inactive": "Inactive"
+        },
+        "EmptyState": {
+          "title": "No addresses found",
+          "subtitle": "No addresses yet",
+          "description": "There are no addresses in the system yet. Create your first address to get started."
+        },
+        "Placeholder": {
+          "city": "Stubenberg",
+          "postCode": "8223",
+          "streetName": "Main Street",
+          "streetNumber": "123"
+        },
+        "Toast": {
+          "success": "Address created successfully",
+          "error": "An error occurred"
+        },
+        "dialogDescription": "Create a new address in the system"
       },
       "Products": {
         "BreadCrumps": {
@@ -150,7 +203,13 @@
           "description": "Description",
           "price": "Price",
           "status": "Status",
-          "notFound": "No products found"
+          "actions": "Actions",
+          "stock": "Stock",
+          "createdAt": "Created At",
+          "notFound": "No products found",
+          "noImage": "No image",
+          "noDescription": "No description",
+          "deleted": "Deleted"
         },
         "buttons": {
           "delete": "Delete Product",
@@ -160,14 +219,22 @@
           "update": "Update Product",
           "updateLoading": "Updating Product...",
           "add": "Add Product",
-          "addLoading": "Adding Product..."
+          "addLoading": "Adding Product...",
+          "editButton": "Edit"
         },
         "add": "Add New Product",
         "edit": "Edit Product",
         "Status": {
           "active": "Active",
           "inactive": "Inactive"
-        }
+        },
+        "EmptyState": {
+          "title": "No products found",
+          "subtitle": "No products yet",
+          "description": "There are no products in the system yet. Create your first product to get started.",
+          "createFirst": "Create first product"
+        },
+        "dialogDescription": "Create a new product in the system"
       },
       "Categories": {
         "BreadCrumps": {
@@ -178,6 +245,7 @@
         "Attributes": {
           "name": "Name",
           "status": "Status",
+          "actions": "Actions",
           "notFound": "No categories found"
         },
         "buttons": {
@@ -188,22 +256,55 @@
           "update": "Update Category",
           "updateLoading": "Updating Category...",
           "add": "Add Category",
-          "addLoading": "Adding Category..."
+          "addLoading": "Adding Category...",
+          "editButton": "Edit"
         },
         "add": "Add New Category",
         "edit": "Edit Category",
         "Status": {
           "active": "Active",
           "inactive": "Inactive"
-        }
+        },
+        "EmptyState": {
+          "title": "No categories found",
+          "subtitle": "No categories yet",
+          "description": "There are no categories in the system yet. Create your first category to get started."
+        },
+        "Toast": {
+          "success": "Category created successfully",
+          "error": "An error occurred"
+        },
+        "dialogDescription": "Create a new category in the system"
       },
       "Routes": {
         "BreadCrumps": {
-          "title": "Routes"
+          "title": "Routes",
+          "add": "Add New Route",
+          "edit": "Edit Route"
         },
         "add": "Add New Route",
         "edit": "Edit Route",
-        "name": "Route Name"
+        "name": "Route Name",
+        "dialogDescription": "Create a new route with selected orders",
+        "Attributes": {
+          "name": "Name",
+          "orders": "Orders",
+          "status": "Status",
+          "actions": "Actions",
+          "clickForOrderDetails": "Click for order details"
+        },
+        "buttons": {
+          "editButton": "Edit"
+        },
+        "Status": {
+          "active": "Active",
+          "inactive": "Inactive"
+        },
+        "EmptyState": {
+          "title": "No routes found",
+          "subtitle": "No routes yet",
+          "description": "There are no routes in the system yet. Create your first delivery route to organize orders."
+        }
       },
       "Orders": {
         "BreadCrumps": {
@@ -219,6 +320,7 @@
           "selfCollectYes": "Self-Collection",
           "selfCollectNo": "Delivery",
           "deliveryMethode": "Delivery Method",
+          "actions": "Actions",
           "Products": {
             "Product": {
               "title": "Product",
@@ -246,10 +348,19 @@
           "update": "Update Order",
           "updateLoading": "Updating Order...",
           "add": "Add Order",
-          "addLoading": "Adding Order..."
+          "addLoading": "Adding Order...",
+          "editButton": "Edit",
+          "collapse": "Collapse",
+          "expand": "Expand"
         },
         "add": "Add New Order",
-        "edit": "Edit Order"
+        "edit": "Edit Order",
+        "EmptyState": {
+          "title": "No orders found",
+          "subtitle": "No orders yet",
+          "description": "There are no orders in the system yet. Create your first order to get started."
+        },
+        "dialogDescription": "Create a new order in the system"
       },
       "Customers": {
         "header": "Add New Customer",
@@ -266,88 +377,120 @@
         "Attributes": {
           "avatar": "Avatar",
           "name": "Name",
-          "firstName": "Vornamen",
-          "lastName": "Nachnamen",
-          "password": "Passwort",
+          "firstName": "First Name",
+          "lastName": "Last Name",
+          "password": "Password",
           "email": "Email",
-          "phone": "Telefon",
-          "customerReference": "Kundenreferenz",
-          "businessSector": "Geschäftsbereich",
-          "companyNumber": "Firmen Nummer",
+          "phone": "Phone",
+          "customerReference": "Customer Reference",
+          "businessSector": "Business Sector",
+          "companyNumber": "Company Number",
           "status": "Status",
-          "notFound": "Keine Kunden gefunden"
+          "actions": "Actions",
+          "notFound": "No customers found"
         },
         "buttons": {
-          "delete": "Kunden Löschen",
-          "deleteLoading": "Kunden Löschen...",
-          "create": "Kunden Erstellen",
-          "createLoading": "Kunden Erstellen...",
-          "update": "Kunden Aktualisieren",
-          "updateLoading": "Kunden Aktualisieren...",
-          "add": "Kunden Hinzufügen",
-          "addLoading": "Kunden Hinzufügen..."
+          "delete": "Delete Customer",
+          "deleteLoading": "Deleting Customer...",
+          "create": "Create Customer",
+          "createLoading": "Creating Customer...",
+          "update": "Update Customer",
+          "updateLoading": "Updating Customer...",
+          "add": "Add Customer",
+          "addLoading": "Adding Customer...",
+          "editButton": "Edit"
         },
-        "add": "Neuen Kunden Hinzufügen",
-        "edit": "Kunden Bearbeiten",
+        "add": "Add New Customer",
+        "edit": "Edit Customer",
         "Placeholder": {
-          "selectBusinessSector": "Geschäftsbereich Auswählen",
-          "firstName": "Vornamen eingeben",
-          "lastName": "Nachnamen eingeben",
-          "email": "Email eingeben",
-          "companyNumber": "Firmen Nummer eingeben",
-          "password": "Wird automatisch generiert",
-          "passwordInfo": "Das Passwort wird automatisch generiert und an den Kunden gesendet"
+          "selectBusinessSector": "Select Business Sector",
+          "firstName": "Enter first name",
+          "lastName": "Enter last name",
+          "email": "Enter email",
+          "companyNumber": "Enter company number",
+          "password": "Will be generated automatically",
+          "passwordInfo": "The password will be automatically generated and sent to the customer"
         },
         "Status": {
-          "active": "Aktiv",
-          "inactive": "Inaktiv"
-        }
+          "active": "Active",
+          "inactive": "Inactive"
+        },
+        "Toast": {
+          "success": "Customer updated successfully",
+          "error": "Failed to update customer"
+        },
+        "EmptyState": {
+          "title": "No customers found",
+          "subtitle": "No customers yet",
+          "description": "There are no customers in the system yet. Create your first customer to get started."
+        },
+        "dialogDescription": "Create a new customer in the system"
       },
       "Settings": {
         "BreadCrumps": {
-          "title": "Einstellungen"
+          "title": "Settings"
         },
-        "edit": "Einstellung Bearbeiten"
+        "edit": "Edit Setting"
       },
       "Employees": {
-        "header": "Neuen Mitarbeiter Hinzufügen",
-        "headerUpdate": "Mitarbeiter Bearbeiten",
+        "header": "Add New Employee",
+        "headerUpdate": "Edit Employee",
         "BreadCrumps": {
-          "title": "Mitarbeiter",
-          "add": "Neuer Mitarbeiter",
-          "edit": "Mitarbeiter Bearbeiten"
+          "title": "Employees",
+          "add": "Add New Employee",
+          "edit": "Edit Employee"
+        },
+        "CreateEmployee": {
+          "header": "Add New Employee"
+        },
+        "Details": {
+          "employeeDetails": "Employee Details"
         },
         "Attributes": {
           "email": "Email",
-          "firstName": "Vornamen",
-          "lastName": "Nachnamen",
+          "firstName": "First Name",
+          "lastName": "Last Name",
+          "password": "Password",
           "status": "Status",
-          "role": "Rolle",
-          "notFound": "Keine Mitarbeiter gefunden"
+          "role": "Role",
+          "actions": "Actions",
+          "notFound": "No employees found"
         },
         "buttons": {
-          "delete": "Mitarbeiter Löschen",
-          "deleteLoading": "Mitarbeiter Löschen...",
-          "create": "Mitarbeiter Erstellen",
-          "createLoading": "Mitarbeiter Erstellen...",
-          "update": "Mitarbeiter Aktualisieren",
-          "updateLoading": "Mitarbeiter Aktualisieren...",
-          "add": "Mitarbeiter Hinzufügen",
-          "addLoading": "Mitarbeiter Hinzufügen..."
+          "delete": "Delete Employee",
+          "deleteLoading": "Deleting Employee...",
+          "create": "Create Employee",
+          "createLoading": "Creating Employee...",
+          "update": "Update Employee",
+          "updateLoading": "Updating Employee...",
+          "add": "Add Employee",
+          "addLoading": "Adding Employee...",
+          "editButton": "Edit"
         },
-        "add": "Neuen Mitarbeiter Hinzufügen",
-        "edit": "Mitarbeiter Bearbeiten",
+        "add": "Add New Employee",
+        "edit": "Edit Employee",
         "Placeholder": {
-          "firstName": "Vornamen eingeben",
-          "lastName": "Nachnamen eingeben",
-          "email": "Email eingeben",
-          "password": "Passwort eingeben",
-          "selectRole": "Rolle Auswählen"
+          "firstName": "Enter first name",
+          "lastName": "Enter last name",
+          "email": "Enter email",
+          "password": "Enter password",
+          "passwordInfo": "The password will be automatically generated and sent to the employee",
+          "selectRole": "Select role"
         },
         "Status": {
-          "active": "Aktiv",
-          "inactive": "Inaktiv"
-        }
+          "active": "Active",
+          "inactive": "Inactive"
+        },
+        "Toast": {
+          "success": "Employee updated successfully",
+          "error": "Failed to update employee"
+        },
+        "EmptyState": {
+          "title": "No employees found",
+          "subtitle": "No employees yet",
+          "description": "There are no employees in the system yet. Add your first employee to get started."
+        },
+        "dialogDescription": "Create a new employee in the system"
       },
       "Permissions": {
         "BreadCrumps": {
@@ -361,6 +504,7 @@
           "actions": "Actions",
           "resource": "Resource",
           "status": "Status",
+          "allowed": "Allowed",
           "notFound": "No permissions found"
         },
         "buttons": {
@@ -382,7 +526,13 @@
         "NoRoles": {
           "title": "No Roles Available",
           "description": "It seems there are no roles defined. Please create one before managing permissions."
-        }
+        },
+        "EmptyState": {
+          "title": "No permissions found",
+          "subtitle": "No permissions yet",
+          "description": "There are no permissions in the system yet. Create your first permission to get started."
+        },
+        "dialogDescription": "Create a new permission in the system"
       },
       "Roles": {
         "BreadCrumps": {
@@ -397,14 +547,15 @@
           "add": "Add Role",
           "addLoading": "Adding Role..."
         },
-        "add": "Add Role"
+        "add": "Add Role",
+        "dialogDescription": "Create a new role in the system"
       },
       "Subscription": {
         "BreadCrumps": {
-          "title": "Abonnement"
+          "title": "Subscription"
         },
-        "add": "Neues Abonnement Hinzufügen",
-        "edit": "Abonnement Bearbeiten"
+        "add": "Add New Subscription",
+        "edit": "Edit Subscription"
       }
     }
   },
@@ -414,89 +565,105 @@
       "Status": {
         "title": "Status",
         "options": {
-          "active": "Aktiv",
-          "inactive": "Inaktiv"
+          "active": "Active",
+          "inactive": "Inactive"
         }
       },
       "BusinessSectors": {
-        "title": "Geschäftsbereiche",
+        "title": "Business Sectors",
         "options": {
-          "agriculture": "Landwirtschaft",
-          "construction": "Bauwesen",
-          "education": "Bildung",
-          "finance": "Finanzen",
-          "health": "Gesundheit",
-          "hospitality": "Gastgewerbe",
+          "agriculture": "Agriculture",
+          "construction": "Construction",
+          "education": "Education",
+          "finance": "Finance",
+          "health": "Health",
+          "hospitality": "Hospitality",
           "it": "IT",
-          "manufacturing": "Fertigung",
-          "other": "Andere",
-          "retail": "Einzelhandel",
-          "technology": "Technologie",
-          "tourism": "Tourismus",
-          "transportation": "Transport",
-          "private": "Privat"
+          "manufacturing": "Manufacturing",
+          "other": "Other",
+          "retail": "Retail",
+          "technology": "Technology",
+          "tourism": "Tourism",
+          "transportation": "Transportation",
+          "private": "Private"
+        }
+      },
+      "OrderState": {
+        "title": "Order Status",
+        "options": {
+          "order_placed": "Order Placed",
+          "in_progress": "In Progress",
+          "dispatched": "Dispatched",
+          "delivered": "Delivered",
+          "order_collected": "Order Collected"
         }
       },
       "Roles": {
-        "title": "Rollen",
+        "title": "Roles",
         "options": {
           "admin": "Admin",
-          "employee": "Mitarbeiter",
-          "supplier": "Lieferant"
+          "employee": "Employee",
+          "supplier": "Supplier"
         }
       }
     },
     "Search": {
-      "title": "Suche",
-      "searchForOption1": "Nach Namen suchen",
-      "searchForOption2": "Nach Name oder E-Mail suchen",
-      "searchForOption3": "Nach Postleitzahl suchen"
+      "title": "Search",
+      "searchForOption1": "Search by name",
+      "searchForOption2": "Search by name or email",
+      "searchForOption3": "Search by postal code"
     }
   },
   "Pagination": {
-    "rowsPerPage": "Zeilen pro Seite",
-    "goToPrev": "Zur vorherigen Seite",
-    "goToNext": "Zur nächsten Seite",
-    "goToFist": "Zur ersten Seite",
-    "goToLast": "Zur letzten Seite",
-    "of": "von"
+    "rowsPerPage": "Rows per page",
+    "goToPrev": "Go to previous page",
+    "goToNext": "Go to next page",
+    "goToFist": "Go to first page",
+    "goToLast": "Go to last page",
+    "of": "of",
+    "selectNumberResults": "Select number of results"
   },
   "SelectComponents": {
     "Address": {
-      "selectAddress": "Adresse auswählen",
-      "noAddressFound": "Keine Adresse gefunden",
-      "addNewAddress": "Neue Adresse hinzufügen",
-      "findAddress": "Adresse finden"
+      "selectAddress": "Select address",
+      "noAddressFound": "No address found",
+      "addNewAddress": "Add new address",
+      "findAddress": "Find address"
     },
     "Category": {
-      "selectCategory": "Kategorie auswählen",
-      "noCategoryFound": "Keine Kategorie gefunden",
-      "addNewCategory": "Neue Kategorie hinzufügen",
-      "findAddress": "Adresse finden"
+      "selectCategory": "Select category",
+      "noCategoryFound": "No category found",
+      "addNewCategory": "Add new category",
+      "findCategory": "Find category"
     },
     "Customer": {
-      "selectCustomer": "Kunde auswählen",
-      "noCustomerFound": "Kein Kunde gefunden",
-      "addNewCustomer": "Neuen Kunden hinzufügen",
-      "findCustomer": "Kunde finden"
+      "selectCustomer": "Select customer",
+      "noCustomerFound": "No customer found",
+      "addNewCustomer": "Add new customer",
+      "findCustomer": "Find customer"
     },
     "Product": {
-      "selectProduct": "Produkt auswählen",
-      "noProductFound": "Kein Produkt gefunden",
-      "addNewProduct": "Neues Produkt hinzufügen",
-      "findProduct": "Produkt finden"
+      "selectProduct": "Select product",
+      "selectProducts": "Select products",
+      "noProductFound": "No product found",
+      "addNewProduct": "Add new product",
+      "findProduct": "Find product"
     },
     "Route": {
-      "selectRoute": "Route auswählen",
-      "noRouteFound": "Keine Route gefunden",
-      "addNewRoute": "Neue Route hinzufügen",
-      "findRoute": "Route finden"
+      "selectRoute": "Select route",
+      "noRouteFound": "No route found",
+      "addNewRoute": "Add new route",
+      "addNewRouteLoading": "Adding new route...",
+      "findRoute": "Find route",
+      "selectedOrders": "Selected orders"
     },
     "Order": {
-      "selectOrder": "Bestellung auswählen",
-      "noOrderFound": "Keine Bestellung gefunden",
-      "addNewOrder": "Neue Bestellung hinzufügen",
-      "findOrder": "Bestellung finden"
+      "selectOrder": "Select order",
+      "selectOrders": "Select orders",
+      "noOrderFound": "No order found",
+      "addNewOrder": "Add new order",
+      "findOrder": "Find order",
+      "ordersSelected": "order(s) selected"
     },
     "Actions": {
       "selectActions": "Select actions",
@@ -580,8 +747,12 @@
     }
   },
   "PremiumWrapper": {
-    "header": "Upgrade auf Premium",
-    "subtitle": "Upgrade auf Premium, um diese Funktion freizuschalten",
-    "button": "Jetzt Upgrade"
+    "header": "Upgrade to Premium",
+    "subtitle": "Upgrade to Premium to unlock this feature",
+    "button": "Upgrade Now"
+  },
+  "Common": {
+    "copiedToClipboard": "Copied to clipboard",
+    "role": "Role"
   }
 }

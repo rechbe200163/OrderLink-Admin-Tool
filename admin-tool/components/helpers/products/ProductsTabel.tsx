@@ -15,22 +15,35 @@ import {
   DropdownMenuItem,
 } from '@/components/ui/dropdown-menu';
 import type { Product } from '@/lib/types';
-import { MoreVertical } from 'lucide-react';
+import { MoreVertical, Package } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { formatDateTime, formatPrice } from '@/lib/utils';
 import ImageSkeleton from '@/components/images/ImageSkeleton';
 import Image from 'next/image';
+import { EmptyState, TableEmptyState } from '@/components/ui/empty-state';
+import { useTranslations } from 'next-intl';
 
-export function ProductTable({ products }: { products: Product[] }) {
+interface ProductTableProps {
+  products: Product[];
+  searchQuery?: string;
+  categoryFilter?: string;
+  onAddProduct?: () => void;
+}
+
+export function ProductTable({
+  products,
+  searchQuery,
+  categoryFilter,
+  onAddProduct,
+}: ProductTableProps) {
+  const t = useTranslations('Dashboard.Ressource.Products.Attributes');
+  const tButtons = useTranslations('Dashboard.Ressource.Products.buttons');
+  const tStatus = useTranslations('Dashboard.Ressource.Products.Status');
+  const tEmptyState = useTranslations('Dashboard.Ressource.Products.EmptyState');
+  const isFiltered = !!(searchQuery || categoryFilter);
+  
   // const [headers, setHeaders] = useState<string[]>([]);
-  if (products.length === 0) {
-    return (
-      <div className='bg-background text-foreground p-4 rounded-lg shadow-xs'>
-        <p className='text-center'>Keine Produkte gefunden</p>
-      </div>
-    );
-  }
 
   // useEffect(() => {
   //   if (products.length > 0) {
@@ -48,14 +61,14 @@ export function ProductTable({ products }: { products: Product[] }) {
                 {header}
               </TableHead>
             ))} */}
-            <TableHead className='w-20'>Bild</TableHead>
-            <TableHead className='w-40'>Name</TableHead>
-            <TableHead className='w-40'>Preis</TableHead>
-            <TableHead className='w-60'>Beschreibung</TableHead>
-            <TableHead className='w-40 text-right'>Lager</TableHead>
-            <TableHead className='w-40 text-right'>Erstellt am</TableHead>
-            <TableHead className='w-40 text-right'>Status</TableHead>
-            <TableHead className='w-20 text-right'>Aktionen</TableHead>
+            <TableHead className='w-20'>{t('image')}</TableHead>
+            <TableHead className='w-40'>{t('name')}</TableHead>
+            <TableHead className='w-40'>{t('price')}</TableHead>
+            <TableHead className='w-60'>{t('description')}</TableHead>
+            <TableHead className='w-40 text-right'>{t('stock')}</TableHead>
+            <TableHead className='w-40 text-right'>{t('createdAt')}</TableHead>
+            <TableHead className='w-40 text-right'>{t('status')}</TableHead>
+            <TableHead className='w-20 text-right'>{t('actions')}</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -79,7 +92,7 @@ export function ProductTable({ products }: { products: Product[] }) {
                         ) : (
                           <div className='w-full h-full bg-muted flex items-center justify-center'>
                             <span className='text-muted-foreground text-sm'>
-                              Kein Bild
+                              {t('noImage')}
                             </span>
                           </div>
                         )}
@@ -108,7 +121,7 @@ export function ProductTable({ products }: { products: Product[] }) {
                     href={`/products/${product.productId}/edit`}
                     className='hover:underline'
                   >
-                    {product.description || 'Keine Beschreibung'}
+                    {product.description || t('noDescription')}
                   </Link>
                 </TableCell>
                 <TableCell className='w-40 text-right'>
@@ -133,9 +146,9 @@ export function ProductTable({ products }: { products: Product[] }) {
                     className='hover:underline'
                   >
                     {product.deleted ? (
-                      <Badge variant='destructive'>Gelöscht</Badge>
+                      <Badge variant='destructive'>{tStatus('inactive')}</Badge>
                     ) : (
-                      <Badge variant='success'>Aktiv</Badge>
+                      <Badge variant='success'>{tStatus('active')}</Badge>
                     )}
                   </Link>
                 </TableCell>
@@ -149,25 +162,45 @@ export function ProductTable({ products }: { products: Product[] }) {
                     <DropdownMenuContent align='end'>
                       <DropdownMenuItem asChild>
                         <Link href={`/products/${product.productId}/edit`}>
-                          Bearbeiten
+                          {tButtons('editButton')}
                         </Link>
                       </DropdownMenuItem>
-                      <DropdownMenuItem asChild>
-                        <Link href={`/products/${product.productId}/history`}>
-                          Historie
-                        </Link>
-                      </DropdownMenuItem>
+                      {/* <DropdownMenuItem disabled>
+                        Löschen
+                      </DropdownMenuItem> */}
                     </DropdownMenuContent>
                   </DropdownMenu>
                 </TableCell>
               </TableRow>
             ))
           ) : (
-            <TableRow>
-              <TableCell colSpan={7} className='text-center py-4'>
-                Keine Produkte gefunden
-              </TableCell>
-            </TableRow>
+            <TableEmptyState colSpan={8}>
+              <EmptyState
+                icon={Package}
+                title={
+                  isFiltered
+                    ? tEmptyState('title')
+                    : tEmptyState('subtitle')
+                }
+                description={tEmptyState('description')}
+                isFiltered={isFiltered}
+                filterMessage={
+                  searchQuery
+                    ? `Suche: "${searchQuery}"${categoryFilter ? ` | Kategorie: ${categoryFilter}` : ''}`
+                    : categoryFilter
+                      ? `Kategorie: ${categoryFilter}`
+                      : undefined
+                }
+                action={
+                  !isFiltered && onAddProduct
+                    ? {
+                        label: tEmptyState('createFirst'),
+                        onClick: onAddProduct,
+                      }
+                    : undefined
+                }
+              />
+            </TableEmptyState>
           )}
         </TableBody>
       </Table>
