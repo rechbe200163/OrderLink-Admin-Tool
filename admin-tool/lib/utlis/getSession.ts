@@ -11,14 +11,6 @@ export interface Token {
 export interface Session {
   token: Token;
   user: SanitizedEmployee;
-  tenantInfo: TenantInfo;
-}
-
-export interface TenantInfo {
-  trialEndsAt: string;
-  trialStartedAt: string;
-  status: string;
-  enabledModules: ModuleName[];
 }
 
 export interface SanitizedEmployee {
@@ -33,14 +25,13 @@ export interface SanitizedEmployee {
 export async function getSession(): Promise<Session> {
   const user = await getCookie<SanitizedEmployee>('user');
   const token = await getCookie<Token>('token');
-  const tenantInfo = await getCookie<TenantInfo>('tenant');
 
-  if (!user || !token || !tenantInfo) {
+  if (!user || !token) {
     unauthorized();
   }
 
   try {
-    return { token, user, tenantInfo };
+    return { token, user };
   } catch (e) {
     unauthorized();
   }

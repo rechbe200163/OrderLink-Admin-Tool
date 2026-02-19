@@ -87,22 +87,53 @@
       "revenue": {
         "title": "Ingresos",
         "subtitle": "Ingresos Mensuales",
-        "timeframe": "desde el mes pasado"
+        "timeframe": "desde el mes pasado",
+        "noDataLastMonth": "No hay datos del mes pasado",
+        "moreThanLastMonth": "Más que el mes pasado",
+        "lessThanLastMonth": "Menos que el mes pasado",
+        "sameAsLastMonth": "Igual que el mes pasado"
       },
       "customer": {
         "title": "Clientes",
         "subtitle": "Número de Clientes",
-        "timeframe": "desde el mes pasado"
+        "timeframe": "desde el mes pasado",
+        "noDataLastMonth": "No hay datos del mes pasado",
+        "moreThanLastMonth": "Más que el mes pasado",
+        "lessThanLastMonth": "Menos que el mes pasado",
+        "sameAsLastMonth": "Igual que el mes pasado",
+        "monthlyRegistrations": "Registros Mensuales"
       },
       "monthlySales": {
         "title": "Ventas Mensuales",
         "subtitle": "Número de Ventas",
-        "timeframe": "desde el mes pasado"
+        "timeframe": "desde el mes pasado",
+        "noDataLastMonth": "No hay datos del mes pasado",
+        "moreThanLastMonth": "Más que el mes pasado",
+        "lessThanLastMonth": "Menos que el mes pasado",
+        "sameAsLastMonth": "Igual que el mes pasado",
+        "monthlySalesCount": "Ventas Mensuales"
       },
       "avarageOrderValue": {
         "title": "Valor Promedio del Pedido",
         "subtitle": "Valor Promedio del Pedido",
-        "timeframe": "desde el mes pasado"
+        "timeframe": "desde el mes pasado",
+        "noDataLastMonth": "No hay datos del mes pasado",
+        "moreThanLastMonth": "Más que el mes pasado",
+        "lessThanLastMonth": "Menos que el mes pasado",
+        "sameAsLastMonth": "Igual que el mes pasado",
+        "averageValue": "Valor Promedio del Pedido"
+      }
+    },
+    "Charts": {
+      "OrderStateDistribution": {
+        "title": "Pedidos por Estado",
+        "description": "Resumen de pedidos por estado.",
+        "orders": "Pedidos"
+      },
+      "CustomerBusinessTypeDistribution": {
+        "title": "Distribución de Clientes por Sector",
+        "description": "Este gráfico muestra la distribución de clientes por sector empresarial.",
+        "customers": "Clientes"
       }
     },
     "Ressource": {
@@ -123,6 +154,7 @@
           "streetName": "Nombre de la Calle",
           "streetNumber": "Número de la Calle",
           "status": "Estado",
+          "actions": "Acciones",
           "notFound": "No se encontraron direcciones"
         },
         "add": "Agregar Nueva Dirección",
@@ -135,8 +167,29 @@
           "update": "Actualizar Dirección",
           "updateLoading": "Actualizando Dirección...",
           "add": "Agregar Dirección",
-          "addLoading": "Agregando Dirección..."
-        }
+          "addLoading": "Agregando Dirección...",
+          "editButton": "Editar"
+        },
+        "Status": {
+          "active": "Activo",
+          "inactive": "Inactivo"
+        },
+        "EmptyState": {
+          "title": "No se encontraron direcciones",
+          "subtitle": "Aún no hay direcciones",
+          "description": "Aún no hay direcciones en el sistema. Crea tu primera dirección para comenzar."
+        },
+        "Placeholder": {
+          "city": "Stubenberg",
+          "postCode": "8223",
+          "streetName": "Calle Principal",
+          "streetNumber": "123"
+        },
+        "Toast": {
+          "success": "Dirección creada exitosamente",
+          "error": "Ocurrió un error"
+        },
+        "dialogDescription": "Crear una nueva dirección en el sistema"
       },
       "Products": {
         "BreadCrumps": {
@@ -150,7 +203,13 @@
           "description": "Descripción",
           "price": "Precio",
           "status": "Estado",
-          "notFound": "No se encontraron productos"
+          "actions": "Acciones",
+          "stock": "Inventario",
+          "createdAt": "Creado En",
+          "notFound": "No se encontraron productos",
+          "noImage": "Sin imagen",
+          "noDescription": "Sin descripción",
+          "deleted": "Eliminado"
         },
         "buttons": {
           "delete": "Eliminar Producto",
@@ -160,14 +219,22 @@
           "update": "Actualizar Producto",
           "updateLoading": "Actualizando Producto...",
           "add": "Agregar Producto",
-          "addLoading": "Agregando Producto..."
+          "addLoading": "Agregando Producto...",
+          "editButton": "Editar"
         },
         "add": "Agregar Nuevo Producto",
         "edit": "Editar Producto",
         "Status": {
           "active": "Activo",
           "inactive": "Inactivo"
-        }
+        },
+        "EmptyState": {
+          "title": "No se encontraron productos",
+          "subtitle": "Aún no hay productos",
+          "description": "Aún no hay productos en el sistema. Crea tu primer producto para comenzar.",
+          "createFirst": "Crear primer producto"
+        },
+        "dialogDescription": "Crear un nuevo producto en el sistema"
       },
       "Categories": {
         "BreadCrumps": {
@@ -178,6 +245,7 @@
         "Attributes": {
           "name": "Nombre",
           "status": "Estado",
+          "actions": "Acciones",
           "notFound": "No se encontraron categorías"
         },
         "buttons": {
@@ -188,22 +256,36 @@
           "update": "Actualizar Categoría",
           "updateLoading": "Actualizando Categoría...",
           "add": "Agregar Categoría",
-          "addLoading": "Agregando Categoría..."
+          "addLoading": "Agregando Categoría...",
+          "editButton": "Editar"
         },
         "add": "Agregar Nueva Categoría",
         "edit": "Editar Categoría",
         "Status": {
           "active": "Activo",
           "inactive": "Inactivo"
-        }
+        },
+        "EmptyState": {
+          "title": "No se encontraron categorías",
+          "subtitle": "Aún no hay categorías",
+          "description": "Aún no hay categorías en el sistema. Crea tu primera categoría para comenzar."
+        },
+        "Toast": {
+          "success": "Categoría creada exitosamente",
+          "error": "Ocurrió un error"
+        },
+        "dialogDescription": "Crear una nueva categoría en el sistema"
       },
       "Routes": {
         "BreadCrumps": {
-          "title": "Rutas"
+          "title": "Rutas",
+          "add": "Agregar Nueva Ruta",
+          "edit": "Editar Ruta"
         },
         "add": "Agregar Nueva Ruta",
         "edit": "Editar Ruta",
-        "name": "Nombre de Ruta"
+        "name": "Nombre de Ruta",
+        "dialogDescription": "Crear una nueva ruta con pedidos seleccionados"
       },
       "Orders": {
         "BreadCrumps": {
@@ -219,6 +301,7 @@
           "selfCollectYes": "Recogida Personal",
           "selfCollectNo": "Entrega",
           "deliveryMethode": "Método de Entrega",
+          "actions": "Acciones",
           "Products": {
             "Product": {
               "title": "Producto",
@@ -246,10 +329,19 @@
           "update": "Actualizar Pedido",
           "updateLoading": "Actualizando Pedido...",
           "add": "Agregar Pedido",
-          "addLoading": "Agregando Pedido..."
+          "addLoading": "Agregando Pedido...",
+          "editButton": "Editar",
+          "collapse": "Contraer",
+          "expand": "Expandir"
         },
         "add": "Agregar Nuevo Pedido",
-        "edit": "Editar Pedido"
+        "edit": "Editar Pedido",
+        "EmptyState": {
+          "title": "No se encontraron pedidos",
+          "subtitle": "Aún no hay pedidos",
+          "description": "Aún no hay pedidos en el sistema. Crea tu primer pedido para comenzar."
+        },
+        "dialogDescription": "Crear un nuevo pedido en el sistema"
       },
       "Customers": {
         "header": "Agregar Nuevo Cliente",
@@ -275,6 +367,7 @@
           "businessSector": "Sector Empresarial",
           "companyNumber": "Número de la Empresa",
           "status": "Estado",
+          "actions": "Acciones",
           "notFound": "No se encontraron clientes"
         },
         "buttons": {
@@ -285,7 +378,8 @@
           "update": "Actualizar Cliente",
           "updateLoading": "Actualizando Cliente...",
           "add": "Agregar Cliente",
-          "addLoading": "Agregando Cliente..."
+          "addLoading": "Agregando Cliente...",
+          "editButton": "Editar"
         },
         "add": "Agregar Nuevo Cliente",
         "edit": "Editar Cliente",
@@ -301,7 +395,17 @@
         "Status": {
           "active": "Activo",
           "inactive": "Inactivo"
-        }
+        },
+        "Toast": {
+          "success": "Cliente actualizado exitosamente",
+          "error": "Error al actualizar el cliente"
+        },
+        "EmptyState": {
+          "title": "No se encontraron clientes",
+          "subtitle": "Aún no hay clientes",
+          "description": "Aún no hay clientes en el sistema. Crea tu primer cliente para comenzar."
+        },
+        "dialogDescription": "Crear un nuevo cliente en el sistema"
       },
       "Settings": {
         "BreadCrumps": {
@@ -317,12 +421,20 @@
           "add": "Nuevo Empleado",
           "edit": "Editar Empleado"
         },
+        "CreateEmployee": {
+          "header": "Agregar Nuevo Empleado"
+        },
+        "Details": {
+          "employeeDetails": "Detalles del Empleado"
+        },
         "Attributes": {
           "email": "Email",
           "firstName": "Nombre",
           "lastName": "Apellido",
+          "password": "Contraseña",
           "status": "Estado",
           "role": "Rol",
+          "actions": "Acciones",
           "notFound": "No se encontraron empleados"
         },
         "buttons": {
@@ -333,7 +445,8 @@
           "update": "Actualizar Empleado",
           "updateLoading": "Actualizando Empleado...",
           "add": "Agregar Empleado",
-          "addLoading": "Agregando Empleado..."
+          "addLoading": "Agregando Empleado...",
+          "editButton": "Editar"
         },
         "add": "Agregar Nuevo Empleado",
         "edit": "Editar Empleado",
@@ -342,12 +455,23 @@
           "lastName": "Introduce el Apellido",
           "email": "Introduce el Email",
           "password": "Introduce la Contraseña",
+          "passwordInfo": "La contraseña se generará automáticamente y se enviará al empleado",
           "selectRole": "Seleccionar Rol"
         },
         "Status": {
           "active": "Activo",
           "inactive": "Inactivo"
-        }
+        },
+        "Toast": {
+          "success": "Empleado actualizado exitosamente",
+          "error": "Error al actualizar el empleado"
+        },
+        "EmptyState": {
+          "title": "No se encontraron empleados",
+          "subtitle": "Aún no hay empleados",
+          "description": "Aún no hay empleados en el sistema. Agrega tu primer empleado para comenzar."
+        },
+        "dialogDescription": "Crear un nuevo empleado en el sistema"
       },
       "Permissions": {
         "BreadCrumps": {
@@ -361,6 +485,7 @@
           "actions": "Acciones",
           "resource": "Recurso",
           "status": "Estado",
+          "allowed": "Permitido",
           "notFound": "No se encontraron permisos"
         },
         "buttons": {
@@ -382,7 +507,13 @@
         "NoRoles": {
           "title": "No hay roles disponibles",
           "description": "Parece que no hay roles definidos. Crea uno antes de gestionar permisos."
-        }
+        },
+        "EmptyState": {
+          "title": "No se encontraron permisos",
+          "subtitle": "Aún no hay permisos",
+          "description": "Aún no hay permisos en el sistema. Crea tu primer permiso para comenzar."
+        },
+        "dialogDescription": "Crear un nuevo permiso en el sistema"
       },
       "Roles": {
         "BreadCrumps": {
@@ -397,7 +528,8 @@
           "add": "Agregar Rol",
           "addLoading": "Agregando Rol..."
         },
-        "add": "Agregar Rol"
+        "add": "Agregar Rol",
+        "dialogDescription": "Crear un nuevo rol en el sistema"
       },
       "Subscription": {
         "BreadCrumps": {
@@ -444,6 +576,16 @@
           "employee": "Empleado",
           "supplier": "Proveedor"
         }
+      },
+      "OrderState": {
+        "title": "Estado del Pedido",
+        "options": {
+          "order_placed": "Pedido Realizado",
+          "in_progress": "En Progreso",
+          "dispatched": "Despachado",
+          "delivered": "Entregado",
+          "order_collected": "Recogido"
+        }
       }
     },
     "Search": {
@@ -459,7 +601,8 @@
     "goToNext": "Ir a la siguiente página",
     "goToFist": "Ir a la primera página",
     "goToLast": "Ir a la última página",
-    "of": "de"
+    "of": "de",
+    "selectNumberResults": "Seleccionar número de resultados"
   },
   "SelectComponents": {
     "Address": {
@@ -472,7 +615,7 @@
       "selectCategory": "Seleccionar Categoría",
       "noCategoryFound": "No se encontró categoría",
       "addNewCategory": "Agregar Nueva Categoría",
-      "findAddress": "Encontrar Dirección"
+      "findCategory": "Encontrar Categoría"
     },
     "Customer": {
       "selectCustomer": "Seleccionar Cliente",
@@ -482,6 +625,7 @@
     },
     "Product": {
       "selectProduct": "Seleccionar Producto",
+      "selectProducts": "Seleccionar Productos",
       "noProductFound": "No se encontró producto",
       "addNewProduct": "Agregar Nuevo Producto",
       "findProduct": "Encontrar Producto"
@@ -490,13 +634,17 @@
       "selectRoute": "Seleccionar Ruta",
       "noRouteFound": "No se encontró ruta",
       "addNewRoute": "Agregar Nueva Ruta",
-      "findRoute": "Encontrar Ruta"
+      "addNewRouteLoading": "Agregando nueva ruta...",
+      "findRoute": "Encontrar Ruta",
+      "selectedOrders": "Pedidos seleccionados"
     },
     "Order": {
       "selectOrder": "Seleccionar Pedido",
+      "selectOrders": "Seleccionar Pedidos",
       "noOrderFound": "No se encontró pedido",
       "addNewOrder": "Agregar Nuevo Pedido",
-      "findOrder": "Encontrar Pedido"
+      "findOrder": "Encontrar Pedido",
+      "ordersSelected": "pedido(s) seleccionado(s)"
     },
     "Actions": {
       "selectActions": "Seleccionar Acciones",
@@ -583,5 +731,9 @@
     "header": "Actualizar a Premium",
     "subtitle": "Actualiza a Premium para desbloquear esta función",
     "button": "Actualizar Ahora"
+  },
+  "Common": {
+    "copiedToClipboard": "Copiado al portapapeles",
+    "role": "Rol"
   }
 }

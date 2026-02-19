@@ -21,6 +21,9 @@ import { useActionState } from 'react';
 import CustomeToast from '@/components/helpers/toasts/CustomeErrorToast';
 import { toast } from 'sonner';
 import type { SanitizedEmployee } from '@/lib/utlis/getSession';
+import LanguageSwitcher from '@/components/LanguageSwitcher';
+import { getUserLocale } from '@/services/locale';
+import { Locale } from '@/i18n/config';
 
 export default function UserSettingsModal({
   children,
@@ -33,6 +36,12 @@ export default function UserSettingsModal({
   const [password, setpassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [passwordError, setPasswordError] = useState('');
+  const [currentLocale, setCurrentLocale] = useState<Locale>('de');
+
+  // Get current locale on mount
+  useEffect(() => {
+    getUserLocale().then((locale) => setCurrentLocale(locale as Locale));
+  }, []);
 
   const [profileState, updateAction, updating] = useActionState(
     async (prevState: any, formData: FormData) => {
@@ -170,6 +179,8 @@ export default function UserSettingsModal({
                   defaultValue={user.email}
                 />
               </div>
+
+              <LanguageSwitcher currentLocale={currentLocale} className='grid gap-2' />
 
               {showPassword ? (
                 <div className='space-y-2'>

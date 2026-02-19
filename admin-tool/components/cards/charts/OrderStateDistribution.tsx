@@ -46,9 +46,10 @@ export function OrderStateDistributionChart({
   const tOrderState = useTranslations(
     'FilterAndSearch.Filter.OrderState.options'
   );
+  const t = useTranslations('Dashboard.Charts.OrderStateDistribution');
 
   const chartConfig = {
-    orders: { label: 'Bestellungen' },
+    orders: { label: t('orders') },
     ...orderStates.reduce(
       (acc, state) => {
         acc[state] = {
@@ -74,8 +75,8 @@ export function OrderStateDistributionChart({
   return (
     <Card className='flex flex-col'>
       <CardHeader className='items-center pb-0'>
-        <CardTitle>Bestellungen nach Status</CardTitle>
-        <CardDescription>Übersicht der Bestellungen je Status.</CardDescription>
+        <CardTitle>{t('title')}</CardTitle>
+        <CardDescription>{t('description')}</CardDescription>
       </CardHeader>
       <CardContent className='flex-1 pb-0'>
         <ChartContainer
@@ -116,7 +117,7 @@ export function OrderStateDistributionChart({
                           y={(viewBox.cy || 0) + 24}
                           className='fill-muted-foreground'
                         >
-                          Bestellungen
+                          {t('orders')}
                         </tspan>
                       </text>
                     );

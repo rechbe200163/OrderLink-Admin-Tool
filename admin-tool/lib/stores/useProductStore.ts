@@ -39,6 +39,7 @@ export const useProductStore = create<ProductState>()(
       storage: createJSONStorage(() => localStorage),
       partialize: (state) => ({ product: state.product }),
       version: 1,
+      skipHydration: true,
     }
   )
 );

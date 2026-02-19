@@ -1,14 +1,12 @@
-import { PlusCircle } from 'lucide-react';
-import React from 'react';
 import PaginationComponent from '@/components/pagination+filtering/PagingComponent';
 import SearchComponent from '@/components/pagination+filtering/SearchComponent';
 import { orderApiService } from '@/lib/api/concrete/orders';
 import { OrderTable } from '@/components/helpers/orders/OrdersTabel';
 import DateRangeSelectCompoent from '@/components/pagination+filtering/DateRangeSelectCompoent';
-import { ButtonLinkComponent } from '@/components/ButtonLinkComponent';
 import { getTranslations } from 'next-intl/server';
 import { getSession } from '@/lib/utlis/getSession';
 import Component from '@/components/pagination+filtering/comp-42';
+import AddOrderDialog from '@/components/helpers/orders/AddOrderDialog';
 
 export default async function OrdersPage(props: {
   searchParams?: Promise<{
@@ -46,19 +44,20 @@ export default async function OrdersPage(props: {
       <div className='flex justify-between items-center mb-6'>
         <div className='flex justify-between items-center space-x-4'>
           <SearchComponent placeholder={tFilter('Search.searchForOption2')} />
-          <DateRangeSelectCompoent />
+          {/*<DateRangeSelectCompoent />*/}
           <Component />
         </div>
 
-        <ButtonLinkComponent
-          href='/orders/add'
-          label={t('Ressource.Orders.add')}
-          icon={<PlusCircle />}
-        />
+        <AddOrderDialog />
       </div>
       <div className='flex-1 justify-between gap-1 flex flex-col'>
         <div className='min-w-full max-h-[calc(100vh-15rem)] overflow-auto'>
-          <OrderTable orders={orders} />
+          <OrderTable
+            orders={orders}
+            searchQuery={query}
+            startDate={startDate}
+            endDate={endDate}
+          />
         </div>
         <div>
           <PaginationComponent

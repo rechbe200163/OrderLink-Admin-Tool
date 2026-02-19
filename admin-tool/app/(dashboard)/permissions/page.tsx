@@ -1,23 +1,17 @@
 import React from 'react';
-import { PlusCircle } from 'lucide-react';
 import { getTranslations } from 'next-intl/server';
 import { getSession } from '@/lib/utlis/getSession';
 import { roleApiService } from '@/lib/api/concrete/roles';
 import RoleSelect from '@/components/helpers/permissions/RoleSelect';
 import { permissionApiService } from '@/lib/api/concrete/permissions';
-import { ButtonLinkComponent } from '@/components/ButtonLinkComponent';
 import SearchComponent from '@/components/pagination+filtering/SearchComponent';
 import PermissionsGrid from '@/components/helpers/permissions/PermissionsGrid';
-import { isModuleEnabled } from '@/lib/modules';
-import { MODULE_NAME } from '@/lib/types';
+import AddRoleDialog from '@/components/helpers/roles/AddRoleDialog';
+import AddPermissionDialog from '@/components/helpers/permissions/AddPermissionDialog';
 
 export default async function PermissionsPage(props: {
   searchParams?: Promise<{ page?: string; limit?: string; role?: string }>;
 }) {
-  if (!(await isModuleEnabled(MODULE_NAME.CUSTOM_ROLES))) {
-    // redirect('/upgrade?module=STATISTICS');
-    return <NoRolesError />;
-  }
   const session = await getSession();
   if (!session) return null;
 
@@ -46,18 +40,10 @@ export default async function PermissionsPage(props: {
         <div className='flex justify-between items-center space-x-4'>
           <SearchComponent placeholder={tFilter('Search.searchForOption2')} />
           <RoleSelect roles={roles} value={selectedRole} />
-          <ButtonLinkComponent
-            href='/roles/add'
-            label={t('Ressource.Roles.buttons.add')}
-            icon={<PlusCircle />}
-          />
+          <AddRoleDialog />
         </div>
         <div className='flex space-x-2'>
-          <ButtonLinkComponent
-            href='/permissions/add'
-            label={t('Ressource.Permissions.add')}
-            icon={<PlusCircle />}
-          />
+          <AddPermissionDialog roles={roles} />
         </div>
       </div>
       <div className='bg-background rounded-lg shadow-md p-4'>

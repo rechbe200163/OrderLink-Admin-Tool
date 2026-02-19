@@ -26,7 +26,7 @@ export default async function AvarageOderValueCard() {
   };
 
   function renderComparison(current: number, lastMonthAIV: number | null) {
-    if (lastMonthAIV == null) return 'Keine Daten für letzten Monat';
+    if (lastMonthAIV == null) return t('noDataLastMonth');
 
     const change = current - lastMonthAIV;
     const changePercentage =
@@ -35,7 +35,7 @@ export default async function AvarageOderValueCard() {
     if (changePercentage > 0) {
       return (
         <>
-          Mehr als letzten Monat <TrendingUpIcon className='size-4' /> (
+          {t('moreThanLastMonth')} <TrendingUpIcon className='size-4' /> (
           {formatPrice(change)})
         </>
       );
@@ -44,13 +44,13 @@ export default async function AvarageOderValueCard() {
     if (changePercentage < 0) {
       return (
         <>
-          Weniger als letzten Monat <TrendingDownIcon className='size-4' /> (
+          {t('lessThanLastMonth')} <TrendingDownIcon className='size-4' /> (
           {formatPrice(change)})
         </>
       );
     }
 
-    return 'Gleich wie letzten Monat';
+    return t('sameAsLastMonth');
   }
 
   console.log(
@@ -65,7 +65,7 @@ export default async function AvarageOderValueCard() {
   return (
     <Card className='@container/card'>
       <CardHeader className='relative'>
-        <CardDescription>Durchschnittlicher Bestellwert</CardDescription>
+        <CardDescription>{t('averageValue')}</CardDescription>
         <CardTitle className='@[250px]/card:text-3xl text-2xl font-semibold tabular-nums'>
           <AnimatedCounter
             value={convertCentsToEuros(currentMonthAIV)}

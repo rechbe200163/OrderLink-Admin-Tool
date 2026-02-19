@@ -1,14 +1,14 @@
-import { PlusCircle } from 'lucide-react';
 import React from 'react';
 import PaginationComponent from '@/components/pagination+filtering/PagingComponent';
 import SearchComponent from '@/components/pagination+filtering/SearchComponent';
 import FilteringComponent from '@/components/pagination+filtering/FilteringComponent';
 import { employeesApiService } from '@/lib/api/concrete/employees';
 import { EmployeesTable } from '@/components/helpers/employees/EmployeesTable';
-import { ButtonLinkComponent } from '@/components/ButtonLinkComponent';
 import { getTranslations } from 'next-intl/server';
 import { getSession } from '@/lib/utlis/getSession';
 import { ROLE_NAMES } from '@/lib/types';
+import { roleApiService } from '@/lib/api/concrete/roles';
+import AddEmployeeDialog from '@/components/helpers/employees/AddEmployeeDialog';
 
 export default async function EmployeesPage(props: {
   searchParams?: Promise<{
@@ -39,6 +39,7 @@ export default async function EmployeesPage(props: {
   const employees = employeesData.data;
   const { meta } = employeesData;
 
+  const roles = await roleApiService.getRoleNames();
   const t = await getTranslations('Dashboard');
 
   const tFilter = await getTranslations('FilterAndSearch');
@@ -71,14 +72,10 @@ export default async function EmployeesPage(props: {
           />
         </div>
 
-        <ButtonLinkComponent
-          href='/employees/add'
-          label={t('Ressource.Employees.add')}
-          icon={<PlusCircle />}
-        />
+        <AddEmployeeDialog roles={roles} />
       </div>
       <div className='min-w-full max-h-[calc(100vh-15rem)] overflow-auto'>
-        <EmployeesTable employees={employees} />
+        <EmployeesTable employees={employees} searchQuery={query} />
       </div>
       <div className='mt-4 mb-5'>
         <PaginationComponent

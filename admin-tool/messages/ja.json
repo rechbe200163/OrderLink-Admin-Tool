@@ -1,0 +1,752 @@
+{
+  "Onboarding": {
+    "Buttons": {
+      "continue": "続ける",
+      "back": "戻る",
+      "complete": "完了",
+      "loading": "読み込み中..."
+    },
+    "Steps": {
+      "stepOne": "ようこそ",
+      "stepTwo": "会社詳細",
+      "stepThree": "初期管理者ユーザー設定"
+    },
+    "Welcome": {
+      "title1": "ようこそ",
+      "title2": "会社設定",
+      "informationNeeded": "必要な情報",
+      "description": "ご参加いただき、ありがとうございます。会社プロフィールを設定しましょう！",
+      "information": "会社プロフィールを完了するために、以下のフィールドに記入してください。",
+      "information2": "スムーズなプロセスを確保するため、この情報を準備しておいてください。",
+      "companyInformationDesc": {
+        "Logo": {
+          "title": "会社ロゴ",
+          "desc": "JPG、PNG、またはSVG形式のロゴ"
+        },
+        "Email": {
+          "title": "メールアドレス",
+          "desc": "ビジネスメールアドレス"
+        },
+        "Phone": {
+          "title": "電話番号",
+          "desc": "ビジネス電話番号"
+        },
+        "IBAN": {
+          "title": "IBAN",
+          "desc": "ビジネスIBAN"
+        },
+        "Company": {
+          "Number": {
+            "title": "会社番号",
+            "desc": "会社番号"
+          },
+          "Name": {
+            "title": "会社名",
+            "desc": "会社名"
+          }
+        }
+      }
+    },
+    "CompanyDetails": {
+      "headerPart1": "会社",
+      "headerPart2": "詳細",
+      "enterCompanyDetails": "会社詳細を入力してください",
+      "fillAllRequiredFields": "すべての必須フィールドに記入してください",
+      "Form": {
+        "Logo": {
+          "title": "会社ロゴ",
+          "lable": "会社ロゴをアップロード",
+          "acceptedTypes": "受け入れ可能なファイル形式：jpg、jpeg、png"
+        },
+        "Location": {
+          "title": "所在地情報",
+          "lable": "国を選択",
+          "description": "国に州がある場合、国を選択すると表示されます",
+          "city": "都市",
+          "postCode": "郵便番号",
+          "streetName": "通り名",
+          "streetNumber": "番地"
+        },
+        "Company": {
+          "title": "会社情報",
+          "companyName": "会社名",
+          "companyNumber": "会社番号",
+          "email": "メールアドレス",
+          "phoneNumber": "電話番号",
+          "iban": "IBAN"
+        }
+      }
+    }
+  },
+  "Dashboard": {
+    "header": {
+      "monthlyStats": "月次統計"
+    },
+    "InfoCards": {
+      "currency": "USD",
+      "revenue": {
+        "title": "収益",
+        "subtitle": "月次収益",
+        "timeframe": "先月から",
+        "noDataLastMonth": "先月のデータなし",
+        "moreThanLastMonth": "先月より多い",
+        "lessThanLastMonth": "先月より少ない",
+        "sameAsLastMonth": "先月と同じ"
+      },
+      "customer": {
+        "title": "顧客",
+        "subtitle": "顧客数",
+        "timeframe": "先月から",
+        "noDataLastMonth": "先月のデータなし",
+        "moreThanLastMonth": "先月より多い",
+        "lessThanLastMonth": "先月より少ない",
+        "sameAsLastMonth": "先月と同じ",
+        "monthlyRegistrations": "月次登録"
+      },
+      "monthlySales": {
+        "title": "月次売上",
+        "subtitle": "売上数",
+        "timeframe": "先月から",
+        "noDataLastMonth": "先月のデータなし",
+        "moreThanLastMonth": "先月より多い",
+        "lessThanLastMonth": "先月より少ない",
+        "sameAsLastMonth": "先月と同じ",
+        "monthlySalesCount": "月次売上"
+      },
+      "avarageOrderValue": {
+        "title": "平均注文価値",
+        "subtitle": "平均注文価値",
+        "timeframe": "先月から",
+        "noDataLastMonth": "先月のデータなし",
+        "moreThanLastMonth": "先月より多い",
+        "lessThanLastMonth": "先月より少ない",
+        "sameAsLastMonth": "先月と同じ",
+        "averageValue": "平均注文価値"
+      }
+    },
+    "Charts": {
+      "OrderStateDistribution": {
+        "title": "ステータス別注文",
+        "description": "ステータス別注文の概要。",
+        "orders": "注文"
+      },
+      "CustomerBusinessTypeDistribution": {
+        "title": "業種別顧客分布",
+        "description": "このグラフは、業種別の顧客分布を示しています。",
+        "customers": "顧客"
+      }
+    },
+    "Ressource": {
+      "BreadCrumps": {
+        "title": "ダッシュボード"
+      },
+      "Address": {
+        "BreadCrumps": {
+          "title": "住所",
+          "add": "新しい住所を追加",
+          "edit": "住所を編集"
+        },
+        "Attributes": {
+          "state": "都道府県",
+          "country": "国",
+          "city": "都市",
+          "postCode": "郵便番号",
+          "streetName": "通り名",
+          "streetNumber": "番地",
+          "status": "ステータス",
+          "actions": "操作",
+          "notFound": "住所が見つかりません"
+        },
+        "add": "新しい住所を追加",
+        "edit": "住所を編集",
+        "buttons": {
+          "delete": "住所を削除",
+          "deleteLoading": "住所を削除中...",
+          "create": "住所を作成",
+          "createLoading": "住所を作成中...",
+          "update": "住所を更新",
+          "updateLoading": "住所を更新中...",
+          "add": "住所を追加",
+          "addLoading": "住所を追加中...",
+          "editButton": "編集"
+        },
+        "Status": {
+          "active": "有効",
+          "inactive": "無効"
+        },
+        "EmptyState": {
+          "title": "住所が見つかりません",
+          "subtitle": "住所がまだありません",
+          "description": "システムにはまだ住所がありません。最初の住所を作成して始めましょう。"
+        },
+        "Placeholder": {
+          "city": "Stubenberg",
+          "postCode": "8223",
+          "streetName": "Main Street",
+          "streetNumber": "123"
+        },
+        "Toast": {
+          "success": "住所が正常に作成されました",
+          "error": "エラーが発生しました"
+        },
+        "dialogDescription": "システムに新しい住所を作成"
+      },
+      "Products": {
+        "BreadCrumps": {
+          "title": "製品",
+          "add": "新しい製品を追加",
+          "edit": "製品を編集"
+        },
+        "Attributes": {
+          "image": "画像",
+          "name": "名前",
+          "description": "説明",
+          "price": "価格",
+          "status": "ステータス",
+          "actions": "操作",
+          "stock": "在庫",
+          "createdAt": "作成日時",
+          "notFound": "製品が見つかりません",
+          "noImage": "画像なし",
+          "noDescription": "説明なし",
+          "deleted": "削除済み"
+        },
+        "buttons": {
+          "delete": "製品を削除",
+          "deleteLoading": "製品を削除中...",
+          "create": "製品を作成",
+          "createLoading": "製品を作成中...",
+          "update": "製品を更新",
+          "updateLoading": "製品を更新中...",
+          "add": "製品を追加",
+          "addLoading": "製品を追加中...",
+          "editButton": "編集"
+        },
+        "add": "新しい製品を追加",
+        "edit": "製品を編集",
+        "Status": {
+          "active": "有効",
+          "inactive": "無効"
+        },
+        "EmptyState": {
+          "title": "製品が見つかりません",
+          "subtitle": "製品がまだありません",
+          "description": "システムにはまだ製品がありません。最初の製品を作成して始めましょう。",
+          "createFirst": "最初の製品を作成"
+        },
+        "dialogDescription": "システムに新しい製品を作成"
+      },
+      "Categories": {
+        "BreadCrumps": {
+          "title": "カテゴリ",
+          "add": "新しいカテゴリを追加",
+          "edit": "カテゴリを編集"
+        },
+        "Attributes": {
+          "name": "名前",
+          "status": "ステータス",
+          "actions": "操作",
+          "notFound": "カテゴリが見つかりません"
+        },
+        "buttons": {
+          "delete": "カテゴリを削除",
+          "deleteLoading": "カテゴリを削除中...",
+          "create": "カテゴリを作成",
+          "createLoading": "カテゴリを作成中...",
+          "update": "カテゴリを更新",
+          "updateLoading": "カテゴリを更新中...",
+          "add": "カテゴリを追加",
+          "addLoading": "カテゴリを追加中...",
+          "editButton": "編集"
+        },
+        "add": "新しいカテゴリを追加",
+        "edit": "カテゴリを編集",
+        "Status": {
+          "active": "有効",
+          "inactive": "無効"
+        },
+        "EmptyState": {
+          "title": "カテゴリが見つかりません",
+          "subtitle": "カテゴリがまだありません",
+          "description": "システムにはまだカテゴリがありません。最初のカテゴリを作成して始めましょう。"
+        },
+        "Toast": {
+          "success": "カテゴリが正常に作成されました",
+          "error": "エラーが発生しました"
+        },
+        "dialogDescription": "システムに新しいカテゴリを作成"
+      },
+      "Routes": {
+        "BreadCrumps": {
+          "title": "ルート",
+          "add": "新しいルートを追加",
+          "edit": "ルートを編集"
+        },
+        "add": "新しいルートを追加",
+        "edit": "ルートを編集",
+        "name": "ルート名",
+        "dialogDescription": "選択した注文で新しいルートを作成",
+        "Attributes": {
+          "name": "名前",
+          "orders": "注文",
+          "status": "ステータス",
+          "actions": "操作",
+          "clickForOrderDetails": "クリックして注文詳細を表示"
+        },
+        "buttons": {
+          "editButton": "編集"
+        },
+        "Status": {
+          "active": "有効",
+          "inactive": "無効"
+        },
+        "EmptyState": {
+          "title": "ルートが見つかりません",
+          "subtitle": "ルートがまだありません",
+          "description": "システムにはまだルートがありません。注文を整理するために最初の配送ルートを作成しましょう。"
+        }
+      },
+      "Orders": {
+        "BreadCrumps": {
+          "title": "注文",
+          "add": "新しい注文を追加",
+          "edit": "注文を編集"
+        },
+        "Attributes": {
+          "customer": "顧客",
+          "orderDate": "注文日",
+          "deliveryDate": "配送日",
+          "orderState": "注文ステータス",
+          "selfCollectYes": "店頭受取",
+          "selfCollectNo": "配送",
+          "deliveryMethode": "配送方法",
+          "actions": "操作",
+          "Products": {
+            "Product": {
+              "title": "製品",
+              "image": "画像",
+              "quantity": "数量",
+              "price": "価格",
+              "total": "合計",
+              "noProductsInOrder": "注文に製品がありません"
+            },
+            "title": "製品",
+            "name": "名前",
+            "quantity": "数量",
+            "price": "価格",
+            "total": "合計",
+            "orderTotal": "注文合計："
+          },
+          "notFound": "注文が見つかりません",
+          "notDeliveredYet": "まだ配送されていません"
+        },
+        "buttons": {
+          "delete": "注文を削除",
+          "deleteLoading": "注文を削除中...",
+          "create": "注文を作成",
+          "createLoading": "注文を作成中...",
+          "update": "注文を更新",
+          "updateLoading": "注文を更新中...",
+          "add": "注文を追加",
+          "addLoading": "注文を追加中...",
+          "editButton": "編集",
+          "collapse": "折りたたむ",
+          "expand": "展開"
+        },
+        "add": "新しい注文を追加",
+        "edit": "注文を編集",
+        "EmptyState": {
+          "title": "注文が見つかりません",
+          "subtitle": "注文がまだありません",
+          "description": "システムにはまだ注文がありません。最初の注文を作成して始めましょう。"
+        },
+        "dialogDescription": "システムに新しい注文を作成"
+      },
+      "Customers": {
+        "header": "新しい顧客を追加",
+        "headerUpdate": "顧客を編集",
+        "Details": {
+          "customerDetails": "顧客詳細",
+          "businessCustomerDetails": "法人顧客詳細"
+        },
+        "BreadCrumps": {
+          "title": "顧客",
+          "add": "新しい顧客を追加",
+          "edit": "顧客を編集"
+        },
+        "Attributes": {
+          "avatar": "アバター",
+          "name": "名前",
+          "firstName": "名",
+          "lastName": "姓",
+          "password": "パスワード",
+          "email": "メール",
+          "phone": "電話",
+          "customerReference": "顧客参照番号",
+          "businessSector": "業種",
+          "companyNumber": "会社番号",
+          "status": "ステータス",
+          "notFound": "顧客が見つかりません"
+        },
+        "buttons": {
+          "delete": "顧客を削除",
+          "deleteLoading": "顧客を削除中...",
+          "create": "顧客を作成",
+          "createLoading": "顧客を作成中...",
+          "update": "顧客を更新",
+          "updateLoading": "顧客を更新中...",
+          "add": "顧客を追加",
+          "addLoading": "顧客を追加中..."
+        },
+        "add": "新しい顧客を追加",
+        "edit": "顧客を編集",
+        "Placeholder": {
+          "selectBusinessSector": "業種を選択",
+          "firstName": "名を入力",
+          "lastName": "姓を入力",
+          "email": "メールを入力",
+          "companyNumber": "会社番号を入力",
+          "password": "自動生成されます",
+          "passwordInfo": "パスワードは自動生成され、顧客に送信されます"
+        },
+        "Status": {
+          "active": "有効",
+          "inactive": "無効"
+        },
+        "Toast": {
+          "success": "顧客が正常に更新されました",
+          "error": "顧客の更新に失敗しました"
+        },
+        "EmptyState": {
+          "title": "顧客が見つかりません",
+          "subtitle": "顧客がまだありません",
+          "description": "システムにはまだ顧客がありません。最初の顧客を作成して始めましょう。"
+        },
+        "dialogDescription": "システムに新しい顧客を作成"
+      },
+      "Settings": {
+        "BreadCrumps": {
+          "title": "設定"
+        },
+        "edit": "設定を編集"
+      },
+      "Employees": {
+        "header": "新しい従業員を追加",
+        "headerUpdate": "従業員を編集",
+        "BreadCrumps": {
+          "title": "従業員",
+          "add": "新しい従業員を追加",
+          "edit": "従業員を編集"
+        },
+        "CreateEmployee": {
+          "header": "新しい従業員を追加"
+        },
+        "Details": {
+          "employeeDetails": "従業員詳細"
+        },
+        "Attributes": {
+          "email": "メール",
+          "firstName": "名",
+          "lastName": "姓",
+          "status": "ステータス",
+          "role": "役割",
+          "notFound": "従業員が見つかりません"
+        },
+        "buttons": {
+          "delete": "従業員を削除",
+          "deleteLoading": "従業員を削除中...",
+          "create": "従業員を作成",
+          "createLoading": "従業員を作成中...",
+          "update": "従業員を更新",
+          "updateLoading": "従業員を更新中...",
+          "add": "従業員を追加",
+          "addLoading": "従業員を追加中..."
+        },
+        "add": "新しい従業員を追加",
+        "edit": "従業員を編集",
+        "Placeholder": {
+          "firstName": "名を入力",
+          "lastName": "姓を入力",
+          "email": "メールを入力",
+          "password": "パスワードを入力",
+          "selectRole": "役割を選択"
+        },
+        "Status": {
+          "active": "有効",
+          "inactive": "無効"
+        },
+        "Toast": {
+          "success": "従業員が正常に更新されました",
+          "error": "従業員の更新に失敗しました"
+        },
+        "EmptyState": {
+          "title": "従業員が見つかりません",
+          "subtitle": "従業員がまだありません",
+          "description": "システムにはまだ従業員がありません。最初の従業員を追加して始めましょう。"
+        },
+        "dialogDescription": "システムに新しい従業員を作成"
+      },
+      "Permissions": {
+        "BreadCrumps": {
+          "title": "権限",
+          "add": "新しい権限を追加",
+          "edit": "権限を編集"
+        },
+        "Attributes": {
+          "role": "役割",
+          "action": "アクション",
+          "actions": "操作",
+          "resource": "リソース",
+          "status": "ステータス",
+          "allowed": "許可",
+          "notFound": "権限が見つかりません"
+        },
+        "buttons": {
+          "delete": "権限を削除",
+          "deleteLoading": "権限を削除中...",
+          "create": "権限を作成",
+          "createLoading": "権限を作成中...",
+          "update": "権限を更新",
+          "updateLoading": "権限を更新中...",
+          "add": "権限を追加",
+          "addLoading": "権限を追加中..."
+        },
+        "add": "新しい権限を追加",
+        "edit": "権限を編集",
+        "Status": {
+          "active": "有効",
+          "inactive": "無効"
+        },
+        "NoRoles": {
+          "title": "利用可能な役割がありません",
+          "description": "役割が定義されていないようです。権限を管理する前に、役割を作成してください。"
+        },
+        "EmptyState": {
+          "title": "権限が見つかりません",
+          "subtitle": "権限がまだありません",
+          "description": "システムにはまだ権限がありません。最初の権限を作成して始めましょう。"
+        },
+        "dialogDescription": "システムに新しい権限を作成"
+      },
+      "Roles": {
+        "BreadCrumps": {
+          "title": "役割",
+          "add": "役割を追加"
+        },
+        "Attributes": {
+          "name": "名前",
+          "description": "説明"
+        },
+        "buttons": {
+          "add": "役割を追加",
+          "addLoading": "役割を追加中..."
+        },
+        "add": "役割を追加",
+        "dialogDescription": "システムに新しい役割を作成"
+      },
+      "Subscription": {
+        "BreadCrumps": {
+          "title": "サブスクリプション"
+        },
+        "add": "新しいサブスクリプションを追加",
+        "edit": "サブスクリプションを編集"
+      }
+    }
+  },
+  "FilterAndSearch": {
+    "Filter": {
+      "title": "フィルター",
+      "Status": {
+        "title": "ステータス",
+        "options": {
+          "active": "有効",
+          "inactive": "無効"
+        }
+      },
+      "BusinessSectors": {
+        "title": "業種",
+        "options": {
+          "agriculture": "農業",
+          "construction": "建設",
+          "education": "教育",
+          "finance": "金融",
+          "health": "医療",
+          "hospitality": "ホスピタリティ",
+          "it": "IT",
+          "manufacturing": "製造",
+          "other": "その他",
+          "retail": "小売",
+          "technology": "テクノロジー",
+          "tourism": "観光",
+          "transportation": "運輸",
+          "private": "個人"
+        }
+      },
+      "OrderState": {
+        "title": "注文ステータス",
+        "options": {
+          "order_placed": "注文済み",
+          "in_progress": "処理中",
+          "dispatched": "出荷済み",
+          "delivered": "配送済み",
+          "order_collected": "受取済み"
+        }
+      },
+      "Roles": {
+        "title": "役割",
+        "options": {
+          "admin": "管理者",
+          "employee": "従業員",
+          "supplier": "サプライヤー"
+        }
+      }
+    },
+    "Search": {
+      "title": "検索",
+      "searchForOption1": "名前で検索",
+      "searchForOption2": "名前またはメールで検索",
+      "searchForOption3": "郵便番号で検索"
+    }
+  },
+  "Pagination": {
+    "rowsPerPage": "ページあたりの行数",
+    "goToPrev": "前のページに移動",
+    "goToNext": "次のページに移動",
+    "goToFist": "最初のページに移動",
+    "goToLast": "最後のページに移動",
+    "of": "の",
+    "selectNumberResults": "結果数を選択"
+  },
+  "SelectComponents": {
+    "Address": {
+      "selectAddress": "住所を選択",
+      "noAddressFound": "住所が見つかりません",
+      "addNewAddress": "新しい住所を追加",
+      "findAddress": "住所を検索"
+    },
+    "Category": {
+      "selectCategory": "カテゴリを選択",
+      "noCategoryFound": "カテゴリが見つかりません",
+      "addNewCategory": "新しいカテゴリを追加",
+      "findCategory": "カテゴリを検索"
+    },
+    "Customer": {
+      "selectCustomer": "顧客を選択",
+      "noCustomerFound": "顧客が見つかりません",
+      "addNewCustomer": "新しい顧客を追加",
+      "findCustomer": "顧客を検索"
+    },
+    "Product": {
+      "selectProduct": "製品を選択",
+      "selectProducts": "製品を選択",
+      "noProductFound": "製品が見つかりません",
+      "addNewProduct": "新しい製品を追加",
+      "findProduct": "製品を検索"
+    },
+    "Route": {
+      "selectRoute": "ルートを選択",
+      "noRouteFound": "ルートが見つかりません",
+      "addNewRoute": "新しいルートを追加",
+      "addNewRouteLoading": "新しいルートを追加中...",
+      "findRoute": "ルートを検索",
+      "selectedOrders": "選択された注文"
+    },
+    "Order": {
+      "selectOrder": "注文を選択",
+      "selectOrders": "注文を選択",
+      "noOrderFound": "注文が見つかりません",
+      "addNewOrder": "新しい注文を追加",
+      "findOrder": "注文を検索",
+      "ordersSelected": "注文が選択されました"
+    },
+    "Actions": {
+      "selectActions": "アクションを選択",
+      "noActionFound": "アクションが見つかりません",
+      "findAction": "アクションを検索"
+    }
+  },
+  "Messages": {
+    "Route": {
+      "created": "ルートが正常に作成されました"
+    }
+  },
+  "Navigation": {
+    "Groups": {
+      "overview": "概要",
+      "sales": "販売",
+      "products": "製品",
+      "customers": "顧客",
+      "employees": "従業員",
+      "settings": "設定",
+      "permissions": "権限"
+    },
+    "Items": {
+      "overview": "概要",
+      "statistics": "統計",
+      "ordersStatistics": "注文統計",
+      "routesStatistics": "ルート統計",
+      "productsStatistics": "製品統計",
+      "categoriesStatistics": "カテゴリ統計",
+      "customersStatistics": "顧客統計",
+      "orders": "注文",
+      "routes": "ルート",
+      "addresses": "住所",
+      "products": "製品",
+      "categories": "カテゴリ",
+      "customers": "顧客",
+      "employees": "従業員",
+      "settings": "設定",
+      "permissions": "権限",
+      "profileSettings": "プロフィールと設定"
+    }
+  },
+  "Components": {
+    "BackButton": {
+      "goBack": "戻る"
+    },
+    "SidebarHeader": {
+      "errorTitle": "エラー",
+      "errorMessage": "サイドバーヘッダーの読み込み中にエラーが発生しました。",
+      "defaultName": "管理ツール"
+    },
+    "NavMain": {
+      "favorites": "お気に入り",
+      "favorite": "お気に入り",
+      "searchPlaceholder": "項目を検索..."
+    },
+    "PhoneInput": {
+      "label": "電話番号",
+      "placeholder": "電話番号を入力",
+      "selectCountry": "国を選択",
+      "selectCountryPlaceholder": "国を選択"
+    },
+    "SubscriptionDetails": {
+      "title": "サブスクリプション詳細",
+      "status": "ステータス",
+      "plan": "プラン",
+      "amount": "金額",
+      "billingPeriod": "請求期間",
+      "currentPeriodStart": "現在の期間開始",
+      "currentPeriodEnd": "現在の期間終了"
+    },
+    "Pagination": {
+      "morePages": "さらにページ"
+    },
+    "NavUser": {
+      "billing": "請求",
+      "logOut": "ログアウト"
+    },
+    "Sidebar": {
+      "toggle": "サイドバーを切り替え"
+    }
+  },
+  "PremiumWrapper": {
+    "header": "プレミアムにアップグレード",
+    "subtitle": "この機能を利用するにはプレミアムにアップグレードしてください",
+    "button": "今すぐアップグレード"
+  },
+  "Common": {
+    "copiedToClipboard": "クリップボードにコピーしました",
+    "role": "役割"
+  }
+}

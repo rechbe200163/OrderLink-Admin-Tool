@@ -67,6 +67,7 @@ export const useOrderStore = create<OrderState>()(
       storage: createJSONStorage(() => localStorage),
       partialize: (state) => ({ order: state.order }),
       version: 1,
+      skipHydration: true,
     }
   )
 );

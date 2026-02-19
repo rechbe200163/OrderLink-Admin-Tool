@@ -1,7 +1,7 @@
 export type FormState = {
   success: boolean;
   message?: string;
-  data?: string | number;
+  data?: any;
   errors?: {
     title: string[];
   };

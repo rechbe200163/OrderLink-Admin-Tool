@@ -10,8 +10,6 @@ export async function logOut(): Promise<FormState> {
   try {
     await deleteCookie('token');
     await deleteCookie('user');
-    await deleteCookie('tenant');
-    await deleteCookie('siteConfig');
     return Promise.resolve({ success: true, message: 'Logout successful' });
   } catch (error: any) {
     return {
@@ -48,12 +46,13 @@ export async function logIn(
       expiresAt: resp.token.expiresAt,
     });
     await setCookie('user', resp.user);
-    await setCookie('tenant', resp.tenantInfo);
   } catch (error: any) {
     console.error('Login error:', error);
     return { success: false, errors: { title: [error.message] } };
   }
-  redirect(`/`);
+  // Nicht redirect() hier – Cookies würden in der 303-Response evtl. nicht mitgesendet.
+  // Client leitet nach Erfolg weiter (siehe LoginForm).
+  return { success: true };
 }
 
 export async function verifyOtp(
@@ -78,7 +77,6 @@ export async function verifyOtp(
       expiresAt: resp.token.expiresAt,
     });
     await setCookie('user', resp.user);
-    await setCookie('tenant', resp.tenantInfo);
   } catch (error: any) {
     console.error('OTP verification error:', error);
     return { success: false, errors: { title: [error.message] } };

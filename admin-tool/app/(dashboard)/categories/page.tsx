@@ -1,13 +1,12 @@
-import { PlusCircle } from 'lucide-react';
 import React from 'react';
 import PaginationComponent from '@/components/pagination+filtering/PagingComponent';
 import SearchComponent from '@/components/pagination+filtering/SearchComponent';
 import FilteringComponent from '@/components/pagination+filtering/FilteringComponent';
 import { CategoryTable } from '@/components/helpers/categories/CategoryTable';
 import { categoryApiService } from '@/lib/api/concrete/categories';
-import { ButtonLinkComponent } from '@/components/ButtonLinkComponent';
 import { getTranslations } from 'next-intl/server';
 import { getSession } from '@/lib/utlis/getSession';
+import AddCategoryDialog from '@/components/helpers/categories/AddCategoryDialog';
 
 export default async function CategoriesPage(props: {
   searchParams?: Promise<{
@@ -60,15 +59,15 @@ export default async function CategoriesPage(props: {
           />
         </div>
 
-        <ButtonLinkComponent
-          href='/categories/add'
-          label={t('Ressource.Categories.add')}
-          icon={<PlusCircle />}
-        />
+        <AddCategoryDialog />
       </div>
       <div className='flex-1 justify-between gap-1 flex flex-col'>
         <div className='min-w-full max-h-[calc(100vh-15rem)] overflow-auto'>
-          <CategoryTable categories={categories} />
+          <CategoryTable
+            categories={categories}
+            searchQuery={query}
+            statusFilter={filter}
+          />
         </div>
         <div>
           <PaginationComponent

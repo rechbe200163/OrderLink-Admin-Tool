@@ -114,7 +114,7 @@ export default function ProductSelectComponent({
                         : '';
                     })
                     .join(', ')
-                : 'Select product'}
+                : t('selectProduct')}
             </span>
             <ChevronDown
               size={16}

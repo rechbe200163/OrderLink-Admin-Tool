@@ -2,7 +2,6 @@ import Image from 'next/image';
 import React, { useId } from 'react';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
-import { supabaseService } from '@/lib/utlis/SupabaseStorageService';
 
 export default function FileInputComponent({
   label,
@@ -18,9 +17,7 @@ export default function FileInputComponent({
 
   React.useEffect(() => {
     if (initialImage) {
-      supabaseService.getSingedUrlSupabase(initialImage).then((url) => {
-        setImagePreview(url);
-      });
+      setImagePreview(initialImage);
     }
   }, [initialImage]);
 

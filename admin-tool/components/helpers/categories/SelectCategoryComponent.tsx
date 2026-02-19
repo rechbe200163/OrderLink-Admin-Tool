@@ -93,7 +93,7 @@ export default function SelectCategoryComponent({
                 !selectedCategory && 'text-muted-foreground'
               )}
             >
-              {selectedCategory?.name ?? 'Select Category'}
+              {selectedCategory?.name ?? t('selectCategory')}
             </span>
             <ChevronDown
               size={16}

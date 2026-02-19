@@ -49,11 +49,11 @@ export default function EditCustomerForm({
   React.useEffect(() => {
     if (formState.success) {
       toast.custom(() => (
-        <CustomeToast variant='success' message={t('toast.success')} />
+        <CustomeToast variant='success' message={t('Toast.success')} />
       ));
     } else if (formState.errors?.title[0]) {
       toast.custom(() => (
-        <CustomeToast variant='error' message={t('toast.error')} />
+        <CustomeToast variant='error' message={t('Toast.error')} />
       ));
     }
   }, [formState, t]);

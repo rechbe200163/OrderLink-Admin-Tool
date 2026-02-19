@@ -30,4 +30,5 @@ jobs:
           file: ./admin-tool/Dockerfile
           platforms: linux/arm64, linux/amd64
           push: true
+          platforms: linux/arm64, linux/amd64
           tags: rechbe200163/orderlink-admintool:latest

@@ -87,22 +87,53 @@
       "revenue": {
         "title": "Omzet",
         "subtitle": "Maandelijkse omzet",
-        "timeframe": "sinds vorige maand"
+        "timeframe": "sinds vorige maand",
+        "noDataLastMonth": "Geen gegevens voor vorige maand",
+        "moreThanLastMonth": "Meer dan vorige maand",
+        "lessThanLastMonth": "Minder dan vorige maand",
+        "sameAsLastMonth": "Hetzelfde als vorige maand"
       },
       "customer": {
         "title": "Klanten",
         "subtitle": "Aantal klanten",
-        "timeframe": "sinds vorige maand"
+        "timeframe": "sinds vorige maand",
+        "noDataLastMonth": "Geen gegevens voor vorige maand",
+        "moreThanLastMonth": "Meer dan vorige maand",
+        "lessThanLastMonth": "Minder dan vorige maand",
+        "sameAsLastMonth": "Hetzelfde als vorige maand",
+        "monthlyRegistrations": "Maandelijkse Registraties"
       },
       "monthlySales": {
         "title": "Maandelijkse Verkoop",
         "subtitle": "Aantal verkopen",
-        "timeframe": "sinds vorige maand"
+        "timeframe": "sinds vorige maand",
+        "noDataLastMonth": "Geen gegevens voor vorige maand",
+        "moreThanLastMonth": "Meer dan vorige maand",
+        "lessThanLastMonth": "Minder dan vorige maand",
+        "sameAsLastMonth": "Hetzelfde als vorige maand",
+        "monthlySalesCount": "Maandelijkse Verkoop"
       },
       "avarageOrderValue": {
         "title": "Gemiddelde Bestelwaarde",
         "subtitle": "Gemiddelde bestelwaarde",
-        "timeframe": "sinds vorige maand"
+        "timeframe": "sinds vorige maand",
+        "noDataLastMonth": "Geen gegevens voor vorige maand",
+        "moreThanLastMonth": "Meer dan vorige maand",
+        "lessThanLastMonth": "Minder dan vorige maand",
+        "sameAsLastMonth": "Hetzelfde als vorige maand",
+        "averageValue": "Gemiddelde Bestelwaarde"
+      }
+    },
+    "Charts": {
+      "OrderStateDistribution": {
+        "title": "Bestellingen op Status",
+        "description": "Overzicht van bestellingen op status.",
+        "orders": "Bestellingen"
+      },
+      "CustomerBusinessTypeDistribution": {
+        "title": "Klantverdeling per Sector",
+        "description": "Deze grafiek toont de verdeling van klanten per bedrijfssector.",
+        "customers": "Klanten"
       }
     },
     "Ressource": {
@@ -123,6 +154,7 @@
           "streetName": "Straatnaam",
           "streetNumber": "Straatnummer",
           "status": "Status",
+          "actions": "Acties",
           "notFound": "Geen adressen gevonden"
         },
         "add": "Nieuw Adres Toevoegen",
@@ -135,8 +167,29 @@
           "update": "Adres Bijwerken",
           "updateLoading": "Adres Bijwerken...",
           "add": "Adres Toevoegen",
-          "addLoading": "Adres Toevoegen..."
-        }
+          "addLoading": "Adres Toevoegen...",
+          "editButton": "Bewerken"
+        },
+        "Status": {
+          "active": "Actief",
+          "inactive": "Inactief"
+        },
+        "EmptyState": {
+          "title": "Geen adressen gevonden",
+          "subtitle": "Nog geen adressen",
+          "description": "Er zijn nog geen adressen in het systeem. Maak uw eerste adres aan om te beginnen."
+        },
+        "Placeholder": {
+          "city": "Stubenberg",
+          "postCode": "8223",
+          "streetName": "Hoofdstraat",
+          "streetNumber": "123"
+        },
+        "Toast": {
+          "success": "Adres succesvol aangemaakt",
+          "error": "Er is een fout opgetreden"
+        },
+        "dialogDescription": "Maak een nieuw adres aan in het systeem"
       },
       "Products": {
         "BreadCrumps": {
@@ -150,7 +203,13 @@
           "description": "Beschrijving",
           "price": "Prijs",
           "status": "Status",
-          "notFound": "Geen producten gevonden"
+          "actions": "Acties",
+          "stock": "Voorraad",
+          "createdAt": "Aangemaakt Op",
+          "notFound": "Geen producten gevonden",
+          "noImage": "Geen afbeelding",
+          "noDescription": "Geen beschrijving",
+          "deleted": "Verwijderd"
         },
         "buttons": {
           "delete": "Product Verwijderen",
@@ -160,14 +219,22 @@
           "update": "Product Bijwerken",
           "updateLoading": "Product Bijwerken...",
           "add": "Product Toevoegen",
-          "addLoading": "Product Toevoegen..."
+          "addLoading": "Product Toevoegen...",
+          "editButton": "Bewerken"
         },
         "add": "Nieuw Product Toevoegen",
         "edit": "Product Bewerken",
         "Status": {
           "active": "Actief",
           "inactive": "Inactief"
-        }
+        },
+        "EmptyState": {
+          "title": "Geen producten gevonden",
+          "subtitle": "Nog geen producten",
+          "description": "Er zijn nog geen producten in het systeem. Maak uw eerste product aan om te beginnen.",
+          "createFirst": "Maak eerste product aan"
+        },
+        "dialogDescription": "Maak een nieuw product aan in het systeem"
       },
       "Categories": {
         "BreadCrumps": {
@@ -178,6 +245,7 @@
         "Attributes": {
           "name": "Naam",
           "status": "Status",
+          "actions": "Acties",
           "notFound": "Geen categorieën gevonden"
         },
         "buttons": {
@@ -188,22 +256,36 @@
           "update": "Categorie Bijwerken",
           "updateLoading": "Categorie Bijwerken...",
           "add": "Categorie Toevoegen",
-          "addLoading": "Categorie Toevoegen..."
+          "addLoading": "Categorie Toevoegen...",
+          "editButton": "Bewerken"
         },
         "add": "Nieuwe Categorie Toevoegen",
         "edit": "Categorie Bewerken",
         "Status": {
           "active": "Actief",
           "inactive": "Inactief"
-        }
+        },
+        "EmptyState": {
+          "title": "Geen categorieën gevonden",
+          "subtitle": "Nog geen categorieën",
+          "description": "Er zijn nog geen categorieën in het systeem. Maak uw eerste categorie aan om te beginnen."
+        },
+        "Toast": {
+          "success": "Categorie succesvol aangemaakt",
+          "error": "Er is een fout opgetreden"
+        },
+        "dialogDescription": "Maak een nieuwe categorie aan in het systeem"
       },
       "Routes": {
         "BreadCrumps": {
-          "title": "Routes"
+          "title": "Routes",
+          "add": "Nieuwe Route Toevoegen",
+          "edit": "Route Bewerken"
         },
         "add": "Nieuwe Route Toevoegen",
         "edit": "Route Bewerken",
-        "name": "Routenaam"
+        "name": "Routenaam",
+        "dialogDescription": "Maak een nieuwe route aan met geselecteerde bestellingen"
       },
       "Orders": {
         "BreadCrumps": {
@@ -219,6 +301,7 @@
           "selfCollectYes": "Zelf afhalen",
           "selfCollectNo": "Levering",
           "deliveryMethode": "Leveringsmethode",
+          "actions": "Acties",
           "Products": {
             "Product": {
               "title": "Product",
@@ -246,10 +329,19 @@
           "update": "Bestelling Bijwerken",
           "updateLoading": "Bestelling Bijwerken...",
           "add": "Bestelling Toevoegen",
-          "addLoading": "Bestelling Toevoegen..."
+          "addLoading": "Bestelling Toevoegen...",
+          "editButton": "Bewerken",
+          "collapse": "Inklappen",
+          "expand": "Uitklappen"
         },
         "add": "Nieuwe Bestelling Toevoegen",
-        "edit": "Bestelling Bewerken"
+        "edit": "Bestelling Bewerken",
+        "EmptyState": {
+          "title": "Geen bestellingen gevonden",
+          "subtitle": "Nog geen bestellingen",
+          "description": "Er zijn nog geen bestellingen in het systeem. Maak uw eerste bestelling aan om te beginnen."
+        },
+        "dialogDescription": "Maak een nieuwe bestelling aan in het systeem"
       },
       "Customers": {
         "header": "Nieuwe Klant Toevoegen",
@@ -275,6 +367,7 @@
           "businessSector": "Zakelijke Sector",
           "companyNumber": "Bedrijfsnummer",
           "status": "Status",
+          "actions": "Acties",
           "notFound": "Geen klanten gevonden"
         },
         "buttons": {
@@ -285,7 +378,8 @@
           "update": "Klant Bijwerken",
           "updateLoading": "Klant Bijwerken...",
           "add": "Klant Toevoegen",
-          "addLoading": "Klant Toevoegen..."
+          "addLoading": "Klant Toevoegen...",
+          "editButton": "Bewerken"
         },
         "add": "Nieuwe Klant Toevoegen",
         "edit": "Klant Bewerken",
@@ -301,7 +395,17 @@
         "Status": {
           "active": "Actief",
           "inactive": "Inactief"
-        }
+        },
+        "Toast": {
+          "success": "Klant succesvol bijgewerkt",
+          "error": "Klant bijwerken mislukt"
+        },
+        "EmptyState": {
+          "title": "Geen klanten gevonden",
+          "subtitle": "Nog geen klanten",
+          "description": "Er zijn nog geen klanten in het systeem. Maak uw eerste klant aan om te beginnen."
+        },
+        "dialogDescription": "Maak een nieuwe klant aan in het systeem"
       },
       "Settings": {
         "BreadCrumps": {
@@ -317,12 +421,20 @@
           "add": "Nieuwe Medewerker",
           "edit": "Medewerker Bewerken"
         },
+        "CreateEmployee": {
+          "header": "Nieuwe Medewerker Toevoegen"
+        },
+        "Details": {
+          "employeeDetails": "Medewerkergegevens"
+        },
         "Attributes": {
           "email": "E-mail",
           "firstName": "Voornaam",
           "lastName": "Achternaam",
+          "password": "Wachtwoord",
           "status": "Status",
           "role": "Rol",
+          "actions": "Acties",
           "notFound": "Geen medewerkers gevonden"
         },
         "buttons": {
@@ -333,7 +445,8 @@
           "update": "Medewerker Bijwerken",
           "updateLoading": "Medewerker Bijwerken...",
           "add": "Medewerker Toevoegen",
-          "addLoading": "Medewerker Toevoegen..."
+          "addLoading": "Medewerker Toevoegen...",
+          "editButton": "Bewerken"
         },
         "add": "Nieuwe Medewerker Toevoegen",
         "edit": "Medewerker Bewerken",
@@ -342,12 +455,23 @@
           "lastName": "Achternaam invoeren",
           "email": "E-mail invoeren",
           "password": "Wachtwoord invoeren",
+          "passwordInfo": "Het wachtwoord wordt automatisch gegenereerd en naar de medewerker verzonden",
           "selectRole": "Rol Selecteren"
         },
         "Status": {
           "active": "Actief",
           "inactive": "Inactief"
-        }
+        },
+        "Toast": {
+          "success": "Medewerker succesvol bijgewerkt",
+          "error": "Medewerker bijwerken mislukt"
+        },
+        "EmptyState": {
+          "title": "Geen medewerkers gevonden",
+          "subtitle": "Nog geen medewerkers",
+          "description": "Er zijn nog geen medewerkers in het systeem. Voeg uw eerste medewerker toe om te beginnen."
+        },
+        "dialogDescription": "Maak een nieuwe medewerker aan in het systeem"
       },
       "Permissions": {
         "BreadCrumps": {
@@ -361,6 +485,7 @@
           "actions": "Acties",
           "resource": "Resource",
           "status": "Status",
+          "allowed": "Toegestaan",
           "notFound": "Geen machtigingen gevonden"
         },
         "buttons": {
@@ -382,7 +507,13 @@
         "NoRoles": {
           "title": "Geen rollen beschikbaar",
           "description": "Er zijn geen rollen gedefinieerd. Maak er eerst een voordat je machtigingen beheert."
-        }
+        },
+        "EmptyState": {
+          "title": "Geen machtigingen gevonden",
+          "subtitle": "Nog geen machtigingen",
+          "description": "Er zijn nog geen machtigingen in het systeem. Maak uw eerste machtiging aan om te beginnen."
+        },
+        "dialogDescription": "Maak een nieuwe machtiging aan in het systeem"
       },
       "Roles": {
         "BreadCrumps": {
@@ -397,7 +528,8 @@
           "add": "Rol Toevoegen",
           "addLoading": "Rol Toevoegen..."
         },
-        "add": "Rol Toevoegen"
+        "add": "Rol Toevoegen",
+        "dialogDescription": "Maak een nieuwe rol aan in het systeem"
       },
       "Subscription": {
         "BreadCrumps": {
@@ -444,6 +576,16 @@
           "employee": "Medewerker",
           "supplier": "Leverancier"
         }
+      },
+      "OrderState": {
+        "title": "Bestelstatus",
+        "options": {
+          "order_placed": "Bestelling Geplaatst",
+          "in_progress": "In Behandeling",
+          "dispatched": "Verzonden",
+          "delivered": "Geleverd",
+          "order_collected": "Opgehaald"
+        }
       }
     },
     "Search": {
@@ -459,7 +601,8 @@
     "goToNext": "Naar volgende pagina",
     "goToFist": "Naar eerste pagina",
     "goToLast": "Naar laatste pagina",
-    "of": "van"
+    "of": "van",
+    "selectNumberResults": "Selecteer aantal resultaten"
   },
   "SelectComponents": {
     "Address": {
@@ -472,7 +615,7 @@
       "selectCategory": "Categorie selecteren",
       "noCategoryFound": "Geen categorie gevonden",
       "addNewCategory": "Nieuwe categorie toevoegen",
-      "findAddress": "Adres vinden"
+      "findCategory": "Categorie vinden"
     },
     "Customer": {
       "selectCustomer": "Klant selecteren",
@@ -482,6 +625,7 @@
     },
     "Product": {
       "selectProduct": "Product selecteren",
+      "selectProducts": "Producten selecteren",
       "noProductFound": "Geen product gevonden",
       "addNewProduct": "Nieuw product toevoegen",
       "findProduct": "Product vinden"
@@ -490,13 +634,17 @@
       "selectRoute": "Route selecteren",
       "noRouteFound": "Geen route gevonden",
       "addNewRoute": "Nieuwe route toevoegen",
-      "findRoute": "Route vinden"
+      "addNewRouteLoading": "Nieuwe route toevoegen...",
+      "findRoute": "Route vinden",
+      "selectedOrders": "Geselecteerde bestellingen"
     },
     "Order": {
       "selectOrder": "Bestelling selecteren",
+      "selectOrders": "Bestellingen selecteren",
       "noOrderFound": "Geen bestelling gevonden",
       "addNewOrder": "Nieuwe bestelling toevoegen",
-      "findOrder": "Bestelling vinden"
+      "findOrder": "Bestelling vinden",
+      "ordersSelected": "bestelling(en) geselecteerd"
     },
     "Actions": {
       "selectActions": "Acties selecteren",
@@ -583,5 +731,9 @@
     "header": "Upgrade naar Premium",
     "subtitle": "Upgrade naar Premium om deze functie te ontgrendelen",
     "button": "Nu Upgraden"
+  },
+  "Common": {
+    "copiedToClipboard": "Gekopieerd naar klembord",
+    "role": "Rol"
   }
 }

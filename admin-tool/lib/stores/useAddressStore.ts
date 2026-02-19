@@ -39,6 +39,7 @@ export const useAddressStore = create<AddressState>()(
       storage: createJSONStorage(() => localStorage),
       partialize: (state) => ({ address: state.address }),
       version: 1,
+      skipHydration: true,
     }
   )
 );

@@ -24,12 +24,12 @@ export default async function CustomerInfoCard() {
   };
 
   function renderComparison(current: number, percentageChange: number | null) {
-    if (percentageChange == null) return 'Keine Daten für letzten Monat';
+    if (percentageChange == null) return t('noDataLastMonth');
 
     if (percentageChange > 0) {
       return (
         <>
-          Mehr als letzten Monat <TrendingUpIcon className='size-4' />
+          {t('moreThanLastMonth')} <TrendingUpIcon className='size-4' />
         </>
       );
     }
@@ -37,17 +37,17 @@ export default async function CustomerInfoCard() {
     if (percentageChange < 0) {
       return (
         <>
-          Weniger als letzten Monat <TrendingDownIcon className='size-4' />{' '}
+          {t('lessThanLastMonth')} <TrendingDownIcon className='size-4' />{' '}
         </>
       );
     }
 
-    return 'Gleich wie letzten Monat';
+    return t('sameAsLastMonth');
   }
   return (
     <Card className='@container/card'>
       <CardHeader className='relative'>
-        <CardDescription>Monatliche Neuanmeldungen</CardDescription>
+        <CardDescription>{t('monthlyRegistrations')}</CardDescription>
         <CardTitle className='@[250px]/card:text-3xl text-2xl font-semibold tabular-nums'>
           <AnimatedCounter value={currentMonthSignUps} />
         </CardTitle>

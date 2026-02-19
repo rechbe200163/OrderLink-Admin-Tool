@@ -35,6 +35,7 @@ export const ENDPOINTS = {
   GET_ME: 'employees/me',
   UPDATE_ME: 'employees/me',
   CHECK_OUT: 'stripe/checkout',
+  CHECKOUT_PORTAL_SESSION: 'stripe/portal-session',
 } as const;
 
 export type EndpointKey = keyof typeof ENDPOINTS;

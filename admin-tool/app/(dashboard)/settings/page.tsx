@@ -1,4 +1,5 @@
 import SiteConfigCard from '@/components/cards/siteConfig/SiteConfigCard';
+import PortalSessionButton from '@/components/PortalSessionButton';
 import { siteConfigApiService } from '@/lib/api/concrete/siteConfig';
 import { getCookie } from '@/lib/cookies/cookie-managment';
 import { Session } from '@/lib/utlis/getSession';
@@ -11,10 +12,8 @@ const SiteConfigPage = async () => {
   return (
     <div className='p-5'>
       <div className='sticky top-0 bg-background z-10'></div>
-      <SiteConfigCard
-        siteConfig={siteConfig}
-        enabledModules={session?.tenantInfo?.enabledModules}
-      />
+      <SiteConfigCard siteConfig={siteConfig} />
+      <PortalSessionButton />
     </div>
   );
 };

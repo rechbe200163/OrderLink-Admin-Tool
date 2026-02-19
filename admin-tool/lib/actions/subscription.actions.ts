@@ -38,3 +38,18 @@ export async function cancleSubscription(
     return { success: true } as FormState;
   }, 'Failed to cancel subscription')) as FormState;
 }
+
+export async function createCheckoutPortalSession() {
+  return (await guardAction(async (session) => {
+    if (session.user.roleName !== 'ADMIN') {
+      return {
+        success: false,
+        errors: { title: ['Unauthorized'] },
+        message: 'Unauthorized',
+      } as FormState;
+    }
+    const resp = await apiPost(ENDPOINTS.CHECKOUT_PORTAL_SESSION, {});
+
+    return { success: true, data: resp } as FormState;
+  }, 'Failed to create checkout portal session')) as FormState;
+}

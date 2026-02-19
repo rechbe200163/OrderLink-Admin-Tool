@@ -18,18 +18,37 @@ import Image from 'next/image'; // Use next/image for optimized images
 import { Suspense } from 'react';
 import ImageSkeleton from '@/components/images/ImageSkeleton';
 import Link from 'next/link';
-import { Package, ChevronDown } from 'lucide-react'; // ChevronDown for the expand/collapse icon
+import { Package, ChevronDown, MoreVertical, ShoppingCart } from 'lucide-react'; // ChevronDown for the expand/collapse icon
 import { useTranslations } from 'next-intl';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
+import { EmptyState, TableEmptyState } from '@/components/ui/empty-state';
+
+interface OrderTableProps {
+  orders: OrdersWithCustomerAndProducts[];
+  searchQuery?: string;
+  startDate?: string;
+  endDate?: string;
+}
 
 export function OrderTable({
   orders,
-}: {
-  orders: OrdersWithCustomerAndProducts[];
-}) {
-  const t = useTranslations('Dashboard.Ressource.Orders');
+  searchQuery,
+  startDate,
+  endDate,
+}: OrderTableProps) {
+  const t = useTranslations('Dashboard.Ressource.Orders.Attributes');
+  const tButtons = useTranslations('Dashboard.Ressource.Orders.buttons');
+  const tEmptyState = useTranslations('Dashboard.Ressource.Orders.EmptyState');
   const tOrderState = useTranslations(
     'FilterAndSearch.Filter.OrderState.options'
   );
+
+  const isFiltered = !!(searchQuery || startDate || endDate);
 
   // State to manage which order's product details are currently expanded
   const [expandedOrderId, setExpandedOrderId] = useState<string | null>(null);
@@ -44,18 +63,19 @@ export function OrderTable({
       <Table className='border-separate border-spacing-0 [&_td]:border-border [&_tfoot_td]:border-t [&_th]:border-b [&_th]:border-border [&_tr:not(:last-child)_td]:border-b'>
         <TableHeader className='sticky top-0 z-10 bg-background/90 backdrop-blur-xs'>
           <TableRow className='hover:bg-muted/50'>
-            <TableHead className='w-40'>{t('Attributes.customer')}</TableHead>
-            <TableHead className='w-40'>{t('Attributes.orderDate')}</TableHead>
+            <TableHead className='w-40'>{t('customer')}</TableHead>
+            <TableHead className='w-40'>{t('orderDate')}</TableHead>
             <TableHead className='w-60'>
-              {t('Attributes.deliveryDate')}
+              {t('deliveryDate')}
             </TableHead>
-            <TableHead className='w-40'>{t('Attributes.orderState')}</TableHead>
+            <TableHead className='w-40'>{t('orderState')}</TableHead>
             <TableHead className='w-40 text-right'>
-              {t('Attributes.deliveryMethode')}
+              {t('deliveryMethode')}
             </TableHead>
+            <TableHead className='w-20 text-right'>{t('actions')}</TableHead>
             {/* This column is now dedicated to the expand/collapse button */}
             <TableHead className='w-10 text-center'>
-              <span className='sr-only'>{t('Attributes.Products.title')}</span>
+              <span className='sr-only'>{t('Products.title')}</span>
             </TableHead>
           </TableRow>
         </TableHeader>
@@ -89,7 +109,7 @@ export function OrderTable({
                       {order.deliveryDate ? (
                         formatDateTime(order.deliveryDate)
                       ) : (
-                        <>{t('Attributes.notDeliveredYet')}</>
+                        <>{t('notDeliveredYet')}</>
                       )}
                     </Link>
                   </TableCell>
@@ -107,11 +127,30 @@ export function OrderTable({
                       className='hover:underline'
                     >
                       {order.selfCollect ? (
-                        <>{t('Attributes.selfCollectYes')}</>
+                        <>{t('selfCollectYes')}</>
                       ) : (
-                        <>{t('Attributes.selfCollectNo')}</>
+                        <>{t('selfCollectNo')}</>
                       )}
                     </Link>
+                  </TableCell>
+                  <TableCell className='w-20 text-right'>
+                    <DropdownMenu>
+                      <DropdownMenuTrigger asChild>
+                        <Button variant='ghost' size='icon'>
+                          <MoreVertical className='h-4 w-4' />
+                        </Button>
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent align='end'>
+                        <DropdownMenuItem asChild>
+                          <Link href={`/orders/${order.orderId}/edit`}>
+                            {tButtons('editButton')}
+                          </Link>
+                        </DropdownMenuItem>
+                        {/* <DropdownMenuItem disabled>
+                          Löschen
+                        </DropdownMenuItem> */}
+                      </DropdownMenuContent>
+                    </DropdownMenu>
                   </TableCell>
                   {/* Cell for the expand/collapse button */}
                   <TableCell className='w-10 text-center'>
@@ -130,8 +169,8 @@ export function OrderTable({
                       />
                       <span className='sr-only'>
                         {expandedOrderId === order.orderId
-                          ? 'Collapse'
-                          : 'Expand'}{' '}
+                          ? tButtons('collapse')
+                          : tButtons('expand')}{' '}
                         products for order {order.orderId}
                       </span>
                     </Button>
@@ -144,7 +183,7 @@ export function OrderTable({
                     className='bg-muted/20'
                   >
                     {/* This cell spans all columns to contain the product table */}
-                    <TableCell colSpan={6} className='p-0'>
+                    <TableCell colSpan={7} className='p-0'>
                       <OrderProductsTable products={order.products} />
                     </TableCell>
                   </TableRow>
@@ -152,11 +191,23 @@ export function OrderTable({
               </React.Fragment>
             ))
           ) : (
-            <TableRow>
-              <TableCell colSpan={6} className='text-center py-4'>
-                {t('Attributes.notFound')}
-              </TableCell>
-            </TableRow>
+            <TableEmptyState colSpan={7}>
+              <EmptyState
+                icon={ShoppingCart}
+                title={
+                  isFiltered
+                    ? tEmptyState('title')
+                    : tEmptyState('subtitle')
+                }
+                description={tEmptyState('description')}
+                isFiltered={isFiltered}
+                filterMessage={
+                  searchQuery || startDate || endDate
+                    ? `${searchQuery ? `Suche: "${searchQuery}"` : ''}${startDate && endDate ? ` | Zeitraum: ${startDate} - ${endDate}` : ''}`
+                    : undefined
+                }
+              />
+            </TableEmptyState>
           )}
         </TableBody>
       </Table>

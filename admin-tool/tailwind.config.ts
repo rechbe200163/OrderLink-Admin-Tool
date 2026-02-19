@@ -10,7 +10,20 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['var(--font-geist-sans)', ...fontFamily.sans],
+        sans: [
+          'var(--font-geist-sans)',
+          ...fontFamily.sans,
+          // Enhanced CJK support
+          'Noto Sans SC',
+          'Noto Sans TC',
+          'Noto Sans JP',
+          'Noto Sans KR',
+          'PingFang SC',
+          'PingFang TC',
+          'Microsoft YaHei',
+          'Malgun Gothic',
+          'Yu Gothic',
+        ],
         mono: ['var(--font-geist-mono)', ...fontFamily.mono],
       },
       colors: {

@@ -10,7 +10,8 @@ import {
 } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { useActionState, useState } from 'react';
+import { useActionState, useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import { EyeIcon, EyeOff, LockKeyhole } from 'lucide-react';
 import { logIn } from '@/lib/actions/auth.actions';
 import { Spinner } from '../ui/kibo-ui/spinner';
@@ -19,14 +20,22 @@ export function LoginForm({
   className,
   ...props
 }: React.ComponentPropsWithoutRef<'div'>) {
+  const router = useRouter();
   const [inputHidden, setInputHidden] = useState('password');
   const [email, setEmail] = useState('');
 
   const [password, setPassword] = useState('');
-  const [_formState, action, isLoading] = useActionState(logIn, {
+  const [formState, action, isLoading] = useActionState(logIn, {
     success: false,
     errors: { title: [] as string[] },
   });
+
+  // Nach erfolgreichem Login clientseitig weiterleiten, damit die gesetzten Cookies mitgeschickt werden
+  useEffect(() => {
+    if (formState?.success) {
+      router.replace('/');
+    }
+  }, [formState?.success, router]);
 
   return (
     <div className={cn('flex flex-col gap-6', className)} {...props}>
