@@ -18,14 +18,12 @@ import LoadingIcon from '@/components/loading-states/loading-icon';
 
 export default function SiteConfigCard({
   siteConfig,
-  enabledModules,
 }: {
   siteConfig: SiteConfigDto;
-  enabledModules: ModuleName[] | undefined;
 }) {
   const router = useRouter();
   const [selectedAddress, setSelectedAddress] = React.useState<string>(
-    siteConfig.address.addressId || ''
+    siteConfig.address.addressId || '',
   );
 
   const [formState, action, isPending] = useActionState(
@@ -35,7 +33,7 @@ export default function SiteConfigCard({
       errors: {
         title: [],
       },
-    }
+    },
   );
 
   React.useEffect(() => {
@@ -69,7 +67,6 @@ export default function SiteConfigCard({
     <Card className='w-full max-w-2xl mx-auto p-6 shadow-lg rounded-2xl'>
       <CardHeader>
         <CardTitle className='text-2xl font-bold flex justify-between items-center'>
-          {siteConfig.companyName} - {showEnabledModules(enabledModules)}
           <div className='flex items-center gap-3'>
             {siteConfig.isPremium && <Badge variant='success'>Premium</Badge>}
           </div>
@@ -177,7 +174,7 @@ function showEnabledModules(enabledModules: ModuleName[] | undefined) {
   return (
     enabledModules
       ?.map(
-        (module) => ModulePackageName[module as keyof typeof ModulePackageName]
+        (module) => ModulePackageName[module as keyof typeof ModulePackageName],
       )
       .join(' • ') ?? 'No Modules Enabled'
   );

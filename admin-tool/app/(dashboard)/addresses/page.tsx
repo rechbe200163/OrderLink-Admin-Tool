@@ -7,7 +7,6 @@ import { addressApiService } from '@/lib/api/concrete/address';
 import { getSession } from '@/lib/utlis/getSession';
 import { getTranslations } from 'next-intl/server';
 import AddAddressDialog from '@/components/helpers/addresses/AddAddressDialog';
-import { redirect } from 'next/navigation';
 
 export default async function AddressesPage(props: {
   searchParams?: Promise<{
@@ -33,7 +32,7 @@ export default async function AddressesPage(props: {
     limit,
     query,
     filter,
-    tag
+    tag,
   );
   const addresses = addressData.data;
 

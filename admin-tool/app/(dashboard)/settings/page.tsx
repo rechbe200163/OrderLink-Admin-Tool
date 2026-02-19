@@ -12,10 +12,7 @@ const SiteConfigPage = async () => {
   return (
     <div className='p-5'>
       <div className='sticky top-0 bg-background z-10'></div>
-      <SiteConfigCard
-        siteConfig={siteConfig}
-        enabledModules={session?.tenantInfo?.enabledModules}
-      />
+      <SiteConfigCard siteConfig={siteConfig} />
       <PortalSessionButton />
     </div>
   );
