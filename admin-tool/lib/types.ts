@@ -401,3 +401,9 @@ export interface OrdersWithAddressOfCustomer extends Order {
     address: Address;
   };
 }
+
+export type OrderAmountResponse = {
+  growth: Record<string, number>;
+  cumulative_growth: Record<string, number>;
+  typeofgraph: 'line' | 'bar' | 'area';
+};

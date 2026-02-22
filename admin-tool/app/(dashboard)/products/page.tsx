@@ -1,4 +1,3 @@
-import React from 'react';
 import PaginationComponent from '@/components/pagination+filtering/PagingComponent';
 import SearchComponent from '@/components/pagination+filtering/SearchComponent';
 import FilteringComponent from '@/components/pagination+filtering/FilteringComponent';
@@ -8,6 +7,7 @@ import { getSession } from '@/lib/utlis/getSession';
 import { BusinessSector } from '@/lib/types';
 import { getTranslations } from 'next-intl/server';
 import AddProductDialog from '@/components/helpers/products/AddProductDialog';
+import CacheHitIndicatorComponent from '@/components/helpers/cach-hit-component';
 
 export default async function ProductsPage(props: {
   searchParams?: Promise<{
@@ -30,7 +30,7 @@ export default async function ProductsPage(props: {
     page,
     limit,
     search,
-    categoryId
+    categoryId,
   );
   const products = productData.data;
   console.log('products1', products);
@@ -48,8 +48,10 @@ export default async function ProductsPage(props: {
             endpoint='CATEGORIES'
           />
         </div>
-
-        <AddProductDialog />
+        <div>
+          {productData.cacheHit && <CacheHitIndicatorComponent />}
+          <AddProductDialog />
+        </div>
       </div>
       <div className='flex-1 justify-between gap-1 flex flex-col'>
         <div className='min-w-full max-h-[calc(100vh-15rem)] overflow-auto'>

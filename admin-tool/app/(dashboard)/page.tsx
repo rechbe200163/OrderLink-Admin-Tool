@@ -7,7 +7,7 @@ export default async function Page() {
       <div className='@container/main w-full max-w-none'>
         <div className='flex flex-col gap-4 py-4 md:gap-6 md:py-6'>
           <SectionCards />
-          <QuickStats />
+          {/* <QuickStats /> */}
         </div>
       </div>
     </div>

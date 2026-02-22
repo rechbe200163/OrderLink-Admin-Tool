@@ -21,8 +21,8 @@ export class BaseApiService {
       params?: Record<string, string | number | boolean | undefined>;
       body?: unknown;
       headers?: HeadersInit;
-    } = {}
-  ): Promise<T> {
+    } = {},
+  ): Promise<T & { cacheHit?: boolean }> {
     console.log('BaseApiService initialized with baseUrl:', this.baseUrl);
     const url = new URL(`${this.baseUrl}/${endpoint}`);
     console.log('API Request:', {
@@ -57,6 +57,8 @@ export class BaseApiService {
 
     const response = await fetch(url.toString(), options);
 
+    const cacheHit = response.headers.get('x-cache') === 'HIT';
+
     if (!response.ok) {
       const errorData = await response.json().catch(() => ({}));
       console.error(errorData);
@@ -69,47 +71,47 @@ export class BaseApiService {
         errorData.message ||
           errorData.error ||
           `Request failed with status ${response.status}`,
-        response.status
+        response.status,
       );
     }
-
-    return response.json();
+    const data = await response.json().catch(() => ({}));
+    return { ...data, cacheHit };
   }
 
   public get<T>(
     endpoint: string,
-    params?: Record<string, string | number | boolean | undefined>
-  ): Promise<T> {
+    params?: Record<string, string | number | boolean | undefined>,
+  ): Promise<T & { cacheHit?: boolean }> {
     return this.request('GET', endpoint, { params });
   }
 
   public post<T>(
     endpoint: string,
     body?: unknown,
-    params?: Record<string, string | number | undefined>
-  ): Promise<T> {
+    params?: Record<string, string | number | undefined>,
+  ): Promise<T & { cacheHit?: boolean }> {
     return this.request('POST', endpoint, { body, params });
   }
 
   public put<T>(
     endpoint: string,
     body?: unknown,
-    params?: Record<string, string | number | undefined>
-  ): Promise<T> {
+    params?: Record<string, string | number | undefined>,
+  ): Promise<T & { cacheHit?: boolean }> {
     return this.request('PUT', endpoint, { body, params });
   }
 
   public patch<T>(
     endpoint: string,
     body?: unknown,
-    params?: Record<string, string | number | undefined>
+    params?: Record<string, string | number | undefined>,
   ): Promise<T> {
     return this.request('PATCH', endpoint, { body, params });
   }
 
   public delete<T>(
     endpoint: string,
-    params?: Record<string, string | number | undefined>
+    params?: Record<string, string | number | undefined>,
   ): Promise<T> {
     return this.request('DELETE', endpoint, { params });
   }

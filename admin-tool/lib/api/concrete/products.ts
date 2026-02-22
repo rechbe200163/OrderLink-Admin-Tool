@@ -18,12 +18,16 @@ export class ProductApiService extends BaseApiService {
     super(process.env.NEXT_PUBLIC_API_URL || '');
   }
 
-  async getAll(): Promise<Product[]> {
-    return this.get<Product[]>('products/all');
+  async getAll(): Promise<Product[] & { cacheHit?: boolean }> {
+    return this.get<Product[] & { cacheHit?: boolean }>('products/all');
   }
 
-  async getProductbyId(productId: string): Promise<Product> {
-    return await this.get<Product>(`products/${productId}`);
+  async getProductbyId(
+    productId: string,
+  ): Promise<Product & { cacheHit?: boolean }> {
+    return await this.get<Product & { cacheHit?: boolean }>(
+      `products/${productId}`,
+    );
   }
 
   async getProductHistory(productId: string): Promise<ProductHistory[]> {
@@ -35,9 +39,9 @@ export class ProductApiService extends BaseApiService {
     limit: number,
     search?: string,
     categoryId?: string,
-    filter?: string
-  ): Promise<PagingDto<Product>> {
-    return this.get<PagingDto<Product>>('products', {
+    filter?: string,
+  ): Promise<PagingDto<Product> & { cacheHit?: boolean }> {
+    return this.get<PagingDto<Product> & { cacheHit?: boolean }>('products', {
       page,
       limit,
       search,
