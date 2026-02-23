@@ -23,6 +23,7 @@ import {
 } from 'lucide-react';
 import { useMemo, useId } from 'react';
 import { useTranslations } from 'next-intl';
+import Link from 'next/link';
 
 type PaginationProps = {
   currentPage: number;
@@ -111,49 +112,53 @@ export default function PaginationComponent({
       <div>
         <Pagination>
           <PaginationContent>
-            {/* First page button */}
+            {/* First page */}
             <PaginationItem>
               <PaginationLink
                 className='aria-disabled:pointer-events-none aria-disabled:opacity-50'
-                href={updateUrlWithPage(1)}
                 aria-label={t('goToFist')}
                 aria-disabled={currentPage === 1}
+                href={updateUrlWithPage(1)}
+                scroll={false}
               >
                 <ChevronFirst size={16} strokeWidth={2} aria-hidden='true' />
               </PaginationLink>
             </PaginationItem>
 
-            {/* Previous page button */}
+            {/* Previous page */}
             <PaginationItem>
               <PaginationLink
                 className='aria-disabled:pointer-events-none aria-disabled:opacity-50'
-                href={updateUrlWithPage(currentPage - 1)}
                 aria-label={t('goToPrev')}
                 aria-disabled={currentPage === 1}
+                href={updateUrlWithPage(currentPage - 1)}
+                scroll={false}
               >
                 <ChevronLeft size={16} strokeWidth={2} aria-hidden='true' />
               </PaginationLink>
             </PaginationItem>
 
-            {/* Next page button */}
+            {/* Next page */}
             <PaginationItem>
               <PaginationLink
                 className='aria-disabled:pointer-events-none aria-disabled:opacity-50'
-                href={updateUrlWithPage(currentPage + 1)}
                 aria-label={t('goToNext')}
                 aria-disabled={currentPage === totalPages}
+                href={updateUrlWithPage(currentPage + 1)}
+                scroll={false}
               >
                 <ChevronRight size={16} strokeWidth={2} aria-hidden='true' />
               </PaginationLink>
             </PaginationItem>
 
-            {/* Last page button */}
+            {/* Last page */}
             <PaginationItem>
               <PaginationLink
                 className='aria-disabled:pointer-events-none aria-disabled:opacity-50'
-                href={updateUrlWithPage(totalPages)}
                 aria-label={t('goToLast')}
                 aria-disabled={currentPage === totalPages}
+                href={updateUrlWithPage(totalPages)}
+                scroll={false}
               >
                 <ChevronLast size={16} strokeWidth={2} aria-hidden='true' />
               </PaginationLink>
