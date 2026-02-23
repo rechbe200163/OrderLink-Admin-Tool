@@ -53,6 +53,7 @@ export default async function RootLayout({
           </ThemeProvider>
           <Toaster />
           <SonnerToast />
+          <Analytics />
         </body>
       </html>
     </>
