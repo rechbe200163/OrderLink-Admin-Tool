@@ -8,6 +8,7 @@ import { defaultLocale } from '@/i18n/config';
 import { NextIntlClientProvider } from 'next-intl';
 import { Toaster as SonnerToast } from 'sonner';
 import { Toaster } from '@/components/ui/toaster';
+import { Analytics } from '@vercel/analytics/next';
 
 // const geistSans = Geist({
 //   variable: '--font-geist-sans',
@@ -51,6 +52,7 @@ export default async function RootLayout({
           </ThemeProvider>
           <Toaster />
           <SonnerToast />
+          <Analytics />
         </body>
       </html>
     </>
