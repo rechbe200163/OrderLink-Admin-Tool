@@ -8,6 +8,7 @@ import { getTranslations } from 'next-intl/server';
 import { getSession } from '@/lib/utlis/getSession';
 import { BusinessSector } from '@/lib/types';
 import AddCustomerDialog from '@/components/helpers/customers/AddCustomerDialog';
+import FilteringComponent from '@/components/pagination+filtering/FilteringComponent';
 
 export default async function AdminPanelUsersPage(props: {
   searchParams?: Promise<{
@@ -33,7 +34,7 @@ export default async function AdminPanelUsersPage(props: {
     limit,
     query,
     filter,
-    businessSector
+    businessSector,
   );
   const customers = data;
 
@@ -44,22 +45,16 @@ export default async function AdminPanelUsersPage(props: {
       <div className='flex justify-between items-center mb-5'>
         <div className='flex justify-between items-center space-x-4'>
           <SearchComponent placeholder={tFilter('Search.searchForOption2')} />
-          {/* <FilteringComponent
-            title={tFilter('Filter.Status.title')}
-            filterName='filter'
-            values={[
-              {
-                label: tFilter('Filter.Status.options.active'),
-                value: 'active',
-                color: 'green',
-              },
-              {
-                label: tFilter('Filter.Status.options.inactive'),
-                value: 'inactive',
-                color: 'red',
-              },
-            ]}
-          /> */}
+          <FilteringComponent
+            title={tFilter('Filter.BusinessSectors.title')}
+            filterName='businessSector'
+            values={Object.values(BusinessSector).map((sector) => ({
+              label: tFilter(
+                `Filter.BusinessSectors.options.${sector.toLocaleLowerCase()}`,
+              ),
+              value: sector,
+            }))}
+          />
         </div>
 
         <AddCustomerDialog />
