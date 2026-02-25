@@ -57,7 +57,7 @@ export default async function SalesInfoCard() {
           <Badge variant='outline' className='flex gap-1 rounded-lg text-xs'>
             {getTrendIcon()}
             {percentageChange == null ? 0 : percentageChange > 0 ? '+' : ''}
-            {percentageChange}%
+            {percentageChange?.toFixed(0) || 0}%
           </Badge>
         </div>
       </CardHeader>
