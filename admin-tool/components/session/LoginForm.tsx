@@ -86,7 +86,7 @@ export function LoginForm({
                       type='button'
                       onClick={() =>
                         setInputHidden(
-                          inputHidden === 'password' ? 'text' : 'password'
+                          inputHidden === 'password' ? 'text' : 'password',
                         )
                       }
                       className='absolute right-2 top-1/2 -translate-y-1/2 p-1 text-gray-500 hover:text-gray-700'
@@ -111,7 +111,6 @@ export function LoginForm({
                   {isLoading ? (
                     <>
                       <Spinner variant='ellipsis' />
-                      Anmelden...
                     </>
                   ) : (
                     <>
