@@ -413,3 +413,8 @@ export type OrderAmountResponse = {
   cumulative_growth: Record<string, number>;
   typeofgraph: 'line' | 'bar' | 'area';
 };
+
+export type CustomerPredictionGrowth = {
+  predictions: Record<string, number>;
+  typeofgraph: 'line' | 'bar' | 'area';
+};

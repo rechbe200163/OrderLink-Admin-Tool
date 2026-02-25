@@ -1,5 +1,5 @@
 'server only';
-import { OrderAmountResponse } from '@/lib/types';
+import { CustomerPredictionGrowth, OrderAmountResponse } from '@/lib/types';
 import { BaseApiService } from '../base';
 
 class DataAnalysisService extends BaseApiService {
@@ -29,6 +29,24 @@ class DataAnalysisService extends BaseApiService {
         month,
         year,
         showzeros: show_zeros,
+      },
+    );
+    return response;
+  }
+
+  async getCustomerGrowthPrediction(
+    one_day: boolean = false,
+    seven_days: boolean = false,
+    month: boolean = true,
+    year: boolean = false
+  ): Promise<CustomerPredictionGrowth> {
+    const response = await this.get<CustomerPredictionGrowth>(
+      'data-analysis/customers-growth',
+      {
+        one_day,
+        seven_days,
+        month,
+        year,
       },
     );
     return response;

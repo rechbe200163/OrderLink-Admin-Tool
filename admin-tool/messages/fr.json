@@ -101,7 +101,10 @@
         "moreThanLastMonth": "Plus que le mois dernier",
         "lessThanLastMonth": "Moins que le mois dernier",
         "sameAsLastMonth": "Identique au mois dernier",
-        "monthlyRegistrations": "Inscriptions Mensuelles"
+        "monthlyRegistrations": "Inscriptions Mensuelles",
+        "monthlyCustomerForecast": "Prévision de Clients pour le Prochain Mois",
+        "predictedCustomerGrowth": "Croissance de Clients Prédite",
+        "predictedtimeframe": "pour le prochain mois"
       },
       "monthlySales": {
         "title": "Ventes mensuelles",

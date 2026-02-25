@@ -101,7 +101,10 @@
         "moreThanLastMonth": "지난달보다 많음",
         "lessThanLastMonth": "지난달보다 적음",
         "sameAsLastMonth": "지난달과 동일",
-        "monthlyRegistrations": "월간 등록"
+        "monthlyRegistrations": "월간 등록",
+        "monthlyCustomerForecast": "다음 달 고객 예측",
+        "predictedCustomerGrowth": "예측된 고객 성장",
+        "predictedtimeframe": "다음 달 예측"
       },
       "monthlySales": {
         "title": "월간 판매",
