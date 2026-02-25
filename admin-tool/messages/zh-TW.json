@@ -101,7 +101,10 @@
         "moreThanLastMonth": "高於上月",
         "lessThanLastMonth": "低於上月",
         "sameAsLastMonth": "與上月相同",
-        "monthlyRegistrations": "月度註冊"
+        "monthlyRegistrations": "月度註冊",
+        "monthlyCustomerForecast": "下月客戶預測",
+        "predictedCustomerGrowth": "預測客戶增長",
+        "predictedtimeframe": "下月預測"
       },
       "monthlySales": {
         "title": "月度銷售",

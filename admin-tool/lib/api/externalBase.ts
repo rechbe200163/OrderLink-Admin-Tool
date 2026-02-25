@@ -4,7 +4,7 @@ import { redirect } from 'next/navigation';
 export class ExternalApiService {
   public baseUrl: string;
 
-  constructor(baseUrl: string = process.env.NEXT_PUBLIC_API_URL || '') {
+  constructor(baseUrl: string = process.env.NEXT_PUBLIC_EXTERNAL_API || '') {
     this.baseUrl = baseUrl;
   }
 

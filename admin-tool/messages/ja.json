@@ -101,7 +101,10 @@
         "moreThanLastMonth": "先月より多い",
         "lessThanLastMonth": "先月より少ない",
         "sameAsLastMonth": "先月と同じ",
-        "monthlyRegistrations": "月次登録"
+        "monthlyRegistrations": "月次登録",
+        "monthlyCustomerForecast": "次月の顧客予測",
+        "predictedCustomerGrowth": "予測される顧客成長",
+        "predictedtimeframe": "次月の予測"
       },
       "monthlySales": {
         "title": "月次売上",

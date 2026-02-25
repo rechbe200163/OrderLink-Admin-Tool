@@ -101,7 +101,10 @@
         "moreThanLastMonth": "Mehr als letzten Monat",
         "lessThanLastMonth": "Weniger als letzten Monat",
         "sameAsLastMonth": "Gleich wie letzten Monat",
-        "monthlyRegistrations": "Monatliche Neuanmeldungen"
+        "monthlyRegistrations": "Monatliche Neuanmeldungen",
+        "monthlyCustomerForecast": "Kundenprognose für nächsten Monat",
+        "predictedCustomerGrowth": "Prognostiziertes Kundenwachstum",
+        "predictedtimeframe": "für nächsten Monat"
       },
       "monthlySales": {
         "title": "Monatliche Verkäufe",
