@@ -101,7 +101,10 @@
         "moreThanLastMonth": "Meer dan vorige maand",
         "lessThanLastMonth": "Minder dan vorige maand",
         "sameAsLastMonth": "Hetzelfde als vorige maand",
-        "monthlyRegistrations": "Maandelijkse Registraties"
+        "monthlyRegistrations": "Maandelijkse Registraties",
+        "monthlyCustomerForecast": "Klantprognose voor volgende maand",
+        "predictedCustomerGrowth": "Voorspelde klantengroei",
+        "predictedtimeframe": "voor volgende maand"
       },
       "monthlySales": {
         "title": "Maandelijkse Verkoop",
