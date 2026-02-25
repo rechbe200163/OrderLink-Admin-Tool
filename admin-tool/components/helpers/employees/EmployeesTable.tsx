@@ -8,7 +8,7 @@ import {
 } from '@/components/ui/table';
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
-import { Employees } from '@/lib/types';
+import { Employees, EmployeesWithRole } from '@/lib/types';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -20,7 +20,7 @@ import { MoreVertical, Users } from 'lucide-react';
 import { EmptyState, TableEmptyState } from '@/components/ui/empty-state';
 
 interface EmployeesTableProps {
-  employees: Employees[];
+  employees: EmployeesWithRole[];
   searchQuery?: string;
 }
 
@@ -30,7 +30,9 @@ export function EmployeesTable({
 }: EmployeesTableProps) {
   const t = useTranslations('Dashboard.Ressource.Employees.Attributes');
   const tButtons = useTranslations('Dashboard.Ressource.Employees.buttons');
-  const tEmptyState = useTranslations('Dashboard.Ressource.Employees.EmptyState');
+  const tEmptyState = useTranslations(
+    'Dashboard.Ressource.Employees.EmptyState',
+  );
   const isFiltered = !!searchQuery;
 
   return (
@@ -81,7 +83,7 @@ export function EmployeesTable({
                     href={`/employees/${employee.employeeId}/edit`}
                     className='hover:underline'
                   >
-                    {employee.roleName}
+                    {employee.role.name || 'N/A'}
                   </Link>
                 </TableCell>
                 <TableCell className='w-20 text-right'>
@@ -110,13 +112,13 @@ export function EmployeesTable({
               <EmptyState
                 icon={Users}
                 title={
-                  isFiltered
-                    ? tEmptyState('title')
-                    : tEmptyState('subtitle')
+                  isFiltered ? tEmptyState('title') : tEmptyState('subtitle')
                 }
                 description={tEmptyState('description')}
                 isFiltered={isFiltered}
-                filterMessage={searchQuery ? `Suche: "${searchQuery}"` : undefined}
+                filterMessage={
+                  searchQuery ? `Suche: "${searchQuery}"` : undefined
+                }
               />
             </TableEmptyState>
           )}
