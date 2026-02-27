@@ -19,6 +19,7 @@ import {
   Star,
   StarOff,
   Search,
+  BarChart3Icon,
 } from 'lucide-react';
 
 import {
@@ -136,6 +137,11 @@ export function NavMainClient({ favoritesEnabled }: NavMainProps) {
             url: '/categories/statistics',
             icon: ChartLine,
           },
+          {
+            title: tItem('mostlyBought'),
+            url: '/products/mostlybought',
+            icon: BarChart3Icon,
+          },
         ],
       },
       {
@@ -212,7 +218,7 @@ export function NavMainClient({ favoritesEnabled }: NavMainProps) {
   const isItemActive = (url: string) =>
     pathname === url ||
     (pathname.startsWith(url + '/') &&
-      !pathname.startsWith(`${url}/statistics`));
+      !pathname.startsWith(`${url}/statistics`)) && !pathname.startsWith(`${url}/mostlybought`);
 
   const isGroupActive = (items: { url: string }[]) =>
     items.some((item) => isItemActive(item.url));

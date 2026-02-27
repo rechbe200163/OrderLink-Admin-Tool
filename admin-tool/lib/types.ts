@@ -408,7 +408,17 @@ export type OrderAmountResponse = {
   typeofgraph: 'line' | 'bar' | 'area';
 };
 
+export type ProductsMostlyBought = {
+  products: Record<string, number>;
+  typeofgraph: 'line' | 'bar' | 'area';
+};
+
 export type CustomerPredictionGrowth = {
+  predictions: Record<string, number>;
+  typeofgraph: 'line' | 'bar' | 'area';
+};
+
+export type OrdersPredictionGrowth = {
   predictions: Record<string, number>;
   typeofgraph: 'line' | 'bar' | 'area';
 };

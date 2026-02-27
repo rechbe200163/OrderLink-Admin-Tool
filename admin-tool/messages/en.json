@@ -114,7 +114,10 @@
         "moreThanLastMonth": "More than last month",
         "lessThanLastMonth": "Less than last month",
         "sameAsLastMonth": "Same as last month",
-        "monthlySalesCount": "Monthly Sales"
+        "monthlySalesCount": "Monthly Sales",
+        "monthlySalesForecast": "Order Forecast for Next Month",
+        "predictedSalesGrowth": "Predicted Order Growth",
+        "predictedtimeframe": "for next month"
       },
       "avarageOrderValue": {
         "title": "Average Order Value",
@@ -199,6 +202,12 @@
           "title": "Products",
           "add": "Add New Product",
           "edit": "Edit Product"
+        },
+        "MostlyBought": {
+          "title": "Top Selling Products this",
+          "monthlyTimeframe": "Month",
+          "yearlyTimeframe": "Year",
+          "description": "These products are the most frequently bought together with other products."
         },
         "Attributes": {
           "image": "Image",
@@ -706,7 +715,8 @@
       "employees": "Employees",
       "settings": "Settings",
       "permissions": "Permissions",
-      "profileSettings": "Profile & Settings"
+      "profileSettings": "Profile & Settings",
+      "purchasePatterns": "Purchase Patterns"
     }
   },
   "Components": {

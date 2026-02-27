@@ -114,7 +114,10 @@
         "moreThanLastMonth": "高于上月",
         "lessThanLastMonth": "低于上月",
         "sameAsLastMonth": "与上月相同",
-        "monthlySalesCount": "月度销售"
+        "monthlySalesCount": "月度销售",
+        "monthlySalesForecast": "下月销售预测",
+        "predictedSalesGrowth": "预测销售增长",
+        "predictedtimeframe": "下月预测"
       },
       "avarageOrderValue": {
         "title": "平均订单价值",
@@ -199,6 +202,12 @@
           "title": "产品",
           "add": "添加新产品",
           "edit": "编辑产品"
+        },
+        "MostlyBought": {
+          "title": "本月最畅销的产品",
+          "monthlyTimeframe": "月",
+          "yearlyTimeframe": "年",
+          "description": "这些产品是与其他产品一起购买最频繁的产品。"
         },
         "Attributes": {
           "image": "图片",
@@ -700,7 +709,8 @@
       "employees": "员工",
       "settings": "设置",
       "permissions": "权限",
-      "profileSettings": "个人资料和设置"
+      "profileSettings": "个人资料和设置",
+      "purchasePatterns": "购买模式"
     }
   },
   "Components": {

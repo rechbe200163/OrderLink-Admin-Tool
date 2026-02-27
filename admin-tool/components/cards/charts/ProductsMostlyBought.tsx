@@ -22,7 +22,6 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from '@/components/ui/chart';
-import { ProductsMosthlyBought } from '@/lib/api/external/concrete/ProductsAmount';
 type ChartItem = {
   name: string;
   value: number;
@@ -37,11 +36,50 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
+interface ProductsMostlyBoughtProps {
+  products: Record<string, number>;
+  cardTitle?: string;
+  cardDescription?: string;
+}
+
+const renderBarLabel = (props : any) => {
+  const { x, y, width, height, value } = props;
+
+  if (!width || width < 20) return null;
+
+  const padding = 8;
+  const availableWidth = width - padding;
+
+  // grobe Schätzung: 7px pro Zeichen
+  const approxCharWidth = 7;
+  const maxChars = Math.floor(availableWidth / approxCharWidth);
+
+  let displayText = value;
+
+  if (value.length > maxChars) {
+    displayText = value.slice(0, maxChars - 3) + "...";
+  }
+
+  return (
+    <text
+      x={x + width / 2}
+      y={y + height / 2}
+      fill="#fff"
+      textAnchor="middle"
+      dominantBaseline="middle"
+      fontSize={12}
+    >
+      {displayText}
+    </text>
+  );
+};
+
+
 export function ProductsMostlyBought({
   products,
-}: {
-  products: ProductsMosthlyBought;
-}) {
+  cardTitle,
+  cardDescription
+}: ProductsMostlyBoughtProps) {
   // Convert object to array
   const chartData: ChartItem[] = Object.entries(products).map(
     ([name, value]) => ({
@@ -53,8 +91,8 @@ export function ProductsMostlyBought({
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Produkte</CardTitle>
-        <CardDescription>Produkte nach Verkaufstärke</CardDescription>
+        <CardTitle>{cardTitle}</CardTitle>
+        <CardDescription>{cardDescription}</CardDescription>
       </CardHeader>
       <CardContent>
         <ChartContainer config={chartConfig}>
@@ -66,15 +104,6 @@ export function ProductsMostlyBought({
             }}
           >
             <CartesianGrid vertical={false} />
-            <XAxis
-              dataKey='name'
-              tickLine={false}
-              tickMargin={1}
-              axisLine
-              angle={-90}
-              textAnchor='end'
-              height={70}
-            />
             <YAxis
               tickLine={false}
               tickMargin={5}
@@ -98,6 +127,14 @@ export function ProductsMostlyBought({
                 className='fill-foreground '
                 fontSize={14}
                 accumulate='sum'
+              />
+              <LabelList
+                position='inside'
+                offset={-10}
+                className='fill-foreground'
+                fontSize={12}
+                dataKey={'name'}
+                content={renderBarLabel}
               />
             </Bar>
           </BarChart>

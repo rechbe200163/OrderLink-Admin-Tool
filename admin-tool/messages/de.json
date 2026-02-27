@@ -114,7 +114,10 @@
         "moreThanLastMonth": "Mehr als letzten Monat",
         "lessThanLastMonth": "Weniger als letzten Monat",
         "sameAsLastMonth": "Gleich wie letzten Monat",
-        "monthlySalesCount": "Monatliche Verkäufe"
+        "monthlySalesCount": "Monatliche Verkäufe",
+        "monthlySalesForecast": "Bestellprognose für nächsten Monat",
+        "predictedSalesGrowth": "Prognostiziertes Bestellwachstum",
+        "predictedtimeframe": "für nächsten Monat"
       },
       "avarageOrderValue": {
         "title": "Durchschnittlicher Bestellwert",
@@ -199,6 +202,12 @@
           "title": "Produkte",
           "add": "Neues Produkt",
           "edit": "Produkt Bearbeiten"
+        },
+        "MostlyBought": {
+          "title": "Meistgekaufte Produkte in",
+          "monthlyTimeframe": "diesem Monat",
+          "yearlyTimeframe": "diesem Jahr",
+          "description": "Produkte nach Verkaufstärke"
         },
         "Attributes": {
           "image": "Bild",
@@ -706,7 +715,8 @@
       "employees": "Mitarbeiter",
       "settings": "Einstellungen",
       "permissions": "Berechtigungen",
-      "profileSettings": "Profil & Einstellungen"
+      "profileSettings": "Profil & Einstellungen",
+      "mostlyBought": "Meistgekauft"
     }
   },
   "Components": {

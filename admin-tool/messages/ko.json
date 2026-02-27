@@ -114,7 +114,10 @@
         "moreThanLastMonth": "지난달보다 많음",
         "lessThanLastMonth": "지난달보다 적음",
         "sameAsLastMonth": "지난달과 동일",
-        "monthlySalesCount": "월간 판매"
+        "monthlySalesCount": "월간 판매",
+        "monthlySalesForecast": "다음 달 판매 예측",
+        "predictedSalesGrowth": "예측된 판매 성장",
+        "predictedtimeframe": "다음 달 예측"
       },
       "avarageOrderValue": {
         "title": "평균 주문 가치",
@@ -199,6 +202,12 @@
           "title": "제품",
           "add": "새 제품 추가",
           "edit": "제품 편집"
+        },
+        "MostlyBought": {
+          "title": "이번 달 가장 많이 팔린 제품",
+          "monthlyTimeframe": "월간",
+          "yearlyTimeframe": "연간",
+          "description": "이 제품들은 다른 제품과 함께 가장 자주 구매되는 제품입니다."
         },
         "Attributes": {
           "image": "이미지",
@@ -700,7 +709,8 @@
       "employees": "직원",
       "settings": "설정",
       "permissions": "권한",
-      "profileSettings": "프로필 및 설정"
+      "profileSettings": "프로필 및 설정",
+      "purchasePatterns": "구매 패턴"
     }
   },
   "Components": {
