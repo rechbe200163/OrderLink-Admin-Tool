@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { statisticsApiService } from '@/lib/api/concrete/statistics';
 import {
   Card,
