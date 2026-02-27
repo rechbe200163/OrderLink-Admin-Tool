@@ -1,5 +1,6 @@
 import Stripe from 'stripe';
 import type { PagingDto } from './dtos';
+import { inter } from '@/app/ui/fonts';
 
 // Enums replicated from the former Prisma schema
 export enum Actions {
@@ -54,6 +55,7 @@ export const UserTierPricing: Record<UserTier, number> = {
 // Role is now a model in the Prisma schema. The enum has been removed and
 // replaced with an interface that mirrors the table structure.
 export interface Role {
+  id: string;
   name: string;
   description: string | null;
   deleted: boolean;
@@ -237,6 +239,10 @@ export interface Employees {
   deleted: boolean;
   superAdmin: boolean;
   roleName: string;
+}
+
+export interface EmployeesWithRole extends Employees {
+  role: Role;
 }
 
 export interface EmployeeWithOtp extends Employees {

@@ -15,7 +15,6 @@ export default async function EmployeesPage(props: {
     page?: string;
     limit?: string;
     query?: string;
-    role?: string;
   }>;
 }) {
   const session = await getSession();
@@ -25,21 +24,18 @@ export default async function EmployeesPage(props: {
   const page = searchParams?.page ? parseInt(searchParams.page) : 1;
   const limit = searchParams?.limit ? parseInt(searchParams.limit) : 10;
   const query = searchParams?.query ? searchParams.query : '';
-  const role = searchParams?.role ? searchParams.role : '';
-
-  const excludeEmployeeId = session.user.employeeId;
 
   const employeesData = await employeesApiService.getEmployeesPaging(
     page,
     limit,
+    true,
     query,
-    role,
-    excludeEmployeeId
   );
+
+  console.log('Employees Data:', employeesData);
   const employees = employeesData.data;
   const { meta } = employeesData;
 
-  const roles = await roleApiService.getRoleNames();
   const t = await getTranslations('Dashboard');
 
   const tFilter = await getTranslations('FilterAndSearch');
@@ -65,14 +61,14 @@ export default async function EmployeesPage(props: {
               },
             ]}
           />
-          <FilteringComponent
+          {/* <FilteringComponent
             title={tFilter('Filter.Roles.title')}
             filterName='role'
             values={getRoleFilterKeys()}
-          />
+          /> */}
         </div>
 
-        <AddEmployeeDialog roles={roles} />
+        {/* <AddEmployeeDialog roles={data} /> */}
       </div>
       <div className='min-w-full max-h-[calc(100vh-15rem)] overflow-auto'>
         <EmployeesTable employees={employees} searchQuery={query} />
@@ -86,15 +82,4 @@ export default async function EmployeesPage(props: {
       </div>
     </div>
   );
-
-  function getRoleFilterKeys(): {
-    label: string;
-    value: string;
-    color?: string;
-  }[] {
-    return ROLE_NAMES.filter((role) => role !== 'CUSTOMER').map((role) => ({
-      label: tFilter(`Filter.Roles.options.${role.toLowerCase()}`),
-      value: role,
-    })) as { label: string; value: string }[];
-  }
 }

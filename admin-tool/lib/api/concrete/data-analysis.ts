@@ -56,7 +56,7 @@ class DataAnalysisService extends BaseApiService {
     one_day: boolean = false,
     seven_days: boolean = false,
     month: boolean = true,
-    year: boolean = false
+    year: boolean = false,
   ): Promise<CustomerPredictionGrowth> {
     const response = await this.get<CustomerPredictionGrowth>(
       'data-analysis/customers-growth',
@@ -74,7 +74,7 @@ class DataAnalysisService extends BaseApiService {
     one_day: boolean = false,
     seven_days: boolean = false,
     month: boolean = true,
-    year: boolean = false
+    year: boolean = false,
   ): Promise<OrdersPredictionGrowth> {
     const response = await this.get<OrdersPredictionGrowth>(
       'data-analysis/orders-growth',

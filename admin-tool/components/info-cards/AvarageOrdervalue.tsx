@@ -57,7 +57,7 @@ export default async function AvarageOderValueCard() {
     'AvarageOderValueCard',
     currentMonthAIV,
     lastMonthAIV,
-    percentageChange
+    percentageChange,
   );
   function convertCentsToEuros(currentMonthAIV: number): number {
     return Number((currentMonthAIV / 100).toFixed(2));
@@ -71,13 +71,13 @@ export default async function AvarageOderValueCard() {
             value={convertCentsToEuros(currentMonthAIV)}
             decimals={2}
             prefix={tCurrency('currency')}
-          />{' '}
+          />
         </CardTitle>
         <div className='absolute right-4 top-4'>
           <Badge variant='outline' className='flex gap-1 rounded-lg text-xs'>
             {getTrendIcon()}
             {percentageChange == null ? 0 : percentageChange > 0 ? '+' : ''}
-            {percentageChange}%
+            {percentageChange?.toFixed(0) || 0}%
           </Badge>
         </div>
       </CardHeader>

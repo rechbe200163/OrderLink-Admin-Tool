@@ -28,6 +28,7 @@ export class BaseApiService {
     console.log('API Request:', {
       method,
       url: url.toString(),
+      params,
       body,
     });
 

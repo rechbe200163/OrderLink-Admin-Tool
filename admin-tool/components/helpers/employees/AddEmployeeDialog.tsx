@@ -15,8 +15,9 @@ import { MailIcon, PlusCircle } from 'lucide-react';
 import { useId } from 'react';
 import { createEmployee } from '@/lib/actions/employee.actions';
 import { GenericDialogForm } from '@/components/forms/generic';
+import { Role } from '@/lib/types';
 
-const AddEmployeeDialog = ({ roles }: { roles: string[] }) => {
+const AddEmployeeDialog = ({ roles }: { roles: Role[] }) => {
   const id = useId();
   const t = useTranslations('Dashboard.Ressource.Employees');
   const tFilter = useTranslations('FilterAndSearch.Filter');
@@ -97,8 +98,8 @@ const AddEmployeeDialog = ({ roles }: { roles: string[] }) => {
               <SelectContent>
                 <SelectGroup>
                   {roles.map((role) => (
-                    <SelectItem key={role} value={role}>
-                      {tFilter(`Roles.options.${role.toLowerCase()}`)}
+                    <SelectItem key={role.id} value={role.name}>
+                      {tFilter(`Roles.options.${role.name.toLowerCase()}`)}
                     </SelectItem>
                   ))}
                 </SelectGroup>

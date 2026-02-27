@@ -1,7 +1,7 @@
 'server only';
 import { BaseApiService } from '../base';
 import { PagingDto } from '@/lib/dtos';
-import { Employees, EmployeeWithOtp } from '@/lib/types';
+import { Employees, EmployeesWithRole, EmployeeWithOtp } from '@/lib/types';
 
 export class EmployeesApiService extends BaseApiService {
   private static instance: EmployeesApiService;
@@ -35,16 +35,14 @@ export class EmployeesApiService extends BaseApiService {
   async getEmployeesPaging(
     page: number,
     limit: number,
+    includeRole: boolean,
     query?: string,
-    role?: string,
-    excludeEmployeeId?: string
-  ): Promise<PagingDto<Employees>> {
-    return this.get<PagingDto<Employees>>('employees', {
+  ): Promise<PagingDto<EmployeesWithRole>> {
+    return this.get<PagingDto<EmployeesWithRole>>('employees', {
       page,
       limit,
-      query,
-      role,
-      excludeEmployeeId,
+      includeRole,
+      search: query,
     });
   }
 

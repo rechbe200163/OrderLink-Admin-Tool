@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { statisticsApiService } from '@/lib/api/concrete/statistics';
 import {
   Card,
@@ -67,7 +65,7 @@ export default async function RevenueInfoCard() {
           <Badge variant='outline' className='flex gap-1 rounded-lg text-xs'>
             {getTrendIcon()}
             {percentageChange == null ? 0 : percentageChange > 0 ? '+' : ''}
-            {percentageChange}%
+            {percentageChange?.toFixed(0) || 0}%
           </Badge>
         </div>
       </CardHeader>

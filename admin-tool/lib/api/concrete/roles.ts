@@ -1,5 +1,7 @@
 'server only';
+import { Role } from '@/lib/types';
 import { BaseApiService } from '../base';
+import { PagingDto } from '@/lib/dtos';
 
 export class RoleApiService extends BaseApiService {
   private static instance: RoleApiService;
@@ -21,7 +23,14 @@ export class RoleApiService extends BaseApiService {
     });
   }
 
-  async createRole(data: { name: string; description?: string }): Promise<void> {
+  async getRoles(): Promise<PagingDto<Role>> {
+    return this.get<PagingDto<Role>>('roles');
+  }
+
+  async createRole(data: {
+    name: string;
+    description?: string;
+  }): Promise<void> {
     await this.post('roles', data);
   }
 }

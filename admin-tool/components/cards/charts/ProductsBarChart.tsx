@@ -1,14 +1,3 @@
-'use client';
-import {
-  Bar,
-  BarChart,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  ResponsiveContainer,
-  Cell,
-  LabelList,
-} from 'recharts';
 import {
   Card,
   CardContent,
@@ -17,11 +6,20 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import {
+  ChartConfig,
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
-  type ChartConfig,
 } from '@/components/ui/chart';
+import {
+  Bar,
+  BarChart,
+  CartesianGrid,
+  Cell,
+  ResponsiveContainer,
+  XAxis,
+  YAxis,
+} from 'recharts';
 
 const chartConfig = {
   quantity: {
@@ -79,9 +77,9 @@ export function ProductsBarChart({
     .map(([name, quantity]) => ({ name, quantity }))
     .sort((a, b) => b.quantity - a.quantity);
 
-  const chartData = typeof limit === 'number' ? data.slice(0, limit) : data;
+  const sliced = typeof limit === 'number' ? data.slice(0, limit) : data;
 
-  const yAxisWidth = calcYAxisWidth(chartData);
+  const yAxisWidth = calcYAxisWidth(sliced);
 
   return (
     <Card className='flex flex-col'>
@@ -94,38 +92,56 @@ export function ProductsBarChart({
         <ChartContainer config={chartConfig} className='h-[300px] w-full'>
           <ResponsiveContainer width='100%' height='100%'>
             <BarChart
-              accessibilityLayer
-              data={chartData}
+              data={sliced}
               layout='vertical'
-              margin={{
-                right: 16,
-              }}
+              margin={{ top: 0, right: 20, left: 0, bottom: 0 }}
+              barSize={28}
             >
-              <CartesianGrid horizontal={false} />
+              <CartesianGrid
+                horizontal={false}
+                strokeDasharray='3 3'
+                opacity={0.3}
+              />
+
+              <XAxis
+                type='number'
+                tick={{ fontSize: 12 }}
+                tickLine={false}
+                axisLine={false}
+              />
+
               <YAxis
                 dataKey='name'
                 type='category'
+                width={yAxisWidth}
+                tick={{ fontSize: 12 }}
                 tickLine={false}
-                tickMargin={10}
                 axisLine={false}
-                tickFormatter={(value) => shortenLabel(value, maxLabelLength)}
-                hide
+                tickFormatter={(v) => shortenLabel(String(v), maxLabelLength)}
               />
-              <XAxis dataKey='quantity' type='number' />
+
               <ChartTooltip
-                cursor={false}
-                content={<ChartTooltipContent indicator='line' />}
+                content={
+                  <ChartTooltipContent
+                    formatter={(value) => (
+                      <span className='font-mono font-semibold'>
+                        {Number(value).toLocaleString('de-AT')}x
+                      </span>
+                    )}
+                  />
+                }
               />
-              <LabelList
-                position='inside'
-                offset={-10}
-                className='fill-foreground'
-                fontSize={12}
-                dataKey={'name'}
-                content={renderBarLabel}
-              />
-            </Bar>
-          </BarChart>
+
+              <Bar dataKey='quantity' radius={[0, 6, 6, 0]}>
+                {sliced.map((_entry, index) => (
+                  <Cell
+                    key={`cell-${index}`}
+                    fill={BAR_COLORS[index % BAR_COLORS.length]}
+                  />
+                ))}
+              </Bar>
+            </BarChart>
+          </ResponsiveContainer>
         </ChartContainer>
       </CardContent>
     </Card>
