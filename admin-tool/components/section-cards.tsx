@@ -5,6 +5,7 @@ import CustomerInfoCard from './info-cards/CustomerInfoCard';
 import InfoCardSkeleton from './skeletons/InfoCardSkeleton';
 import AvarageOderValueCard from './info-cards/AvarageOrdervalue';
 import CustomerPredictionInfoCard from './info-cards/CustomerPredictionInfoCard';
+import OrderPredictionInfoCard from './info-cards/OrderPredictionInfoCard';
 
 export function SectionCards() {
   return (
@@ -23,6 +24,9 @@ export function SectionCards() {
       </Suspense>
       <Suspense fallback={<InfoCardSkeleton />}>
         <CustomerPredictionInfoCard />
+      </Suspense>
+      <Suspense fallback={<SectionCardSekeleton />}>
+        <OrderPredictionInfoCard />
       </Suspense>
     </div>
   );

@@ -114,7 +114,10 @@
         "moreThanLastMonth": "高於上月",
         "lessThanLastMonth": "低於上月",
         "sameAsLastMonth": "與上月相同",
-        "monthlySalesCount": "月度銷售"
+        "monthlySalesCount": "月度銷售",
+        "monthlySalesForecast": "下月銷售預測",
+        "predictedSalesGrowth": "預測銷售增長",
+        "predictedtimeframe": "下月預測"
       },
       "avarageOrderValue": {
         "title": "平均訂單價值",
@@ -199,6 +202,12 @@
           "title": "產品",
           "add": "新增產品",
           "edit": "編輯產品"
+        },
+        "MostlyBought": {
+          "title": "本月最暢銷產品",
+          "monthlyTimeframe": "月",
+          "yearlyTimeframe": "年",
+          "description": "這些產品是與其他產品一起購買頻率最高的產品。"
         },
         "Attributes": {
           "image": "圖片",
@@ -700,7 +709,8 @@
       "employees": "員工",
       "settings": "設定",
       "permissions": "權限",
-      "profileSettings": "個人資料與設定"
+      "profileSettings": "個人資料與設定",
+      "purchasePatterns": "購買模式"
     }
   },
   "Components": {

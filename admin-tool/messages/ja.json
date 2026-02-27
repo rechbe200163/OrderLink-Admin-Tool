@@ -114,7 +114,10 @@
         "moreThanLastMonth": "先月より多い",
         "lessThanLastMonth": "先月より少ない",
         "sameAsLastMonth": "先月と同じ",
-        "monthlySalesCount": "月次売上"
+        "monthlySalesCount": "月次売上",
+        "monthlySalesForecast": "次月の売上予測",
+        "predictedSalesGrowth": "予測される売上成長",
+        "predictedtimeframe": "次月の予測"
       },
       "avarageOrderValue": {
         "title": "平均注文価値",
@@ -199,6 +202,12 @@
           "title": "製品",
           "add": "新しい製品を追加",
           "edit": "製品を編集"
+        },
+        "MostlyBought": {
+          "title": "今月のトップセール製品",
+          "monthlyTimeframe": "月",
+          "yearlyTimeframe": "年",
+          "description": "これらの製品は、他の製品と一緒に最も頻繁に購入されている製品です。"
         },
         "Attributes": {
           "image": "画像",
@@ -700,7 +709,8 @@
       "employees": "従業員",
       "settings": "設定",
       "permissions": "権限",
-      "profileSettings": "プロフィールと設定"
+      "profileSettings": "プロフィールと設定",
+      "purchasePatterns": "購買パターン"
     }
   },
   "Components": {

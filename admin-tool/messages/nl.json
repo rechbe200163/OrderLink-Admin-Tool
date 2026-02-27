@@ -114,7 +114,10 @@
         "moreThanLastMonth": "Meer dan vorige maand",
         "lessThanLastMonth": "Minder dan vorige maand",
         "sameAsLastMonth": "Hetzelfde als vorige maand",
-        "monthlySalesCount": "Maandelijkse Verkoop"
+        "monthlySalesCount": "Maandelijkse Verkoop",
+        "monthlySalesForecast": "Verkoopprognose voor volgende maand",
+        "predictedSalesGrowth": "Voorspelde verkoopgroei",
+        "predictedtimeframe": "voor volgende maand"
       },
       "avarageOrderValue": {
         "title": "Gemiddelde Bestelwaarde",
@@ -199,6 +202,12 @@
           "title": "Producten",
           "add": "Nieuw Product",
           "edit": "Product Bewerken"
+        },
+        "MostlyBought": {
+          "title": "Meest Gekochte Producten deze",
+          "monthlyTimeframe": "Maand",
+          "yearlyTimeframe": "Jaar",
+          "description": "Deze producten worden het meest samen met andere producten gekocht."
         },
         "Attributes": {
           "image": "Afbeelding",
@@ -687,7 +696,8 @@
       "employees": "Werknemers",
       "settings": "Instellingen",
       "permissions": "Machtigingen",
-      "profileSettings": "Profiel & instellingen"
+      "profileSettings": "Profiel & instellingen",
+      "purchasePatterns": "Bestelpatronen"
     }
   },
   "Components": {

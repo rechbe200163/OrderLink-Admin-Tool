@@ -88,7 +88,7 @@ export const ProductChartsComponent = async (props: {
   return (
     <>
       <ProductsBarChart products={products} />
-      <ProductsMostlyBought products={productsMostlyBought} />
+      {/* <ProductsMostlyBought products={productsMostlyBought} /> */}
     </>
   );
 };
