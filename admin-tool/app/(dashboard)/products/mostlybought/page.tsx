@@ -1,4 +1,4 @@
-import { ProductsBarChart } from '@/components/cards/charts/ProductsBarChart';
+import { ProductsMostlyBougthBarChart } from '@/components/cards/charts/ProductsMostlyBougthBarChart';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { dataAnalysisService } from '@/lib/api/concrete/data-analysis';
 import { CalendarDays } from 'lucide-react';
@@ -45,7 +45,7 @@ export default async function ProductsMostlyBoughtPage() {
 
             <TabsContent value='monthly'>
               <div className='grid grid-cols-1 gap-6 lg:grid-cols-2'>
-                <ProductsBarChart
+                <ProductsMostlyBougthBarChart
                   products={monthdata.products}
                   cardTitle={`${t('title')} ${t('monthlyTimeframe')}`}
                   cardDescription={t('description')}
@@ -55,7 +55,7 @@ export default async function ProductsMostlyBoughtPage() {
 
             <TabsContent value='yearly'>
               <div className='grid grid-cols-1 gap-6 lg:grid-cols-2'>
-                <ProductsBarChart
+                <ProductsMostlyBougthBarChart
                   products={yearData.products}
                   cardTitle={`${t('title')} ${t('yearlyTimeframe')}`}
                   cardDescription={t('description')}

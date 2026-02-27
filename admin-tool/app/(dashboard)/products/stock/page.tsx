@@ -1,4 +1,4 @@
-import { ProductsBarChart } from '@/components/cards/charts/ProductsBarChart';
+import { StockBarChart } from '@/components/cards/charts/StockBarChart';
 import { dataAnalysisService } from '@/lib/api/concrete/data-analysis';
 import { getTranslations } from 'next-intl/server';
 
@@ -10,7 +10,6 @@ export default async function ProductsStockPage() {
     false,
     5,
   );
-
   const outOfStockData = await dataAnalysisService.getProductsAmount(
     false,
     true,
@@ -19,18 +18,30 @@ export default async function ProductsStockPage() {
 
   return (
     <div className='flex flex-1 flex-col'>
-      <div className='@container/main w-full max-w-none'>
-        <div className='flex flex-col gap-4 py-4 md:gap-6 md:py-6'>
-          <div className='grid grid-cols-1 grid-rows-2 gap-4 w-full'>
-            <ProductsBarChart
+      <div className='@container/main w-full max-w-none px-4 py-4 sm:px-6 lg:px-8'>
+        <div className='flex flex-col gap-6'>
+          <header className='space-y-1'>
+            <h1 className='text-xl font-semibold tracking-tight'>
+              {t('title')}
+            </h1>
+            <p className='text-sm text-muted-foreground'>{t('description')}</p>
+          </header>
+
+          <div className='grid grid-cols-1 gap-6 lg:grid-cols-2'>
+            <StockBarChart
               products={wellStockData.products}
-              cardDescription={t('title') + ' ' + t('wellStocked')}
-              cardTitle={t('description')}
+              cardTitle={t('wellStocked')}
+              cardDescription='Produkte mit ausreichend Lagerbestand'
+              type='high'
+              limit={5}
             />
-            <ProductsBarChart
+
+            <StockBarChart
               products={outOfStockData.products}
-              cardDescription={t('title') + ' ' + t('outOfStock')}
-              cardTitle={t('description')}
+              cardTitle={t('outOfStock')}
+              cardDescription='Kritische Produkte – Nachbestellung empfohlen'
+              type='low'
+              limit={5}
             />
           </div>
         </div>

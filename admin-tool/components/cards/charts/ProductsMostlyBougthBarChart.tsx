@@ -67,7 +67,7 @@ function calcYAxisWidth(data: ProductRow[], max = 240, min = 120) {
   return Math.max(min, Math.min(max, px));
 }
 
-export function ProductsBarChart({
+export function ProductsMostlyBougthBarChart({
   products,
   cardTitle: title,
   cardDescription: description,
