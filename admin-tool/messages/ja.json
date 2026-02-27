@@ -209,6 +209,12 @@
           "yearlyTimeframe": "年",
           "description": "これらの製品は、他の製品と一緒に最も頻繁に購入されている製品です。"
         },
+        "Stock": {
+          "title": "製品在庫",
+          "wellStocked": "十分な在庫",
+          "outOfStock": "在庫切れ",
+          "description": "製品の在庫レベルの概要"
+        },
         "Attributes": {
           "image": "画像",
           "name": "名前",
@@ -710,7 +716,8 @@
       "settings": "設定",
       "permissions": "権限",
       "profileSettings": "プロフィールと設定",
-      "purchasePatterns": "購買パターン"
+      "mostlyBought": "今月のトップセール製品",
+      "stock": "在庫"
     }
   },
   "Components": {

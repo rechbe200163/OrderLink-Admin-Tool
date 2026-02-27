@@ -209,6 +209,12 @@
           "yearlyTimeframe": "年",
           "description": "这些产品是与其他产品一起购买最频繁的产品。"
         },
+        "Stock": {
+          "title": "产品库存",
+          "wellStocked": "库存充足",
+          "outOfStock": "缺货或库存不足",
+          "description": "产品库存水平概览"
+        },
         "Attributes": {
           "image": "图片",
           "name": "名称",
@@ -710,7 +716,8 @@
       "settings": "设置",
       "permissions": "权限",
       "profileSettings": "个人资料和设置",
-      "purchasePatterns": "购买模式"
+      "mostlyBought": "本月最畅销的产品",
+      "stock": "库存"
     }
   },
   "Components": {
