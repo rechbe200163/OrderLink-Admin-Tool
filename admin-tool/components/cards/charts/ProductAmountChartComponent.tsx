@@ -116,35 +116,16 @@ export function ProductsBarChart({
                 cursor={false}
                 content={<ChartTooltipContent indicator='line' />}
               />
-              <Bar
-                dataKey='quantity'
-                layout='vertical'
-                fill='var(--color-desktop)'
-                radius={4}
-              >
-                <LabelList
-                  dataKey='quantity'
-                  position='right'
-                  offset={8}
-                  className='fill-foreground'
-                  fontSize={12}
-                />
-                <LabelList
-                  dataKey='name'
-                  position='insideLeft'
-                  offset={8}
-                  className='fill-foreground'
-                  fontSize={12}
-                />
-                {chartData.map((entry, index) => (
-                  <Cell
-                    key={`cell-${index}`}
-                    fill={BAR_COLORS[index % BAR_COLORS.length]}
-                  />
-                ))}
-              </Bar>
-            </BarChart>
-          </ResponsiveContainer>
+              <LabelList
+                position='inside'
+                offset={-10}
+                className='fill-foreground'
+                fontSize={12}
+                dataKey={'name'}
+                content={renderBarLabel}
+              />
+            </Bar>
+          </BarChart>
         </ChartContainer>
       </CardContent>
     </Card>

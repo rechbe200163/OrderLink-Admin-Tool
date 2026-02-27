@@ -428,3 +428,8 @@ export type OrdersPredictionGrowth = {
   predictions: Record<string, number>;
   typeofgraph: 'line' | 'bar' | 'area';
 };
+
+export type ProductsAmount = {
+  products: Record<string, number>;
+  typeofgraph: 'line' | 'bar' | 'area';
+}

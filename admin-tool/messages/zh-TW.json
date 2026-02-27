@@ -209,6 +209,12 @@
           "yearlyTimeframe": "年",
           "description": "這些產品是與其他產品一起購買頻率最高的產品。"
         },
+        "Stock": {
+          "title": "產品庫存",
+          "wellStocked": "庫存充足",
+          "outOfStock": "缺貨或庫存不足",
+          "description": "產品庫存水平概覽"
+        },
         "Attributes": {
           "image": "圖片",
           "name": "名稱",
@@ -710,7 +716,8 @@
       "settings": "設定",
       "permissions": "權限",
       "profileSettings": "個人資料與設定",
-      "purchasePatterns": "購買模式"
+      "mostlyBought": "本月最暢銷產品",
+      "stock": "庫存"
     }
   },
   "Components": {

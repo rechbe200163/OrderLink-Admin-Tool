@@ -57,6 +57,9 @@ export default function PathBreadcrumbs() {
     } else if (segment === 'mostlybought') {
       currentPath += `/${segment}`;
       breadcrumbs.push({ label: navT('mostlyBought') });
+    } else if (segment === 'stock') {
+      currentPath += `/${segment}`;
+      breadcrumbs.push({ label: navT('stock') });
     } else {
       currentPath += `/${segment}`;
     }

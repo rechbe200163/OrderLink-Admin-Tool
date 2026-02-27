@@ -209,6 +209,12 @@
           "yearlyTimeframe": "Jaar",
           "description": "Deze producten worden het meest samen met andere producten gekocht."
         },
+        "Stock": {
+          "title": "Product Voorraad",
+          "wellStocked": "Goed Voorraad",
+          "outOfStock": "Niet of Weinig Voorraad",
+          "description": "Overzicht van voorraadniveaus van producten"
+        },
         "Attributes": {
           "image": "Afbeelding",
           "name": "Naam",
@@ -697,7 +703,8 @@
       "settings": "Instellingen",
       "permissions": "Machtigingen",
       "profileSettings": "Profiel & instellingen",
-      "purchasePatterns": "Bestelpatronen"
+      "mostlyBought": "Meest gekocht",
+      "stock": "Voorraad"
     }
   },
   "Components": {

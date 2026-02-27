@@ -209,6 +209,12 @@
           "yearlyTimeframe": "diesem Jahr",
           "description": "Produkte nach Verkaufstärke"
         },
+        "Stock": {
+          "title": "Produkte ",
+          "wellStocked": "mit größter Bestandsmenge",
+          "outOfStock": "mit geringster Bestandsmenge",
+          "description": "Übersicht über den Lagerbestand der Produkte"
+        },
         "Attributes": {
           "image": "Bild",
           "name": "Name",
@@ -716,7 +722,8 @@
       "settings": "Einstellungen",
       "permissions": "Berechtigungen",
       "profileSettings": "Profil & Einstellungen",
-      "mostlyBought": "Meistgekauft"
+      "mostlyBought": "Meistgekauft",
+      "stock": "Lagerbestand"
     }
   },
   "Components": {

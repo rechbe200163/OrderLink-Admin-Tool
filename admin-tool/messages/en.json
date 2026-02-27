@@ -209,6 +209,12 @@
           "yearlyTimeframe": "Year",
           "description": "These products are the most frequently bought together with other products."
         },
+        "Stock": {
+          "title": "Product Stock",
+          "wellStocked": "Well Stocked",
+          "outOfStock": "Out of Stock",
+          "description": "Overview of product stock levels"
+        },
         "Attributes": {
           "image": "Image",
           "name": "Name",
@@ -716,7 +722,8 @@
       "settings": "Settings",
       "permissions": "Permissions",
       "profileSettings": "Profile & Settings",
-      "purchasePatterns": "Purchase Patterns"
+      "mostlyBought": "Mostly Bought",
+      "stock": "Stock"
     }
   },
   "Components": {

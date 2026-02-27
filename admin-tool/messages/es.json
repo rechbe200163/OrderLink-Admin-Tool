@@ -209,6 +209,12 @@
           "yearlyTimeframe": "Año",
           "description": "Estos productos son los más frecuentemente comprados junto con otros productos."
         },
+        "Stock": {
+          "title": "Inventario de Productos",
+          "wellStocked": "Bien Abastecido",
+          "outOfStock": "Agotado o Poco Stock",
+          "description": "Visión general de los niveles de inventario de los productos"
+        },
         "Attributes": {
           "image": "Imagen",
           "name": "Nombre",
@@ -697,7 +703,8 @@
       "settings": "Configuración",
       "permissions": "Permisos",
       "profileSettings": "Perfil y ajustes",
-      "purchasePatterns": "Muster de Compra"
+      "mostlyBought": "Productos más comprados",
+      "stock": "Inventario"
     }
   },
   "Components": {

@@ -1,10 +1,5 @@
 'server only';
-import {
-  CustomerPredictionGrowth,
-  OrderAmountResponse,
-  OrdersPredictionGrowth,
-  ProductsMostlyBought,
-} from '@/lib/types';
+import { CustomerPredictionGrowth, OrderAmountResponse, OrdersPredictionGrowth, ProductsMostlyBought, ProductsAmount } from '@/lib/types';
 import { BaseApiService } from '../base';
 
 class DataAnalysisService extends BaseApiService {
@@ -88,6 +83,22 @@ class DataAnalysisService extends BaseApiService {
         seven_days,
         month,
         year,
+      },
+    );
+    return response;
+  }
+
+  async getProductsAmount(
+    well_stocked: boolean = false,
+    out_of_stock: boolean = false,
+    limit: number = 5
+  ): Promise<ProductsAmount> {
+    const response = await this.get<ProductsAmount>(
+      'data-analysis/products-amount',
+      {
+        well_stocked,
+        out_of_stock,
+        limit,
       },
     );
     return response;

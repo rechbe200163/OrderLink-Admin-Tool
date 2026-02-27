@@ -209,6 +209,12 @@
           "yearlyTimeframe": "연간",
           "description": "이 제품들은 다른 제품과 함께 가장 자주 구매되는 제품입니다."
         },
+        "Stock": {
+          "title": "제품 재고",
+          "wellStocked": "충분한 재고",
+          "outOfStock": "재고 없음",
+          "description": "제품의 재고 수준 개요"
+        },
         "Attributes": {
           "image": "이미지",
           "name": "이름",
@@ -710,7 +716,8 @@
       "settings": "설정",
       "permissions": "권한",
       "profileSettings": "프로필 및 설정",
-      "purchasePatterns": "구매 패턴"
+      "mostlyBought": "이번 달 가장 많이 팔린 제품",
+      "stock": "재고"
     }
   },
   "Components": {
