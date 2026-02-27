@@ -25,7 +25,7 @@ export function SectionCards() {
       <Suspense fallback={<InfoCardSkeleton />}>
         <CustomerPredictionInfoCard />
       </Suspense>
-      <Suspense fallback={<SectionCardSekeleton />}>
+      <Suspense fallback={<InfoCardSkeleton />}>
         <OrderPredictionInfoCard />
       </Suspense>
     </div>
