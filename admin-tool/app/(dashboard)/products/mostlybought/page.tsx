@@ -1,4 +1,4 @@
-import { ProductsBarChart } from '@/components/cards/charts/ProductAmountChartComponent';
+import { ProductsBarChart } from '@/components/cards/charts/ProductsBarChart';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { dataAnalysisService } from '@/lib/api/concrete/data-analysis';
 import { CalendarDays } from 'lucide-react';

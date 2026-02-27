@@ -1,3 +1,4 @@
+'use client';
 import {
   Card,
   CardContent,
@@ -16,6 +17,7 @@ import {
   BarChart,
   CartesianGrid,
   Cell,
+  LabelList,
   ResponsiveContainer,
   XAxis,
   YAxis,
@@ -95,19 +97,15 @@ export function ProductsBarChart({
               data={sliced}
               layout='vertical'
               margin={{ top: 0, right: 20, left: 0, bottom: 0 }}
-              barSize={28}
+              barSize={43}
             >
-              <CartesianGrid
-                horizontal={false}
-                strokeDasharray='3 3'
-                opacity={0.3}
-              />
+              <CartesianGrid horizontal={false} />
 
               <XAxis
                 type='number'
                 tick={{ fontSize: 12 }}
-                tickLine={false}
-                axisLine={false}
+                tickLine={true}
+                axisLine={true}
               />
 
               <YAxis
@@ -118,21 +116,29 @@ export function ProductsBarChart({
                 tickLine={false}
                 axisLine={false}
                 tickFormatter={(v) => shortenLabel(String(v), maxLabelLength)}
+                hide
               />
 
               <ChartTooltip
-                content={
-                  <ChartTooltipContent
-                    formatter={(value) => (
-                      <span className='font-mono font-semibold'>
-                        {Number(value).toLocaleString('de-AT')}x
-                      </span>
-                    )}
-                  />
-                }
+                cursor={false}
+                content={<ChartTooltipContent indicator='line' />}
               />
 
-              <Bar dataKey='quantity' radius={[0, 6, 6, 0]}>
+              <Bar dataKey='quantity' layout='vertical' radius={4}>
+                <LabelList
+                  dataKey='name'
+                  position='insideLeft'
+                  offset={8}
+                  className='fill-foreground'
+                  fontSize={12}
+                />
+                <LabelList
+                  dataKey='quantity'
+                  position='right'
+                  offset={8}
+                  className='fill-foreground'
+                  fontSize={12}
+                />
                 {sliced.map((_entry, index) => (
                   <Cell
                     key={`cell-${index}`}
