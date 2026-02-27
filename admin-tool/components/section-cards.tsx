@@ -2,7 +2,7 @@ import { Suspense } from 'react';
 import SalesInfoCard from './info-cards/SalesInfoCard';
 import RevenueInfoCard from './info-cards/RevenueInfoCard';
 import CustomerInfoCard from './info-cards/CustomerInfoCard';
-import InfoCardSkeleton from './skeletons/SectionCardSekeleton';
+import InfoCardSkeleton from './skeletons/InfoCardSkeleton';
 import AvarageOderValueCard from './info-cards/AvarageOrdervalue';
 import CustomerPredictionInfoCard from './info-cards/CustomerPredictionInfoCard';
 
