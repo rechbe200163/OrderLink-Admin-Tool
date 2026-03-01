@@ -15,7 +15,7 @@ export async function GET(req: NextRequest) {
       limit,
       query,
       startDate,
-      endDate
+      endDate,
     );
     return NextResponse.json(data);
   } catch (error: any) {

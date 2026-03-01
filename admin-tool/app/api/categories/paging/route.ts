@@ -12,8 +12,10 @@ export async function GET(req: NextRequest) {
     const data = await categoryApiService.getCategoriesPaging(
       page,
       limit,
+      undefined,
+      undefined,
       query,
-      filter
+      filter,
     );
     return NextResponse.json(data);
   } catch (error: any) {

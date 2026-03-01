@@ -13,9 +13,11 @@ export async function GET(req: NextRequest) {
     const data = await customerApiService.getCustomersPaging(
       page,
       limit,
+      undefined,
+      undefined,
       query,
       filter,
-      businessSector as any
+      businessSector as any,
     );
     return NextResponse.json(data);
   } catch (error: any) {
