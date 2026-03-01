@@ -6,14 +6,14 @@ import { employeesApiService } from '@/lib/api/concrete/employees';
 import { EmployeesTable } from '@/components/helpers/employees/EmployeesTable';
 import { getTranslations } from 'next-intl/server';
 import { getSession } from '@/lib/utlis/getSession';
-import { ROLE_NAMES } from '@/lib/types';
-import { roleApiService } from '@/lib/api/concrete/roles';
-import AddEmployeeDialog from '@/components/helpers/employees/AddEmployeeDialog';
+import { SortOrder } from '@/lib/types';
 
 export default async function EmployeesPage(props: {
   searchParams?: Promise<{
     page?: string;
     limit?: string;
+    sort?: string;
+    order?: SortOrder;
     query?: string;
   }>;
 }) {
@@ -24,11 +24,17 @@ export default async function EmployeesPage(props: {
   const page = searchParams?.page ? parseInt(searchParams.page) : 1;
   const limit = searchParams?.limit ? parseInt(searchParams.limit) : 10;
   const query = searchParams?.query ? searchParams.query : '';
+  const sort = searchParams?.sort ? searchParams.sort : undefined;
+  const order = searchParams?.order ? searchParams.order : 'asc';
+
+  console.log('Search Params:', { page, limit, query, sort, order });
 
   const employeesData = await employeesApiService.getEmployeesPaging(
     page,
     limit,
     true,
+    sort,
+    order,
     query,
   );
 

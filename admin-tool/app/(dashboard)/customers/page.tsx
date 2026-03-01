@@ -6,7 +6,7 @@ import { CustomerTable } from '@/components/helpers/customers/CustomerTable';
 import { customerApiService } from '@/lib/api/concrete/customers';
 import { getTranslations } from 'next-intl/server';
 import { getSession } from '@/lib/utlis/getSession';
-import { BusinessSector } from '@/lib/types';
+import { BusinessSector, SortOrder } from '@/lib/types';
 import AddCustomerDialog from '@/components/helpers/customers/AddCustomerDialog';
 import FilteringComponent from '@/components/pagination+filtering/FilteringComponent';
 
@@ -14,6 +14,8 @@ export default async function AdminPanelUsersPage(props: {
   searchParams?: Promise<{
     page?: string;
     limit?: string;
+    sort?: string;
+    order?: SortOrder;
     query?: string;
     filter?: string;
     businessSector?: BusinessSector;
@@ -28,10 +30,14 @@ export default async function AdminPanelUsersPage(props: {
   const query = searchParams?.query ? searchParams.query : '';
   const filter = searchParams?.filter ? searchParams.filter : '';
   const businessSector = searchParams?.businessSector;
+  const sort = searchParams?.sort ? searchParams.sort : undefined;
+  const order = searchParams?.order ? searchParams.order : 'asc';
 
   const { meta, data } = await customerApiService.getCustomersPaging(
     page,
     limit,
+    sort,
+    order,
     query,
     filter,
     businessSector,

@@ -1,5 +1,5 @@
 'server only';
-import { ProductHistory, Product } from '@/lib/types';
+import { ProductHistory, Product, SortOrder } from '@/lib/types';
 import { BaseApiService } from '../base';
 import { PagingDto } from '@/lib/dtos';
 
@@ -37,6 +37,8 @@ export class ProductApiService extends BaseApiService {
   async getProductsPaging(
     page: number,
     limit: number,
+    sort?: string,
+    order?: SortOrder,
     search?: string,
     categoryId?: string,
     filter?: string,
@@ -45,6 +47,8 @@ export class ProductApiService extends BaseApiService {
       page,
       limit,
       search,
+      sort,
+      order,
       categoryId,
       filter,
     });

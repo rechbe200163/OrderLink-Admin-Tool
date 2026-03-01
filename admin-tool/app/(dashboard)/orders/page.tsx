@@ -7,11 +7,14 @@ import { getTranslations } from 'next-intl/server';
 import { getSession } from '@/lib/utlis/getSession';
 import Component from '@/components/pagination+filtering/comp-42';
 import AddOrderDialog from '@/components/helpers/orders/AddOrderDialog';
+import { SortOrder } from '@/lib/types';
 
 export default async function OrdersPage(props: {
   searchParams?: Promise<{
     page?: string;
     limit?: string;
+    sort?: string;
+    order?: SortOrder;
     query?: string;
     startDate?: string;
     endDate?: string;
@@ -26,13 +29,27 @@ export default async function OrdersPage(props: {
   const startDate = searchParams?.startDate ? searchParams.startDate : '';
   const endDate = searchParams?.endDate ? searchParams.endDate : '';
   const query = searchParams?.query ? searchParams.query : '';
+  const sort = searchParams?.sort ? searchParams.sort : undefined;
+  const order: SortOrder = searchParams?.order ? searchParams.order : 'desc';
+
+  console.log('Search Params:', {
+    page,
+    limit,
+    sort,
+    order,
+    query,
+    startDate,
+    endDate,
+  });
 
   const orderData = await orderApiService.getOrdersPaging(
     page,
     limit,
+    sort,
+    order,
     query,
     startDate,
-    endDate
+    endDate,
   );
   const orders = orderData.data;
   const { meta } = orderData;

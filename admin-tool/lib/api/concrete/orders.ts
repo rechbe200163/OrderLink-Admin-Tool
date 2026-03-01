@@ -27,10 +27,10 @@ export class OrderApiService extends BaseApiService {
   }
 
   async getOrdersByRouteId(
-    routeId: string
+    routeId: string,
   ): Promise<OrdersWithCustomerAndProducts[]> {
     return this.get<OrdersWithCustomerAndProducts[]>(
-      `orders/routes/${routeId}`
+      `orders/routes/${routeId}`,
     );
   }
 
@@ -41,13 +41,17 @@ export class OrderApiService extends BaseApiService {
   async getOrdersPaging(
     page: number,
     limit: number,
+    sort?: string,
+    order?: string,
     query?: string,
     startDate?: string,
-    endDate?: string
+    endDate?: string,
   ): Promise<PagingDto<OrdersWithCustomer>> {
     return this.get<PagingDto<OrdersWithCustomer>>('orders', {
       page,
       limit,
+      sort,
+      order,
       query,
       startDate,
       endDate,

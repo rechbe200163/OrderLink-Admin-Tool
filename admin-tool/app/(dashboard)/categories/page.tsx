@@ -7,11 +7,14 @@ import { categoryApiService } from '@/lib/api/concrete/categories';
 import { getTranslations } from 'next-intl/server';
 import { getSession } from '@/lib/utlis/getSession';
 import AddCategoryDialog from '@/components/helpers/categories/AddCategoryDialog';
+import { SortOrder } from '@/lib/types';
 
 export default async function CategoriesPage(props: {
   searchParams?: Promise<{
     page?: string;
     limit?: string;
+    sort?: string;
+    order?: SortOrder;
     query?: string;
     filter?: string;
   }>;
@@ -24,13 +27,18 @@ export default async function CategoriesPage(props: {
   const limit = searchParams?.limit ? parseInt(searchParams.limit) : 10;
   const query = searchParams?.query ? searchParams.query : '';
   const filter = searchParams?.filter ? searchParams.filter : '';
+  const sort = searchParams?.sort ? searchParams.sort : undefined;
+  const order: SortOrder = searchParams?.order ? searchParams.order : 'desc';
 
   const categoryData = await categoryApiService.getCategoriesPaging(
     page,
     limit,
+    sort,
+    order,
     query,
-    filter
+    filter,
   );
+
   const categories = categoryData.data;
   const { meta } = categoryData;
   const t = await getTranslations('Dashboard');

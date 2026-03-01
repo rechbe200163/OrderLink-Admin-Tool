@@ -23,6 +23,7 @@ import ImageSkeleton from '@/components/images/ImageSkeleton';
 import Image from 'next/image';
 import { EmptyState, TableEmptyState } from '@/components/ui/empty-state';
 import { useTranslations } from 'next-intl';
+import { SortableTableHead } from '../customers/sort-table';
 
 interface ProductTableProps {
   products: Product[];
@@ -40,9 +41,11 @@ export function ProductTable({
   const t = useTranslations('Dashboard.Ressource.Products.Attributes');
   const tButtons = useTranslations('Dashboard.Ressource.Products.buttons');
   const tStatus = useTranslations('Dashboard.Ressource.Products.Status');
-  const tEmptyState = useTranslations('Dashboard.Ressource.Products.EmptyState');
+  const tEmptyState = useTranslations(
+    'Dashboard.Ressource.Products.EmptyState',
+  );
   const isFiltered = !!(searchQuery || categoryFilter);
-  
+
   // const [headers, setHeaders] = useState<string[]>([]);
 
   // useEffect(() => {
@@ -62,12 +65,35 @@ export function ProductTable({
               </TableHead>
             ))} */}
             <TableHead className='w-20'>{t('image')}</TableHead>
-            <TableHead className='w-40'>{t('name')}</TableHead>
-            <TableHead className='w-40'>{t('price')}</TableHead>
+            <SortableTableHead
+              label={t('name')}
+              sortKey='name'
+              className='w-40'
+            />
+
+            <SortableTableHead
+              label={t('price')}
+              sortKey='price'
+              className='w-60'
+            />
+
             <TableHead className='w-60'>{t('description')}</TableHead>
-            <TableHead className='w-40 text-right'>{t('stock')}</TableHead>
-            <TableHead className='w-40 text-right'>{t('createdAt')}</TableHead>
+
+            <SortableTableHead
+              label={t('stock')}
+              sortKey='stock'
+              className='w-60'
+            />
+
+            <SortableTableHead
+              label={t('createdAt')}
+              sortKey='createdAt'
+              className='w-40'
+              align='right'
+            />
+
             <TableHead className='w-40 text-right'>{t('status')}</TableHead>
+
             <TableHead className='w-20 text-right'>{t('actions')}</TableHead>
           </TableRow>
         </TableHeader>
@@ -178,9 +204,7 @@ export function ProductTable({
               <EmptyState
                 icon={Package}
                 title={
-                  isFiltered
-                    ? tEmptyState('title')
-                    : tEmptyState('subtitle')
+                  isFiltered ? tEmptyState('title') : tEmptyState('subtitle')
                 }
                 description={tEmptyState('description')}
                 isFiltered={isFiltered}

@@ -1,6 +1,6 @@
 'server only';
 import { BaseApiService } from '../base';
-import { Category } from '@/lib/types';
+import { Category, SortOrder } from '@/lib/types';
 import { PagingDto } from '@/lib/dtos';
 
 class CategoryApiService extends BaseApiService {
@@ -20,7 +20,7 @@ class CategoryApiService extends BaseApiService {
   async getCategories(): Promise<Category[]> {
     const response = await this.get<{ categories: Category[] }>(
       'categories',
-      {}
+      {},
     );
     return response.categories;
   }
@@ -32,12 +32,16 @@ class CategoryApiService extends BaseApiService {
   async getCategoriesPaging(
     page: number,
     limit: number,
+    sort?: string,
+    order?: SortOrder,
     query?: string,
-    filter?: string
+    filter?: string,
   ): Promise<PagingDto<Category>> {
     return this.get<PagingDto<Category>>('categories', {
       page,
       limit,
+      sort,
+      order,
       query,
       filter,
     });

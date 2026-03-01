@@ -18,6 +18,7 @@ import {
 import { Button } from '@/components/ui/button';
 import { MoreVertical, Users } from 'lucide-react';
 import { EmptyState, TableEmptyState } from '@/components/ui/empty-state';
+import { SortableTableHead } from '../customers/sort-table';
 
 interface EmployeesTableProps {
   employees: EmployeesWithRole[];
@@ -40,9 +41,21 @@ export function EmployeesTable({
       <Table className='border-separate border-spacing-0 [&_td]:border-border [&_tfoot_td]:border-t [&_th]:border-b [&_th]:border-border [&_tr:not(:last-child)_td]:border-b [&_tr]:border-none'>
         <TableHeader className='sticky top-0 z-10 bg-background/90 backdrop-blur-xs'>
           <TableRow className='hover:bg-muted'>
-            <TableHead className='w-40'>{t('email')}</TableHead>
-            <TableHead className='w-40'>{t('firstName')}</TableHead>
-            <TableHead className='w-40'>{t('lastName')}</TableHead>
+            <SortableTableHead
+              label={t('email')}
+              sortKey='email'
+              className='w-40'
+            />
+            <SortableTableHead
+              label={t('firstName')}
+              sortKey='firstName'
+              className='w-40'
+            />
+            <SortableTableHead
+              label={t('lastName')}
+              sortKey='lastName'
+              className='w-40'
+            />
             <TableHead className='w-40'>{t('role')}</TableHead>
             <TableHead className='w-20 text-right'>{t('actions')}</TableHead>
           </TableRow>

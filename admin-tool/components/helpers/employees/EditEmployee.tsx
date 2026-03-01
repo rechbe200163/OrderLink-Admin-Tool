@@ -39,7 +39,7 @@ const EditEmployee = ({ employee }: EditEmployeesProps) => {
       errors: {
         title: [''],
       },
-    }
+    },
   );
 
   React.useEffect(() => {
@@ -48,7 +48,7 @@ const EditEmployee = ({ employee }: EditEmployeesProps) => {
         <CustomeToast variant='success' message={t('Toast.success')} />
       ));
       if (formState.data) {
-        router.push(`/employees/${formState.data}/edit`);
+        router.push(`/dashboard/employees/${formState.data.employeeId}`);
       }
     } else if (formState.errors?.title[0]) {
       toast.custom(() => (

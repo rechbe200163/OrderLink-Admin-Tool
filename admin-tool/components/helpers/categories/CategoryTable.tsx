@@ -19,6 +19,7 @@ import {
 import { Button } from '@/components/ui/button';
 import { MoreVertical, FolderOpen } from 'lucide-react';
 import { EmptyState, TableEmptyState } from '@/components/ui/empty-state';
+import { SortableTableHead } from '../customers/sort-table';
 
 interface CategoryTableProps {
   categories: Category[];
@@ -34,20 +35,22 @@ export function CategoryTable({
   const t = useTranslations('Dashboard.Ressource.Categories.Attributes');
   const tButtons = useTranslations('Dashboard.Ressource.Categories.buttons');
   const tStatus = useTranslations('Dashboard.Ressource.Categories.Status');
-  const tEmptyState = useTranslations('Dashboard.Ressource.Categories.EmptyState');
+  const tEmptyState = useTranslations(
+    'Dashboard.Ressource.Categories.EmptyState',
+  );
   const isFiltered = !!(searchQuery || statusFilter);
-  
+
   return (
     <div className='bg-background text-foreground p-4 rounded-lg shadow-xs'>
       <Table className='border-separate border-spacing-0 [&_td]:border-border [&_tfoot_td]:border-t [&_th]:border-b [&_th]:border-border [&_tr:not(:last-child)_td]:border-b [&_tr]:border-none'>
         <TableHeader className='sticky top-0 z-10 bg-background/90 backdrop-blur-xs'>
           <TableRow className='hover:bg-muted'>
-            <TableHead className='w-40 text-start'>
-              {t('name')}
-            </TableHead>
-            <TableHead className='w-40 text-right'>
-              {t('status')}
-            </TableHead>
+            <SortableTableHead
+              label={t('name')}
+              className='w-40'
+              sortKey='name'
+            />
+            <TableHead className='w-20 text-right'>{t('status')}</TableHead>
             <TableHead className='w-20 text-right'>{t('actions')}</TableHead>
           </TableRow>
         </TableHeader>
@@ -103,9 +106,7 @@ export function CategoryTable({
               <EmptyState
                 icon={FolderOpen}
                 title={
-                  isFiltered
-                    ? tEmptyState('title')
-                    : tEmptyState('subtitle')
+                  isFiltered ? tEmptyState('title') : tEmptyState('subtitle')
                 }
                 description={tEmptyState('description')}
                 isFiltered={isFiltered}

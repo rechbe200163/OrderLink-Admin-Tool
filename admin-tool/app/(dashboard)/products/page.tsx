@@ -4,15 +4,16 @@ import FilteringComponent from '@/components/pagination+filtering/FilteringCompo
 import { ProductTable } from '@/components/helpers/products/ProductsTabel';
 import { productApiService } from '@/lib/api/concrete/products';
 import { getSession } from '@/lib/utlis/getSession';
-import { BusinessSector } from '@/lib/types';
+import { BusinessSector, SortOrder } from '@/lib/types';
 import { getTranslations } from 'next-intl/server';
 import AddProductDialog from '@/components/helpers/products/AddProductDialog';
-import CacheHitIndicatorComponent from '@/components/helpers/cach-hit-component';
 
 export default async function ProductsPage(props: {
   searchParams?: Promise<{
     page?: string;
     limit?: string;
+    sort?: string;
+    order?: SortOrder;
     search?: string;
     categoryId?: BusinessSector;
   }>;
@@ -24,16 +25,21 @@ export default async function ProductsPage(props: {
   const page = searchParams?.page ? parseInt(searchParams.page) : 1;
   const limit = searchParams?.limit ? parseInt(searchParams.limit) : 10;
   const search = searchParams?.search ? searchParams.search : '';
+  const sort = searchParams?.sort ? searchParams.sort : 'createdAt';
+  const order = searchParams?.order ? searchParams.order : 'desc';
   const categoryId = searchParams?.categoryId;
+
+  console.log('ProductsPage searchParams:', searchParams);
 
   const productData = await productApiService.getProductsPaging(
     page,
     limit,
+    sort,
+    order,
     search,
     categoryId,
   );
   const products = productData.data;
-  console.log('products1', products);
   const { meta } = productData;
   const t = await getTranslations('Dashboard');
   const tFilter = await getTranslations('FilterAndSearch');
@@ -49,7 +55,6 @@ export default async function ProductsPage(props: {
           />
         </div>
         <div>
-          {productData.cacheHit && <CacheHitIndicatorComponent />}
           <AddProductDialog />
         </div>
       </div>

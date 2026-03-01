@@ -432,4 +432,6 @@ export type OrdersPredictionGrowth = {
 export type ProductsAmount = {
   products: Record<string, number>;
   typeofgraph: 'line' | 'bar' | 'area';
-}
+};
+
+export type SortOrder = 'asc' | 'desc';

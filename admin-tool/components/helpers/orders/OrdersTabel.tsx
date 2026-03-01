@@ -27,6 +27,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { EmptyState, TableEmptyState } from '@/components/ui/empty-state';
+import { SortableTableHead } from '../customers/sort-table';
 
 interface OrderTableProps {
   orders: OrdersWithCustomerAndProducts[];
@@ -45,7 +46,7 @@ export function OrderTable({
   const tButtons = useTranslations('Dashboard.Ressource.Orders.buttons');
   const tEmptyState = useTranslations('Dashboard.Ressource.Orders.EmptyState');
   const tOrderState = useTranslations(
-    'FilterAndSearch.Filter.OrderState.options'
+    'FilterAndSearch.Filter.OrderState.options',
   );
 
   const isFiltered = !!(searchQuery || startDate || endDate);
@@ -63,17 +64,28 @@ export function OrderTable({
       <Table className='border-separate border-spacing-0 [&_td]:border-border [&_tfoot_td]:border-t [&_th]:border-b [&_th]:border-border [&_tr:not(:last-child)_td]:border-b'>
         <TableHeader className='sticky top-0 z-10 bg-background/90 backdrop-blur-xs'>
           <TableRow className='hover:bg-muted/50'>
-            <TableHead className='w-40'>{t('customer')}</TableHead>
-            <TableHead className='w-40'>{t('orderDate')}</TableHead>
-            <TableHead className='w-60'>
-              {t('deliveryDate')}
-            </TableHead>
-            <TableHead className='w-40'>{t('orderState')}</TableHead>
-            <TableHead className='w-40 text-right'>
-              {t('deliveryMethode')}
-            </TableHead>
+            <TableHead className='w-20 text-left'>{t('customer')}</TableHead>
+            <SortableTableHead
+              label={t('orderDate')}
+              className='w-40'
+              sortKey='orderDate'
+            />
+            <SortableTableHead
+              label={t('deliveryDate')}
+              className='w-60'
+              sortKey='deliveryDate'
+            />
+            <SortableTableHead
+              label={t('orderState')}
+              className='w-40'
+              sortKey='orderState'
+            />
+            <SortableTableHead
+              label={t('deliveryMethode')}
+              className='w-40 text-right'
+              sortKey='selfCollect'
+            />
             <TableHead className='w-20 text-right'>{t('actions')}</TableHead>
-            {/* This column is now dedicated to the expand/collapse button */}
             <TableHead className='w-10 text-center'>
               <span className='sr-only'>{t('Products.title')}</span>
             </TableHead>
@@ -195,9 +207,7 @@ export function OrderTable({
               <EmptyState
                 icon={ShoppingCart}
                 title={
-                  isFiltered
-                    ? tEmptyState('title')
-                    : tEmptyState('subtitle')
+                  isFiltered ? tEmptyState('title') : tEmptyState('subtitle')
                 }
                 description={tEmptyState('description')}
                 isFiltered={isFiltered}
@@ -281,8 +291,8 @@ function OrderProductsTable({
                     products.reduce(
                       (total, { product, productAmount }) =>
                         total + product.price * productAmount,
-                      0
-                    )
+                      0,
+                    ),
                   )}
                 </TableCell>
               </TableRow>
