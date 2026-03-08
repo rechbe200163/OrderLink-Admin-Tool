@@ -11,16 +11,22 @@ import AnimatedCounter from '../helpers/AnimatedCounter';
 import { dataAnalysisService } from '@/lib/api/concrete/data-analysis';
 import { Badge } from '../ui/badge';
 import { History } from 'lucide-react';
+import { ErrorCard } from '../error-card';
 export default async function OrderPredictionInfoCard() {
   const t = await getTranslations('Dashboard.InfoCards.monthlySales');
 
-  const { predictions, typeofgraph } =
+  const { ok, predictions } =
     await dataAnalysisService.getOrdersGrowthPrediction(
       false,
       false,
       true,
       false,
     );
+
+  if (!ok) {
+    return <ErrorCard />;
+  }
+
   return (
     <Card className='@container/card'>
       <CardHeader className='relative space-y-2'>

@@ -1,11 +1,11 @@
 import { Suspense } from 'react';
 import SalesInfoCard from './info-cards/SalesInfoCard';
 import RevenueInfoCard from './info-cards/RevenueInfoCard';
-import CustomerInfoCard from './info-cards/CustomerInfoCard';
 import InfoCardSkeleton from './skeletons/InfoCardSkeleton';
+import CustomerInfoCard from './info-cards/CustomerInfoCard';
 import AvarageOderValueCard from './info-cards/AvarageOrdervalue';
-import CustomerPredictionInfoCard from './info-cards/CustomerPredictionInfoCard';
 import OrderPredictionInfoCard from './info-cards/OrderPredictionInfoCard';
+import CustomerPredictionInfoCard from './info-cards/CustomerPredictionInfoCard';
 
 export function SectionCards() {
   return (

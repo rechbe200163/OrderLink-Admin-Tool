@@ -1,7 +1,14 @@
 'server only';
+
 import { getCookie } from '../cookies/cookie-managment';
-import { ApiError } from './ApiError';
 import { forbidden } from 'next/navigation';
+
+export type ApiResult<T> = T & {
+  ok: boolean;
+  error: string | null;
+  status: number;
+  cacheHit?: boolean;
+};
 
 export class BaseApiService {
   public baseUrl: string;
@@ -22,15 +29,8 @@ export class BaseApiService {
       body?: unknown;
       headers?: HeadersInit;
     } = {},
-  ): Promise<T & { cacheHit?: boolean }> {
-    console.log('BaseApiService initialized with baseUrl:', this.baseUrl);
+  ): Promise<ApiResult<T>> {
     const url = new URL(`${this.baseUrl}/${endpoint}`);
-    console.log('API Request:', {
-      method,
-      url: url.toString(),
-      params,
-      body,
-    });
 
     if (params) {
       Object.entries(params).forEach(([key, value]) => {
@@ -56,65 +56,85 @@ export class BaseApiService {
       options.body = JSON.stringify(body);
     }
 
-    const response = await fetch(url.toString(), options);
+    try {
+      const response = await fetch(url.toString(), options);
+      const cacheHit = response.headers.get('x-cache') === 'HIT';
 
-    const cacheHit = response.headers.get('x-cache') === 'HIT';
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
 
-    if (!response.ok) {
-      const errorData = await response.json().catch(() => ({}));
-      console.error(errorData);
+        if (response.status === 401 || response.status === 403) {
+          forbidden();
+        }
 
-      if (response.status === 401 || response.status === 403) {
-        forbidden();
+        return {
+          ok: false,
+          ...(Object.create(null) as T),
+          error:
+            errorData.message ||
+            errorData.error ||
+            `Request failed with status ${response.status}`,
+          status: response.status,
+          cacheHit,
+        };
       }
 
-      throw new ApiError(
-        errorData.message ||
-          errorData.error ||
-          `Request failed with status ${response.status}`,
-        response.status,
-      );
+      const data = await response.json().catch(() => ({}) as T);
+
+      return {
+        ok: true,
+        ...(data as T),
+        error: null,
+        status: response.status,
+        cacheHit,
+      };
+    } catch (error) {
+      return {
+        ok: false,
+        ...(Object.create(null) as T),
+        error: error instanceof Error ? error.message : 'Unknown network error',
+        status: 0,
+        cacheHit: false,
+      };
     }
-    const data = await response.json().catch(() => ({}));
-    return { ...data, cacheHit };
   }
 
   public get<T>(
     endpoint: string,
     params?: Record<string, string | number | boolean | undefined>,
-  ): Promise<T & { cacheHit?: boolean }> {
-    return this.request('GET', endpoint, { params });
+  ): Promise<ApiResult<T>> {
+    return this.request<T>('GET', endpoint, { params });
   }
 
   public post<T>(
     endpoint: string,
     body?: unknown,
     params?: Record<string, string | number | undefined>,
-  ): Promise<T & { cacheHit?: boolean }> {
-    return this.request('POST', endpoint, { body, params });
+  ): Promise<ApiResult<T>> {
+    return this.request<T>('POST', endpoint, { body, params });
   }
 
   public put<T>(
     endpoint: string,
     body?: unknown,
     params?: Record<string, string | number | undefined>,
-  ): Promise<T & { cacheHit?: boolean }> {
-    return this.request('PUT', endpoint, { body, params });
+  ): Promise<ApiResult<T>> {
+    return this.request<T>('PUT', endpoint, { body, params });
   }
 
   public patch<T>(
     endpoint: string,
     body?: unknown,
     params?: Record<string, string | number | undefined>,
-  ): Promise<T> {
-    return this.request('PATCH', endpoint, { body, params });
+  ): Promise<ApiResult<T>> {
+    return this.request<T>('PATCH', endpoint, { body, params });
   }
 
   public delete<T>(
     endpoint: string,
     params?: Record<string, string | number | undefined>,
-  ): Promise<T> {
-    return this.request('DELETE', endpoint, { params });
+  ): Promise<ApiResult<T>> {
+    return this.request<T>('DELETE', endpoint, { params });
   }
 }
 

@@ -774,5 +774,31 @@
   "Common": {
     "copiedToClipboard": "In die Zwischenablage kopiert",
     "role": "Rolle"
+  },
+  "Errors": {
+    "Forbidden": {
+      "title": "Zugriff verweigert",
+      "message": "Sie haben keine Berechtigung, diese Seite zu betreten."
+    },
+    "NotFound": {
+      "title": "Seite nicht gefunden",
+      "message": "Die angeforderte Seite existiert nicht."
+    },
+    "InternalServerError": {
+      "title": "Interner Serverfehler",
+      "message": "Ein unerwarteter Fehler ist aufgetreten. Bitte versuchen Sie es später erneut."
+    },
+    "NetworkError": {
+      "title": "Netzwerkfehler",
+      "message": "Es gab ein Problem mit der Netzwerkverbindung. Bitte überprüfen Sie Ihre Internetverbindung und versuchen Sie es erneut."
+    },
+    "Unauthorized": {
+      "title": "Nicht autorisiert",
+      "message": "Sie müssen sich anmelden, um auf diese Seite zuzugreifen."
+    },
+    "DataFetchError": {
+      "title": "Datenfehler",
+      "message": "Es gab ein Problem beim Abrufen der Daten. Bitte aktualisieren Sie die Seite oder versuchen Sie es später erneut."
+    }
   }
 }

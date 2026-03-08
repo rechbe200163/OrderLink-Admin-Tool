@@ -1,6 +1,12 @@
 'server only';
-import { CustomerPredictionGrowth, OrderAmountResponse, OrdersPredictionGrowth, ProductsMostlyBought, ProductsAmount } from '@/lib/types';
-import { BaseApiService } from '../base';
+import {
+  CustomerPredictionGrowth,
+  OrderAmountResponse,
+  OrdersPredictionGrowth,
+  ProductsMostlyBought,
+  ProductsAmount,
+} from '@/lib/types';
+import { ApiResult, BaseApiService } from '../base';
 
 class DataAnalysisService extends BaseApiService {
   private static instance: DataAnalysisService;
@@ -21,7 +27,7 @@ class DataAnalysisService extends BaseApiService {
     month?: boolean,
     year?: boolean,
     show_zeros?: boolean,
-  ): Promise<OrderAmountResponse> {
+  ): Promise<ApiResult<OrderAmountResponse>> {
     const response = await this.get<OrderAmountResponse>(
       'data-analysis/orders-amount',
       {
@@ -39,7 +45,7 @@ class DataAnalysisService extends BaseApiService {
     month?: boolean,
     year?: boolean,
     limit?: number,
-  ): Promise<ProductsMostlyBought> {
+  ): Promise<ApiResult<ProductsMostlyBought>> {
     const response = await this.get<ProductsMostlyBought>(
       'data-analysis/products-mostly-bought',
       {
@@ -57,7 +63,7 @@ class DataAnalysisService extends BaseApiService {
     seven_days: boolean = false,
     month: boolean = true,
     year: boolean = false,
-  ): Promise<CustomerPredictionGrowth> {
+  ): Promise<ApiResult<CustomerPredictionGrowth>> {
     const response = await this.get<CustomerPredictionGrowth>(
       'data-analysis/customers-growth',
       {
@@ -75,7 +81,7 @@ class DataAnalysisService extends BaseApiService {
     seven_days: boolean = false,
     month: boolean = true,
     year: boolean = false,
-  ): Promise<OrdersPredictionGrowth> {
+  ): Promise<ApiResult<OrdersPredictionGrowth>> {
     const response = await this.get<OrdersPredictionGrowth>(
       'data-analysis/orders-growth',
       {
@@ -91,8 +97,8 @@ class DataAnalysisService extends BaseApiService {
   async getProductsAmount(
     well_stocked: boolean = false,
     out_of_stock: boolean = false,
-    limit: number = 5
-  ): Promise<ProductsAmount> {
+    limit: number = 5,
+  ): Promise<ApiResult<ProductsAmount>> {
     const response = await this.get<ProductsAmount>(
       'data-analysis/products-amount',
       {
