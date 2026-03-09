@@ -755,5 +755,31 @@
   "Common": {
     "copiedToClipboard": "Gekopieerd naar klembord",
     "role": "Rol"
+  },
+  "Errors": {
+    "Forbidden": {
+      "title": "Verboden",
+      "message": "U heeft geen toestemming om deze pagina te openen."
+    },
+    "NotFound": {
+      "title": "Pagina Niet Gevonden",
+      "message": "De gevraagde pagina bestaat niet."
+    },
+    "InternalServerError": {
+      "title": "Internal Server Error",
+      "message": "Er is een onverwachte fout opgetreden. Probeer het later opnieuw."
+    },
+    "NetworkError": {
+      "title": "Network Error",
+      "message": "Er was een probleem met de netwerkverbinding. Controleer uw internetverbinding en probeer het opnieuw."
+    },
+    "Unauthorized": {
+      "title": "Unauthorized",
+      "message": "U moet ingelogd zijn om deze pagina te openen."
+    },
+    "DataFetchError": {
+      "title": "Data Error",
+      "message": "Er was een probleem met het ophalen van de data. Ververs de pagina of probeer het later opnieuw."
+    }
   }
 }

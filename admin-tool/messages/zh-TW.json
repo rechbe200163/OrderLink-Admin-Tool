@@ -768,5 +768,31 @@
   "Common": {
     "copiedToClipboard": "已複製到剪貼簿",
     "role": "角色"
+  },
+  "Errors": {
+    "Forbidden": {
+      "title": "禁止訪問",
+      "message": "您沒有權限訪問此頁面。"
+    },
+    "NotFound": {
+      "title": "頁面未找到",
+      "message": "請求的頁面不存在。"
+    },
+    "InternalServerError": {
+      "title": "內部伺服器錯誤",
+      "message": "發生了意外錯誤。請稍後重試。"
+    },
+    "NetworkError": {
+      "title": "網絡錯誤",
+      "message": "網絡連接有問題。請檢查您的互聯網連接並重試。"
+    },
+    "Unauthorized": {
+      "title": "未授權",
+      "message": "您必須登錄才能訪問此頁面。"
+    },
+    "DataFetchError": {
+      "title": "數據錯誤",
+      "message": "獲取數據時出現問題。請刷新頁面或稍後重試。"
+    }
   }
 }

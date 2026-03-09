@@ -774,5 +774,31 @@
   "Common": {
     "copiedToClipboard": "Copied to clipboard",
     "role": "Role"
+  },
+  "Errors": {
+    "Forbidden": {
+      "title": "Forbidden",
+      "message": "You do not have permission to access this page."
+    },
+    "NotFound": {
+      "title": "Page Not Found",
+      "message": "The requested page does not exist."
+    },
+    "InternalServerError": {
+      "title": "Internal Server Error",
+      "message": "An unexpected error occurred. Please try again later."
+    },
+    "NetworkError": {
+      "title": "Network Error",
+      "message": "There was a problem with the network connection. Please check your internet connection and try again."
+    },
+    "Unauthorized": {
+      "title": "Unauthorized",
+      "message": "You must be logged in to access this page."
+    },
+    "DataFetchError": {
+      "title": "Data Error",
+      "message": "There was a problem fetching the data. Please refresh the page or try again later."
+    }
   }
 }

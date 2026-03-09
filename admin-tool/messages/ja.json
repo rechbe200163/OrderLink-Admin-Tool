@@ -768,5 +768,31 @@
   "Common": {
     "copiedToClipboard": "クリップボードにコピーしました",
     "role": "役割"
+  },
+  "Errors": {
+    "Forbidden": {
+      "title": "アクセス拒否",
+      "message": "このページにアクセスする権限がありません。"
+    },
+    "NotFound": {
+      "title": "ページが見つかりません",
+      "message": "要求されたページは存在しません。"
+    },
+    "InternalServerError": {
+      "title": "内部サーバーエラー",
+      "message": "予期しないエラーが発生しました。後で再度お試しください。"
+    },
+    "NetworkError": {
+      "title": "ネットワークエラー",
+      "message": "ネットワーク接続に問題があります。インターネット接続を確認して再度お試しください。"
+    },
+    "Unauthorized": {
+      "title": "権限なし",
+      "message": "このページにアクセスするにはログインが必要です。"
+    },
+    "DataFetchError": {
+      "title": "データエラー",
+      "message": "データの取得中に問題が発生しました。ページを更新するか、後で再度お試しください。"
+    }
   }
 }

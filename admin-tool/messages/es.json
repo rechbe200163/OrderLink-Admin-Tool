@@ -755,5 +755,31 @@
   "Common": {
     "copiedToClipboard": "Copiado al portapapeles",
     "role": "Rol"
+  },
+  "Errors": {
+    "Forbidden": {
+      "title": "Acceso Prohibido",
+      "message": "No tiene permiso para acceder a esta página."
+    },
+    "NotFound": {
+      "title": "Página No Encontrada",
+      "message": "La página solicitada no existe."
+    },
+    "InternalServerError": {
+      "title": "Error del Servidor Interno",
+      "message": "Ocurrió un error inesperado. Por favor, inténtelo de nuevo más tarde."
+    },
+    "NetworkError": {
+      "title": "Error de Red",
+      "message": "Hubo un problema con la conexión de red. Por favor, verifique su conexión a internet y vuelva a intentarlo."
+    },
+    "Unauthorized": {
+      "title": "Acceso No Autorizado",
+      "message": "Debe estar conectado para acceder a esta página."
+    },
+    "DataFetchError": {
+      "title": "Error de Datos",
+      "message": "Hubo un problema al obtener los datos. Por favor, actualice la página o inténtelo de nuevo más tarde."
+    }
   }
 }

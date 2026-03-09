@@ -755,5 +755,31 @@
   "Common": {
     "copiedToClipboard": "Copié dans le presse-papiers",
     "role": "Rôle"
+  },
+  "Errors": {
+    "Forbidden": {
+      "title": "Accès Refusé",
+      "message": "Vous n'avez pas la permission d'accéder à cette page."
+    },
+    "NotFound": {
+      "title": "Page Non Trouvée",
+      "message": "La page demandée n'existe pas."
+    },
+    "InternalServerError": {
+      "title": "Error du Serveur Interne",
+      "message": "Une erreur inattendue s'est produite. Veuillez réessayer plus tard."
+    },
+    "NetworkError": {
+      "title": "Error de Red",
+      "message": "Il y a eu un problème avec la connexion réseau. Veuillez vérifier votre connexion internet et réessayer."
+    },
+    "Unauthorized": {
+      "title": "Accès Non Autorisé",
+      "message": "Vous devez être connecté pour accéder à cette page."
+    },
+    "DataFetchError": {
+      "title": "Error de Datos",
+      "message": "Il y a eu un problème lors de la récupération des données. Veuillez actualiser la page ou réessayer plus tard."
+    }
   }
 }
