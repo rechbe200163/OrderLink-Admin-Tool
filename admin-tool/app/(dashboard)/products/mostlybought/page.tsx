@@ -1,4 +1,5 @@
 import { ProductsMostlyBougthBarChart } from '@/components/cards/charts/ProductsMostlyBougthBarChart';
+import { ErrorCard } from '@/components/error-card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { dataAnalysisService } from '@/lib/api/concrete/data-analysis';
 import { CalendarDays } from 'lucide-react';
@@ -9,16 +10,20 @@ export default async function ProductsMostlyBoughtPage() {
 
   const monthdata = await dataAnalysisService.getProductsMostlyBought(
     0,
-    false,
     true,
+    false,
     5,
   );
   const yearData = await dataAnalysisService.getProductsMostlyBought(
     0,
-    true,
     false,
+    true,
     5,
   );
+
+  if (!monthdata.ok || !yearData.ok) {
+    return <ErrorCard />;
+  }
 
   return (
     <div className='flex flex-1 flex-col'>
