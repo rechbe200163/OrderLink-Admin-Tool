@@ -59,37 +59,33 @@ class DataAnalysisService extends BaseApiService {
   }
 
   async getCustomerGrowthPrediction(
-    one_day: boolean = false,
-    seven_days: boolean = false,
-    month: boolean = true,
-    year: boolean = false,
   ): Promise<ApiResult<CustomerPredictionGrowth>> {
     const response = await this.get<CustomerPredictionGrowth>(
       'data-analysis/customers-growth',
-      {
-        one_day,
-        seven_days,
-        month,
-        year,
-      },
+    );
+    return response;
+  }
+
+  async getCustomerGrowthPredictionMonth(
+  ): Promise<ApiResult<CustomerPredictionGrowth>> {
+    const response = await this.get<CustomerPredictionGrowth>(
+      'data-analysis/customers-growth-month',
     );
     return response;
   }
 
   async getOrdersGrowthPrediction(
-    one_day: boolean = false,
-    seven_days: boolean = false,
-    month: boolean = true,
-    year: boolean = false,
   ): Promise<ApiResult<OrdersPredictionGrowth>> {
     const response = await this.get<OrdersPredictionGrowth>(
-      'data-analysis/orders-growth',
-      {
-        one_day,
-        seven_days,
-        month,
-        year,
-      },
+      'data-analysis/orders-growth'
+    );
+    return response;
+  }
+
+  async getOrdersGrowthPredictionMonth(
+  ): Promise<ApiResult<OrdersPredictionGrowth>> {
+    const response = await this.get<OrdersPredictionGrowth>(
+      'data-analysis/orders-growth-month'
     );
     return response;
   }
