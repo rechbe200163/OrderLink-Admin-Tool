@@ -2,6 +2,7 @@ import { LineChartUserComponent } from '@/components/cards/charts/LineChartUserC
 import { dataAnalysisService } from '@/lib/api/concrete/data-analysis';
 import { getTranslations } from 'next-intl/server';
 import { CustomerPredictionGrowth } from '@/lib/types';
+import { ErrorCard } from '@/components/error-card';
 
 export default async function CustomerStatisticsPage() {
   const t = await getTranslations('Dashboard.Charts.CustomerGrowth');
@@ -22,6 +23,10 @@ export default async function CustomerStatisticsPage() {
   const monthSignUps = await dataAnalysisService.getCustomerSignUps(0, true, false, true, false);
 
   const last30daysSignUps = await dataAnalysisService.getCustomerSignUps(30, false, false, true, false);
+
+  if (!monthSignUps.ok || !last30daysSignUps.ok) {
+    return <ErrorCard />;
+  }
 
   return (
     <div className='flex flex-1 flex-col'>
