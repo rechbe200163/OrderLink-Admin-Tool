@@ -7,6 +7,8 @@ import {
   ProductsAmount,
   CustomerSignup,
   InvoicesAmount,
+  CustomerSignupPercentage,
+  InvoicesAmountPercentage,
 } from '@/lib/types';
 import { ApiResult, BaseApiService } from '../base';
 
@@ -130,6 +132,26 @@ class DataAnalysisService extends BaseApiService {
     return response;
   }
 
+  async getCustomerSignUpsPercentage(
+    last_days?: number,
+    month?: boolean,
+    year?: boolean,
+    show_zeros?: boolean,
+    percentage?: boolean,
+  ): Promise<ApiResult<CustomerSignupPercentage>> {
+    const response = await this.get<CustomerSignupPercentage>(
+      'data-analysis/customers-signup',
+      {
+        last_days,
+        month,
+        year,
+        show_zeros,
+        percentage,
+      }
+    );
+    return response;
+  }
+
   async getInvoiceAmount(
     last_days?: number,
     month?: boolean,
@@ -138,6 +160,26 @@ class DataAnalysisService extends BaseApiService {
     percentage?: boolean
   ): Promise<ApiResult<InvoicesAmount>> {
     const response = await this.get<InvoicesAmount>(
+      'data-analysis/invoices-amount',
+      {
+        last_days,
+        month,
+        year,
+        showzeros: show_zeros,
+        percentage
+      },
+    );
+    return response;
+  }
+
+  async getInvoiceAmountPercentage(
+    last_days?: number,
+    month?: boolean,
+    year?: boolean,
+    show_zeros?: boolean,
+    percentage?: boolean
+  ): Promise<ApiResult<InvoicesAmountPercentage>> {
+    const response = await this.get<InvoicesAmountPercentage>(
       'data-analysis/invoices-amount',
       {
         last_days,

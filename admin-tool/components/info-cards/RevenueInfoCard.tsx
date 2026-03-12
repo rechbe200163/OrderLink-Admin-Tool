@@ -15,7 +15,7 @@ export default async function RevenueInfoCard() {
   const t = await getTranslations('Dashboard.InfoCards.revenue');
   const tCurrency = await getTranslations('Dashboard.InfoCards');
 
-  const {ok, amount} = await dataAnalysisService.getInvoiceAmount(0, true, false, true, true);
+  const {ok, amount} = await dataAnalysisService.getInvoiceAmountPercentage(0, true, false, true, true);
   
     if (!ok) {
       return <ErrorCard />;

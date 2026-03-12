@@ -16,7 +16,7 @@ import { ErrorCard } from '../error-card';
 export default async function CustomerInfoCard() {
   const t = await getTranslations('Dashboard.InfoCards.customer');
 
-  const {ok, growth} = await dataAnalysisService.getCustomerSignUps(0, true, false, true, true);
+  const {ok, growth} = await dataAnalysisService.getCustomerSignUpsPercentage(0, true, false, true, true);
 
   if (!ok) {
     return <ErrorCard />;

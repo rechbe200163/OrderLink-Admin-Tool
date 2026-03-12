@@ -434,14 +434,26 @@ export type ProductsAmount = {
   typeofgraph: 'line' | 'bar' | 'area';
 };
 
-export type CustomerSignup = {
+export type CustomerSignupPercentage = {
   growth: Record<string, number[]>;
   cumulative_growth: Record<string, number>;
   typeofgraph: 'line' | 'bar' | 'area';
 };
 
-export type InvoicesAmount = {
+export type CustomerSignup = {
+  growth: Record<string, number>;
+  cumulative_growth: Record<string, number>;
+  typeofgraph: 'line' | 'bar' | 'area';
+}
+
+export type InvoicesAmountPercentage = {
   amount: Record<string, number[]>;
+  cumulative_amount: Record<string, number>;
+  typeofgraph: 'line' | 'bar' | 'area';
+};
+
+export type InvoicesAmount = {
+  amount: Record<string, number>;
   cumulative_amount: Record<string, number>;
   typeofgraph: 'line' | 'bar' | 'area';
 };
