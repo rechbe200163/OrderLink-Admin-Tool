@@ -1,4 +1,5 @@
-import { statisticsApiService } from '@/lib/api/concrete/statistics';
+import { dataAnalysisService } from '@/lib/api/concrete/data-analysis';
+import { ErrorCard } from '../error-card';
 import {
   Card,
   CardDescription,
@@ -13,10 +14,28 @@ import { Badge } from '../ui/badge';
 export default async function RevenueInfoCard() {
   const t = await getTranslations('Dashboard.InfoCards.revenue');
   const tCurrency = await getTranslations('Dashboard.InfoCards');
-  const { currentMonthRevenue, percentageChange } =
-    await statisticsApiService.getRevenueStats();
 
-  console.log('RevenueInfoCard', currentMonthRevenue, percentageChange);
+  const {ok, amount} = await dataAnalysisService.getInvoiceAmount(0, true, false, true, true);
+  
+    if (!ok) {
+      return <ErrorCard />;
+    }
+  
+    let currentMonthRevenue = 0;
+    let percentageChange: number | null = null;
+  
+    try {
+      const lastItem = amount[Object.keys(amount).at(-1)!];
+  
+      currentMonthRevenue = lastItem[1];
+      percentageChange = lastItem[0];
+  
+    }
+    catch (error)
+    {
+      return <ErrorCard/>
+    }
+
 
   const getTrendIcon = () => {
     if (percentageChange > 0) return <TrendingUpIcon className='size-3' />;

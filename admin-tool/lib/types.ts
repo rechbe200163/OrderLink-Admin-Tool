@@ -440,4 +440,10 @@ export type CustomerSignup = {
   typeofgraph: 'line' | 'bar' | 'area';
 };
 
+export type InvoicesAmount = {
+  amount: Record<string, number[]>;
+  cumulative_amount: Record<string, number>;
+  typeofgraph: 'line' | 'bar' | 'area';
+};
+
 export type SortOrder = 'asc' | 'desc';
