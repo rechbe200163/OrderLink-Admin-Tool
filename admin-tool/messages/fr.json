@@ -140,6 +140,16 @@
         "title": "Répartition des Clients par Secteur",
         "description": "Ce graphique montre la répartition des clients par secteur d'activité.",
         "customers": "Clients"
+      },
+      "CustomerGrowth": {
+        "title": "Croissance et prévision des clients",
+        "description": "Nombre de clients au fil du temps incluant une prévision pour la période donnée.",
+        "customers": "Clients",
+        "subtitle": "Croissance et prévision",
+        "dailyTimeFrame": "Quotidien",
+        "monthlyTimeFrame": "Mensuel",
+        "from": "De",
+        "to": "À"
       }
     },
     "Ressource": {

@@ -140,6 +140,16 @@
         "title": "按行业分类的客户分布",
         "description": "此图表显示按业务行业分类的客户分布。",
         "customers": "客户"
+      },
+      "CustomerGrowth": {
+        "title": "客户增长与预测",
+        "description": "一段时间内的客户数量，包括所选时间段的预测。",
+        "customers": "客户",
+        "subtitle": "增长与预测",
+        "dailyTimeFrame": "每日",
+        "monthlyTimeFrame": "每月",
+        "from": "从",
+        "to": "到"
       }
     },
     "Ressource": {

@@ -140,6 +140,16 @@
         "title": "업종별 고객 분포",
         "description": "이 차트는 업종별 고객 분포를 보여줍니다.",
         "customers": "고객"
+      },
+      "CustomerGrowth": {
+        "title": "고객 성장 및 예측",
+        "description": "지정된 기간에 대한 예측을 포함한 시간별 고객 수.",
+        "customers": "고객",
+        "subtitle": "성장 및 예측",
+        "dailyTimeFrame": "일별",
+        "monthlyTimeFrame": "월별",
+        "from": "시작",
+        "to": "종료"
       }
     },
     "Ressource": {

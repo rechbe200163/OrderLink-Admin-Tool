@@ -140,6 +140,16 @@
         "title": "Distribución de Clientes por Sector",
         "description": "Este gráfico muestra la distribución de clientes por sector empresarial.",
         "customers": "Clientes"
+      },
+      "CustomerGrowth": {
+        "title": "Crecimiento y previsión de clientes",
+        "description": "Cantidad de clientes a lo largo del tiempo incluyendo la previsión para el período seleccionado.",
+        "customers": "Clientes",
+        "subtitle": "Crecimiento y previsión",
+        "dailyTimeFrame": "Diario",
+        "monthlyTimeFrame": "Mensual",
+        "from": "Desde",
+        "to": "Hasta"
       }
     },
     "Ressource": {

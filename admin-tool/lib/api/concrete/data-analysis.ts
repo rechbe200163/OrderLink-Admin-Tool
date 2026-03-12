@@ -30,7 +30,7 @@ class DataAnalysisService extends BaseApiService {
     last_days?: number,
     month?: boolean,
     year?: boolean,
-    show_zeros?: boolean,
+    showzeros?: boolean,
     percentage?: boolean
   ): Promise<ApiResult<OrderAmountResponse>> {
     const response = await this.get<OrderAmountResponse>(
@@ -39,7 +39,7 @@ class DataAnalysisService extends BaseApiService {
         last_days,
         month,
         year,
-        showzeros: show_zeros,
+        showzeros,
         percentage
       },
     );
@@ -116,7 +116,7 @@ class DataAnalysisService extends BaseApiService {
     last_days?: number,
     month?: boolean,
     year?: boolean,
-    show_zeros?: boolean,
+    showzeros?: boolean,
     percentage?: boolean,
   ): Promise<ApiResult<CustomerSignup>> {
     const response = await this.get<CustomerSignup>(
@@ -125,7 +125,7 @@ class DataAnalysisService extends BaseApiService {
         last_days,
         month,
         year,
-        show_zeros,
+        showzeros,
         percentage,
       }
     );
@@ -136,7 +136,7 @@ class DataAnalysisService extends BaseApiService {
     last_days?: number,
     month?: boolean,
     year?: boolean,
-    show_zeros?: boolean,
+    showzeros?: boolean,
     percentage?: boolean,
   ): Promise<ApiResult<CustomerSignupPercentage>> {
     const response = await this.get<CustomerSignupPercentage>(
@@ -145,7 +145,7 @@ class DataAnalysisService extends BaseApiService {
         last_days,
         month,
         year,
-        show_zeros,
+        showzeros,
         percentage,
       }
     );
@@ -156,7 +156,7 @@ class DataAnalysisService extends BaseApiService {
     last_days?: number,
     month?: boolean,
     year?: boolean,
-    show_zeros?: boolean,
+    showzeros?: boolean,
     percentage?: boolean
   ): Promise<ApiResult<InvoicesAmount>> {
     const response = await this.get<InvoicesAmount>(
@@ -165,7 +165,7 @@ class DataAnalysisService extends BaseApiService {
         last_days,
         month,
         year,
-        showzeros: show_zeros,
+        showzeros,
         percentage
       },
     );
@@ -176,7 +176,7 @@ class DataAnalysisService extends BaseApiService {
     last_days?: number,
     month?: boolean,
     year?: boolean,
-    show_zeros?: boolean,
+    showzeros?: boolean,
     percentage?: boolean
   ): Promise<ApiResult<InvoicesAmountPercentage>> {
     const response = await this.get<InvoicesAmountPercentage>(
@@ -185,7 +185,7 @@ class DataAnalysisService extends BaseApiService {
         last_days,
         month,
         year,
-        showzeros: show_zeros,
+        showzeros,
         percentage
       },
     );
