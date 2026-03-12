@@ -409,7 +409,7 @@ export interface OrdersWithAddressOfCustomer extends Order {
 }
 
 export type OrderAmountResponse = {
-  growth: Record<string, number>;
+  growth: Record<string, number[]>;
   cumulative_growth: Record<string, number>;
   typeofgraph: 'line' | 'bar' | 'area';
 };
@@ -431,6 +431,12 @@ export type OrdersPredictionGrowth = {
 
 export type ProductsAmount = {
   products: Record<string, number>;
+  typeofgraph: 'line' | 'bar' | 'area';
+};
+
+export type CustomerSignup = {
+  growth: Record<string, number[]>;
+  cumulative_growth: Record<string, number>;
   typeofgraph: 'line' | 'bar' | 'area';
 };
 

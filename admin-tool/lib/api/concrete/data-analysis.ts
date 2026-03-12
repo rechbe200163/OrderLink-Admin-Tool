@@ -5,6 +5,7 @@ import {
   OrdersPredictionGrowth,
   ProductsMostlyBought,
   ProductsAmount,
+  CustomerSignup,
 } from '@/lib/types';
 import { ApiResult, BaseApiService } from '../base';
 
@@ -27,6 +28,7 @@ class DataAnalysisService extends BaseApiService {
     month?: boolean,
     year?: boolean,
     show_zeros?: boolean,
+    percentage?: boolean
   ): Promise<ApiResult<OrderAmountResponse>> {
     const response = await this.get<OrderAmountResponse>(
       'data-analysis/orders-amount',
@@ -35,6 +37,7 @@ class DataAnalysisService extends BaseApiService {
         month,
         year,
         showzeros: show_zeros,
+        percentage
       },
     );
     return response;
@@ -102,6 +105,26 @@ class DataAnalysisService extends BaseApiService {
         out_of_stock,
         limit,
       },
+    );
+    return response;
+  }
+
+  async getCustomerSignUps(
+    last_days?: number,
+    month?: boolean,
+    year?: boolean,
+    show_zeros?: boolean,
+    percentage?: boolean,
+  ): Promise<ApiResult<CustomerSignup>> {
+    const response = await this.get<CustomerSignup>(
+      'data-analysis/customers-signup',
+      {
+        last_days,
+        month,
+        year,
+        show_zeros,
+        percentage,
+      }
     );
     return response;
   }

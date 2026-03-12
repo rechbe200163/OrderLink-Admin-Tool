@@ -10,16 +10,36 @@ import { ArrowRightIcon, TrendingDownIcon, TrendingUpIcon } from 'lucide-react';
 import { getTranslations } from 'next-intl/server';
 import { Badge } from '../ui/badge';
 import AnimatedCounter from '../helpers/AnimatedCounter';
-import { statisticsApiService } from '@/lib/api/concrete/statistics';
+import { dataAnalysisService } from '@/lib/api/concrete/data-analysis';
+import { ErrorCard } from '../error-card';
+
 export default async function CustomerInfoCard() {
   const t = await getTranslations('Dashboard.InfoCards.customer');
 
-  const { currentMonthSignUps, percentageChange } =
-    await statisticsApiService.getCustomerSignUps();
+  const {ok, growth} = await dataAnalysisService.getCustomerSignUps(0, true, false, true, true);
+
+  if (!ok) {
+    return <ErrorCard />;
+  }
+
+  let currentMonthSignUps = 0;
+  let percentageChange: number | null = null;
+
+  try {
+    const lastItem = growth[Object.keys(growth).at(-1)!];
+
+    currentMonthSignUps = lastItem[1];
+    percentageChange = lastItem[0];
+
+  }
+  catch (error)
+  {
+    return <ErrorCard/>
+  }
 
   const getTrendIcon = () => {
-    if (percentageChange > 0) return <TrendingUpIcon className='size-3' />;
-    if (percentageChange < 0) return <TrendingDownIcon className='size-3' />;
+    if (percentageChange !== null && percentageChange > 0) return <TrendingUpIcon className='size-3' />;
+    if (percentageChange !== null && percentageChange < 0) return <TrendingDownIcon className='size-3' />;
     return <ArrowRightIcon className='size-3' />;
   };
 
