@@ -16,12 +16,7 @@ export default async function OrderPredictionInfoCard() {
   const t = await getTranslations('Dashboard.InfoCards.monthlySales');
 
   const { ok, predictions } =
-    await dataAnalysisService.getOrdersGrowthPrediction(
-      false,
-      false,
-      true,
-      false,
-    );
+    await dataAnalysisService.getOrdersGrowthPredictionMonth();
 
   if (!ok) {
     return <ErrorCard />;

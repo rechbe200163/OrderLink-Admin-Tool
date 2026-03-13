@@ -1,10 +1,14 @@
 'server only';
 import {
   CustomerPredictionGrowth,
-  OrderAmountResponse,
+  OrderAmountPercentageResponse,
   OrdersPredictionGrowth,
   ProductsMostlyBought,
   ProductsAmount,
+  CustomerSignup,
+  InvoicesAmount,
+  CustomerSignupPercentage,
+  InvoicesAmountPercentage,
 } from '@/lib/types';
 import { ApiResult, BaseApiService } from '../base';
 
@@ -26,15 +30,17 @@ class DataAnalysisService extends BaseApiService {
     last_days?: number,
     month?: boolean,
     year?: boolean,
-    show_zeros?: boolean,
-  ): Promise<ApiResult<OrderAmountResponse>> {
-    const response = await this.get<OrderAmountResponse>(
+    showzeros?: boolean,
+    percentage?: boolean
+  ): Promise<ApiResult<OrderAmountPercentageResponse>> {
+    const response = await this.get<OrderAmountPercentageResponse>(
       'data-analysis/orders-amount',
       {
         last_days,
         month,
         year,
-        showzeros: show_zeros,
+        showzeros,
+        percentage
       },
     );
     return response;
@@ -59,37 +65,33 @@ class DataAnalysisService extends BaseApiService {
   }
 
   async getCustomerGrowthPrediction(
-    one_day: boolean = false,
-    seven_days: boolean = false,
-    month: boolean = true,
-    year: boolean = false,
   ): Promise<ApiResult<CustomerPredictionGrowth>> {
     const response = await this.get<CustomerPredictionGrowth>(
       'data-analysis/customers-growth',
-      {
-        one_day,
-        seven_days,
-        month,
-        year,
-      },
+    );
+    return response;
+  }
+
+  async getCustomerGrowthPredictionMonth(
+  ): Promise<ApiResult<CustomerPredictionGrowth>> {
+    const response = await this.get<CustomerPredictionGrowth>(
+      'data-analysis/customers-growth-month',
     );
     return response;
   }
 
   async getOrdersGrowthPrediction(
-    one_day: boolean = false,
-    seven_days: boolean = false,
-    month: boolean = true,
-    year: boolean = false,
   ): Promise<ApiResult<OrdersPredictionGrowth>> {
     const response = await this.get<OrdersPredictionGrowth>(
-      'data-analysis/orders-growth',
-      {
-        one_day,
-        seven_days,
-        month,
-        year,
-      },
+      'data-analysis/orders-growth'
+    );
+    return response;
+  }
+
+  async getOrdersGrowthPredictionMonth(
+  ): Promise<ApiResult<OrdersPredictionGrowth>> {
+    const response = await this.get<OrdersPredictionGrowth>(
+      'data-analysis/orders-growth-month'
     );
     return response;
   }
@@ -105,6 +107,86 @@ class DataAnalysisService extends BaseApiService {
         well_stocked,
         out_of_stock,
         limit,
+      },
+    );
+    return response;
+  }
+
+  async getCustomerSignUps(
+    last_days?: number,
+    month?: boolean,
+    year?: boolean,
+    showzeros?: boolean,
+    percentage?: boolean,
+  ): Promise<ApiResult<CustomerSignup>> {
+    const response = await this.get<CustomerSignup>(
+      'data-analysis/customers-signup',
+      {
+        last_days,
+        month,
+        year,
+        showzeros,
+        percentage,
+      }
+    );
+    return response;
+  }
+
+  async getCustomerSignUpsPercentage(
+    last_days?: number,
+    month?: boolean,
+    year?: boolean,
+    showzeros?: boolean,
+    percentage?: boolean,
+  ): Promise<ApiResult<CustomerSignupPercentage>> {
+    const response = await this.get<CustomerSignupPercentage>(
+      'data-analysis/customers-signup',
+      {
+        last_days,
+        month,
+        year,
+        showzeros,
+        percentage,
+      }
+    );
+    return response;
+  }
+
+  async getInvoiceAmount(
+    last_days?: number,
+    month?: boolean,
+    year?: boolean,
+    showzeros?: boolean,
+    percentage?: boolean
+  ): Promise<ApiResult<InvoicesAmount>> {
+    const response = await this.get<InvoicesAmount>(
+      'data-analysis/invoices-amount',
+      {
+        last_days,
+        month,
+        year,
+        showzeros,
+        percentage
+      },
+    );
+    return response;
+  }
+
+  async getInvoiceAmountPercentage(
+    last_days?: number,
+    month?: boolean,
+    year?: boolean,
+    showzeros?: boolean,
+    percentage?: boolean
+  ): Promise<ApiResult<InvoicesAmountPercentage>> {
+    const response = await this.get<InvoicesAmountPercentage>(
+      'data-analysis/invoices-amount',
+      {
+        last_days,
+        month,
+        year,
+        showzeros,
+        percentage
       },
     );
     return response;

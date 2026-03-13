@@ -140,6 +140,18 @@
         "title": "Kundenverteilung nach Branche",
         "description": "Diese Grafik zeigt die Verteilung der Kunden nach Branche.",
         "customers": "Kunden"
+      },
+      "CustomerGrowth": {
+        "title": "Kundenwachstum & Prognose",
+        "description": "Anzahl der registrierten und prognostizierten Kunden im Zeitverlauf.",
+        "customers": "Kunden",
+        "subtitle": "Wachstum & Prognose",
+        "dailyTimeFrame": "Tägliches",
+        "monthlyTimeFrame": "Monatliches",
+        "from": "von",
+        "to": "bis",
+        "predicted": "Prognose",
+        "trend": "Verlauf"
       }
     },
     "Ressource": {

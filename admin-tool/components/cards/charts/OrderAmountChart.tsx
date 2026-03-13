@@ -15,11 +15,11 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from '@/components/ui/chart';
-import { OrderAmountResponse } from '@/lib/types';
+import { OrderAmountPercentageResponse } from '@/lib/types';
 
 type OrderAmountPoint = {
   date: string; // ISO yyyy-mm-dd
-  growth: number;
+  growth: number[];
   cumulative_growth: number;
 };
 
@@ -34,7 +34,7 @@ const chartConfig = {
   },
 };
 
-function toSeries(data: OrderAmountResponse): OrderAmountPoint[] {
+function toSeries(data: OrderAmountPercentageResponse): OrderAmountPoint[] {
   const dateSet = new Set<string>([
     ...Object.keys(data.growth ?? {}),
     ...Object.keys(data.cumulative_growth ?? {}),
@@ -58,7 +58,7 @@ function safeDate(dateStr: string): Date {
 export function OrderAmountChart({
   chartData,
 }: {
-  chartData: OrderAmountResponse;
+  chartData: OrderAmountPercentageResponse;
 }) {
   const series = React.useMemo(() => toSeries(chartData), [chartData]);
 

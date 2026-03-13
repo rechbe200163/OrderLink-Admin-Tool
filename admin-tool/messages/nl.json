@@ -140,6 +140,18 @@
         "title": "Klantverdeling per Sector",
         "description": "Deze grafiek toont de verdeling van klanten per bedrijfssector.",
         "customers": "Klanten"
+      },
+      "CustomerGrowth": {
+        "title": "Klantengroei en prognose",
+        "description": "Aantal klanten in de tijd inclusief een prognose voor de opgegeven periode.",
+        "customers": "Klanten",
+        "subtitle": "Groei en prognose",
+        "dailyTimeFrame": "Dagelijks",
+        "monthlyTimeFrame": "Maandelijks",
+        "from": "Van",
+        "to": "Tot",
+        "predicted": "Voorspeld",
+        "trend": "Trend"
       }
     },
     "Ressource": {

@@ -140,6 +140,18 @@
         "title": "業種別顧客分布",
         "description": "このグラフは、業種別の顧客分布を示しています。",
         "customers": "顧客"
+      },
+      "CustomerGrowth": {
+        "title": "顧客成長と予測",
+        "description": "指定された期間の予測を含む、時間経過による顧客数。",
+        "customers": "顧客",
+        "subtitle": "成長と予測",
+        "dailyTimeFrame": "日別",
+        "monthlyTimeFrame": "月別",
+        "from": "開始",
+        "to": "終了",
+        "predicted": "予測",
+        "trend": "傾向"
       }
     },
     "Ressource": {

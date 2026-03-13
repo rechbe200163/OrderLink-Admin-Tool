@@ -140,6 +140,18 @@
         "title": "Customer Distribution by Sector",
         "description": "This chart shows the distribution of customers by business sector.",
         "customers": "Customers"
+      },
+      "CustomerGrowth": {
+        "title": "Customer Growth & Forecast",
+        "description": "Amount of customers over time including forecast for given time period.",
+        "customers": "Customers",
+        "subtitle": "Growth & Forecast",
+        "dailyTimeFrame": "Daily",
+        "monthlyTimeFrame": "Monthly",
+        "from": "From",
+        "to": "To",
+        "predicted": "Predicted",
+        "trend": "Trend"
       }
     },
     "Ressource": {

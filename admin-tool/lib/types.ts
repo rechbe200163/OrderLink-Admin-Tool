@@ -414,6 +414,12 @@ export type OrderAmountResponse = {
   typeofgraph: 'line' | 'bar' | 'area';
 };
 
+export type OrderAmountPercentageResponse = {
+  growth: Record<string, number[]>;
+  cumulative_growth: Record<string, number>;
+  typeofgraph: 'line' | 'bar' | 'area';
+};
+
 export type ProductsMostlyBought = {
   products: Record<string, number>;
   typeofgraph: 'line' | 'bar' | 'area';
@@ -431,6 +437,30 @@ export type OrdersPredictionGrowth = {
 
 export type ProductsAmount = {
   products: Record<string, number>;
+  typeofgraph: 'line' | 'bar' | 'area';
+};
+
+export type CustomerSignupPercentage = {
+  growth: Record<string, number[]>;
+  cumulative_growth: Record<string, number>;
+  typeofgraph: 'line' | 'bar' | 'area';
+};
+
+export type CustomerSignup = {
+  growth: Record<string, number>;
+  cumulative_growth: Record<string, number>;
+  typeofgraph: 'line' | 'bar' | 'area';
+}
+
+export type InvoicesAmountPercentage = {
+  amount: Record<string, number[]>;
+  cumulative_amount: Record<string, number>;
+  typeofgraph: 'line' | 'bar' | 'area';
+};
+
+export type InvoicesAmount = {
+  amount: Record<string, number>;
+  cumulative_amount: Record<string, number>;
   typeofgraph: 'line' | 'bar' | 'area';
 };
 

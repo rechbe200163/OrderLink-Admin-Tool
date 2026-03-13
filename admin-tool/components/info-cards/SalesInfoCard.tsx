@@ -2,7 +2,7 @@ import React from 'react';
 
 import { ArrowRightIcon, TrendingDownIcon, TrendingUpIcon } from 'lucide-react';
 import { getTranslations } from 'next-intl/server';
-import { statisticsApiService } from '@/lib/api/concrete/statistics';
+import { dataAnalysisService } from '@/lib/api/concrete/data-analysis';
 import {
   Card,
   CardDescription,
@@ -12,12 +12,31 @@ import {
 } from '../ui/card';
 import AnimatedCounter from '../helpers/AnimatedCounter';
 import { Badge } from '../ui/badge';
+import { ErrorCard } from '../error-card';
 
 export default async function SalesInfoCard() {
   const t = await getTranslations('Dashboard.InfoCards.monthlySales');
 
-  const { currentMonthSales, percentageChange } =
-    await statisticsApiService.getSalesStats();
+  const {ok, growth} = await dataAnalysisService.getOrderAmount(0, true, false, true, true);
+
+  if (!ok) {
+      return <ErrorCard />;
+    }
+  
+  let currentMonthSales = 0;
+  let percentageChange: number | null = null;
+
+  try {
+    const lastItem = growth[Object.keys(growth).at(-1)!];
+
+    currentMonthSales = lastItem[1];
+    percentageChange = lastItem[0];
+
+  }
+  catch (error)
+  {
+    return <ErrorCard/>
+  }
 
   const getTrendIcon = () => {
     if (percentageChange > 0) return <TrendingUpIcon className='size-3' />;
