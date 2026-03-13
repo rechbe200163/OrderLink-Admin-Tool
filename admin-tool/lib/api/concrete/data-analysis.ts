@@ -1,7 +1,7 @@
 'server only';
 import {
   CustomerPredictionGrowth,
-  OrderAmountResponse,
+  OrderAmountPercentageResponse,
   OrdersPredictionGrowth,
   ProductsMostlyBought,
   ProductsAmount,
@@ -32,8 +32,8 @@ class DataAnalysisService extends BaseApiService {
     year?: boolean,
     showzeros?: boolean,
     percentage?: boolean
-  ): Promise<ApiResult<OrderAmountResponse>> {
-    const response = await this.get<OrderAmountResponse>(
+  ): Promise<ApiResult<OrderAmountPercentageResponse>> {
+    const response = await this.get<OrderAmountPercentageResponse>(
       'data-analysis/orders-amount',
       {
         last_days,
