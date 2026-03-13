@@ -149,7 +149,9 @@
         "dailyTimeFrame": "일별",
         "monthlyTimeFrame": "월별",
         "from": "시작",
-        "to": "종료"
+        "to": "종료",
+        "predicted": "예측",
+        "trend": "추세"
       }
     },
     "Ressource": {

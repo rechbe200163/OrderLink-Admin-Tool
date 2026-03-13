@@ -149,7 +149,9 @@
         "dailyTimeFrame": "每日",
         "monthlyTimeFrame": "每月",
         "from": "從",
-        "to": "到"
+        "to": "到",
+        "predicted": "預測",
+        "trend": "趨勢"
       }
     },
     "Ressource": {

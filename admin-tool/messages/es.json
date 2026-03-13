@@ -149,7 +149,9 @@
         "dailyTimeFrame": "Diario",
         "monthlyTimeFrame": "Mensual",
         "from": "Desde",
-        "to": "Hasta"
+        "to": "Hasta",
+        "predicted": "Predicho",
+        "trend": "Tendencia"
       }
     },
     "Ressource": {

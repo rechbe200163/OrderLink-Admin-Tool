@@ -149,7 +149,9 @@
         "dailyTimeFrame": "Dagelijks",
         "monthlyTimeFrame": "Maandelijks",
         "from": "Van",
-        "to": "Tot"
+        "to": "Tot",
+        "predicted": "Voorspeld",
+        "trend": "Trend"
       }
     },
     "Ressource": {

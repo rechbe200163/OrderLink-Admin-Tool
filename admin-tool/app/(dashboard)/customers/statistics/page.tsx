@@ -11,7 +11,8 @@ export default async function CustomerStatisticsPage() {
   let dayPredictions: CustomerPredictionGrowth | null;
 
   try {
-    monthPredictions = await dataAnalysisService.getCustomerGrowthPredictionMonth();
+    monthPredictions =
+      await dataAnalysisService.getCustomerGrowthPredictionMonth();
 
     dayPredictions = await dataAnalysisService.getCustomerGrowthPrediction();
   } catch (error) {
@@ -20,9 +21,23 @@ export default async function CustomerStatisticsPage() {
     dayPredictions = null;
   }
 
-  const monthSignUps = await dataAnalysisService.getCustomerSignUps(0, true, false, true, false);
+  const monthSignUps = await dataAnalysisService.getCustomerSignUps(
+    0,
+    true,
+    false,
+    true,
+    false,
+  );
 
-  const last30daysSignUps = await dataAnalysisService.getCustomerSignUps(30, false, false, true, false);
+  const last30daysSignUps = await dataAnalysisService.getCustomerSignUps(
+    30,
+    false,
+    false,
+    true,
+    false,
+  );
+
+  console.log('Month Sign-Ups:', monthSignUps);
 
   if (!monthSignUps.ok || !last30daysSignUps.ok) {
     return <ErrorCard />;
@@ -42,7 +57,9 @@ export default async function CustomerStatisticsPage() {
           <div className='grid grid-cols-1 gap-6 lg:grid-cols-2'>
             <LineChartUserComponent
               growth={last30daysSignUps.growth}
-              {...(dayPredictions ? { predictions: dayPredictions.predictions } : {})}
+              {...(dayPredictions
+                ? { predictions: dayPredictions.predictions }
+                : {})}
               title={t('dailyTimeFrame') + ' ' + t('subtitle')}
               dateFormatter='day-month'
               from={t('from')}
@@ -50,13 +67,14 @@ export default async function CustomerStatisticsPage() {
             />
             <LineChartUserComponent
               growth={monthSignUps.growth}
-              {...(monthPredictions ? { predictions: monthPredictions.predictions } : {})}
+              {...(monthPredictions
+                ? { predictions: monthPredictions.predictions }
+                : {})}
               title={t('monthlyTimeFrame') + ' ' + t('subtitle')}
               dateFormatter='month-year'
               from={t('from')}
               to={t('to')}
             />
-
           </div>
         </div>
       </div>

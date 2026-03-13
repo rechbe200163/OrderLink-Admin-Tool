@@ -149,7 +149,9 @@
         "dailyTimeFrame": "Tägliches",
         "monthlyTimeFrame": "Monatliches",
         "from": "von",
-        "to": "bis"
+        "to": "bis",
+        "predicted": "Prognose",
+        "trend": "Verlauf"
       }
     },
     "Ressource": {

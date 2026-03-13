@@ -149,7 +149,9 @@
         "dailyTimeFrame": "日別",
         "monthlyTimeFrame": "月別",
         "from": "開始",
-        "to": "終了"
+        "to": "終了",
+        "predicted": "予測",
+        "trend": "傾向"
       }
     },
     "Ressource": {
