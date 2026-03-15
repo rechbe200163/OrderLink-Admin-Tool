@@ -11,7 +11,11 @@ import {
   CommandList,
 } from '@/components/ui/command';
 import { Label } from '@/components/ui/label';
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/components/ui/popover';
 import { Check, ChevronDown } from 'lucide-react';
 import { useId, useState, useEffect } from 'react';
 import { Actions } from '@/lib/types';
@@ -46,7 +50,7 @@ export default function ActionsSelectComponent({
   return (
     <div className='space-y-2 min-w-full'>
       <Label htmlFor={id}>{t('selectActions')}</Label>
-      <Popover open={open} onOpenChange={setOpen}>
+      <Popover open={open} modal={true} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
           <Button
             id={id}
@@ -58,7 +62,7 @@ export default function ActionsSelectComponent({
             <span
               className={cn(
                 'truncate',
-                selectedValues.length === 0 && 'text-muted-foreground'
+                selectedValues.length === 0 && 'text-muted-foreground',
               )}
             >
               {selectedValues.length > 0
@@ -79,7 +83,7 @@ export default function ActionsSelectComponent({
         >
           <Command>
             <CommandInput placeholder={t('findAction')} />
-            <CommandList className='max-h-[300px] overflow-y-auto'>
+            <CommandList className='max-h-75 overflow-y-auto'>
               <CommandEmpty>{t('noActionFound')}</CommandEmpty>
               <CommandGroup>
                 {Object.values(Actions).map((action) => {
@@ -105,4 +109,3 @@ export default function ActionsSelectComponent({
     </div>
   );
 }
-

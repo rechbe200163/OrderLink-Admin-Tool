@@ -78,7 +78,7 @@ export default function ProductSelectComponent({
       setSelectedValues([...selectedValues, product.productId]);
     } else {
       setSelectedValues(
-        selectedValues.filter((id) => id !== product.productId)
+        selectedValues.filter((id) => id !== product.productId),
       );
     }
     onProductSelect(product, willSelect);
@@ -88,7 +88,7 @@ export default function ProductSelectComponent({
   return (
     <div className='space-y-2 min-w-full'>
       <Label htmlFor={id}>{t('selectProducts')}</Label>
-      <Popover open={open} onOpenChange={setOpen}>
+      <Popover open={open} modal={true} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
           <Button
             id={id}
@@ -100,7 +100,7 @@ export default function ProductSelectComponent({
             <span
               className={cn(
                 'truncate',
-                selectedValues.length === 0 && 'text-muted-foreground'
+                selectedValues.length === 0 && 'text-muted-foreground',
               )}
             >
               {selectedValues.length > 0
@@ -109,7 +109,7 @@ export default function ProductSelectComponent({
                       const product = products.find((p) => p.productId === id);
                       return product
                         ? `${product.name} - $${(product.price / 100).toFixed(
-                            2
+                            2,
                           )}`
                         : '';
                     })
@@ -171,21 +171,23 @@ export default function ProductSelectComponent({
                 </Link>
               </CommandGroup>
               <div className='flex items-center justify-between p-2'>
-                <button
+                <Button
                   className='disabled:opacity-50'
+                  variant={'outline'}
                   onClick={() => setPage((p) => Math.max(1, p - 1))}
                   disabled={meta?.isFirstPage}
                 >
                   <ChevronLeft size={16} />
-                </button>
+                </Button>
                 <span className='text-sm'>{meta?.currentPage ?? page}</span>
-                <button
+                <Button
                   className='disabled:opacity-50'
+                  variant={'outline'}
                   onClick={() => setPage((p) => p + 1)}
                   disabled={meta?.isLastPage}
                 >
                   <ChevronRight size={16} />
-                </button>
+                </Button>
               </div>
             </div>
           </Command>

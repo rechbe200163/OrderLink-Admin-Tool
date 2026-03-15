@@ -78,7 +78,7 @@ export default function SelectCategoryComponent({
   return (
     <div className='space-y-2'>
       <Label htmlFor={id}>{t('selectCategory')}</Label>
-      <Popover open={open} onOpenChange={setOpen}>
+      <Popover open={open} modal={true} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
           <Button
             id={id}
@@ -90,7 +90,7 @@ export default function SelectCategoryComponent({
             <span
               className={cn(
                 'truncate',
-                !selectedCategory && 'text-muted-foreground'
+                !selectedCategory && 'text-muted-foreground',
               )}
             >
               {selectedCategory?.name ?? t('selectCategory')}
@@ -112,7 +112,7 @@ export default function SelectCategoryComponent({
               placeholder={t('findCategory')}
               onValueChange={setSearch}
             />
-            <CommandList className='max-h-[300px] overflow-y-auto'>
+            <CommandList className='max-h-75 overflow-y-auto'>
               <CommandEmpty>{t('noCategoryFound')}</CommandEmpty>
               <CommandGroup>
                 {categories.map((category) => (
@@ -144,21 +144,27 @@ export default function SelectCategoryComponent({
                 </Link>
               </CommandGroup>
               <div className='flex items-center justify-between p-2'>
-                <button
+                <Button
+                  type='button'
                   className='disabled:opacity-50'
+                  variant={'outline'}
                   onClick={() => setPage((p) => Math.max(1, p - 1))}
                   disabled={meta?.isFirstPage}
                 >
                   <ChevronLeft size={16} />
-                </button>
+                </Button>
+
                 <span className='text-sm'>{meta?.currentPage ?? page}</span>
-                <button
+
+                <Button
+                  type='button'
                   className='disabled:opacity-50'
+                  variant={'outline'}
                   onClick={() => setPage((p) => p + 1)}
                   disabled={meta?.isLastPage}
                 >
                   <ChevronRight size={16} />
-                </button>
+                </Button>
               </div>
             </CommandList>
           </Command>

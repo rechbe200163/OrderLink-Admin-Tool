@@ -75,7 +75,7 @@ export default function AddressSelectComponent({
   }, [page, search]);
 
   const selectedAddress = addresses.find(
-    (address) => address.addressId === value
+    (address) => address.addressId === value,
   );
 
   console.log('Selected address:', selectedAddress);
@@ -85,7 +85,7 @@ export default function AddressSelectComponent({
   return (
     <div className='space-y-2'>
       <Label htmlFor={id}>{t('selectAddress')}</Label>
-      <Popover open={open} onOpenChange={setOpen}>
+      <Popover open={open} modal={true} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
           <Button
             id={id}
@@ -158,7 +158,7 @@ export default function AddressSelectComponent({
               </CommandGroup>
               <div className='flex items-center justify-between p-2 border-t mt-2'>
                 <Button
-                  variant='ghost'
+                  variant='outline'
                   size='icon'
                   onClick={() => setPage((p) => Math.max(1, p - 1))}
                   disabled={meta?.isFirstPage}
@@ -170,7 +170,7 @@ export default function AddressSelectComponent({
                   {meta?.currentPage ?? page}
                 </span>
                 <Button
-                  variant='ghost'
+                  variant='outline'
                   size='icon'
                   onClick={() => setPage((p) => p + 1)}
                   disabled={meta?.isLastPage}

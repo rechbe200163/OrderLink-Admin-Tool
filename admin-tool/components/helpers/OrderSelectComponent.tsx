@@ -81,7 +81,7 @@ export default function OrderSelectComponent({
   return (
     <div className=''>
       <Label htmlFor={id}>{t('selectOrders')}</Label>
-      <Popover open={open} onOpenChange={setOpen}>
+      <Popover open={open} modal={true} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
           <Button
             id={id}
@@ -93,7 +93,7 @@ export default function OrderSelectComponent({
             <span
               className={cn(
                 'truncate',
-                selectedValues.length === 0 && 'text-muted-foreground'
+                selectedValues.length === 0 && 'text-muted-foreground',
               )}
             >
               {selectedValues.length > 0
@@ -166,21 +166,23 @@ export default function OrderSelectComponent({
                 </div>
               </CommandGroup>
               <div className='flex items-center justify-between p-2'>
-                <button
+                <Button
                   className='disabled:opacity-50'
+                  variant='outline'
                   onClick={() => setPage((p) => Math.max(1, p - 1))}
                   disabled={meta?.isFirstPage}
                 >
                   <ChevronLeft size={16} />
-                </button>
+                </Button>
                 <span className='text-sm'>{meta?.currentPage ?? page}</span>
-                <button
+                <Button
                   className='disabled:opacity-50'
+                  variant='outline'
                   onClick={() => setPage((p) => p + 1)}
                   disabled={meta?.isLastPage}
                 >
                   <ChevronRight size={16} />
-                </button>
+                </Button>
               </div>
             </CommandList>
           </Command>

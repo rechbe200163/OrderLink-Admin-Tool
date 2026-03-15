@@ -17,7 +17,13 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover';
-import { Check, ChevronDown, ChevronLeft, ChevronRight, Plus } from 'lucide-react';
+import {
+  Check,
+  ChevronDown,
+  ChevronLeft,
+  ChevronRight,
+  Plus,
+} from 'lucide-react';
 import { useId, useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
@@ -66,13 +72,13 @@ export default function CustomerSelectComponent({
   }, [page, search]);
 
   const selectedCustomer = customers.find(
-    (customer) => String(customer.customerReference) === value
+    (customer) => String(customer.customerReference) === value,
   );
   const t = useTranslations('SelectComponents.Customer');
   return (
     <div className='space-y-2 min-w-full'>
       <Label htmlFor={id}>{t('selectCustomer')}</Label>
-      <Popover open={open} onOpenChange={setOpen}>
+      <Popover open={open} modal={true} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
           <Button
             id={id}
@@ -144,21 +150,23 @@ export default function CustomerSelectComponent({
                 </Link>
               </CommandGroup>
               <div className='flex items-center justify-between p-2'>
-                <button
+                <Button
                   className='disabled:opacity-50'
+                  variant={'outline'}
                   onClick={() => setPage((p) => Math.max(1, p - 1))}
                   disabled={meta?.isFirstPage}
                 >
                   <ChevronLeft size={16} />
-                </button>
+                </Button>
                 <span className='text-sm'>{meta?.currentPage ?? page}</span>
-                <button
+                <Button
                   className='disabled:opacity-50'
+                  variant={'outline'}
                   onClick={() => setPage((p) => p + 1)}
                   disabled={meta?.isLastPage}
                 >
                   <ChevronRight size={16} />
-                </button>
+                </Button>
               </div>
             </CommandList>
           </Command>
