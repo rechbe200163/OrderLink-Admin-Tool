@@ -22,30 +22,41 @@ export interface GenericDialogFormProps {
   // Trigger button props
   triggerButtonText: string;
   triggerButtonIcon?: ReactNode;
-  triggerButtonVariant?: 'default' | 'destructive' | 'outline' | 'secondary' | 'ghost' | 'link';
-  
+  triggerButtonVariant?:
+    | 'default'
+    | 'destructive'
+    | 'outline'
+    | 'secondary'
+    | 'ghost'
+    | 'link';
+
   // Dialog props
   dialogTitle: string;
   dialogDescription?: string;
-  
+
   // Server action
-  serverAction: (prevState: FormState, formData: FormData) => Promise<FormState> | FormState;
-  
+  serverAction: (
+    prevState: FormState,
+    formData: FormData,
+  ) => Promise<FormState> | FormState;
+
   // Children (form fields) - receives formState and isPending
-  children: ReactNode | ((formState: FormState, isPending: boolean) => ReactNode);
-  
+  children:
+    | ReactNode
+    | ((formState: FormState, isPending: boolean) => ReactNode);
+
   // Submit button props
   submitButtonText: string;
   submitButtonPendingText?: string;
-  
+
   // Cancel button props
   cancelButtonText?: string;
   showCancelButton?: boolean;
-  
+
   // Additional customization
   dialogClassName?: string;
   formClassName?: string;
-  
+
   // External control of dialog state (optional)
   open?: boolean;
   onOpenChange?: (open: boolean) => void;
@@ -69,11 +80,11 @@ export function GenericDialogForm({
   onOpenChange: controlledOnOpenChange,
 }: GenericDialogFormProps) {
   const [internalOpen, setInternalOpen] = useState(false);
-  const [formState, formAction, isPending] = useActionState<FormState, FormData>(
-    serverAction,
-    initialFormState
-  );
-  
+  const [formState, formAction, isPending] = useActionState<
+    FormState,
+    FormData
+  >(serverAction, initialFormState);
+
   // Use controlled state if provided, otherwise use internal state
   const isControlled = controlledOpen !== undefined;
   const isOpen = isControlled ? controlledOpen : internalOpen;
@@ -87,7 +98,9 @@ export function GenericDialogForm({
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
         <Button variant={triggerButtonVariant}>
-          {triggerButtonIcon && <span className='mr-2'>{triggerButtonIcon}</span>}
+          {triggerButtonIcon && (
+            <span className='mr-2'>{triggerButtonIcon}</span>
+          )}
           {triggerButtonText}
         </Button>
       </DialogTrigger>
@@ -99,7 +112,9 @@ export function GenericDialogForm({
           )}
         </DialogHeader>
         <form action={formAction} className={formClassName}>
-          {typeof children === 'function' ? children(formState, isPending) : children}
+          {typeof children === 'function'
+            ? children(formState, isPending)
+            : children}
 
           {formState.message && (
             <p
@@ -110,7 +125,7 @@ export function GenericDialogForm({
               {formState.message}
             </p>
           )}
-          
+
           <DialogFooter>
             {showCancelButton && (
               <Button
@@ -127,6 +142,16 @@ export function GenericDialogForm({
                 ? submitButtonPendingText || `${submitButtonText}…`
                 : submitButtonText}
             </Button>
+            {formState.errors && (
+              <div className='mt-2 text-sm text-red-500'>
+                {Object.entries(formState.errors).map(([field, messages]) => (
+                  <div key={field}>
+                    <strong>{field}:</strong> {messages.join(', ')}
+                  </div>
+                ))}
+              </div>
+            )}
+            {JSON.stringify(formState)}
           </DialogFooter>
         </form>
       </DialogContent>

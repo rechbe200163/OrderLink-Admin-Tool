@@ -43,17 +43,19 @@ export class BaseApiService {
     const tokenData = await getCookie<{ accessToken: string }>('token');
     const token = tokenData?.accessToken;
 
+    const isFormData = body instanceof FormData;
+
     const options: RequestInit = {
       method,
       headers: {
-        'Content-Type': 'application/json',
+        ...(isFormData ? {} : { 'Content-Type': 'application/json' }),
         ...(token ? { Authorization: `Bearer ${token}` } : {}),
         ...(headers || {}),
       },
     };
 
     if (body !== undefined) {
-      options.body = JSON.stringify(body);
+      options.body = isFormData ? body : JSON.stringify(body);
     }
 
     try {
@@ -98,7 +100,6 @@ export class BaseApiService {
       };
     }
   }
-
   public get<T>(
     endpoint: string,
     params?: Record<string, string | number | boolean | undefined>,

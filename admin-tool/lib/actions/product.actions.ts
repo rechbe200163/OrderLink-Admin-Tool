@@ -8,7 +8,7 @@ import { guardAction } from '../server-guard';
 
 export async function createProduct(
   _prevState: FormState,
-  formData: FormData
+  formData: FormData,
 ): Promise<FormState> {
   const data = new FormData();
   data.append('name', formData.get('name') as string);
@@ -17,17 +17,25 @@ export async function createProduct(
   data.append('stock', formData.get('stock') as string);
   data.append('categoryId', formData.get('categoryId') as string);
 
-  const file = formData.get('image') as File;
-  if (file) {
-    data.append('image', file);
+  const file = formData.get('productImage') as File | null;
+  if (file && file.size > 0) {
+    data.append('productImage', file);
   }
 
-  console.log('data', data);
-
-  console.log('Creating product with formData:', Object.fromEntries(formData));
   return (await guardAction(async () => {
-    await apiPost(ENDPOINTS.PRODUCTS, data);
-    return { success: true } as FormState;
+    const result = await apiPost(ENDPOINTS.PRODUCTS, data);
+
+    if (!result.ok) {
+      return {
+        success: false,
+        message: result.error ?? 'Produkt konnte nicht erstellt werden.',
+      } as FormState;
+    }
+
+    return {
+      success: true,
+      message: 'Produkt erfolgreich erstellt.',
+    } as FormState;
   }, 'Failed to create product')) as FormState;
 }
 
@@ -35,12 +43,12 @@ export async function updateProduct(
   productId: string,
   current: Record<string, any>,
   _prevState: FormState,
-  formData: FormData
+  formData: FormData,
 ): Promise<FormState> {
   return (await guardAction(async () => {
     await apiPatch(
       ENDPOINTS.PRODUCT(productId),
-      getChangedFormData(current, formData)
+      getChangedFormData(current, formData),
     );
     return { success: true } as FormState;
   }, 'Failed to update product')) as FormState;

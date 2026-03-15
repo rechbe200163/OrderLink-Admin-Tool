@@ -29,8 +29,6 @@ export default async function ProductsPage(props: {
   const order = searchParams?.order ? searchParams.order : 'desc';
   const categoryId = searchParams?.categoryId;
 
-  console.log('ProductsPage searchParams:', searchParams);
-
   const productData = await productApiService.getProductsPaging(
     page,
     limit,
@@ -43,10 +41,6 @@ export default async function ProductsPage(props: {
   const { meta } = productData;
   const t = await getTranslations('Dashboard');
   const tFilter = await getTranslations('FilterAndSearch');
-
-  console.log('ProductsPage products:', products);
-  console.log('ProductsPage meta:', meta);
-
   return (
     <div className='px-5 pt-5'>
       <div className='flex justify-between items-center mb-6'>

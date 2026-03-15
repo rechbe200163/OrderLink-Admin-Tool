@@ -40,7 +40,7 @@ export default function FileInputComponent({
         id={id}
         className='p-0 pe-3 file:me-3 file:border-0 file:border-e'
         type='file'
-        name='image'
+        name='productImage'
         accept='.png, .jpeg, .jpg'
         onChange={handleFileChange}
       />
