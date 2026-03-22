@@ -32,6 +32,13 @@ export class BaseApiService {
   ): Promise<ApiResult<T>> {
     const url = new URL(`${this.baseUrl}/${endpoint}`);
 
+    console.log(
+      `Making ${method} request to ${url.toString()} with body:`,
+      body,
+      'and params:',
+      params,
+    );
+
     if (params) {
       Object.entries(params).forEach(([key, value]) => {
         if (value !== undefined) {
@@ -61,6 +68,7 @@ export class BaseApiService {
     try {
       const response = await fetch(url.toString(), options);
       const cacheHit = response.headers.get('x-cache') === 'HIT';
+      console.log(`Response:`, response);
 
       if (!response.ok) {
         const errorData = await response.json().catch(() => ({}));
@@ -91,6 +99,7 @@ export class BaseApiService {
         cacheHit,
       };
     } catch (error) {
+      console.error('Network error:', error);
       return {
         ok: false,
         ...(Object.create(null) as T),

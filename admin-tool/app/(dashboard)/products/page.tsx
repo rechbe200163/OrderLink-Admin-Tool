@@ -7,6 +7,7 @@ import { getSession } from '@/lib/utlis/getSession';
 import { BusinessSector, SortOrder } from '@/lib/types';
 import { getTranslations } from 'next-intl/server';
 import AddProductDialog from '@/components/helpers/products/AddProductDialog';
+import NavigateButton from '@/components/navigation/navigate-button';
 
 export default async function ProductsPage(props: {
   searchParams?: Promise<{
@@ -53,7 +54,9 @@ export default async function ProductsPage(props: {
           />
         </div>
         <div>
-          <AddProductDialog />
+          <NavigateButton href='/products/add'>
+            {t('Ressource.Products.buttons.add')}
+          </NavigateButton>
         </div>
       </div>
       <div className='flex-1 justify-between gap-1 flex flex-col'>

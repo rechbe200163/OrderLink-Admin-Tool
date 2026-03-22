@@ -9,7 +9,7 @@ import { createProduct } from '@/lib/actions/product.actions';
 import SelectCategoryComponent from '../categories/SelectCategoryComponent';
 import FileInputComponent from '@/components/file-upload/FileInputComponent';
 import { useProductStore } from '@/lib/stores/useProductStore';
-import { GenericDialogForm } from '@/components/forms/generic';
+import { GenericForm } from '@/components/forms/generic';
 import { useTranslations } from 'next-intl';
 
 const AddProductDialog = () => {
@@ -39,14 +39,14 @@ const AddProductDialog = () => {
       if (name === 'description') setDescription(value);
       if (name === 'stock') setStock(Number(value));
     },
-    [setName, setDescription, setStock]
+    [setName, setDescription, setStock],
   );
 
   const handleCategoryChange = useCallback(
     (id: string) => {
       setCategoryId(id);
     },
-    [setCategoryId]
+    [setCategoryId],
   );
 
   const handlePriceChange = useCallback(
@@ -67,7 +67,7 @@ const AddProductDialog = () => {
         setPrice(parseFloat(value.slice(0, -1)));
       }
     },
-    [setPrice]
+    [setPrice],
   );
 
   const handleImageUpload = useCallback(
@@ -77,11 +77,11 @@ const AddProductDialog = () => {
         setImagePath(imageUrl);
       }
     },
-    [setImagePath]
+    [setImagePath],
   );
 
   return (
-    <GenericDialogForm
+    <GenericForm
       triggerButtonText={t('add')}
       triggerButtonIcon={<Plus className='h-4 w-4' />}
       dialogTitle={t('add')}
@@ -170,7 +170,7 @@ const AddProductDialog = () => {
           </div>
         </>
       )}
-    </GenericDialogForm>
+    </GenericForm>
   );
 };
 

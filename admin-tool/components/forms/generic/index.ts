@@ -1,2 +1,2 @@
-export { GenericDialogForm } from './generic-dialog-form';
-export type { GenericDialogFormProps } from './generic-dialog-form';
+export { GenericForm } from './generic-form';
+export type { GenericFormProps } from './generic-form';

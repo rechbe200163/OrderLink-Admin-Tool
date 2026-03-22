@@ -16,7 +16,7 @@ import { createPermission } from '@/lib/actions/permission.actions';
 import { useTranslations } from 'next-intl';
 import { Resources } from '@/lib/types';
 import { Checkbox } from '@/components/ui/checkbox';
-import { GenericDialogForm } from '@/components/forms/generic';
+import { GenericForm } from '@/components/forms/generic';
 
 export default function AddPermissionDialog({ roles }: { roles: string[] }) {
   const t = useTranslations('Dashboard.Ressource.Permissions');
@@ -24,7 +24,7 @@ export default function AddPermissionDialog({ roles }: { roles: string[] }) {
   const [selectedActions, setSelectedActions] = useState<string[]>([]);
 
   return (
-    <GenericDialogForm
+    <GenericForm
       triggerButtonText={t('add')}
       triggerButtonIcon={<PlusCircle className='h-4 w-4' />}
       dialogTitle={t('add')}
@@ -58,7 +58,7 @@ export default function AddPermissionDialog({ roles }: { roles: string[] }) {
                 setSelectedActions((prev) =>
                   prev.includes(action)
                     ? prev.filter((a) => a !== action)
-                    : [...prev, action]
+                    : [...prev, action],
                 );
               }}
               defaultValue={selectedActions}
@@ -96,6 +96,6 @@ export default function AddPermissionDialog({ roles }: { roles: string[] }) {
           </div>
         </>
       )}
-    </GenericDialogForm>
+    </GenericForm>
   );
 }

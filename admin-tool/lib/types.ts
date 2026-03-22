@@ -55,7 +55,7 @@ export const UserTierPricing: Record<UserTier, number> = {
 // Role is now a model in the Prisma schema. The enum has been removed and
 // replaced with an interface that mirrors the table structure.
 export interface Role {
-  id: string;
+  roleId: string;
   name: string;
   description: string | null;
   deleted: boolean;
@@ -450,7 +450,7 @@ export type CustomerSignup = {
   growth: Record<string, number>;
   cumulative_growth: Record<string, number>;
   typeofgraph: 'line' | 'bar' | 'area';
-}
+};
 
 export type InvoicesAmountPercentage = {
   amount: Record<string, number[]>;

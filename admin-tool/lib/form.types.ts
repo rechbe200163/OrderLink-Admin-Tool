@@ -1,6 +1,6 @@
 export type FormState = {
   success: boolean;
-  message?: string;
+  message?: string | null;
   data?: any;
   errors?: {
     title: string[];

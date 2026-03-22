@@ -8,6 +8,7 @@ import { getTranslations } from 'next-intl/server';
 import { getSession } from '@/lib/utlis/getSession';
 import AddCategoryDialog from '@/components/helpers/categories/AddCategoryDialog';
 import { SortOrder } from '@/lib/types';
+import NavigateButton from '@/components/navigation/navigate-button';
 
 export default async function CategoriesPage(props: {
   searchParams?: Promise<{
@@ -67,7 +68,9 @@ export default async function CategoriesPage(props: {
           />
         </div>
 
-        <AddCategoryDialog />
+        <NavigateButton href='/categories/add'>
+          {t('Ressource.Categories.buttons.add')}
+        </NavigateButton>
       </div>
       <div className='flex-1 justify-between gap-1 flex flex-col'>
         <div className='min-w-full max-h-[calc(100vh-15rem)] overflow-auto'>

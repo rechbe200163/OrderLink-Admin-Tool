@@ -20,7 +20,7 @@ import { createAddress } from '@/lib/actions/address.actions';
 import { MapPinHouse } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { useAddressStore } from '@/lib/stores/useAddressStore';
-import { GenericDialogForm } from '@/components/forms/generic';
+import { GenericForm } from '@/components/forms/generic';
 
 const formSchema = z.object({
   name_5020537749: z.tuple([z.string(), z.string().optional()]),
@@ -56,7 +56,7 @@ export default function AddAddressDialog() {
   }, []);
 
   return (
-    <GenericDialogForm
+    <GenericForm
       triggerButtonText={t('add')}
       triggerButtonIcon={<MapPinHouse className='h-4 w-4' />}
       dialogTitle={t('add')}
@@ -171,6 +171,6 @@ export default function AddAddressDialog() {
           </div>
         </Form>
       )}
-    </GenericDialogForm>
+    </GenericForm>
   );
 }

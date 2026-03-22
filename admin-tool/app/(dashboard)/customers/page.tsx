@@ -9,6 +9,7 @@ import { getSession } from '@/lib/utlis/getSession';
 import { BusinessSector, SortOrder } from '@/lib/types';
 import AddCustomerDialog from '@/components/helpers/customers/AddCustomerDialog';
 import FilteringComponent from '@/components/pagination+filtering/FilteringComponent';
+import NavigateButton from '@/components/navigation/navigate-button';
 
 export default async function AdminPanelUsersPage(props: {
   searchParams?: Promise<{
@@ -63,7 +64,9 @@ export default async function AdminPanelUsersPage(props: {
           />
         </div>
 
-        <AddCustomerDialog />
+        <NavigateButton href='/customers/add' variant='default'>
+          {t('Ressource.Customers.buttons.add')}
+        </NavigateButton>
       </div>
       <div className='flex-1 justify-between gap-1 flex flex-col'>
         <div className='min-w-full max-h-[calc(100vh-15rem)] overflow-auto'>

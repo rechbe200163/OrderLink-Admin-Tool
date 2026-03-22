@@ -1,12 +1,12 @@
-import React from 'react';
-import PaginationComponent from '@/components/pagination+filtering/PagingComponent';
-import SearchComponent from '@/components/pagination+filtering/SearchComponent';
-import FilteringComponent from '@/components/pagination+filtering/FilteringComponent';
-import { employeesApiService } from '@/lib/api/concrete/employees';
-import { EmployeesTable } from '@/components/helpers/employees/EmployeesTable';
+import { SortOrder } from '@/lib/types';
 import { getTranslations } from 'next-intl/server';
 import { getSession } from '@/lib/utlis/getSession';
-import { SortOrder } from '@/lib/types';
+import { employeesApiService } from '@/lib/api/concrete/employees';
+import NavigateButton from '@/components/navigation/navigate-button';
+import { EmployeesTable } from '@/components/helpers/employees/EmployeesTable';
+import SearchComponent from '@/components/pagination+filtering/SearchComponent';
+import PaginationComponent from '@/components/pagination+filtering/PagingComponent';
+import FilteringComponent from '@/components/pagination+filtering/FilteringComponent';
 
 export default async function EmployeesPage(props: {
   searchParams?: Promise<{
@@ -29,7 +29,7 @@ export default async function EmployeesPage(props: {
 
   console.log('Search Params:', { page, limit, query, sort, order });
 
-  const employeesData = await employeesApiService.getEmployeesPaging(
+  const { ok, data, error } = await employeesApiService.getEmployeesPaging(
     page,
     limit,
     true,
@@ -38,9 +38,20 @@ export default async function EmployeesPage(props: {
     query,
   );
 
-  console.log('Employees Data:', employeesData);
-  const employees = employeesData.data;
-  const { meta } = employeesData;
+  if (!ok) {
+    console.error('Error fetching employees data', error);
+    console.error('Failed to fetch employees data');
+    return null;
+  }
+
+  console.log('Employees Data:', data);
+  const employees = data;
+
+  const meta = {
+    currentPage: page,
+    pageCount: Math.ceil(employees.length / limit),
+    totalCount: employees.length,
+  };
 
   const t = await getTranslations('Dashboard');
 
@@ -74,7 +85,9 @@ export default async function EmployeesPage(props: {
           /> */}
         </div>
 
-        {/* <AddEmployeeDialog roles={data} /> */}
+        <NavigateButton href='/employees/add' variant='default'>
+          {t('Ressource.Employees.buttons.add')}
+        </NavigateButton>
       </div>
       <div className='min-w-full max-h-[calc(100vh-15rem)] overflow-auto'>
         <EmployeesTable employees={employees} searchQuery={query} />

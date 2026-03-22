@@ -17,7 +17,7 @@ import { useTranslations } from 'next-intl';
 import PhoneNumberInputComponent from '@/components/PhoneNumberInputComponent';
 import { BusinessSector } from '@/lib/types';
 import { useCustomerStore } from '@/lib/stores/useCustomerStore';
-import { GenericDialogForm } from '@/components/forms/generic';
+import { GenericForm } from '@/components/forms/generic';
 
 export default function AddCustomerDialog() {
   const setFirstName = useCustomerStore((state) => state.setFirstName);
@@ -26,18 +26,18 @@ export default function AddCustomerDialog() {
   const setCompanyNumber = useCustomerStore((state) => state.setCompanyNumber);
   const setAddressId = useCustomerStore((state) => state.setAddressId);
   const setBusinessSector = useCustomerStore(
-    (state) => state.setBusinessSector
+    (state) => state.setBusinessSector,
   );
 
   const firstName = useCustomerStore((state) => state.customer.firstName);
   const lastName = useCustomerStore((state) => state.customer.lastName);
   const email = useCustomerStore((state) => state.customer.email);
   const companyNumber = useCustomerStore(
-    (state) => state.customer.companyNumber
+    (state) => state.customer.companyNumber,
   );
   const addressId = useCustomerStore((state) => state.customer.addressId);
   const businessSector = useCustomerStore(
-    (state) => state.customer.businessSector
+    (state) => state.customer.businessSector,
   );
 
   const t = useTranslations('Dashboard.Ressource.Customers');
@@ -49,11 +49,7 @@ export default function AddCustomerDialog() {
   }, []);
 
   return (
-    <GenericDialogForm
-      triggerButtonText={t('add')}
-      triggerButtonIcon={<PlusCircle className='h-4 w-4' />}
-      dialogTitle={t('header')}
-      dialogDescription={t('dialogDescription')}
+    <GenericForm
       serverAction={addCustomer}
       submitButtonText={t('buttons.add')}
       submitButtonPendingText={t('buttons.add')}
@@ -63,7 +59,9 @@ export default function AddCustomerDialog() {
         <>
           {/* Customer Details Section */}
           <div className='space-y-4'>
-            <h3 className='text-lg font-semibold'>{t('Details.customerDetails')}</h3>
+            <h3 className='text-lg font-semibold'>
+              {t('Details.customerDetails')}
+            </h3>
             <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
               <div className='space-y-2'>
                 <Label htmlFor='firstName'>{t('Attributes.firstName')}</Label>
@@ -162,7 +160,7 @@ export default function AddCustomerDialog() {
                   {Object.keys(BusinessSector).map((sector) => (
                     <SelectItem key={sector} value={sector}>
                       {tFilter(
-                        `BusinessSectors.options.${sector.toLowerCase()}`
+                        `BusinessSectors.options.${sector.toLowerCase()}`,
                       )}
                     </SelectItem>
                   ))}
@@ -190,6 +188,6 @@ export default function AddCustomerDialog() {
           </div>
         </>
       )}
-    </GenericDialogForm>
+    </GenericForm>
   );
 }

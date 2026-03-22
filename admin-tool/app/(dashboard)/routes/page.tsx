@@ -6,6 +6,7 @@ import { getSession } from '@/lib/utlis/getSession';
 import React from 'react';
 import { getTranslations } from 'next-intl/server';
 import AddRouteDialog from '@/components/helpers/routes/AddRouteDialog';
+import NavigateButton from '@/components/navigation/navigate-button';
 
 async function RoutesPage(props: {
   searchParams?: Promise<{
@@ -38,7 +39,9 @@ async function RoutesPage(props: {
           <SearchComponent placeholder={tFilter('Search.searchForOption1')} />
         </div>
 
-        <AddRouteDialog />
+        <NavigateButton href={'/routes/add'}>
+          {t('Ressource.Routes.buttons.add')}
+        </NavigateButton>
       </div>
       <div className='flex-1 justify-between gap-1 flex flex-col'>
         <div className='min-w-full max-h-[calc(100vh-15rem)] overflow-auto'>

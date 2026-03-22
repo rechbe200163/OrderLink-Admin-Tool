@@ -312,8 +312,6 @@
           "add": "Neue Route Hinzufügen",
           "edit": "Route Bearbeiten"
         },
-        "add": "Neue Route Hinzufügen",
-        "edit": "Route Bearbeiten",
         "name": "Routenname",
         "dialogDescription": "Erstellen Sie eine neue Route mit ausgewählten Bestellungen",
         "Attributes": {
@@ -324,6 +322,8 @@
           "clickForOrderDetails": "Klicken für Bestelldetails"
         },
         "buttons": {
+          "add": "Neue Route Hinzufügen",
+          "edit": "Route Bearbeiten",
           "editButton": "Bearbeiten"
         },
         "Status": {

@@ -7,7 +7,7 @@ import OrderSelectComponent from '../OrderSelectComponent';
 import { createRoute } from '@/lib/actions/route.actions';
 import { useTranslations } from 'next-intl';
 import { PlusCircle } from 'lucide-react';
-import { GenericDialogForm } from '@/components/forms/generic';
+import { GenericForm } from '@/components/forms/generic';
 
 const AddRouteDialog = () => {
   const t = useTranslations('Dashboard');
@@ -16,7 +16,7 @@ const AddRouteDialog = () => {
   const id = useId();
 
   return (
-    <GenericDialogForm
+    <GenericForm
       triggerButtonText={tSelect('addNewRoute')}
       triggerButtonIcon={<PlusCircle className='h-4 w-4' />}
       dialogTitle={tSelect('addNewRoute')}
@@ -29,12 +29,7 @@ const AddRouteDialog = () => {
         <>
           <div className='space-y-2'>
             <Label htmlFor={id}>{t('Ressource.Routes.name')}</Label>
-            <Input 
-              id={id} 
-              name='name' 
-              disabled={isPending}
-              required
-            />
+            <Input id={id} name='name' disabled={isPending} required />
           </div>
           <div className='space-y-2'>
             <OrderSelectComponent
@@ -50,7 +45,7 @@ const AddRouteDialog = () => {
           </div>
         </>
       )}
-    </GenericDialogForm>
+    </GenericForm>
   );
 };
 

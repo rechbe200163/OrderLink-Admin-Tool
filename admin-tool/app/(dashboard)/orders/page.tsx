@@ -8,6 +8,7 @@ import { getSession } from '@/lib/utlis/getSession';
 import Component from '@/components/pagination+filtering/comp-42';
 import AddOrderDialog from '@/components/helpers/orders/AddOrderDialog';
 import { SortOrder } from '@/lib/types';
+import NavigateButton from '@/components/navigation/navigate-button';
 
 export default async function OrdersPage(props: {
   searchParams?: Promise<{
@@ -65,7 +66,9 @@ export default async function OrdersPage(props: {
           <Component />
         </div>
 
-        <AddOrderDialog />
+        <NavigateButton href='/orders/add'>
+          {t('Ressource.Orders.buttons.add')}
+        </NavigateButton>
       </div>
       <div className='flex-1 justify-between gap-1 flex flex-col'>
         <div className='min-w-full max-h-[calc(100vh-15rem)] overflow-auto'>

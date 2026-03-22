@@ -7,11 +7,15 @@ import { guardAction } from '../server-guard';
 
 export async function createEmployee(
   _prevState: FormState,
-  formData: FormData
+  formData: FormData,
 ): Promise<FormState> {
+  console.log('Creating employee with data:', Object.fromEntries(formData));
   return (await guardAction(async () => {
     await apiPost(ENDPOINTS.EMPLOYEES, Object.fromEntries(formData));
-    return { success: true } as FormState;
+    return {
+      success: true,
+      message: 'Employee created successfully',
+    } as FormState;
   }, 'Failed to create employee')) as FormState;
 }
 
@@ -19,14 +23,17 @@ export async function updateEmployee(
   employeeId: string,
   current: Record<string, any>,
   _prevState: FormState,
-  formData: FormData
+  formData: FormData,
 ): Promise<FormState> {
   return (await guardAction(async () => {
     await apiPatch(
       ENDPOINTS.EMPLOYEE(employeeId),
-      getChangedFormData(current, formData)
+      getChangedFormData(current, formData),
     );
-    return { success: true } as FormState;
+    return {
+      success: true,
+      message: 'Employee updated successfully',
+    } as FormState;
   }, 'Failed to update employee')) as FormState;
 }
 

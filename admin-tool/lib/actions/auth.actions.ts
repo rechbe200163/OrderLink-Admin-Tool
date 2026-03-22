@@ -23,7 +23,7 @@ export async function logOut(): Promise<FormState> {
 
 export async function logIn(
   _prev: FormState,
-  formData: FormData
+  formData: FormData,
 ): Promise<FormState> {
   const email = formData.get('email');
   const password = formData.get('password');
@@ -58,7 +58,7 @@ export async function logIn(
 export async function verifyOtp(
   tenantSlug: string,
   _prev: FormState,
-  formData: FormData
+  formData: FormData,
 ): Promise<FormState> {
   const otp = Number(formData.get('otp'));
 

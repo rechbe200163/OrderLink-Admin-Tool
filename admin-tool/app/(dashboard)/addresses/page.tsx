@@ -7,6 +7,7 @@ import { addressApiService } from '@/lib/api/concrete/address';
 import { getSession } from '@/lib/utlis/getSession';
 import { getTranslations } from 'next-intl/server';
 import AddAddressDialog from '@/components/helpers/addresses/AddAddressDialog';
+import NavigateButton from '@/components/navigation/navigate-button';
 
 export default async function AddressesPage(props: {
   searchParams?: Promise<{
@@ -64,7 +65,9 @@ export default async function AddressesPage(props: {
           />
         </div>
 
-        <AddAddressDialog />
+        <NavigateButton href='/addresses/add'>
+          {t('Ressource.Address.buttons.add')}
+        </NavigateButton>
       </div>
       <div className='flex-1 justify-between gap-1 flex flex-col'>
         <div className='min-w-full max-h-[calc(100vh-15rem)] overflow-auto'>

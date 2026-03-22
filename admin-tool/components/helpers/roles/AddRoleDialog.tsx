@@ -6,13 +6,13 @@ import { PlusCircle } from 'lucide-react';
 import { createRole } from '@/lib/actions/role.actions';
 import { useTranslations } from 'next-intl';
 import GenericInputMaskComponent from '@/components/InputWithMask';
-import { GenericDialogForm } from '@/components/forms/generic';
+import { GenericForm } from '@/components/forms/generic';
 
 export default function AddRoleDialog() {
   const t = useTranslations('Dashboard.Ressource.Roles');
 
   return (
-    <GenericDialogForm
+    <GenericForm
       triggerButtonText={t('add')}
       triggerButtonIcon={<PlusCircle className='h-4 w-4' />}
       dialogTitle={t('add')}
@@ -43,6 +43,6 @@ export default function AddRoleDialog() {
           </div>
         </>
       )}
-    </GenericDialogForm>
+    </GenericForm>
   );
 }

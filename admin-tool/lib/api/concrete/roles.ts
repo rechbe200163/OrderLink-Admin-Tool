@@ -23,8 +23,16 @@ export class RoleApiService extends BaseApiService {
     });
   }
 
-  async getRoles(): Promise<PagingDto<Role>> {
-    return this.get<PagingDto<Role>>('roles');
+  async getRoles(
+    limit: number = 20,
+    page: number = 1,
+    search?: string,
+  ): Promise<PagingDto<Role>> {
+    return this.get<PagingDto<Role>>('roles', {
+      limit,
+      page,
+      search,
+    });
   }
 
   async createRole(data: {

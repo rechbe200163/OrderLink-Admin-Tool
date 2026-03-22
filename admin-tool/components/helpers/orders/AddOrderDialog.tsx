@@ -10,7 +10,7 @@ import { createOrder } from '@/lib/actions/order.actions';
 import { Product } from '@/lib/types';
 import { useOrderStore } from '@/lib/stores/useOrderStore';
 import { PlusCircle } from 'lucide-react';
-import { GenericDialogForm } from '@/components/forms/generic';
+import { GenericForm } from '@/components/forms/generic';
 import { useTranslations } from 'next-intl';
 
 const AddOrderDialog = () => {
@@ -18,7 +18,7 @@ const AddOrderDialog = () => {
   const selectedCustomer = useOrderStore((s) => s.order.customerReference);
   const selectedProducts = useOrderStore((s) => s.order.selectedProducts);
   const selectedProductObjects = useOrderStore(
-    (s) => s.order.selectedProductObjects
+    (s) => s.order.selectedProductObjects,
   );
   const quantities = useOrderStore((s) => s.order.quantities);
   const selfCollect = useOrderStore((s) => s.order.selfCollect);
@@ -38,7 +38,7 @@ const AddOrderDialog = () => {
   }, []);
 
   return (
-    <GenericDialogForm
+    <GenericForm
       triggerButtonText={t('add')}
       triggerButtonIcon={<PlusCircle className='h-4 w-4' />}
       dialogTitle={t('add')}
@@ -92,7 +92,7 @@ const AddOrderDialog = () => {
                 selectedProducts.map((id) => ({
                   productId: id,
                   productAmount: quantities[id] || 1,
-                }))
+                })),
               )}
             />
           </div>
@@ -116,12 +116,12 @@ const AddOrderDialog = () => {
                     disabled={isPending}
                   />
                 </div>
-              ) : null
+              ) : null,
             )}
           </div>
         </>
       )}
-    </GenericDialogForm>
+    </GenericForm>
   );
 };
 

@@ -14,8 +14,9 @@ import {
 import { MailIcon, PlusCircle } from 'lucide-react';
 import { useId } from 'react';
 import { createEmployee } from '@/lib/actions/employee.actions';
-import { GenericDialogForm } from '@/components/forms/generic';
+import { GenericForm } from '@/components/forms/generic';
 import { Role } from '@/lib/types';
+import { FormState } from '@/lib/form.types';
 
 const AddEmployeeDialog = ({ roles }: { roles: Role[] }) => {
   const id = useId();
@@ -23,16 +24,12 @@ const AddEmployeeDialog = ({ roles }: { roles: Role[] }) => {
   const tFilter = useTranslations('FilterAndSearch.Filter');
 
   return (
-    <GenericDialogForm
-      triggerButtonText={t('CreateEmployee.header')}
-      triggerButtonIcon={<PlusCircle className='h-4 w-4' />}
-      dialogTitle={t('CreateEmployee.header')}
-      dialogDescription={t('dialogDescription')}
+    <GenericForm
       serverAction={createEmployee}
       submitButtonText={t('buttons.add')}
       submitButtonPendingText={t('buttons.add')}
     >
-      {(formState, isPending) => (
+      {(formState: FormState, isPending: boolean) => (
         <>
           <div className='grid grid-cols-1 xl:grid-cols-2 gap-4'>
             <div className='space-y-2'>
@@ -90,16 +87,16 @@ const AddEmployeeDialog = ({ roles }: { roles: Role[] }) => {
             </span>
           </div>
           <div className='space-y-2'>
-            <Label htmlFor='role'>{t('Attributes.role')}</Label>
-            <Select name='role' disabled={isPending}>
+            <Label htmlFor='roleId'>{t('Attributes.role')}</Label>
+            <Select name='roleId' disabled={isPending}>
               <SelectTrigger className='w-full'>
                 <SelectValue placeholder={t('Placeholder.selectRole')} />
               </SelectTrigger>
               <SelectContent>
                 <SelectGroup>
-                  {roles.map((role) => (
-                    <SelectItem key={role.id} value={role.name}>
-                      {tFilter(`Roles.options.${role.name.toLowerCase()}`)}
+                  {roles.map((role: Role) => (
+                    <SelectItem key={role.roleId} value={role.roleId}>
+                      {role.name}
                     </SelectItem>
                   ))}
                 </SelectGroup>
@@ -108,7 +105,7 @@ const AddEmployeeDialog = ({ roles }: { roles: Role[] }) => {
           </div>
         </>
       )}
-    </GenericDialogForm>
+    </GenericForm>
   );
 };
 
