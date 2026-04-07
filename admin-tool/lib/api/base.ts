@@ -2,6 +2,7 @@
 
 import { getCookie } from '../cookies/cookie-managment';
 import { forbidden } from 'next/navigation';
+import { headers as nextHeaders } from 'next/headers';
 
 export type ApiResult<T> = T & {
   ok: boolean;
@@ -9,6 +10,33 @@ export type ApiResult<T> = T & {
   status: number;
   cacheHit?: boolean;
 };
+
+function extractTenantSubdomain(host: string): string | null {
+  const normalizedHost = host.split(':')[0].trim().toLowerCase();
+
+  if (!normalizedHost) return null;
+
+  if (normalizedHost.endsWith('.localhost')) {
+    const subdomain = normalizedHost.replace('.localhost', '');
+    return subdomain || null;
+  }
+
+  const parts = normalizedHost.split('.');
+
+  if (parts.length >= 4) {
+    return parts[0] || null;
+  }
+
+  return null;
+}
+
+async function getTenantSubdomainFromRequest(): Promise<string | null> {
+  const requestHeaders = await nextHeaders();
+  const forwardedHost = requestHeaders.get('x-forwarded-host');
+  const host = requestHeaders.get('host');
+
+  return extractTenantSubdomain(forwardedHost ?? host ?? '');
+}
 
 export class BaseApiService {
   public baseUrl: string;
@@ -49,6 +77,7 @@ export class BaseApiService {
 
     const tokenData = await getCookie<{ accessToken: string }>('token');
     const token = tokenData?.accessToken;
+    const tenantSubdomain = await getTenantSubdomainFromRequest();
 
     const isFormData = body instanceof FormData;
 
@@ -57,6 +86,7 @@ export class BaseApiService {
       headers: {
         ...(isFormData ? {} : { 'Content-Type': 'application/json' }),
         ...(token ? { Authorization: `Bearer ${token}` } : {}),
+        ...(tenantSubdomain ? { 'x-tenant-subdomain': tenantSubdomain } : {}),
         ...(headers || {}),
       },
     };

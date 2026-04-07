@@ -1,5 +1,33 @@
 import { ApiError } from './ApiError';
 import { redirect } from 'next/navigation';
+import { headers as nextHeaders } from 'next/headers';
+
+function extractTenantSubdomain(host: string): string | null {
+  const normalizedHost = host.split(':')[0].trim().toLowerCase();
+
+  if (!normalizedHost) return null;
+
+  if (normalizedHost.endsWith('.localhost')) {
+    const subdomain = normalizedHost.replace('.localhost', '');
+    return subdomain || null;
+  }
+
+  const parts = normalizedHost.split('.');
+
+  if (parts.length >= 4) {
+    return parts[0] || null;
+  }
+
+  return null;
+}
+
+async function getTenantSubdomainFromRequest(): Promise<string | null> {
+  const requestHeaders = await nextHeaders();
+  const forwardedHost = requestHeaders.get('x-forwarded-host');
+  const host = requestHeaders.get('host');
+
+  return extractTenantSubdomain(forwardedHost ?? host ?? '');
+}
 
 export class ExternalApiService {
   public baseUrl: string;
@@ -12,7 +40,7 @@ export class ExternalApiService {
     token: string,
     endpoint: string,
     params?: Record<string, string | number | undefined>,
-    options?: RequestInit
+    options?: RequestInit,
   ): Promise<T> {
     const url = new URL(`${this.baseUrl}/${endpoint}`);
 
@@ -26,8 +54,16 @@ export class ExternalApiService {
       });
     }
 
+    const tenantSubdomain = await getTenantSubdomainFromRequest();
+
     try {
-      const response = await fetch(url.toString(), options);
+      const response = await fetch(url.toString(), {
+        ...options,
+        headers: {
+          ...(options?.headers ?? {}),
+          ...(tenantSubdomain ? { 'x-tenant-subdomain': tenantSubdomain } : {}),
+        },
+      });
 
       if (!response.ok) {
         const errorData = await response.json().catch(() => ({}));
@@ -35,8 +71,8 @@ export class ExternalApiService {
         if (response.status === 401 || response.status === 403) {
           redirect(
             `/unauthorized?message=${encodeURIComponent(
-              errorData.message || errorData.error || 'Access denied'
-            )}`
+              errorData.message || errorData.error || 'Access denied',
+            )}`,
           );
         }
 
@@ -44,7 +80,7 @@ export class ExternalApiService {
           errorData.message ||
             errorData.error ||
             `Request failed with status ${response.status}`,
-          response.status
+          response.status,
         );
       }
 
@@ -52,7 +88,7 @@ export class ExternalApiService {
     } catch (error) {
       console.error(`Error fetching ${endpoint}:`, error);
       throw new Error(
-        `Failed to fetch data from: ${endpoint}` + ' ' + '|' + ' ' + error
+        `Failed to fetch data from: ${endpoint}` + ' ' + '|' + ' ' + error,
       );
     }
   }
