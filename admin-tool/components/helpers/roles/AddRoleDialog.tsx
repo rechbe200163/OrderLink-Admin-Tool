@@ -13,10 +13,6 @@ export default function AddRoleDialog() {
 
   return (
     <GenericForm
-      triggerButtonText={t('add')}
-      triggerButtonIcon={<PlusCircle className='h-4 w-4' />}
-      dialogTitle={t('add')}
-      dialogDescription={t('dialogDescription')}
       serverAction={createRole}
       submitButtonText={t('buttons.add')}
       submitButtonPendingText={t('buttons.add')}

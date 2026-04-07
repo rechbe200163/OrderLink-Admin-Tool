@@ -82,10 +82,6 @@ const AddProductDialog = () => {
 
   return (
     <GenericForm
-      triggerButtonText={t('add')}
-      triggerButtonIcon={<Plus className='h-4 w-4' />}
-      dialogTitle={t('add')}
-      dialogDescription={t('dialogDescription')}
       serverAction={createProduct}
       submitButtonText={t('buttons.add')}
       submitButtonPendingText={t('buttons.addLoading')}

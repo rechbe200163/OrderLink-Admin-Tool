@@ -17,10 +17,6 @@ const AddRouteDialog = () => {
 
   return (
     <GenericForm
-      triggerButtonText={tSelect('addNewRoute')}
-      triggerButtonIcon={<PlusCircle className='h-4 w-4' />}
-      dialogTitle={tSelect('addNewRoute')}
-      dialogDescription={t('Ressource.Routes.dialogDescription')}
       serverAction={createRoute}
       submitButtonText={tSelect('addNewRoute')}
       submitButtonPendingText={tSelect('addNewRouteLoading')}

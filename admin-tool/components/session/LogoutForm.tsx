@@ -1,12 +1,12 @@
 'use client';
 
-import { Alert, AlertDescription } from '../ui/alert';
 import { AlertCircle, LogOutIcon } from 'lucide-react';
 import { useActionState } from 'react';
 import { DropdownMenuItem } from '@radix-ui/react-dropdown-menu';
 import { logOut } from '@/lib/actions/auth.actions';
 import { GenericLoading } from '../loading-states/loading';
 import LoadingIcon from '../loading-states/loading-icon';
+import { Alert, AlertDescription } from '../ui/alert';
 
 export function LogoutForm() {
   const [formState, action, isPending] = useActionState(logOut, {
@@ -23,7 +23,7 @@ export function LogoutForm() {
   return (
     <form action={action}>
       {formState.data && (
-        <Alert variant='destructive' className='mb-4'>
+        <Alert variant={'error'} className='mb-4'>
           <AlertCircle className='h-4 w-4' />
           <AlertDescription>{formState.message}</AlertDescription>
         </Alert>

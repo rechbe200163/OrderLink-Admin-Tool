@@ -57,10 +57,6 @@ export default function AddAddressDialog() {
 
   return (
     <GenericForm
-      triggerButtonText={t('add')}
-      triggerButtonIcon={<MapPinHouse className='h-4 w-4' />}
-      dialogTitle={t('add')}
-      dialogDescription={t('dialogDescription')}
       serverAction={createAddress}
       submitButtonText={t('buttons.add')}
       submitButtonPendingText={t('buttons.add')}
