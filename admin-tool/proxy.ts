@@ -27,6 +27,25 @@ export const config = {
 
 const COOKIE_NAME = 'NEXT_LOCALE';
 
+function extractTenantSubdomain(hostname: string): string | null {
+  const host = hostname.split(':')[0].toLowerCase();
+
+  if (!host) return null;
+
+  if (host.endsWith('.localhost')) {
+    const subdomain = host.replace('.localhost', '');
+    return subdomain || null;
+  }
+
+  const parts = host.split('.');
+
+  if (parts.length >= 4) {
+    return parts[0] || null;
+  }
+
+  return null;
+}
+
 export default async function proxy(request: NextRequest) {
   const userCookie = request.cookies.get('user');
   const tokenCookie = request.cookies.get('token');
@@ -61,7 +80,8 @@ export default async function proxy(request: NextRequest) {
     session?.token.accessToken
   );
 
-  const { origin, pathname } = request.nextUrl;
+  const { origin, pathname, hostname } = request.nextUrl;
+  const tenantSubdomain = extractTenantSubdomain(hostname);
 
   // Locale detection
   const acceptLanguage = request.headers.get('accept-language');
@@ -78,13 +98,16 @@ export default async function proxy(request: NextRequest) {
   }
 
   const isPublicRoute = PUBLIC_ROUTES.some((route) =>
-    new RegExp(route).test(pathname)
+    new RegExp(route).test(pathname),
   );
 
   if (isPublicRoute) {
     const response = NextResponse.next();
     response.cookies.set(COOKIE_NAME, userLocale);
     response.headers.set('x-user-locale', userLocale);
+    if (tenantSubdomain) {
+      response.headers.set('x-tenant-subdomain', tenantSubdomain);
+    }
     return response;
   }
 
@@ -92,6 +115,9 @@ export default async function proxy(request: NextRequest) {
     const response = NextResponse.redirect(new URL(DEFAULT_REDIRECT, origin));
     response.cookies.set(COOKIE_NAME, userLocale);
     response.headers.set('x-user-locale', userLocale);
+    if (tenantSubdomain) {
+      response.headers.set('x-tenant-subdomain', tenantSubdomain);
+    }
     return response;
   }
 
@@ -99,11 +125,17 @@ export default async function proxy(request: NextRequest) {
     const response = NextResponse.redirect(new URL(ROOT, origin));
     response.cookies.set(COOKIE_NAME, userLocale);
     response.headers.set('x-user-locale', userLocale);
+    if (tenantSubdomain) {
+      response.headers.set('x-tenant-subdomain', tenantSubdomain);
+    }
     return response;
   }
 
   const response = NextResponse.next();
   response.cookies.set(COOKIE_NAME, userLocale);
   response.headers.set('x-user-locale', userLocale);
+  if (tenantSubdomain) {
+    response.headers.set('x-tenant-subdomain', tenantSubdomain);
+  }
   return response;
 }
